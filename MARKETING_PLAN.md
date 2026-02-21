@@ -1,78 +1,86 @@
-# MamaFern — Marketing Plan
+# Mama Fern — Marketing Plan
 
 > Startup brand marketing strategy for a headless Shopify storefront. Built with AI as a development tool. No AI features in the live store. Focus: grow a loyal customer base, increase average order value, and earn repeat buyers.
+>
+> Brand guidelines sourced from `PRD.md`. Read that first.
 
 ---
 
-## A Note on the PRD
+## 1. Brand Identity
 
-No product requirements document or brand guidelines file was found in this repository. The site currently shows "Minimal Store" as the brand name and generic Next.js metadata. **Before executing any marketing, the brand identity section below must be completed first.** Everything else in this plan depends on it.
+### Who Mama Fern Is
 
----
+Mama Fern is a **mom-owned, family apparel and accessories brand** selling organic cotton tees, sweatshirts, onesies, and accessories for moms, dads, and kids. Small seasonal drops plus evergreen staples. The brand is positioned as mid-premium — not fast fashion, not luxury.
 
-## 1. Brand Identity (Define Before Marketing)
+**Tagline:** "Grounded family apparel for crunchy, cozy homes."
 
-### What "MamaFern" Signals
+**Key adjectives:** grounded, minimal, playful, natural, happy
 
-The name carries two distinct layers:
+**Brand promise:** Cute patterns and sayings on skin-friendlier fabrics (organic cotton where possible), designed for the whole family to wear together.
 
-- **Mama** — nurturing, authentic, real, community-first, not corporate. Could lean into "cool girl" energy, the modern mother aesthetic, or simply a warm/human brand personality.
-- **Fern** — botanical, nature-inspired, earthy, organic, grounded. Suggests a palette of greens, neutrals, and natural textures.
+### Visual Identity (From PRD)
 
-Combined: a fashion brand with a grounded, nature-adjacent identity and a warm, human voice. Think: the intersection of conscious living and personal style.
+| Element | Spec |
+|---------|------|
+| Base | Cream / oat, warm white |
+| Primary | Fern green (`#4A7C59`), muted sage (`#8FAF8B`) |
+| Accents | Soft terracotta, blush, warm brown |
+| UI font | Humanist sans-serif (Inter, Satoshi) |
+| Display font | Gentle serif or soft hand-drawn style (Playfair Display, Cormorant) |
+| Lifestyle imagery | Wood, antiques, cast iron, sourdough, cozy "crunchy" interiors |
+| Product imagery | Fabric texture close-ups, graphic + text combos, family lifestyle |
 
-### Brand Direction Options (Choose One)
+### Tone of Voice
 
-| Direction | Vibe | Palette | Customer |
-|-----------|------|---------|----------|
-| **Botanical Minimal** | Clean, earthy, quiet luxury | Sage, cream, terracotta, forest green | Style-conscious 25-40, values quality + sustainability |
-| **Cool Girl Nature** | Effortless, slightly editorial, raw | Olive, sand, deep brown, off-white | Fashion-forward 20-35, Instagram/TikTok native |
-| **Warm Community** | Approachable, inclusive, real | Warm neutrals, rust, camel, ivory | Community-oriented, values brand story over trend |
+- Friendly, calm, grounded
+- Lightly "crunchy" — natural, wholesome, never preachy or judgmental
+- Emphasis on comfort, materials, and real family moments
+- **Not:** corporate, trend-chasing, or aspirationally unattainable
 
-### Brand Identity Checklist (Must Define)
+### Code Updates Still Needed
 
-- [ ] **Logo** — wordmark or icon? Typography style?
-- [ ] **Primary color palette** — 3-4 colors max
-- [ ] **Typography** — heading font (personality) + body font (readability)
-- [ ] **Photography style** — studio vs. lifestyle, light vs. moody, model-led vs. product-only
-- [ ] **Tone of voice** — 3 adjectives (e.g., warm, honest, effortless)
-- [ ] **Brand tagline or positioning statement**
-- [ ] **What MamaFern is NOT** — just as important as what it is
-
-Once defined, update:
-- `src/components/view/Logo/index.tsx` (currently reads "Minimal Store")
-- `src/app/layout.tsx` metadata (currently reads "Create Next App")
-- Tailwind color tokens in `tailwind.config.ts`
+- `src/components/view/Logo/index.tsx` — currently reads "Minimal Store", update to "Mama Fern"
+- `src/app/layout.tsx` metadata — currently reads "Create Next App"
+- `tailwind.config.ts` — Mama Fern palette tokens not yet applied
 
 ---
 
 ## 2. Target Audience
 
-MamaFern has Men and Women collections. Two primary personas:
+Mama Fern sells to three distinct buyer types. The Crunchy Mom drives volume; the Family Coordinator drives AOV; the Gift Buyer drives holiday spikes.
 
-### Persona A — The Woman (Primary)
+### Persona A — The Crunchy Mom (Primary)
 
-**"Jordan, 28"**
-- Lives in a mid-size or major city
-- Follows fashion content on TikTok and Instagram but is skeptical of fast fashion
-- Values quality and the story behind a brand
-- Shops online 2-4x per month
-- Average order: $60-$120
-- Discovers brands through organic social, friends' recommendations, and editorial content
-- Will become a loyal customer if she connects with the brand story
+**"Ellie, 29"**
+- Millennial or Gen-Z, has one or more kids under 5
+- Values organic materials, skin-safer products, and brands she can trust
+- Follows family lifestyle content on TikTok and Instagram — bookmarks "crunchy mom" accounts
+- Buys intentionally — fewer, better items
+- Average order: $55-$90
+- Discovers brands via TikTok organic, Instagram saves, mom community recommendations
+- Becomes loyal when the brand speaks her language (no greenwashing, real founder story)
+- Likely to coordinate family outfits for photos, holidays, family trips
 
-### Persona B — The Man (Secondary)
+### Persona B — The Family Coordinator (High AOV)
 
-**"Marcus, 30"**
-- Buys for himself or as gifts
-- Values understated, quality clothing
-- Less influenced by editorial, more by reviews and "does this last"
-- Average order: $70-$130
-- Discovers brands through Reddit, YouTube reviews, word of mouth
+**"Sarah, 33"**
+- Buys matching or coordinating sets for the whole family
+- Plans "family photo" outfits, holiday drop purchases, milestone moments
+- Adds multiple items per order (mom tee + kids onesie + dad sweatshirt)
+- Average order: $110-$180
+- Discovers brands through Pinterest (high purchase intent) and Instagram
+- Responds strongly to "Complete the Family Look" cross-sells
+- This persona is your AOV driver — design the full product family for her
 
-### Persona C — The Gift Buyer (Opportunity)
+### Persona C — The Gift Buyer (Seasonal Volume)
 
-Not a wearer of the product but buys MamaFern as a gift. This customer has high AOV (buys multiple items) and is most active around holidays and gifting moments. Design the gift experience (packaging, gift notes, gift wrapping upsell) for this persona specifically.
+**"Linda, 52" or "Jamie, 31"**
+- Buying for a new mom, a baby shower, a birthday, or Mother's Day
+- May not know the brand — discovers it through search ("organic cotton mom gift")
+- Single-purchase but high AOV (bundles, gift sets)
+- Active November-December and April-May (Mother's Day)
+- Needs gift-specific landing pages, clear packaging messaging, and gift notes
+- SEO and Pinterest are primary discovery channels for this persona
 
 ---
 
@@ -101,9 +109,10 @@ For a startup with limited time and budget, execute channels in this order:
 
 #### TikTok (Primary Organic)
 - Algorithm rewards original content regardless of follower count — a new account can go viral
-- Best content for fashion brands: founder story, product close-ups with good music, "what I ordered vs. what I got" (positive), styling videos, brand behind-the-scenes
+- Best content for family/crunchy-mom brands: founder story, "day in our life" with kids, fabric close-ups, "why I care about organic cotton", unboxing, family outfit coordination, "crunchy mom starter pack" style content
 - Frequency: 3-5 posts/week
 - Do NOT produce polished ads — raw, authentic content outperforms on this platform
+- The "crunchy mom" TikTok community is an existing, passionate audience — speak directly to them
 
 #### Instagram (Brand Home)
 - Use Reels for reach (same TikTok content, repurposed)
@@ -187,14 +196,15 @@ Set free shipping at **15-20% above your current AOV**.
 - This single tactic causes 58% of shoppers to add items to qualify
 - Implement as a cart notification in `src/lib/atoms/cart.tsx`
 
-### Tactic 2 — "Complete the Look" Cross-Sells
+### Tactic 2 — "Complete the Family Look" Cross-Sells
 
-On each product page, manually curate 2-3 products that pair with the current item.
+On each product page, curate 2-3 products that complete the family outfit.
 
-- Implement using Shopify product metafields (no app needed initially)
+- This is the PRD's explicit feature: "Complete the Family Look" section on every product detail page
+- Cross-sell logic: mom tee → matching kids onesie + dad crewneck in same colorway
+- Implement via Shopify product metafields (no app needed initially)
 - Or use **Selleasy** (free plan) for automatic cross-sell widgets
-- Fashion cross-sells: shirt → pants, jacket → tee, shoes → accessories
-- Show at the bottom of the product detail page before Add to Cart
+- This is your single strongest AOV lever — the Family Coordinator persona buys the whole set
 
 ### Tactic 3 — Post-Purchase One-Click Upsell
 
@@ -321,7 +331,7 @@ Structure:
 - **Points for referrals** — turns customers into acquisition channels
 - **VIP tiers** — Bronze (0-200 points), Silver (200-500), Gold (500+), each with escalating perks
 
-Name the tiers something on-brand for MamaFern (botanical language works: Seedling, Bloom, Root).
+Name the tiers something on-brand for Mama Fern — botanical language: **Seedling → Bloom → Root** (or Sprout → Fern → Forest).
 
 ### Tactic 2 — SMS Re-Engagement
 
@@ -335,7 +345,7 @@ For customers who have purchased but gone quiet (60-90 days), send a 1-2 message
 
 Give your top 10% of customers (by spend) early access to new drops, sales, and limited items.
 
-- Name this group something on-brand (e.g., "MamaFern Roots")
+- Name this group something on-brand (e.g., "Mama Fern Forest" — the highest loyalty tier)
 - Communicate via email with a distinct design/tone — make them feel seen
 - First access to new collections before the public
 - This mechanic creates status incentives that motivate higher spend
@@ -560,41 +570,47 @@ Install apps progressively — not all at once. Every app adds page weight and c
 
 ## 13. Content Calendar Framework
 
-### Weekly Rhythm (Fashion Brand)
+### Weekly Rhythm (Family/Crunchy Brand)
 
 | Day | Platform | Content Type |
 |-----|----------|-------------|
-| Monday | TikTok | New week / new drop / styling content |
-| Tuesday | Instagram Stories | Poll or Q&A — audience engagement |
-| Wednesday | TikTok | Behind the scenes / brand story |
-| Thursday | Instagram Reels | Product close-up or "outfit of the week" |
-| Friday | Email | New arrivals, weekend promo if running |
-| Saturday | TikTok | Customer UGC repost or founder-led content |
-| Sunday | Pinterest | Pin 5-10 product images, refresh boards |
+| Monday | TikTok | New week / new drop / "what we're wearing this week" |
+| Tuesday | Instagram Stories | Poll or Q&A — "which colorway should we drop next?" |
+| Wednesday | TikTok | Behind the scenes — fabric sourcing, design process, packing orders |
+| Thursday | Instagram Reels | Family outfit coordination / product detail close-up |
+| Friday | Email | New arrivals, weekend drop if running |
+| Saturday | TikTok | Customer UGC repost or founder-led "day in the life" with kids |
+| Sunday | Pinterest | Pin 5-10 product images, "family outfit" boards, "crunchy mom style" boards |
 
 ### Monthly Rhythm
 
 | Week | Focus |
 |------|-------|
 | Week 1 | New drop or collection launch content |
-| Week 2 | Educational or lifestyle content (styling tips, brand story) |
-| Week 3 | Social proof / community (UGC reposts, review highlights) |
-| Week 4 | Promotional or re-engagement (loyalty reminder, flash offer) |
+| Week 2 | Educational or lifestyle content ("why we use organic cotton", brand story, materials explainer) |
+| Week 3 | Social proof / community (UGC reposts, family photo tags, review highlights) |
+| Week 4 | Promotional or re-engagement (loyalty reminder, flash offer, family bundle spotlight) |
 
 ### Seasonal Calendar (Key Commerce Moments)
 
-| Month | Opportunity |
-|-------|------------|
-| January | New Year reset, "new wardrobe" messaging |
-| February | Valentine's Day — gift buyer persona, couples content |
-| March-April | Spring drop, refresh campaign |
-| May | Mother's Day — especially relevant to the "Mama" brand name |
-| June-July | Summer styles, vacation dressing |
-| September | Fall drop, "back to routine" campaign |
-| November | Black Friday / Cyber Monday — plan 6 weeks in advance |
-| December | Holiday gifting — gift guides, gift wrapping upsell, last order dates |
+Mama Fern's seasonal calendar is built around **family milestones and the crunchy mom lifestyle calendar** — not generic fashion seasons.
 
-**Note on Mother's Day:** The "Mama" in MamaFern makes this moment uniquely ownable. Build a dedicated gift guide, special packaging, and a marketing push specifically around this holiday — this should be one of the top 3 revenue months of the year.
+| Month | Opportunity | Mama Fern Angle |
+|-------|------------|----------------|
+| January | "Fresh start" for families | New year drop, "back to basics" organic essentials |
+| February | Valentine's Day | Family matching Valentine's outfits — "love in every stitch" |
+| March-April | Spring / Earth Day (April 22) | **Earth Day is a flagship moment** — organic cotton, sustainability story, spring drop |
+| May | **Mother's Day** | **Top 1 revenue month.** Gift guide, special packaging, "for every kind of mama" campaign |
+| June | Father's Day | Dad collection spotlight, family coordination content |
+| July-August | Summer outdoor / family travel | Casual summer drop, "adventure-ready" onesies and tees |
+| September | Back to school / Fall | Fall colorway drop (terracotta, warm browns), cozy family content |
+| October | Halloween | Limited Halloween drop (huge opportunity — pumpkin/ghost/fern graphics on onesies + family sets) |
+| November | **Black Friday / Cyber Monday** | Plan 6 weeks in advance. Family bundle deals, gift with purchase |
+| December | Holiday gifting | Gift guide (new baby, crunchy mom, family set), gift wrapping upsell, last order dates |
+
+**Mother's Day is your Super Bowl.** The "Mama" in Mama Fern makes this uniquely ownable. Build a dedicated gift guide page, special gift packaging, and a full campaign starting 3 weeks before the date. This should be top-3 revenue month of the year.
+
+**Earth Day is underused by most brands.** For an organic cotton family brand, April 22 is a natural owned moment. No other brand has a name that includes both "earth" signals — lean into it with storytelling about materials, sourcing, and why you made this brand.
 
 ---
 
