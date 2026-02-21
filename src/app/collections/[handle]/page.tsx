@@ -1,105 +1,76 @@
-"use client";
+import { commerceClient } from "@/lib/commerce";
+import { notFound } from "next/navigation";
+import type { Metadata } from "next";
+import CollectionContent from "@/components/view/CollectionContent";
+import Breadcrumbs from "@/components/view/Breadcrumbs";
 
-import { Skeleton } from "@/components/ui/skeleton";
-import ProductCard from "@/components/view/ProductCard";
-import { GET_COLLECTION_BY_HANDLE_WITH_PAGINATION_QUERY } from "@/graphql/collections";
-import { useStorefrontQuery } from "@/hooks/useStorefront";
-import { GetCollectionByHandleQuery, Product } from "@/types/shopify-graphql";
-import { useParams } from "next/navigation";
-import {
-  Pagination,
-  PaginationContent,
-  PaginationItem,
-  PaginationNext,
-  PaginationPrevious,
-} from "@/components/ui/pagination";
-import { useState } from "react";
-
-const CollectionPage = () => {
-  const unwrappedParams = useParams();
-
-  //   Pagination
-  const [currentCursor, setCurrentCursor] = useState<string | null>(null);
-  const [previousCursors, setPreviousCursors] = useState<string[]>([]);
-  const [currentPage, setCurrentPage] = useState(1);
-
-  const { data, isLoading } = useStorefrontQuery<GetCollectionByHandleQuery>(
-    ["collections", currentCursor],
-    {
-      query: GET_COLLECTION_BY_HANDLE_WITH_PAGINATION_QUERY,
-      variables: {
-        handle: unwrappedParams.handle,
-        first: 12,
-        after: currentCursor,
-      },
-    }
-  );
-
-  const handleNextPage = () => {
-    if (currentCursor) {
-      setPreviousCursors([...previousCursors, currentCursor]);
-    }
-    setCurrentCursor(data?.collection?.products?.pageInfo?.endCursor ?? null);
-    setCurrentPage(currentPage + 1);
-  };
-  const handlePreviousPage = () => {
-    const previousCursor = previousCursors[previousCursors.length - 1];
-    const newPreviousCursors = previousCursors.slice(0, -1);
-    setPreviousCursors(newPreviousCursors);
-    setCurrentCursor(previousCursor);
-    setCurrentPage(currentPage - 1);
-  };
-
-  if (isLoading) {
-    return (
-      <div className="my-10 flex flex-col gap-y-6">
-        <Skeleton className="h-[50px] w-full" />
-        <div className="grid grid-cols-3 gap-6">
-          {Array.from({ length: 10 }).map((_, index) => (
-            <Skeleton key={index} className="h-[300px] w-full" />
-          ))}
-        </div>
-      </div>
-    );
-  }
-
-  return (
-    <div className="my-10 flex flex-col gap-y-6">
-      <h1 className="text-2xl font-bold">{data?.collection?.title}</h1>
-      <div className="grid grid-cols-3 gap-6">
-        {data?.collection?.products?.edges?.map((product) => (
-          <ProductCard
-            key={product?.node?.id}
-            product={product.node as Product}
-          />
-        ))}
-      </div>
-      <Pagination>
-        <PaginationContent>
-          <PaginationItem>
-            <PaginationPrevious
-              onClick={handlePreviousPage}
-              className={
-                !data?.collection?.products?.pageInfo?.hasPreviousPage
-                  ? "pointer-events-none opacity-50"
-                  : "cursor-pointer"
-              }
-            />
-          </PaginationItem>
-          <PaginationItem>
-            <PaginationNext
-              onClick={handleNextPage}
-              className={
-                !data?.collection?.products?.pageInfo?.hasNextPage
-                  ? "pointer-events-none opacity-50"
-                  : "cursor-pointer"
-              }
-            />
-          </PaginationItem>
-        </PaginationContent>
-      </Pagination>
-    </div>
-  );
+type Props = {
+  params: Promise<{ handle: string }>;
+  searchParams: Promise<{ after?: string; sort?: string }>;
 };
 
-export default CollectionPage;
+export async function generateMetadata({ params }: Props): Promise<Metadata> {
+  const { handle } = await params;
+  const result = await commerceClient.getCollectionByHandle(handle, {
+    first: 1,
+  });
+  if (!result) return { title: "Collection Not Found" };
+  return {
+    title: `${result.collection.title} | Mama Fern`,
+    description:
+      result.collection.description ||
+      `Shop ${result.collection.title} at Mama Fern`,
+  };
+}
+
+const SORT_OPTIONS: Record<string, { sortKey: string; reverse: boolean }> = {
+  default: { sortKey: "BEST_SELLING", reverse: false },
+  "price-asc": { sortKey: "PRICE", reverse: false },
+  "price-desc": { sortKey: "PRICE", reverse: true },
+  newest: { sortKey: "CREATED", reverse: true },
+};
+
+export default async function CollectionPage({
+  params,
+  searchParams,
+}: Props) {
+  const { handle } = await params;
+  const { after, sort } = await searchParams;
+  const sortOption = SORT_OPTIONS[sort ?? "default"] ?? SORT_OPTIONS.default;
+
+  const result = await commerceClient.getCollectionByHandle(handle, {
+    first: 12,
+    after: after ?? null,
+    sortKey: sortOption.sortKey,
+    reverse: sortOption.reverse,
+  });
+
+  if (!result) notFound();
+
+  return (
+    <div className="my-10 flex flex-col gap-y-6 px-4">
+      <Breadcrumbs
+        items={[
+          { label: "Shop", href: "/shop" },
+          { label: result.collection.title },
+        ]}
+      />
+      <div className="flex items-center justify-between">
+        <h1 className="text-3xl font-bold font-display text-charcoal">
+          {result.collection.title}
+        </h1>
+      </div>
+      {result.collection.description && (
+        <p className="text-warm-brown/70 max-w-2xl">
+          {result.collection.description}
+        </p>
+      )}
+      <CollectionContent
+        products={result.products}
+        pageInfo={result.pageInfo}
+        handle={handle}
+        currentSort={sort ?? "default"}
+      />
+    </div>
+  );
+}

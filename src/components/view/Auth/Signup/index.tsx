@@ -13,6 +13,7 @@ import {
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
+import { Checkbox } from "@/components/ui/checkbox";
 import { useStorefrontMutation } from "@/hooks/useStorefront";
 import { CUSTOMER_CREATE } from "@/graphql/auth";
 import { toast } from "sonner";
@@ -25,6 +26,7 @@ const signupSchema = z
     email: z.string().email(),
     password: z.string().min(8),
     confirmPassword: z.string().min(8),
+    acceptsMarketing: z.boolean().default(true),
   })
   .refine((data) => data.password === data.confirmPassword, {
     message: "Passwords don't match",
@@ -49,6 +51,7 @@ export default function SignupForm({ setShowRegister }: SignupFormProps) {
       email: "",
       password: "",
       confirmPassword: "",
+      acceptsMarketing: true,
     },
   });
 
@@ -63,6 +66,7 @@ export default function SignupForm({ setShowRegister }: SignupFormProps) {
             lastName: values.lastName,
             email: values.email,
             password: values.password,
+            acceptsMarketing: values.acceptsMarketing,
           },
         },
       });
@@ -155,6 +159,23 @@ export default function SignupForm({ setShowRegister }: SignupFormProps) {
                 <Input type="password" {...field} />
               </FormControl>
               <FormMessage />
+            </FormItem>
+          )}
+        />
+        <FormField
+          control={form.control}
+          name="acceptsMarketing"
+          render={({ field }) => (
+            <FormItem className="flex items-center gap-2 space-y-0">
+              <FormControl>
+                <Checkbox
+                  checked={field.value}
+                  onCheckedChange={field.onChange}
+                />
+              </FormControl>
+              <FormLabel className="text-sm font-normal cursor-pointer">
+                Subscribe to emails for deals &amp; new arrivals
+              </FormLabel>
             </FormItem>
           )}
         />

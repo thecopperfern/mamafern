@@ -1,17 +1,7 @@
-"use client";
+import type { CommercePriceRange } from "@/lib/commerce";
+import { formatPrice } from "@/lib/currency";
 
-import { ProductPriceRange } from "@/types/shopify-graphql";
-import React from "react";
-
-const ProductPrice = ({ priceRange }: { priceRange: ProductPriceRange }) => {
-  const formatPrice = (amount: string, currencyCode: string) => {
-    return new Intl.NumberFormat(undefined, {
-      style: "currency",
-      currency: currencyCode,
-      currencyDisplay: "narrowSymbol",
-    }).format(parseFloat(amount));
-  };
-
+const ProductPrice = ({ priceRange }: { priceRange: CommercePriceRange }) => {
   return (
     <div className="flex flex-col gap-y-1">
       <div className="flex items-center gap-2 font-semibold">

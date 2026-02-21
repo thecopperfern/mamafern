@@ -1,11 +1,13 @@
 import { cn } from "@/lib/utils";
-import React from "react";
 import Link from "next/link";
 
 const Logo = ({ className }: { className?: string }) => {
   return (
-    <Link className={cn("text-sm font-medium", className)} href="/">
-      Minimal Store
+    <Link
+      className={cn("text-xl font-display font-bold text-fern", className)}
+      href="/"
+    >
+      Mama Fern
     </Link>
   );
 };

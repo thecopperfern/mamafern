@@ -6,9 +6,13 @@ import { ChevronLeft, ChevronRight } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { Button } from "@/components/ui/button";
 import Image from "next/image";
-import { ImageEdge } from "@/types/shopify-graphql";
+import type { CommerceImage } from "@/lib/commerce";
 
-export default function ProductCarousel({ images }: { images: ImageEdge[] }) {
+export default function ProductCarousel({
+  images,
+}: {
+  images: CommerceImage[];
+}) {
   const [selectedIndex, setSelectedIndex] = useState(0);
   const [canScrollPrev, setCanScrollPrev] = useState(false);
   const [canScrollNext, setCanScrollNext] = useState(false);
@@ -68,7 +72,7 @@ export default function ProductCarousel({ images }: { images: ImageEdge[] }) {
     };
   }, [mainEmblaApi, onSelect]);
 
-  if (!images) return null;
+  if (!images || images.length === 0) return null;
 
   return (
     <div className="col-span-2 mx-auto grid w-full grid-cols-[auto_1fr] gap-x-4">
@@ -81,14 +85,16 @@ export default function ProductCarousel({ images }: { images: ImageEdge[] }) {
               onClick={() => onThumbClick(index)}
               className={cn(
                 "relative aspect-square h-24 w-24 cursor-pointer overflow-hidden rounded-xl border",
-                selectedIndex === index ? "border-gray-800" : "border-gray-200"
+                selectedIndex === index
+                  ? "border-fern"
+                  : "border-oat"
               )}
             >
               <Image
                 width={96}
                 height={96}
-                src={image.node.url}
-                alt={image.node.altText ?? ""}
+                src={image.url}
+                alt={image.altText ?? ""}
                 className="h-full w-full object-cover"
                 style={{ objectFit: "cover" }}
               />
@@ -106,8 +112,8 @@ export default function ProductCarousel({ images }: { images: ImageEdge[] }) {
                 <Image
                   width={1000}
                   height={400}
-                  src={image.node.url.toString()}
-                  alt={image.node.altText ?? ""}
+                  src={image.url}
+                  alt={image.altText ?? ""}
                   className="h-full max-h-[650px] w-full object-contain"
                 />
               </div>
