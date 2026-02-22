@@ -6,14 +6,39 @@ import Image from "next/image";
 import ProductPrice from "./ProductPrice";
 import { useRouter } from "next/navigation";
 import WishlistButton from "../WishlistButton";
+import { useCartActions } from "@/lib/atoms/cart";
+import { toast } from "sonner";
 
 const ProductCard = ({ product }: { product: CommerceProduct }) => {
   const router = useRouter();
+  const { addItem } = useCartActions();
+
+  // Single variant = only one option and it's the default (no real choices)
+  const isSingleVariant =
+    product.variants.length === 1 &&
+    product.variants[0].selectedOptions.every(
+      (opt) => opt.value === "Default Title"
+    );
+
+  const handleCardClick = () => {
+    router.push(`/product/${product.handle}`);
+  };
+
+  const handleCartClick = (e: React.MouseEvent) => {
+    e.stopPropagation();
+    if (isSingleVariant) {
+      addItem(product.variants[0].id, 1);
+      toast.success(`${product.title} added to cart`);
+    } else {
+      router.push(`/product/${product.handle}`);
+    }
+  };
+
   return (
     <div
       role="button"
       className="group flex flex-col gap-2"
-      onClick={() => router.push(`/product/${product.handle}`)}
+      onClick={handleCardClick}
     >
       <div className="relative w-full h-[300px] rounded-lg overflow-hidden border border-oat">
         <WishlistButton
@@ -36,8 +61,11 @@ const ProductCard = ({ product }: { product: CommerceProduct }) => {
       </div>
       <h3 className="font-medium text-charcoal">{product.title}</h3>
       <ProductPrice priceRange={product.priceRange} />
-      <Button className="bg-fern hover:bg-fern-dark text-white">
-        Add to Cart
+      <Button
+        className="bg-fern hover:bg-fern-dark text-white"
+        onClick={handleCartClick}
+      >
+        {isSingleVariant ? "Add to Cart" : "View Options"}
       </Button>
     </div>
   );

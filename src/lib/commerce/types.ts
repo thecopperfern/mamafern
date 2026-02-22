@@ -130,4 +130,8 @@ export interface CommerceClient {
   removeDiscountCode(cartId: string, code: string): Promise<CommerceCart>;
   searchProducts(query: string, first?: number): Promise<CommerceProduct[]>;
   getProductRecommendations(productId: string): Promise<CommerceProduct[]>;
+  associateBuyer(
+    cartId: string,
+    customerAccessToken: string
+  ): Promise<{ checkoutUrl: string }>;
 }

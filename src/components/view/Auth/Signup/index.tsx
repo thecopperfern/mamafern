@@ -74,6 +74,19 @@ export default function SignupForm({ setShowRegister }: SignupFormProps) {
         throw new Error(response.customerCreate.customerUserErrors[0].message);
       }
 
+      // Sync to Brevo if user opted into marketing
+      if (values.acceptsMarketing) {
+        fetch("/api/newsletter", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({
+            email: values.email,
+            firstName: values.firstName,
+            lastName: values.lastName,
+          }),
+        }).catch(() => {}); // Non-critical
+      }
+
       toast.success("Account created successfully. Please login.");
       form.reset();
     } catch (error) {

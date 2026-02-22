@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useRef } from "react";
 import type { CommerceProduct, CommerceVariant } from "@/lib/commerce";
 import ProductCarousel from "@/components/view/ProductCarousel";
 import ProductPrice from "@/components/view/ProductCard/ProductPrice";
@@ -12,6 +12,8 @@ import ShareButtons from "@/components/view/ShareButtons";
 import WishlistButton from "@/components/view/WishlistButton";
 import { trackEvent } from "@/components/view/Analytics";
 import ProductReviews from "@/components/view/ProductReviews";
+import StickyATC from "@/components/view/StickyATC";
+import NotifyMe from "@/components/view/NotifyMe";
 
 export default function ProductDetail({
   product,
@@ -23,6 +25,7 @@ export default function ProductDetail({
     Record<string, string>
   >({});
   const [selectedVariant, setSelectedVariant] = useState<CommerceVariant>();
+  const atcButtonRef = useRef<HTMLButtonElement | null>(null);
 
   const handleSelectOptions = (options: Record<string, string>) => {
     const variant = product.variants.find((v) => {
@@ -44,38 +47,69 @@ export default function ProductDetail({
     }
   };
 
+  const isOOS = !!selectedVariant && !selectedVariant.availableForSale;
+  const atcDisabled = !selectedVariant || isOOS;
+
+  // Price shown in sticky bar — use selected variant price or product min
+  const stickyPrice = selectedVariant
+    ? selectedVariant.price.amount
+    : product.priceRange.minVariantPrice.amount;
+  const stickyCurrency = selectedVariant
+    ? selectedVariant.price.currencyCode
+    : product.priceRange.minVariantPrice.currencyCode;
+
   return (
-    <div className="grid grid-cols-1 md:grid-cols-3 gap-8 my-10">
-      <ProductCarousel images={product.images} />
-      <div className="flex flex-col gap-y-4">
-        <div className="flex items-start justify-between">
-          <h1 className="text-2xl font-bold font-display text-charcoal">
-            {product.title}
-          </h1>
-          <WishlistButton handle={product.handle} title={product.title} />
+    <>
+      <div className="grid grid-cols-1 md:grid-cols-3 gap-8 my-10">
+        <ProductCarousel images={product.images} />
+        <div className="flex flex-col gap-y-4">
+          <div className="flex items-start justify-between">
+            <h1 className="text-2xl font-bold font-display text-charcoal">
+              {product.title}
+            </h1>
+            <WishlistButton handle={product.handle} title={product.title} />
+          </div>
+          <p className="text-sm text-warm-brown/70">{product.description}</p>
+          <ProductOptions
+            selectedOptions={selectedOptions}
+            setSelectedOptions={handleSelectOptions}
+            options={product.options}
+          />
+          <ProductPrice priceRange={product.priceRange} />
+
+          {isOOS ? (
+            <NotifyMe
+              productTitle={product.title}
+              variantTitle={selectedVariant?.title}
+            />
+          ) : (
+            <Button
+              ref={atcButtonRef}
+              disabled={atcDisabled}
+              onClick={handleAddToCart}
+              className="bg-fern hover:bg-fern-dark text-white"
+            >
+              {selectedVariant ? "Add to Cart" : "Select Options"}
+            </Button>
+          )}
+
+          <ShareButtons title={product.title} handle={product.handle} />
         </div>
-        <p className="text-sm text-warm-brown/70">{product.description}</p>
-        <ProductOptions
-          selectedOptions={selectedOptions}
-          setSelectedOptions={handleSelectOptions}
-          options={product.options}
-        />
-        <ProductPrice priceRange={product.priceRange} />
-        {selectedVariant && !selectedVariant.availableForSale && (
-          <p className="text-sm text-terracotta">Out of stock</p>
-        )}
-        <Button
-          disabled={!selectedVariant || !selectedVariant.availableForSale}
-          onClick={handleAddToCart}
-          className="bg-fern hover:bg-fern-dark text-white"
-        >
-          Add to Cart
-        </Button>
-        <ShareButtons title={product.title} handle={product.handle} />
+        <div className="md:col-span-3">
+          <ProductReviews productHandle={product.handle} />
+        </div>
       </div>
-      <div className="md:col-span-3">
-        <ProductReviews productHandle={product.handle} />
-      </div>
-    </div>
+
+      {/* Sticky ATC — mobile only, appears when main button scrolls out of view */}
+      <StickyATC
+        title={product.title}
+        variantTitle={selectedVariant?.title}
+        price={stickyPrice}
+        currencyCode={stickyCurrency}
+        disabled={atcDisabled}
+        onAddToCart={handleAddToCart}
+        observeRef={atcButtonRef}
+      />
+    </>
   );
 }

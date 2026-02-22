@@ -3,15 +3,14 @@
 import { useState } from "react";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
-import { useStorefrontMutation } from "@/hooks/useStorefront";
-import { CUSTOMER_CREATE } from "@/graphql/auth";
 import { toast } from "sonner";
 
 export default function NewsletterSignup() {
   const [email, setEmail] = useState("");
-  const [status, setStatus] = useState<"idle" | "loading" | "success" | "error">("idle");
+  const [status, setStatus] = useState<
+    "idle" | "loading" | "success" | "error"
+  >("idle");
   const [message, setMessage] = useState("");
-  const { mutate } = useStorefrontMutation();
 
   async function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
@@ -19,47 +18,20 @@ export default function NewsletterSignup() {
 
     setStatus("loading");
     try {
-      const password =
-        Math.random().toString(36).slice(2) +
-        Math.random().toString(36).slice(2);
-
-      const response = await mutate({
-        query: CUSTOMER_CREATE,
-        variables: {
-          input: {
-            email: email.trim(),
-            password,
-            acceptsMarketing: true,
-          },
-        },
+      const res = await fetch("/api/newsletter", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ email: email.trim() }),
       });
 
-      const res = response as {
-        customerCreate: {
-          customerUserErrors: { code: string; message: string }[];
-        };
-      };
-      const errors = res.customerCreate?.customerUserErrors;
-      if (errors?.length > 0) {
-        const alreadyExists = errors.some((err) => err.code === "TAKEN");
-        if (alreadyExists) {
-          setStatus("success");
-          setMessage("You're already subscribed!");
-          toast.success("You're already subscribed!");
-        } else {
-          throw new Error(errors[0].message);
-        }
-      } else {
-        // Also register with newsletter API (Resend audience)
-        fetch("/api/newsletter", {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({ email: email.trim() }),
-        }).catch(() => {}); // Non-critical, don't block on failure
-        setStatus("success");
-        setMessage("Thanks for subscribing!");
-        toast.success("Thanks for subscribing!");
+      if (!res.ok) {
+        const data = await res.json().catch(() => ({}));
+        throw new Error(data.error || "Subscription failed");
       }
+
+      setStatus("success");
+      setMessage("Thanks for subscribing!");
+      toast.success("Thanks for subscribing!");
       setEmail("");
     } catch (err) {
       setStatus("error");
@@ -102,7 +74,9 @@ export default function NewsletterSignup() {
       </form>
       {message && (
         <p
-          className={`text-xs mt-2 ${status === "error" ? "text-terracotta" : "text-fern"}`}
+          className={`text-xs mt-2 ${
+            status === "error" ? "text-terracotta" : "text-fern-light"
+          }`}
         >
           {message}
         </p>

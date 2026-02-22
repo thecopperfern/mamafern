@@ -15,6 +15,7 @@ export const CUSTOMER_UPDATE = gql`
         lastName
         email
         phone
+        acceptsMarketing
       }
       customerUserErrors {
         code
@@ -99,6 +100,7 @@ export const GET_CUSTOMER = gql`
       lastName
       email
       phone
+      acceptsMarketing
     }
   }
 `;

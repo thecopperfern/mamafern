@@ -6,7 +6,8 @@ import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import { ShoppingCart, Menu, X, User, LogOut, Search, Heart } from "lucide-react";
 import { useRouter } from "next/navigation";
-import { useCartActions } from "@/lib/atoms/cart";
+import { useCartActions, isCartOpenAtom } from "@/lib/atoms/cart";
+import { useAtom } from "jotai";
 import { Badge } from "@/components/ui/badge";
 import CartSlideout from "../CartSlideout";
 
@@ -43,7 +44,7 @@ const Navbar = ({ collectionLinks }: NavbarProps) => {
       ? [{ label: "Shop", href: "/shop" }, ...collectionLinks]
       : DEFAULT_LINKS;
   const { cart, initializeCart } = useCartActions();
-  const [cartOpen, setCartOpen] = useState(false);
+  const [cartOpen, setCartOpen] = useAtom(isCartOpenAtom);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [searchOpen, setSearchOpen] = useState(false);
