@@ -3,8 +3,18 @@ import { Button } from "@/components/ui/button";
 
 export default function Hero() {
   return (
-    <section className="relative bg-gradient-to-br from-sage/30 via-cream to-blush/20 py-20 md:py-32 px-4">
-      <div className="mx-auto max-w-6xl text-center">
+    <section
+      className="relative py-24 md:py-36 px-4"
+      style={{
+        backgroundImage: "url('/linen.jpeg')",
+        backgroundRepeat: "repeat",
+        backgroundSize: "800px auto",
+      }}
+    >
+      {/* Colour wash over the texture */}
+      <div className="absolute inset-0 bg-gradient-to-br from-sage/30 via-cream/60 to-blush/30" />
+
+      <div className="relative z-10 mx-auto max-w-6xl text-center">
         <h1 className="text-4xl md:text-6xl font-display font-bold text-charcoal leading-tight">
           For every stage of
           <br />

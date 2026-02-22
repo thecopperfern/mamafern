@@ -7,10 +7,82 @@
     --background: #FAF7F2;
     --foreground: #2C2C2C;
     --radius: 0.5rem;
+    /* 65% cream wash over linen — adjust to taste */
+    --linen-wash: rgba(250, 247, 242, 0.65);
   }
 
   body {
     background-color: var(--background);
+    background-image:
+      linear-gradient(var(--linen-wash), var(--linen-wash)),
+      url('/linen.jpeg');
+    background-repeat: no-repeat, repeat;
+    background-size: auto, 800px auto;
     color: var(--foreground);
+  }
+
+  @keyframes fade-in-up {
+    from {
+      opacity: 0;
+      transform: translateY(18px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+}
+
+@layer utilities {
+  .animate-fade-in-up {
+    animation: fade-in-up 0.55s ease-out both;
+  }
+  .animate-fade-in-up-1 {
+    animation: fade-in-up 0.55s ease-out 0.08s both;
+  }
+  .animate-fade-in-up-2 {
+    animation: fade-in-up 0.55s ease-out 0.16s both;
+  }
+  .animate-fade-in-up-3 {
+    animation: fade-in-up 0.55s ease-out 0.24s both;
+  }
+  .animate-fade-in-up-4 {
+    animation: fade-in-up 0.55s ease-out 0.32s both;
+  }
+
+  /* Paper texture — softer, lighter feel */
+  .bg-texture-paper {
+    background-color: #FAF7F2;
+    background-image: url('/paper.jpeg');
+    background-repeat: repeat;
+    background-size: 600px auto;
+    background-blend-mode: multiply;
+  }
+
+  /* Same linen-with-wash — used on navbar, search bar, mobile menu */
+  .bg-texture-linen-wash {
+    background-color: #FAF7F2;
+    background-image:
+      linear-gradient(var(--linen-wash), var(--linen-wash)),
+      url('/linen.jpeg');
+    background-repeat: no-repeat, repeat;
+    background-size: auto, 800px auto;
+  }
+
+  /* Solid linen for sections that want a slightly warmer tone */
+  .bg-texture-linen {
+    background-color: #F0EBE3;
+    background-image: url('/linen.jpeg');
+    background-repeat: repeat;
+    background-size: 800px auto;
+  }
+
+  /* Footer: dark charcoal blended through linen weave */
+  .bg-texture-linen-dark {
+    background-color: #2C2C2C;
+    background-image: url('/linen.jpeg');
+    background-repeat: repeat;
+    background-size: 800px auto;
+    background-blend-mode: multiply;
   }
 }

@@ -1,4 +1,6 @@
 import type { Metadata } from "next";
+import Link from "next/link";
+import PageHero from "@/components/view/PageHero";
 
 export const metadata: Metadata = {
   title: "FAQ | Mama Fern",
@@ -45,28 +47,51 @@ const FAQS = [
 
 export default function FAQPage() {
   return (
-    <div className="mx-auto max-w-3xl px-4 py-16">
-      <h1 className="text-4xl font-display font-bold text-charcoal mb-8">
-        Frequently Asked Questions
-      </h1>
+    <div>
+      <PageHero
+        eyebrow="Got Questions?"
+        title="Frequently Asked Questions"
+        subtitle="Everything you need to know about orders, materials, and more."
+      />
 
-      <div className="space-y-6">
-        {FAQS.map((faq, i) => (
-          <details
-            key={i}
-            className="group border border-oat rounded-lg overflow-hidden"
+      <div className="mx-auto max-w-3xl px-4 py-14 animate-fade-in-up">
+        <div className="space-y-3">
+          {FAQS.map((faq, i) => (
+            <details
+              key={i}
+              className="group bg-texture-linen border border-oat rounded-xl overflow-hidden"
+            >
+              <summary className="cursor-pointer px-6 py-5 font-medium text-charcoal hover:text-fern transition-colors list-none flex items-center justify-between gap-4">
+                <span>{faq.question}</span>
+                <span className="text-fern shrink-0 group-open:rotate-45 transition-transform duration-200 text-xl leading-none">
+                  +
+                </span>
+              </summary>
+              <div className="px-6 pb-5 pt-1 text-warm-brown/70 leading-relaxed text-[14px] border-t border-oat/60">
+                {faq.answer}
+              </div>
+            </details>
+          ))}
+        </div>
+
+        {/* Still have questions CTA */}
+        <div className="mt-12 bg-texture-linen rounded-2xl border border-oat p-8 text-center">
+          <p className="text-xs font-medium text-fern uppercase tracking-[0.18em] mb-2">
+            Need More Help?
+          </p>
+          <h3 className="font-display font-bold text-charcoal text-xl mb-3">
+            Still have questions?
+          </h3>
+          <p className="text-warm-brown/60 text-sm mb-6 max-w-xs mx-auto">
+            We&apos;re always happy to help. Reach out and we&apos;ll get back to you soon.
+          </p>
+          <Link
+            href="/contact"
+            className="inline-flex items-center bg-fern hover:bg-fern-dark text-white font-medium px-7 py-2.5 rounded-md transition-colors text-sm"
           >
-            <summary className="cursor-pointer px-6 py-4 font-medium text-charcoal hover:bg-oat/50 transition-colors list-none flex items-center justify-between">
-              {faq.question}
-              <span className="text-fern ml-2 group-open:rotate-45 transition-transform text-xl">
-                +
-              </span>
-            </summary>
-            <div className="px-6 pb-4 text-warm-brown/70 leading-relaxed">
-              {faq.answer}
-            </div>
-          </details>
-        ))}
+            Contact Us
+          </Link>
+        </div>
       </div>
     </div>
   );

@@ -71,7 +71,7 @@ const Navbar = ({ collectionLinks }: NavbarProps) => {
 
   return (
     <>
-      <header className="sticky top-0 z-50 bg-cream/95 backdrop-blur-sm border-b border-oat">
+      <header className="sticky top-0 z-50 bg-texture-linen-wash border-b border-oat/60">
         <div className="mx-auto max-w-6xl px-4 py-4 flex items-center justify-between">
           <Logo />
 
@@ -173,7 +173,7 @@ const Navbar = ({ collectionLinks }: NavbarProps) => {
 
         {/* Search bar */}
         {searchOpen && (
-          <div className="border-t border-oat bg-cream px-4 py-3">
+          <div className="border-t border-oat/60 bg-texture-linen-wash px-4 py-3">
             <form onSubmit={handleSearch} className="mx-auto max-w-md flex gap-2">
               <input
                 type="text"
@@ -192,7 +192,7 @@ const Navbar = ({ collectionLinks }: NavbarProps) => {
 
         {/* Mobile nav */}
         {mobileMenuOpen && (
-          <nav className="md:hidden border-t border-oat bg-cream px-4 py-4 flex flex-col gap-y-3">
+          <nav className="md:hidden border-t border-oat/60 bg-texture-linen-wash px-4 py-4 flex flex-col gap-y-3">
             {NAV_LINKS.map((link) => (
               <Link
                 key={link.href}

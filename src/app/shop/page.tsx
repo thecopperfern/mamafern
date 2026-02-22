@@ -1,4 +1,5 @@
 import AllCollections from "@/components/view/AllCollections";
+import PageHero from "@/components/view/PageHero";
 import type { Metadata } from "next";
 
 export const dynamic = "force-dynamic";
@@ -10,11 +11,15 @@ export const metadata: Metadata = {
 
 export default function ShopPage() {
   return (
-    <div className="mx-auto max-w-6xl px-4">
-      <h1 className="text-3xl font-display font-bold text-charcoal mt-10">
-        Shop All
-      </h1>
-      <AllCollections />
+    <div>
+      <PageHero
+        eyebrow="All Collections"
+        title="Shop All"
+        subtitle="Family apparel in skin-friendlier fabrics for every stage of growing together."
+      />
+      <div className="mx-auto max-w-6xl px-4">
+        <AllCollections />
+      </div>
     </div>
   );
 }
