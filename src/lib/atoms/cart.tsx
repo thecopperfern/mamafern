@@ -112,6 +112,24 @@ export const useCartActions = () => {
     }
   };
 
+  const checkout = async (): Promise<string> => {
+    try {
+      if (typeof document !== "undefined") {
+        const match = document.cookie.match(
+          /(?:^|;\s*)customerAccessToken=([^;]*)/
+        );
+        const token = match ? decodeURIComponent(match[1]) : null;
+        if (token) {
+          const result = await commerceClient.associateBuyer(cart.id, token);
+          return result.checkoutUrl;
+        }
+      }
+    } catch {
+      // Fall through to unauthenticated checkout URL
+    }
+    return cart.checkoutUrl;
+  };
+
   return {
     cart,
     addItem,
@@ -120,5 +138,6 @@ export const useCartActions = () => {
     initializeCart,
     applyDiscount,
     removeDiscount,
+    checkout,
   };
 };

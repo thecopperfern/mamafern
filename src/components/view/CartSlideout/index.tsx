@@ -16,9 +16,10 @@ type Props = {
 };
 
 export default function CartSlideout({ open, onClose }: Props) {
-  const { cart, updateItem, removeItem, applyDiscount, removeDiscount } =
+  const { cart, updateItem, removeItem, applyDiscount, removeDiscount, checkout } =
     useCartActions();
   const [promoOpen, setPromoOpen] = useState(false);
+  const [checkoutLoading, setCheckoutLoading] = useState(false);
   const [promoCode, setPromoCode] = useState("");
   const [promoLoading, setPromoLoading] = useState(false);
   const [promoError, setPromoError] = useState("");
@@ -268,11 +269,21 @@ export default function CartSlideout({ open, onClose }: Props) {
               <p className="text-xs text-warm-brown/50">
                 Shipping and taxes calculated at checkout
               </p>
-              <a href={cart.checkoutUrl} className="block">
-                <Button className="w-full bg-fern hover:bg-fern-dark text-white">
-                  Checkout
-                </Button>
-              </a>
+              <Button
+                className="w-full bg-fern hover:bg-fern-dark text-white"
+                disabled={checkoutLoading}
+                onClick={async () => {
+                  setCheckoutLoading(true);
+                  try {
+                    const url = await checkout();
+                    window.location.href = url;
+                  } finally {
+                    setCheckoutLoading(false);
+                  }
+                }}
+              >
+                {checkoutLoading ? "Redirecting..." : "Checkout"}
+              </Button>
             </div>
           </>
         )}

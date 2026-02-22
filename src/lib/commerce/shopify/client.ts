@@ -16,6 +16,7 @@ import {
   UPDATE_CART_ITEMS,
   REMOVE_FROM_CART,
   CART_DISCOUNT_CODES_UPDATE,
+  CART_BUYER_IDENTITY_UPDATE,
 } from "@/graphql/cart";
 import type { CommerceClient } from "../types";
 import { mapCart, mapCollection, mapProduct } from "./mappers";
@@ -130,5 +131,15 @@ export const shopifyClient: CommerceClient = {
     return (data.productRecommendations ?? []).map((node: any) =>
       mapProduct(node)
     );
+  },
+
+  async associateBuyer(cartId, customerAccessToken) {
+    const data = await fetchGraphQL<any>(CART_BUYER_IDENTITY_UPDATE, {
+      cartId,
+      buyerIdentity: { customerAccessToken },
+    });
+    return {
+      checkoutUrl: data.cartBuyerIdentityUpdate.cart.checkoutUrl as string,
+    };
   },
 };
