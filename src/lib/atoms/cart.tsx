@@ -3,6 +3,8 @@
 import { atom, useAtom } from "jotai";
 import { commerceClient, type CommerceCart } from "@/lib/commerce";
 
+export const isCartOpenAtom = atom(false);
+
 const initialCartState: CommerceCart = {
   id: "",
   checkoutUrl: "",
@@ -17,6 +19,7 @@ const cartAtom = atom<CommerceCart>(initialCartState);
 
 export const useCartActions = () => {
   const [cart, setCart] = useAtom(cartAtom);
+  const [, setCartOpen] = useAtom(isCartOpenAtom);
 
   const addItem = async (merchandiseId: string, quantity: number) => {
     try {
@@ -24,6 +27,7 @@ export const useCartActions = () => {
         { merchandiseId, quantity },
       ]);
       setCart(updatedCart);
+      setCartOpen(true);
     } catch (error) {
       console.error("Error adding to cart:", error);
     }

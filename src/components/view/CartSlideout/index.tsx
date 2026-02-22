@@ -49,6 +49,37 @@ export default function CartSlideout({ open, onClose }: Props) {
           </Button>
         </div>
 
+        {/* Free shipping progress bar */}
+        {(() => {
+          const FREE_SHIPPING_THRESHOLD = 70;
+          const subtotal = parseFloat(cart.subtotal.amount);
+          const remaining = Math.max(FREE_SHIPPING_THRESHOLD - subtotal, 0);
+          const progress = Math.min((subtotal / FREE_SHIPPING_THRESHOLD) * 100, 100);
+          return (
+            <div className="px-4 pt-3 pb-3 bg-fern/5 border-b border-oat">
+              {remaining > 0 ? (
+                <p className="text-xs text-warm-brown/70 mb-1.5">
+                  Add{" "}
+                  <span className="font-semibold text-fern">
+                    ${remaining.toFixed(2)}
+                  </span>{" "}
+                  more for free shipping
+                </p>
+              ) : (
+                <p className="text-xs text-fern font-medium mb-1.5">
+                  🌿 You&apos;ve unlocked free shipping!
+                </p>
+              )}
+              <div className="w-full bg-oat rounded-full h-1.5">
+                <div
+                  className="bg-fern h-1.5 rounded-full transition-all duration-500"
+                  style={{ width: `${progress}%` }}
+                />
+              </div>
+            </div>
+          );
+        })()}
+
         {cart.lines.length === 0 ? (
           <div className="flex-1 flex flex-col items-center justify-center gap-4 p-8">
             <ShoppingBag className="h-12 w-12 text-warm-brown/30" />
