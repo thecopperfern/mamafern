@@ -1,20 +1,19 @@
-import { GetProductByHandleQuery } from "@/types/shopify-graphql";
-import React from "react";
+"use client";
+
+import type { CommerceProductOption } from "@/lib/commerce";
 import { Button } from "../../ui/button";
 import { cn } from "@/lib/utils";
 
 type ProductOptionsProps = {
-  options: NonNullable<GetProductByHandleQuery["product"]>["options"];
+  options: CommerceProductOption[];
   selectedOptions?: Record<string, string>;
   setSelectedOptions?: (options: Record<string, string>) => void;
-  isGlass?: boolean;
 };
 
 const ProductOptions = ({
   options,
   selectedOptions = {},
   setSelectedOptions,
-  isGlass = false,
 }: ProductOptionsProps) => {
   const handleOptionChange = (optionName: string, value: string) => {
     const updatedOptions = {
@@ -24,10 +23,7 @@ const ProductOptions = ({
     setSelectedOptions?.(updatedOptions);
   };
 
-  const renderOptionUI = (
-    option: NonNullable<GetProductByHandleQuery["product"]>["options"][0],
-    isGlass: boolean
-  ) => {
+  const renderOptionUI = (option: CommerceProductOption) => {
     switch (option.name.toLowerCase()) {
       case "color":
         return (
@@ -38,13 +34,13 @@ const ProductOptions = ({
                 className={cn(
                   "p-0 transition-all duration-300 ease-in-out hover:scale-[1.05]",
                   {
-                    "ring-1 ring-black":
+                    "ring-2 ring-fern":
                       selectedOptions[option.name] === value.name,
                   }
                 )}
                 onClick={() => handleOptionChange(option.name, value.name)}
                 style={{
-                  backgroundColor: value.name,
+                  backgroundColor: value.swatch?.color ?? value.name,
                   width: "24px",
                   height: "24px",
                   borderRadius: "100%",
@@ -68,10 +64,8 @@ const ProductOptions = ({
                 }
                 className={cn(
                   "transition-all duration-300 ease-in-out hover:scale-[1.05]",
-                  {
-                    "ring-1 ring-black":
-                      selectedOptions[option.name] === value.name,
-                  }
+                  selectedOptions[option.name] === value.name &&
+                    "bg-fern hover:bg-fern-dark"
                 )}
                 onClick={() => handleOptionChange(option.name, value.name)}
               >
@@ -90,14 +84,13 @@ const ProductOptions = ({
                 variant={
                   selectedOptions[option.name] === value.name
                     ? "default"
-                    : isGlass
-                    ? "ghost"
                     : "outline"
                 }
-                className={cn("transition-all duration-300 ease-in-out", {
-                  "ring-1 ring-black":
-                    selectedOptions[option.name] === value.name,
-                })}
+                className={cn(
+                  "transition-all duration-300 ease-in-out",
+                  selectedOptions[option.name] === value.name &&
+                    "bg-fern hover:bg-fern-dark"
+                )}
                 onClick={() => handleOptionChange(option.name, value.name)}
               >
                 {value.name}
@@ -112,8 +105,10 @@ const ProductOptions = ({
     <div className="flex w-full gap-4">
       {options.map((option) => (
         <div key={option.name} className="flex w-full flex-col gap-2">
-          <label className="text-sm font-medium">{option.name}</label>
-          {renderOptionUI(option, isGlass)}
+          <label className="text-sm font-medium text-charcoal">
+            {option.name}
+          </label>
+          {renderOptionUI(option)}
         </div>
       ))}
     </div>

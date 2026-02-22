@@ -1,53 +1,47 @@
-"use client";
-
-import { Skeleton } from "@/components/ui/skeleton";
-import { GET_COLLECTIONS_QUERY } from "@/graphql/collections";
-import { useStorefrontQuery } from "@/hooks/useStorefront";
-import { GetCollectionsQuery } from "@/types/shopify-graphql";
+import { commerceClient } from "@/lib/commerce";
 import Image from "next/image";
-import React from "react";
-import { useRouter } from "next/navigation";
-const AllCollections = () => {
-  const router = useRouter();
-  const { data, isLoading } = useStorefrontQuery<GetCollectionsQuery>(
-    ["collections"],
-    {
-      query: GET_COLLECTIONS_QUERY,
-    }
-  );
+import Link from "next/link";
 
-  if (isLoading) {
-    return (
-      <div className="grid grid-cols-2 gap-6 w-full my-10">
-        <Skeleton className="h-[300px] w-full" />
-        <Skeleton className="h-[300px] w-full" />
-        <Skeleton className="h-[300px] w-full" />
-        <Skeleton className="h-[300px] w-full" />
-      </div>
-    );
-  }
+export default async function AllCollections() {
+  const collections = await commerceClient.getCollections();
 
   return (
-    <div className="grid grid-cols-2 gap-6 w-full my-10">
-      {data?.collections.edges.map((collection) => (
-        <button
-          onClick={() => router.push(`/collections/${collection.node.handle}`)}
-          key={collection.node.id}
+    <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 w-full my-10">
+      {collections.map((collection) => (
+        <Link
+          href={`/collections/${collection.handle}`}
+          key={collection.id}
+          className="group"
         >
-          <div className="relative w-full h-[500px] rounded-lg overflow-hidden">
-            <Image
-              src={collection.node.image?.url ?? ""}
-              alt={collection.node.image?.altText ?? ""}
-              layout="fill"
-              className="w-full h-full object-cover rounded-lg shadow-lg"
-            />
+          <div className="relative w-full h-[400px] rounded-lg overflow-hidden">
+            {collection.image?.url ? (
+              <Image
+                src={collection.image.url}
+                alt={collection.image.altText ?? collection.title}
+                fill
+                className="w-full h-full object-cover rounded-lg transition-transform duration-300 group-hover:scale-105"
+              />
+            ) : (
+              <div className="w-full h-full bg-oat flex items-center justify-center">
+                <span className="text-warm-brown/50 text-lg">
+                  {collection.title}
+                </span>
+              </div>
+            )}
+            <div className="absolute inset-0 bg-charcoal/20 group-hover:bg-charcoal/30 transition-colors" />
+            <div className="absolute bottom-4 left-4">
+              <h2 className="text-xl font-display font-bold text-white">
+                {collection.title}
+              </h2>
+              {collection.description && (
+                <p className="text-sm text-white/80 mt-1">
+                  {collection.description}
+                </p>
+              )}
+            </div>
           </div>
-          <h1>{collection.node.title}</h1>
-          <p>{collection.node.description}</p>
-        </button>
+        </Link>
       ))}
     </div>
   );
-};
-
-export default AllCollections;
+}

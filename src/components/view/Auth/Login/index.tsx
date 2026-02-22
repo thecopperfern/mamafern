@@ -69,9 +69,10 @@ const Login = ({ setShowRegister }: LoginFormProps) => {
         response.customerAccessTokenCreate.customerAccessToken.accessToken,
         {
           maxAge: 60 * 60 * 24 * 30, // 30 days
+          path: "/",
         }
       );
-      router.push("/");
+      router.push("/account");
     } catch (error) {
       toast.error(
         error instanceof Error ? error.message : "An unknown error occurred"
