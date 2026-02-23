@@ -1,4 +1,5 @@
-export const dynamic = "force-dynamic";
+// ISR: revalidate every 60 seconds for fresh product data without rebuilding
+export const revalidate = 60;
 
 import Hero from "@/components/view/Hero";
 import CategoryCards from "@/components/view/CategoryCards";

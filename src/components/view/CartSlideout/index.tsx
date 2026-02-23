@@ -52,7 +52,7 @@ export default function CartSlideout({ open, onClose }: Props) {
 
         {/* Free shipping progress bar */}
         {(() => {
-          const FREE_SHIPPING_THRESHOLD = 70;
+          const FREE_SHIPPING_THRESHOLD = Number(process.env.NEXT_PUBLIC_FREE_SHIPPING_THRESHOLD ?? 70);
           const subtotal = parseFloat(cart.subtotal.amount);
           const remaining = Math.max(FREE_SHIPPING_THRESHOLD - subtotal, 0);
           const progress = Math.min((subtotal / FREE_SHIPPING_THRESHOLD) * 100, 100);

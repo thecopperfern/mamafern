@@ -74,8 +74,9 @@ export default function SignupForm({ setShowRegister }: SignupFormProps) {
         throw new Error(response.customerCreate.customerUserErrors[0].message);
       }
 
-      // Sync to Brevo if user opted into marketing
       if (values.acceptsMarketing) {
+        // Opted in: newsletter route handles adding to list + sends the richer
+        // "Welcome to the family" email with WELCOME10. No separate account email.
         fetch("/api/newsletter", {
           method: "POST",
           headers: { "Content-Type": "application/json" },
@@ -83,6 +84,16 @@ export default function SignupForm({ setShowRegister }: SignupFormProps) {
             email: values.email,
             firstName: values.firstName,
             lastName: values.lastName,
+          }),
+        }).catch(() => {}); // Non-critical
+      } else {
+        // Opted out of newsletter: just send the simple account confirmation email.
+        fetch("/api/welcome", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({
+            email: values.email,
+            firstName: values.firstName,
           }),
         }).catch(() => {}); // Non-critical
       }

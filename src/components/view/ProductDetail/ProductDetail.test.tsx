@@ -34,7 +34,9 @@ vi.mock("@/components/view/ProductReviews", () => ({
 describe("ProductDetail", () => {
   it("renders product title", () => {
     render(<ProductDetail product={mockProduct} />);
-    expect(screen.getByText("Organic Cotton Onesie")).toBeInTheDocument();
+    // Title may appear multiple times (main heading + sticky ATC bar)
+    const titles = screen.getAllByText("Organic Cotton Onesie");
+    expect(titles.length).toBeGreaterThanOrEqual(1);
   });
 
   it("renders product description", () => {
@@ -46,8 +48,9 @@ describe("ProductDetail", () => {
 
   it("renders Add to Cart button (disabled by default)", () => {
     render(<ProductDetail product={mockProduct} />);
-    const btn = screen.getByText("Add to Cart");
-    expect(btn).toBeDisabled();
+    const btns = screen.getAllByText("Add to Cart");
+    // At least one Add to Cart button should be disabled
+    expect(btns.some((btn) => btn.hasAttribute("disabled") || (btn as HTMLButtonElement).disabled)).toBe(true);
   });
 
   it("renders share buttons", () => {

@@ -72,12 +72,12 @@ const Navbar = ({ collectionLinks }: NavbarProps) => {
 
   return (
     <>
-      <header className="sticky top-0 z-50 bg-texture-linen-wash border-b border-oat/60">
+      <header className="sticky top-0 z-50 bg-texture-linen-wash border-b border-oat/60" role="banner">
         <div className="mx-auto max-w-6xl px-4 py-4 flex items-center justify-between">
           <Logo />
 
           {/* Desktop nav */}
-          <nav className="hidden md:flex items-center gap-x-6">
+          <nav className="hidden md:flex items-center gap-x-6" aria-label="Main navigation">
             {NAV_LINKS.map((link) => (
               <Link
                 key={link.href}
@@ -95,16 +95,19 @@ const Navbar = ({ collectionLinks }: NavbarProps) => {
               variant="ghost"
               onClick={() => setSearchOpen(!searchOpen)}
               className="text-charcoal hover:text-fern"
+              aria-label={searchOpen ? "Close search" : "Open search"}
+              aria-expanded={searchOpen}
             >
-              <Search className="h-5 w-5" />
+              <Search className="h-5 w-5" aria-hidden="true" />
             </Button>
-            <Link href="/wishlist">
+            <Link href="/wishlist" aria-label="Wishlist">
               <Button
                 size="icon"
                 variant="ghost"
                 className="text-charcoal hover:text-fern"
+                aria-label="View wishlist"
               >
-                <Heart className="h-5 w-5" />
+                <Heart className="h-5 w-5" aria-hidden="true" />
               </Button>
             </Link>
             <div className="relative">
@@ -113,12 +116,14 @@ const Navbar = ({ collectionLinks }: NavbarProps) => {
                 variant="ghost"
                 onClick={() => setCartOpen(true)}
                 className="text-charcoal hover:text-fern"
+                aria-label={`Shopping cart${cart?.totalQuantity > 0 ? `, ${cart.totalQuantity} items` : ''}`}
               >
-                <ShoppingCart className="h-5 w-5" />
+                <ShoppingCart className="h-5 w-5" aria-hidden="true" />
               </Button>
               {cart?.totalQuantity > 0 && (
                 <Badge
                   className="absolute -top-1 -right-1 h-5 w-5 rounded-full p-0 flex items-center justify-center text-[10px] bg-fern text-white"
+                  aria-hidden="true"
                 >
                   {cart.totalQuantity}
                 </Badge>
@@ -126,13 +131,14 @@ const Navbar = ({ collectionLinks }: NavbarProps) => {
             </div>
             {isLoggedIn ? (
               <>
-                <Link href="/account">
+                <Link href="/account" aria-label="My account">
                   <Button
                     size="icon"
                     variant="ghost"
                     className="text-charcoal hover:text-fern"
+                    aria-label="My account"
                   >
-                    <User className="h-5 w-5" />
+                    <User className="h-5 w-5" aria-hidden="true" />
                   </Button>
                 </Link>
                 <Button
@@ -140,18 +146,20 @@ const Navbar = ({ collectionLinks }: NavbarProps) => {
                   variant="ghost"
                   className="text-charcoal hover:text-fern"
                   onClick={handleLogout}
+                  aria-label="Log out"
                 >
-                  <LogOut className="h-5 w-5" />
+                  <LogOut className="h-5 w-5" aria-hidden="true" />
                 </Button>
               </>
             ) : (
-              <Link href="/auth">
+              <Link href="/auth" aria-label="Log in or sign up">
                 <Button
                   size="icon"
                   variant="ghost"
                   className="text-charcoal hover:text-fern"
+                  aria-label="Log in or sign up"
                 >
-                  <User className="h-5 w-5" />
+                  <User className="h-5 w-5" aria-hidden="true" />
                 </Button>
               </Link>
             )}
@@ -162,11 +170,14 @@ const Navbar = ({ collectionLinks }: NavbarProps) => {
               variant="ghost"
               className="md:hidden text-charcoal"
               onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+              aria-label={mobileMenuOpen ? "Close menu" : "Open menu"}
+              aria-expanded={mobileMenuOpen}
+              aria-controls="mobile-nav"
             >
               {mobileMenuOpen ? (
-                <X className="h-5 w-5" />
+                <X className="h-5 w-5" aria-hidden="true" />
               ) : (
-                <Menu className="h-5 w-5" />
+                <Menu className="h-5 w-5" aria-hidden="true" />
               )}
             </Button>
           </div>
@@ -174,14 +185,17 @@ const Navbar = ({ collectionLinks }: NavbarProps) => {
 
         {/* Search bar */}
         {searchOpen && (
-          <div className="border-t border-oat/60 bg-texture-linen-wash px-4 py-3">
+          <div className="border-t border-oat/60 bg-texture-linen-wash px-4 py-3" role="search" aria-label="Product search">
             <form onSubmit={handleSearch} className="mx-auto max-w-md flex gap-2">
+              <label htmlFor="nav-search" className="sr-only">Search products</label>
               <input
-                type="text"
+                id="nav-search"
+                type="search"
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
                 placeholder="Search products..."
                 autoFocus
+                aria-label="Search products"
                 className="flex-1 border border-oat rounded-md px-3 py-1.5 text-sm bg-white text-charcoal placeholder:text-warm-brown/30 focus:outline-none focus:ring-2 focus:ring-fern/30 focus:border-fern"
               />
               <Button type="submit" size="sm" className="bg-fern hover:bg-fern-dark text-white">
@@ -193,7 +207,11 @@ const Navbar = ({ collectionLinks }: NavbarProps) => {
 
         {/* Mobile nav */}
         {mobileMenuOpen && (
-          <nav className="md:hidden border-t border-oat/60 bg-texture-linen-wash px-4 py-4 flex flex-col gap-y-3">
+          <nav
+            id="mobile-nav"
+            className="md:hidden border-t border-oat/60 bg-texture-linen-wash px-4 py-4 flex flex-col gap-y-3"
+            aria-label="Mobile navigation"
+          >
             {NAV_LINKS.map((link) => (
               <Link
                 key={link.href}

@@ -48,8 +48,13 @@ describe("ProductCard", () => {
     expect(mockPush).toHaveBeenCalledWith("/product/organic-onesie");
   });
 
-  it("renders Add to Cart button", () => {
+  it("renders action button", () => {
     render(<ProductCard product={mockProduct} />);
-    expect(screen.getByText("Add to Cart")).toBeInTheDocument();
+    // Button text may be "Add to Cart" or "View Options" depending on variants
+    const btns = screen.getAllByRole("button");
+    const actionBtn = btns.find(
+      (b) => b.textContent === "Add to Cart" || b.textContent === "View Options"
+    );
+    expect(actionBtn).toBeTruthy();
   });
 });

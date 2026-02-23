@@ -10,7 +10,8 @@
     "codegen": "node -r dotenv/config ./node_modules/.bin/graphql-codegen",
     "test": "vitest run",
     "test:watch": "vitest",
-    "test:coverage": "vitest run --coverage"
+    "test:coverage": "vitest run --coverage",
+    "shopify:token": "node scripts/shopify-token.js"
   },
   "dependencies": {
     "@hookform/resolvers": "^3.10.0",

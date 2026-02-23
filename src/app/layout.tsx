@@ -7,6 +7,7 @@ import Providers from "@/providers";
 import { Toaster } from "@/components/ui/sonner";
 import { commerceClient } from "@/lib/commerce";
 import Analytics from "@/components/view/Analytics";
+import SkipNav from "@/components/view/SkipNav";
 
 const dmSans = DM_Sans({
   variable: "--font-dm-sans",
@@ -55,10 +56,13 @@ export default async function RootLayout({
         <body
           className={`${dmSans.variable} ${playfair.variable} font-sans antialiased`}
         >
+          <SkipNav />
           <Analytics />
           <Toaster />
           <Navbar collectionLinks={collectionLinks} />
-          <main className="min-h-screen">{children}</main>
+          <main id="main-content" className="min-h-screen" role="main" tabIndex={-1}>
+            {children}
+          </main>
           <Footer />
         </body>
       </Providers>

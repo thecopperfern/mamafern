@@ -13,6 +13,12 @@ vi.mock("@/lib/atoms/cart", () => ({
     cart: { id: "", totalQuantity: 0, lines: [] },
     initializeCart: vi.fn(),
   }),
+  isCartOpenAtom: { init: false, read: () => false, write: () => {} },
+}));
+
+vi.mock("jotai", () => ({
+  useAtom: () => [false, vi.fn()],
+  atom: (init: unknown) => ({ init, read: () => init, write: () => {} }),
 }));
 
 vi.mock("../CartSlideout", () => ({

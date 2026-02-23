@@ -3,6 +3,10 @@ import { NextResponse } from "next/server";
 const BREVO_API_KEY = process.env.BREVO_API_KEY;
 const BREVO_LIST_ID = process.env.BREVO_LIST_ID;
 const BREVO_BACK_IN_STOCK_LIST_ID = process.env.BREVO_BACK_IN_STOCK_LIST_ID;
+const BREVO_SENDER_EMAIL =
+  process.env.BREVO_SENDER_EMAIL || "hello@thecopperfern.com";
+// Template ID 1 = "Newsletter Welcome — Mama Fern" created in Brevo
+const WELCOME_TEMPLATE_ID = 1;
 
 export async function POST(request: Request) {
   try {
@@ -66,6 +70,31 @@ export async function POST(request: Request) {
       return NextResponse.json(
         { error: "Failed to subscribe" },
         { status: 500 }
+      );
+    }
+
+    // Send marketing welcome email to brand-new newsletter subscribers only.
+    // 201 = new contact, 204 = existing contact updated → skip to avoid duplicates.
+    // Back-in-stock signups get a different flow so skip those too.
+    if (res.status === 201 && !backInStock) {
+      fetch("https://api.brevo.com/v3/smtp/email", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          "api-key": BREVO_API_KEY!,
+        },
+        body: JSON.stringify({
+          sender: { name: "Mama Fern", email: BREVO_SENDER_EMAIL },
+          to: [
+            {
+              email: email.trim(),
+              name: firstName ? `${firstName}${lastName ? " " + lastName : ""}` : undefined,
+            },
+          ],
+          templateId: WELCOME_TEMPLATE_ID,
+        }),
+      }).catch((err) =>
+        console.error("[Newsletter Welcome Email Error]", err)
       );
     }
 

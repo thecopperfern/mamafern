@@ -1,0 +1,770 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Mama Fern — Action Plan · Mother's Day Launch 2026</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  /* ── Root palette ── */
+  :root {
+    --cream:      #faf6ef;
+    --cream-mid:  #f0e9dc;
+    --cream-dark: #ddd0bc;
+    --fern:       #4a7c59;
+    --fern-dark:  #355c40;
+    --fern-light: #d1e8d8;
+    --sage:       #7aad8a;
+    --sage-light: #e3f0e7;
+    --terracotta: #b9602a;
+    --terra-light:#f5e0d0;
+    --ink:        #2a2217;
+    --muted:      #6b5e4e;
+    --rule:       #c9baa5;
+    --build:      #3b6fa0;
+    --build-bg:   #ddeaf7;
+    --social:     #a0593b;
+    --social-bg:  #fde8db;
+    --email:      #855c9e;
+    --email-bg:   #ecdff5;
+    --influencer: #4a7c59;
+    --influencer-bg: #d1e8d8;
+    --shopify:    #5d9f41;
+    --shopify-bg: #d8f0cc;
+    --metrics:    #8a6f2e;
+    --metrics-bg: #f5e9cc;
+  }
+
+  /* ── Reset ── */
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    font-family: 'Inter', system-ui, sans-serif;
+    background: var(--cream);
+    color: var(--ink);
+    font-size: 11pt;
+    line-height: 1.6;
+  }
+
+  /* ── Page wrapper ── */
+  .page {
+    max-width: 820px;
+    margin: 0 auto;
+    padding: 0;
+  }
+
+  /* ── Cover ── */
+  .cover {
+    background: var(--fern);
+    color: #fff;
+    padding: 56px 48px 48px;
+    position: relative;
+    page-break-after: always;
+  }
+  .cover::after {
+    content: '';
+    display: block;
+    height: 6px;
+    background: linear-gradient(90deg, var(--terracotta), var(--sage), var(--fern-dark));
+    position: absolute;
+    bottom: 0; left: 0; right: 0;
+  }
+  .cover-eyebrow {
+    font-family: 'Inter', sans-serif;
+    font-size: 9pt;
+    font-weight: 600;
+    letter-spacing: .18em;
+    text-transform: uppercase;
+    opacity: .75;
+    margin-bottom: 14px;
+  }
+  .cover h1 {
+    font-family: 'Playfair Display', Georgia, serif;
+    font-size: 38pt;
+    font-weight: 900;
+    line-height: 1.1;
+    letter-spacing: -.02em;
+    margin-bottom: 12px;
+  }
+  .cover h1 span { color: #c8e6c2; }
+  .cover-sub {
+    font-size: 13pt;
+    opacity: .88;
+    font-weight: 500;
+    margin-bottom: 32px;
+  }
+  .cover-meta {
+    display: flex;
+    gap: 28px;
+    flex-wrap: wrap;
+  }
+  .cover-pill {
+    background: rgba(255,255,255,.15);
+    border: 1px solid rgba(255,255,255,.3);
+    border-radius: 40px;
+    padding: 6px 16px;
+    font-size: 9pt;
+    font-weight: 600;
+    letter-spacing: .04em;
+  }
+  .cover-legend {
+    margin-top: 40px;
+    padding-top: 24px;
+    border-top: 1px solid rgba(255,255,255,.2);
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px 20px;
+    font-size: 8.5pt;
+    opacity: .85;
+  }
+  .cover-legend span { display: flex; align-items: center; gap: 5px; }
+
+  /* ── Section wrapper ── */
+  .section {
+    padding: 36px 48px;
+    border-bottom: 1px solid var(--cream-dark);
+  }
+
+  /* ── Section heading ── */
+  .section-head {
+    display: flex;
+    align-items: baseline;
+    gap: 12px;
+    margin-bottom: 20px;
+  }
+  .section-head h2 {
+    font-family: 'Playfair Display', Georgia, serif;
+    font-size: 17pt;
+    font-weight: 700;
+    color: var(--fern-dark);
+    line-height: 1.1;
+  }
+  .section-head .rule {
+    flex: 1;
+    height: 1px;
+    background: var(--rule);
+    align-self: center;
+    margin-top: 4px;
+  }
+
+  /* ── Phase timeline block ── */
+  .timeline-graphic {
+    background: var(--fern-dark);
+    color: #fff;
+    border-radius: 8px;
+    padding: 22px 24px;
+    font-family: 'Inter', monospace;
+    font-size: 8.5pt;
+    line-height: 1.8;
+    overflow: hidden;
+    margin-bottom: 4px;
+  }
+
+  /* ── Week banner ── */
+  .week-banner {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    background: var(--fern);
+    color: #fff;
+    border-radius: 6px;
+    padding: 10px 18px;
+    margin-bottom: 12px;
+    page-break-inside: avoid;
+  }
+  .week-banner .wk-label {
+    font-family: 'Inter', sans-serif;
+    font-size: 8pt;
+    font-weight: 700;
+    letter-spacing: .14em;
+    text-transform: uppercase;
+    opacity: .8;
+    white-space: nowrap;
+  }
+  .week-banner .wk-title {
+    font-family: 'Playfair Display', Georgia, serif;
+    font-size: 13pt;
+    font-weight: 700;
+    flex: 1;
+  }
+  .week-banner .wk-goal {
+    font-size: 8pt;
+    background: rgba(255,255,255,.18);
+    border-radius: 20px;
+    padding: 3px 10px;
+    white-space: nowrap;
+    font-weight: 500;
+  }
+  .week-banner.pre { background: var(--terracotta); }
+  .week-banner.wk1 { background: #4a7c59; }
+  .week-banner.wk2 { background: #5a8c68; }
+  .week-banner.wk3 { background: #3e6e52; }
+  .week-banner.wk4 { background: #c0392b; }
+  .week-banner.wk5 { background: #8a6f2e; }
+  .week-banner.wk6 { background: #1a6b3c; } 
+  .week-banner.wk7 { background: #855c9e; }
+  .week-banner.wk8 { background: #b9602a; }
+
+  /* ── Tables ── */
+  table { width: 100%; border-collapse: collapse; margin-bottom: 6px; page-break-inside: avoid; }
+  thead tr { background: var(--fern-dark); color: #fff; }
+  thead th {
+    padding: 8px 12px;
+    text-align: left;
+    font-size: 8pt;
+    font-weight: 700;
+    letter-spacing: .08em;
+    text-transform: uppercase;
+  }
+  tbody tr:nth-child(even) { background: var(--cream-mid); }
+  tbody tr:nth-child(odd)  { background: #fff; }
+  tbody td { padding: 8px 12px; font-size: 9.5pt; vertical-align: top; }
+  tbody tr:last-child td { border-bottom: 2px solid var(--fern-dark); }
+
+  /* checkbox column */
+  .col-check { width: 36px; text-align: center; }
+  .cb {
+    display: inline-block;
+    width: 14px; height: 14px;
+    border: 2px solid var(--fern);
+    border-radius: 3px;
+    vertical-align: middle;
+  }
+
+  /* ── Category badges ── */
+  .cat {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    font-size: 8pt;
+    font-weight: 600;
+    padding: 2px 8px;
+    border-radius: 20px;
+    white-space: nowrap;
+  }
+  .cat-build       { color: var(--build);       background: var(--build-bg); }
+  .cat-social      { color: var(--social);      background: var(--social-bg); }
+  .cat-email       { color: var(--email);        background: var(--email-bg); }
+  .cat-influencer  { color: var(--influencer);   background: var(--influencer-bg); }
+  .cat-shopify     { color: var(--shopify);      background: var(--shopify-bg); }
+  .cat-metrics     { color: var(--metrics);      background: var(--metrics-bg); }
+
+  /* ── Note / callout box ── */
+  .note {
+    border-left: 4px solid var(--fern);
+    background: var(--sage-light);
+    padding: 12px 16px;
+    border-radius: 0 6px 6px 0;
+    font-size: 9.5pt;
+    margin: 10px 0;
+    page-break-inside: avoid;
+  }
+  .note strong { color: var(--fern-dark); }
+
+  .warn {
+    border-left: 4px solid var(--terracotta);
+    background: var(--terra-light);
+    padding: 12px 16px;
+    border-radius: 0 6px 6px 0;
+    font-size: 9.5pt;
+    margin: 10px 0;
+    page-break-inside: avoid;
+  }
+  .warn strong { color: var(--terracotta); }
+
+  /* ── MUST badge ── */
+  .must {
+    display: inline-block;
+    background: var(--terracotta);
+    color: #fff;
+    font-size: 7pt;
+    font-weight: 700;
+    letter-spacing: .08em;
+    text-transform: uppercase;
+    padding: 1px 7px;
+    border-radius: 3px;
+  }
+  .nice {
+    display: inline-block;
+    background: var(--cream-dark);
+    color: var(--muted);
+    font-size: 7pt;
+    font-weight: 600;
+    letter-spacing: .06em;
+    text-transform: uppercase;
+    padding: 1px 7px;
+    border-radius: 3px;
+  }
+
+  /* ── Two-column code track ── */
+  .tracks {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+  }
+  .track-box {
+    background: #fff;
+    border: 1px solid var(--cream-dark);
+    border-top: 3px solid var(--fern);
+    border-radius: 6px;
+    padding: 16px;
+    page-break-inside: avoid;
+  }
+  .track-box h3 {
+    font-family: 'Inter', sans-serif;
+    font-size: 9pt;
+    font-weight: 700;
+    letter-spacing: .1em;
+    text-transform: uppercase;
+    color: var(--fern-dark);
+    margin-bottom: 10px;
+  }
+  .track-box.market { border-top-color: var(--terracotta); }
+  .track-box.market h3 { color: var(--terracotta); }
+  .track-row {
+    display: flex;
+    gap: 8px;
+    font-size: 8.5pt;
+    padding: 5px 0;
+    border-bottom: 1px dotted var(--cream-dark);
+    align-items: flex-start;
+  }
+  .track-row:last-child { border-bottom: none; }
+  .track-wk {
+    font-weight: 700;
+    color: var(--fern-dark);
+    min-width: 42px;
+    font-size: 7.5pt;
+    padding-top: 1px;
+  }
+  .track-box.market .track-wk { color: var(--terracotta); }
+
+  /* ── KPI table special ── */
+  .kpi-group td:first-child {
+    font-weight: 600;
+    color: var(--fern-dark);
+  }
+
+  /* ── Footer ── */
+  .footer {
+    padding: 20px 48px;
+    font-size: 8pt;
+    color: var(--muted);
+    display: flex;
+    justify-content: space-between;
+    border-top: 2px solid var(--fern);
+  }
+
+  /* ── Spacer ── */
+  .spacer { height: 16px; }
+
+  p.body-text { font-size: 9.5pt; color: var(--muted); margin-bottom: 12px; }
+
+  /* ── After section ── */
+  .after-list { list-style: none; padding: 0; }
+  .after-list li {
+    padding: 8px 0 8px 28px;
+    border-bottom: 1px dotted var(--cream-dark);
+    font-size: 9.5pt;
+    position: relative;
+  }
+  .after-list li::before {
+    content: counter(after-counter);
+    counter-increment: after-counter;
+    position: absolute;
+    left: 0;
+    width: 20px; height: 20px;
+    background: var(--fern);
+    color: #fff;
+    font-size: 8pt;
+    font-weight: 700;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    top: 9px;
+  }
+  .after-list { counter-reset: after-counter; }
+
+  /* ─────────────── PRINT STYLES ─────────────── */
+  @page {
+    size: letter portrait;
+    margin: 14mm 12mm 14mm 12mm;
+  }
+  @media print {
+    body { background: #fff; font-size: 9.5pt; }
+    .cover { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+    .week-banner { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+    thead tr { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+    .cat, .must, .nice, .cb, .note, .warn, .track-box {
+      -webkit-print-color-adjust: exact; print-color-adjust: exact;
+    }
+    .section { page-break-inside: avoid; }
+    .week-block { page-break-inside: avoid; }
+    h2, h3 { page-break-after: avoid; }
+    table { page-break-inside: auto; }
+    tr { page-break-inside: avoid; }
+  }
+</style>
+</head>
+<body>
+<div class="page">
+
+  <!-- ═══════════════ COVER ═══════════════ -->
+  <div class="cover">
+    <div class="cover-eyebrow">Day-to-Day Playbook</div>
+    <h1>Mama <span>Fern</span><br>Action Plan</h1>
+    <div class="cover-sub">Mother's Day Launch · March 16 → May 10, 2026</div>
+    <div class="cover-meta">
+      <div class="cover-pill">8 Weeks</div>
+      <div class="cover-pill">2 Tracks</div>
+      <div class="cover-pill">1 Goal: Launch Day</div>
+    </div>
+    <div class="cover-legend">
+      <span>🔧 Build</span>
+      <span>📱 Social</span>
+      <span>📧 Email</span>
+      <span>🤝 Influencer</span>
+      <span>🛍️ Shopify</span>
+      <span>📊 Metrics</span>
+    </div>
+  </div>
+
+  <!-- ═══════════════ PHASE OVERVIEW ═══════════════ -->
+  <div class="section">
+    <div class="section-head">
+      <h2>Phase Overview</h2>
+      <div class="rule"></div>
+    </div>
+    <div class="timeline-graphic">
+NOW ─────────────────────────────────────────────────────► MAY 10
+│         │              │          │        │      │        │
+FEB 21    MAR 16         APR 6      APR 20   APR 27 MAY 4    MAY 10
+│         │              │          │        │      │        │
+GET READY CAMPAIGN       STORE      LAUNCH   GIFT   LAST     MOTHER'S
+(build    STARTS         MUST       DAY      PUSH   CALL     DAY
+ the      (waitlist +    BE LIVE                             │
+ store)   social)                            └──────┴────────┘
+                                              Revenue Sprint
+    </div>
+    <div style="display:flex; gap:10px; flex-wrap:wrap; margin-top:12px;">
+      <div style="background: var(--terra-light); border-left:3px solid var(--terracotta); border-radius:4px; padding:8px 14px; font-size:9pt; flex:1; min-width:140px;"><strong style="color:var(--terracotta);">Pre-Campaign</strong><br>Feb 21 – Mar 15<br>Build the foundation</div>
+      <div style="background: var(--sage-light); border-left:3px solid var(--sage); border-radius:4px; padding:8px 14px; font-size:9pt; flex:1; min-width:140px;"><strong style="color:var(--fern-dark);">Weeks 1–3</strong><br>Mar 16 – Apr 5<br>Content + Waitlist</div>
+      <div style="background: var(--build-bg); border-left:3px solid var(--build); border-radius:4px; padding:8px 14px; font-size:9pt; flex:1; min-width:140px;"><strong style="color:var(--build);">Weeks 4–5</strong><br>Apr 6 – Apr 19<br>Store goes live</div>
+      <div style="background: #d4f0e0; border-left:3px solid var(--fern-dark); border-radius:4px; padding:8px 14px; font-size:9pt; flex:1; min-width:140px;"><strong style="color:var(--fern-dark);">Weeks 6–8</strong><br>Apr 20 – May 10<br>Launch + Revenue Sprint</div>
+    </div>
+  </div>
+
+  <!-- ═══════════════ PRE-CAMPAIGN ═══════════════ -->
+  <div class="section">
+    <div class="week-banner pre">
+      <div class="wk-label">Pre-Campaign</div>
+      <div class="wk-title">Feb 21 → Mar 15 — Foundation</div>
+      <div class="wk-goal">⚠️ All 10 items done before Mar 16</div>
+    </div>
+    <p class="body-text">These must be done <strong>before</strong> the campaign starts. The store does not need to be live yet — but these must be ready.</p>
+    <div class="spacer"></div>
+    <table>
+      <thead>
+        <tr><th class="col-check">✓</th><th>#</th><th>Task</th><th>Category</th></tr>
+      </thead>
+      <tbody>
+        <tr><td class="col-check"><span class="cb"></span></td><td>1</td><td>Update logo from "Minimal Store" → "Mama Fern"</td><td><span class="cat cat-build">🔧 Build</span></td></tr>
+        <tr><td class="col-check"><span class="cb"></span></td><td>2</td><td>Update page metadata (title, description, OG image)</td><td><span class="cat cat-build">🔧 Build</span></td></tr>
+        <tr><td class="col-check"><span class="cb"></span></td><td>3</td><td>Apply brand palette to <code>tailwind.config.ts</code> (cream, fern green, sage, terracotta)</td><td><span class="cat cat-build">🔧 Build</span></td></tr>
+        <tr><td class="col-check"><span class="cb"></span></td><td>4</td><td>Get products into Shopify admin with photos, variants, prices</td><td><span class="cat cat-shopify">🛍️ Shopify</span></td></tr>
+        <tr><td class="col-check"><span class="cb"></span></td><td>5</td><td>Create collections: Moms, Kids, Family Sets, Mother's Day 2026</td><td><span class="cat cat-shopify">🛍️ Shopify</span></td></tr>
+        <tr><td class="col-check"><span class="cb"></span></td><td>6</td><td>Build a waitlist landing page at mamafern.com (email capture + hero image)</td><td><span class="cat cat-build">🔧 Build</span></td></tr>
+        <tr><td class="col-check"><span class="cb"></span></td><td>7</td><td>Set up Klaviyo (free tier) and connect to Shopify</td><td><span class="cat cat-email">📧 Email</span></td></tr>
+        <tr><td class="col-check"><span class="cb"></span></td><td>8</td><td>Create TikTok account + Instagram account</td><td><span class="cat cat-social">📱 Social</span></td></tr>
+        <tr><td class="col-check"><span class="cb"></span></td><td>9</td><td>Create Pinterest account + first 3 boards</td><td><span class="cat cat-social">📱 Social</span></td></tr>
+        <tr><td class="col-check"><span class="cb"></span></td><td>10</td><td>Draft welcome email series (3 emails) in Klaviyo</td><td><span class="cat cat-email">📧 Email</span></td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- ═══════════════ WEEK 1 ═══════════════ -->
+  <div class="section week-block">
+    <div class="week-banner wk1">
+      <div class="wk-label">Week 1</div>
+      <div class="wk-title">Mar 16–22 · Start Content + Waitlist</div>
+      <div class="wk-goal">Target: 100 email subscribers</div>
+    </div>
+    <div class="note"><strong>Store is NOT open.</strong> Focus: get the waitlist page live and begin establishing the brand on social.</div>
+    <div class="spacer"></div>
+    <table>
+      <thead><tr><th class="col-check">✓</th><th>Task</th><th>Category</th></tr></thead>
+      <tbody>
+        <tr><td class="col-check"><span class="cb"></span></td><td>Launch waitlist page live at mamafern.com</td><td><span class="cat cat-build">🔧 Build</span></td></tr>
+        <tr><td class="col-check"><span class="cb"></span></td><td>Post 3–5 TikToks: founder story, fabric close-ups, brand vision</td><td><span class="cat cat-social">📱 Social</span></td></tr>
+        <tr><td class="col-check"><span class="cb"></span></td><td>Post 3–4 Instagram feed photos establishing brand aesthetic</td><td><span class="cat cat-social">📱 Social</span></td></tr>
+        <tr><td class="col-check"><span class="cb"></span></td><td>Instagram Stories: launch polls ("sage or terracotta for spring drop?")</td><td><span class="cat cat-social">📱 Social</span></td></tr>
+        <tr><td class="col-check"><span class="cb"></span></td><td>Pin 10–15 images to Pinterest: "Mama Fern Style" + "Mother's Day Gift Ideas" boards</td><td><span class="cat cat-social">📱 Social</span></td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- ═══════════════ WEEK 2 ═══════════════ -->
+  <div class="section week-block">
+    <div class="week-banner wk2">
+      <div class="wk-label">Week 2</div>
+      <div class="wk-title">Mar 23–29 · Influencer Seeding</div>
+      <div class="wk-goal">Target: 250 subscribers · 10 samples shipped</div>
+    </div>
+    <table>
+      <thead><tr><th class="col-check">✓</th><th>Task</th><th>Category</th></tr></thead>
+      <tbody>
+        <tr><td class="col-check"><span class="cb"></span></td><td>Find 20 micro-influencers via #crunchymom #organicbaby #familymatching #momlife</td><td><span class="cat cat-influencer">🤝 Influencer</span></td></tr>
+        <tr><td class="col-check"><span class="cb"></span></td><td>Send DMs: free family set, no strings, just hoping they'll share if they love it</td><td><span class="cat cat-influencer">🤝 Influencer</span></td></tr>
+        <tr><td class="col-check"><span class="cb"></span></td><td>Ship first 10 samples to responders</td><td><span class="cat cat-influencer">🤝 Influencer</span></td></tr>
+        <tr><td class="col-check"><span class="cb"></span></td><td>Continue TikTok cadence (3–5/week) + Instagram Reels (3/week)</td><td><span class="cat cat-social">📱 Social</span></td></tr>
+      </tbody>
+    </table>
+    <div class="note" style="margin-top:10px;"><strong>DM Template:</strong> "Hey [name]! I'm launching Mama Fern — organic cotton tees and onesies for the whole family. I'd love to send your family a set, no strings attached, just hoping you'll share if you love them."</div>
+  </div>
+
+  <!-- ═══════════════ WEEK 3 ═══════════════ -->
+  <div class="section week-block">
+    <div class="week-banner wk3">
+      <div class="wk-label">Week 3</div>
+      <div class="wk-title">Mar 30 – Apr 5 · Build Social Proof</div>
+      <div class="wk-goal">Target: 400 subscribers · first UGC arriving</div>
+    </div>
+    <table>
+      <thead><tr><th class="col-check">✓</th><th>Task</th><th>Category</th></tr></thead>
+      <tbody>
+        <tr><td class="col-check"><span class="cb"></span></td><td>Ship remaining influencer samples</td><td><span class="cat cat-influencer">🤝 Influencer</span></td></tr>
+        <tr><td class="col-check"><span class="cb"></span></td><td>Start product-specific content: sneak peek tees, fabric details, packaging reveal</td><td><span class="cat cat-social">📱 Social</span></td></tr>
+        <tr><td class="col-check"><span class="cb"></span></td><td>Install Judge.me in Shopify (auto review requests after orders)</td><td><span class="cat cat-shopify">🛍️ Shopify</span></td></tr>
+        <tr><td class="col-check"><span class="cb"></span></td><td>Draft abandoned cart email series (3 emails) in Klaviyo</td><td><span class="cat cat-email">📧 Email</span></td></tr>
+        <tr><td class="col-check"><span class="cb"></span></td><td>Save any influencer UGC as it arrives — hold for launch week</td><td><span class="cat cat-influencer">🤝 Influencer</span></td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- ═══════════════ WEEK 4 ═══════════════ -->
+  <div class="section week-block">
+    <div class="week-banner wk4">
+      <div class="wk-label">Week 4 ⚠️ Hard Deadline</div>
+      <div class="wk-title">Apr 6–12 · STORE MUST GO LIVE</div>
+      <div class="wk-goal">Target: 500 subscribers</div>
+    </div>
+    <div class="warn"><strong>THIS IS THE HARD DEADLINE.</strong> Store opens for early access Apr 20. Everything below marked MUST is non-negotiable.</div>
+    <div class="spacer"></div>
+    <table>
+      <thead><tr><th class="col-check">✓</th><th>Task</th><th>Category</th><th style="width:52px;">Priority</th></tr></thead>
+      <tbody>
+        <tr><td class="col-check"><span class="cb"></span></td><td>Checkout working end-to-end (<code>cart.checkoutUrl</code> → Shopify hosted checkout)</td><td><span class="cat cat-build">🔧 Build</span></td><td><span class="must">MUST</span></td></tr>
+        <tr><td class="col-check"><span class="cb"></span></td><td>All Mother's Day products live with images, variants, descriptions</td><td><span class="cat cat-shopify">🛍️ Shopify</span></td><td><span class="must">MUST</span></td></tr>
+        <tr><td class="col-check"><span class="cb"></span></td><td>Collections live: Moms, Kids, Family Sets, Mother's Day 2026</td><td><span class="cat cat-shopify">🛍️ Shopify</span></td><td><span class="must">MUST</span></td></tr>
+        <tr><td class="col-check"><span class="cb"></span></td><td>Mobile responsive check — most traffic will be TikTok/Instagram mobile</td><td><span class="cat cat-build">🔧 Build</span></td><td><span class="must">MUST</span></td></tr>
+        <tr><td class="col-check"><span class="cb"></span></td><td>Welcome + abandoned cart flows live in Klaviyo</td><td><span class="cat cat-email">📧 Email</span></td><td><span class="must">MUST</span></td></tr>
+        <tr><td class="col-check"><span class="cb"></span></td><td>Create 3–4 gift bundles (Mama Bundle, Family Set, New Mama Gift, Mini Match)</td><td><span class="cat cat-shopify">🛍️ Shopify</span></td><td><span class="must">MUST</span></td></tr>
+        <tr><td class="col-check"><span class="cb"></span></td><td>"Complete the Family Look" cross-sell on product pages</td><td><span class="cat cat-build">🔧 Build</span></td><td><span class="nice">NICE</span></td></tr>
+        <tr><td class="col-check"><span class="cb"></span></td><td>Gift wrapping add-on in cart ($5–$8)</td><td><span class="cat cat-shopify">🛍️ Shopify</span></td><td><span class="nice">NICE</span></td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- ═══════════════ WEEK 5 ═══════════════ -->
+  <div class="section week-block">
+    <div class="week-banner wk5">
+      <div class="wk-label">Week 5</div>
+      <div class="wk-title">Apr 13–19 · Earth Day Prep + Confirm Influencers</div>
+      <div class="wk-goal">Target: 600 subscribers</div>
+    </div>
+    <table>
+      <thead><tr><th class="col-check">✓</th><th>Task</th><th>Category</th></tr></thead>
+      <tbody>
+        <tr><td class="col-check"><span class="cb"></span></td><td>Write Earth Day blog post: "Why we chose organic cotton"</td><td><span class="cat cat-social">📱 Social</span></td></tr>
+        <tr><td class="col-check"><span class="cb"></span></td><td>TikTok: "What organic cotton actually means for your baby's skin"</td><td><span class="cat cat-social">📱 Social</span></td></tr>
+        <tr><td class="col-check"><span class="cb"></span></td><td>Email to waitlist: "We're launching next week — here's why we care about materials"</td><td><span class="cat cat-email">📧 Email</span></td></tr>
+        <tr><td class="col-check"><span class="cb"></span></td><td>Confirm 8–12 influencers will post in weeks 6–7; stagger schedule (2–3/day)</td><td><span class="cat cat-influencer">🤝 Influencer</span></td></tr>
+        <tr><td class="col-check"><span class="cb"></span></td><td>Test full purchase flow: add to cart → checkout → order confirmation email</td><td><span class="cat cat-build">🔧 Build</span></td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- ═══════════════ WEEK 6 ═══════════════ -->
+  <div class="section week-block">
+    <div class="week-banner wk6">
+      <div class="wk-label">Week 6 🚀 LAUNCH</div>
+      <div class="wk-title">Apr 20–26 · LAUNCH WEEK</div>
+      <div class="wk-goal">50–100 orders · 800+ subscribers</div>
+    </div>
+    <table>
+      <thead><tr><th style="width:90px;">Date</th><th>Task</th><th>Category</th></tr></thead>
+      <tbody>
+        <tr><td><strong>Mon Apr 20</strong></td><td>Email waitlist: "You're in first. Mama Fern is live." — 15% off with <code>FIRSTFERN</code> (48 hrs)</td><td><span class="cat cat-email">📧 Email</span></td></tr>
+        <tr><td><strong>Mon Apr 20</strong></td><td>Do NOT post publicly yet — 24-hour email-only window</td><td><span class="cat cat-email">📧 Email</span></td></tr>
+        <tr><td><strong>Tue Apr 21</strong></td><td>Go public: TikTok "IT'S LIVE" founder video, Instagram Reels + feed post</td><td><span class="cat cat-social">📱 Social</span></td></tr>
+        <tr><td><strong>Tue Apr 21</strong></td><td>Pinterest: pin every product to "Mother's Day Gift Ideas" board</td><td><span class="cat cat-social">📱 Social</span></td></tr>
+        <tr><td><strong>Tue Apr 21</strong></td><td>Public discount: 10% off with <code>MAMAFERN10</code> (expires May 1)</td><td><span class="cat cat-shopify">🛍️ Shopify</span></td></tr>
+        <tr><td><strong>Tue Apr 21</strong></td><td>Enable Fomo / Sales Pop app for social proof notifications</td><td><span class="cat cat-shopify">🛍️ Shopify</span></td></tr>
+        <tr><td><strong>Wed Apr 22</strong></td><td>Publish Earth Day blog post + Earth Day email to full list</td><td><span class="cat cat-email">📧 Email</span></td></tr>
+        <tr><td><strong>Apr 23–26</strong></td><td>First influencer wave: 2–3 posts/day; repost every piece of UGC immediately</td><td><span class="cat cat-influencer">🤝 Influencer</span></td></tr>
+        <tr><td><strong>All Week</strong></td><td>Reply to every comment and DM personally</td><td><span class="cat cat-social">📱 Social</span></td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- ═══════════════ WEEK 7 ═══════════════ -->
+  <div class="section week-block">
+    <div class="week-banner wk7">
+      <div class="wk-label">Week 7</div>
+      <div class="wk-title">Apr 27 – May 3 · Gift Buyer Capture</div>
+      <div class="wk-goal">Gift guide + 2nd influencer wave</div>
+    </div>
+    <table>
+      <thead><tr><th class="col-check">✓</th><th>Task</th><th>Category</th></tr></thead>
+      <tbody>
+        <tr><td class="col-check"><span class="cb"></span></td><td>Build Mother's Day gift guide page (<code>/collections/mothers-day-2026</code>) with sections: "For New Mama" / "Mama of Many" / "Family Set"</td><td><span class="cat cat-shopify">🛍️ Shopify</span></td></tr>
+        <tr><td class="col-check"><span class="cb"></span></td><td>Email: "The Mama Fern Mother's Day Gift Guide" — feature bundles with prices</td><td><span class="cat cat-email">📧 Email</span></td></tr>
+        <tr><td class="col-check"><span class="cb"></span></td><td>TikTok: "Mother's Day gift ideas for the crunchy mama in your life"</td><td><span class="cat cat-social">📱 Social</span></td></tr>
+        <tr><td class="col-check"><span class="cb"></span></td><td>Instagram: gift guide carousel (saveable/shareable format)</td><td><span class="cat cat-social">📱 Social</span></td></tr>
+        <tr><td class="col-check"><span class="cb"></span></td><td>Email recent buyers: "Share a photo for 15% off your next order" (UGC capture)</td><td><span class="cat cat-email">📧 Email</span></td></tr>
+        <tr><td class="col-check"><span class="cb"></span></td><td>Second influencer wave: 5–8 posts themed "Mother's Day gift idea"</td><td><span class="cat cat-influencer">🤝 Influencer</span></td></tr>
+        <tr><td class="col-check"><span class="cb"></span></td><td>Optional: Boost top TikTok ($50–$100) + Meta retargeting ($100–$200)</td><td><span class="cat cat-metrics">📊 Metrics</span></td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- ═══════════════ WEEK 8 ═══════════════ -->
+  <div class="section week-block">
+    <div class="week-banner wk8">
+      <div class="wk-label">Week 8 💰 Final Push</div>
+      <div class="wk-title">May 4–10 · Revenue Sprint</div>
+      <div class="wk-goal">Close out Mother's Day strong</div>
+    </div>
+    <table>
+      <thead><tr><th style="width:110px;">Date</th><th>Task</th><th>Category</th></tr></thead>
+      <tbody>
+        <tr><td><strong>Mon May 4</strong></td><td>Email: "Last week to order for Mother's Day" — shipping cutoff date prominent</td><td><span class="cat cat-email">📧 Email</span></td></tr>
+        <tr><td><strong>Mon May 4</strong></td><td>TikTok/Instagram: "What I'm getting my mom for Mother's Day" format</td><td><span class="cat cat-social">📱 Social</span></td></tr>
+        <tr><td><strong>Wed May 7</strong></td><td>Email: "Final call — order by tonight for May 10 delivery"</td><td><span class="cat cat-email">📧 Email</span></td></tr>
+        <tr><td><strong>Wed May 7</strong></td><td>All social: "LAST DAY for Mother's Day"</td><td><span class="cat cat-social">📱 Social</span></td></tr>
+        <tr><td><strong>Thu–Fri May 8–9</strong></td><td>Email: "Missed the window? Send a gift card — delivered instantly by email"</td><td><span class="cat cat-email">📧 Email</span></td></tr>
+        <tr><td><strong>Sun May 10</strong></td><td>Email: "Happy Mother's Day from Mama Fern" — warm letter, UGC, soft self-purchase CTA</td><td><span class="cat cat-email">📧 Email</span></td></tr>
+        <tr><td><strong>Sun May 10</strong></td><td>Social: celebrate, repost UGC, no hard selling</td><td><span class="cat cat-social">📱 Social</span></td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- ═══════════════ EMAIL SEQUENCE ═══════════════ -->
+  <div class="section">
+    <div class="section-head">
+      <h2>Email Sequence at a Glance</h2>
+      <div class="rule"></div>
+    </div>
+    <table>
+      <thead><tr><th style="width:28px;">#</th><th style="width:70px;">Date</th><th>Subject Line</th><th>Audience</th></tr></thead>
+      <tbody>
+        <tr><td><strong>1</strong></td><td>Apr 20</td><td>"You're in first. Mama Fern is live."</td><td>Waitlist only</td></tr>
+        <tr><td><strong>2</strong></td><td>Apr 21</td><td>"We're officially open"</td><td>Everyone</td></tr>
+        <tr><td><strong>3</strong></td><td>Apr 22</td><td>"Why organic matters — Happy Earth Day 🌿"</td><td>Everyone</td></tr>
+        <tr><td><strong>4</strong></td><td>Apr 27</td><td>"The Mama Fern Mother's Day Gift Guide"</td><td>Everyone</td></tr>
+        <tr><td><strong>5</strong></td><td>May 4</td><td>"Last week to order for Mother's Day"</td><td>Everyone</td></tr>
+        <tr><td><strong>6</strong></td><td>May 7</td><td>"Final call: order tonight for May 10 delivery"</td><td>Everyone</td></tr>
+        <tr><td><strong>7</strong></td><td>May 8–9</td><td>"Missed the window? Send a gift card instead"</td><td>Everyone</td></tr>
+        <tr><td><strong>8</strong></td><td>May 10</td><td>"Happy Mother's Day from Mama Fern"</td><td>Everyone</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- ═══════════════ GIFT BUNDLES ═══════════════ -->
+  <div class="section">
+    <div class="section-head">
+      <h2>Gift Bundles to Build in Shopify</h2>
+      <div class="rule"></div>
+    </div>
+    <table>
+      <thead><tr><th>Bundle Name</th><th>Contents</th><th style="width:90px;">Price</th></tr></thead>
+      <tbody>
+        <tr><td><strong>The Mama Bundle</strong></td><td>Mom tee + tote bag</td><td>$55–$70</td></tr>
+        <tr><td><strong>The Family Set</strong></td><td>Mom tee + dad tee + kids onesie</td><td>$80–$105</td></tr>
+        <tr><td><strong>The New Mama Gift</strong></td><td>Mom tee + baby onesie + gift wrap included</td><td>$60–$80</td></tr>
+        <tr><td><strong>The Mini Match</strong></td><td>Mom tee + matching kids tee</td><td>$50–$65</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- ═══════════════ KPIs ═══════════════ -->
+  <div class="section">
+    <div class="section-head">
+      <h2>KPIs — What Success Looks Like</h2>
+      <div class="rule"></div>
+    </div>
+    <table>
+      <thead><tr><th>Phase</th><th>Metric</th><th>Target</th></tr></thead>
+      <tbody>
+        <tr class="kpi-group"><td>Pre-launch (Wks 1–5)</td><td>Email waitlist</td><td><strong>500–600</strong></td></tr>
+        <tr class="kpi-group"><td>Pre-launch</td><td>Influencer partnerships confirmed</td><td><strong>12–15</strong></td></tr>
+        <tr class="kpi-group"><td>Launch week</td><td>Orders (Apr 20–26)</td><td><strong>50–100</strong></td></tr>
+        <tr class="kpi-group"><td>Campaign total</td><td>Revenue (Apr 20 – May 10)</td><td><strong>$5,000–$15,000</strong></td></tr>
+        <tr class="kpi-group"><td>Campaign total</td><td>AOV</td><td><strong>$70–$100</strong></td></tr>
+        <tr class="kpi-group"><td>Campaign total</td><td>Email list</td><td><strong>1,000+</strong></td></tr>
+        <tr class="kpi-group"><td>Campaign total</td><td>Reviews collected</td><td><strong>15–25</strong></td></tr>
+        <tr class="kpi-group"><td>Campaign total</td><td>UGC pieces</td><td><strong>20–30</strong></td></tr>
+        <tr class="kpi-group"><td>Post-campaign</td><td>Repeat purchase rate (30 days)</td><td><strong>10–15%</strong></td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- ═══════════════ TWO TRACKS ═══════════════ -->
+  <div class="section">
+    <div class="section-head">
+      <h2>The Two Tracks — Side by Side</h2>
+      <div class="rule"></div>
+    </div>
+    <div class="tracks">
+      <div class="track-box">
+        <h3>🔧 Build Track (Tech)</h3>
+        <div class="track-row"><div class="track-wk">NOW</div><div>Fix branding (logo, meta, palette)</div></div>
+        <div class="track-row"><div class="track-wk">Wk 1</div><div>Waitlist landing page live</div></div>
+        <div class="track-row"><div class="track-wk">Wk 2</div><div>Building internally</div></div>
+        <div class="track-row"><div class="track-wk">Wk 3</div><div>Draft email flows</div></div>
+        <div class="track-row"><div class="track-wk">Wk 4</div><div>⚠️ STORE MUST BE LIVE — checkout + collections + mobile + email flows</div></div>
+        <div class="track-row"><div class="track-wk">Wk 5</div><div>Full purchase flow QA</div></div>
+        <div class="track-row"><div class="track-wk">Wk 6</div><div>Enable social proof app</div></div>
+        <div class="track-row"><div class="track-wk">Wk 7</div><div>Gift guide page live</div></div>
+        <div class="track-row"><div class="track-wk">Wk 8</div><div>Gift card products enabled</div></div>
+      </div>
+      <div class="track-box market">
+        <h3>📱 Market Track (Content + Channels)</h3>
+        <div class="track-row"><div class="track-wk">NOW</div><div>Waitlist page, Klaviyo setup, TikTok + IG accounts</div></div>
+        <div class="track-row"><div class="track-wk">Wk 1</div><div>3–5 TikToks, 3–4 IG posts, Pinterest boards</div></div>
+        <div class="track-row"><div class="track-wk">Wk 2</div><div>DM 20 influencers, ship first 10 samples</div></div>
+        <div class="track-row"><div class="track-wk">Wk 3</div><div>Save influencer UGC, product tease content</div></div>
+        <div class="track-row"><div class="track-wk">Wk 4</div><div>500 subscriber target, finalize bundle pages</div></div>
+        <div class="track-row"><div class="track-wk">Wk 5</div><div>Earth Day content, confirm influencer schedule</div></div>
+        <div class="track-row"><div class="track-wk">Wk 6</div><div>LAUNCH DAY, influencer wave, repost all UGC</div></div>
+        <div class="track-row"><div class="track-wk">Wk 7</div><div>Gift guide email + content, 2nd influencer wave</div></div>
+        <div class="track-row"><div class="track-wk">Wk 8</div><div>Urgency emails, last-call posts, Mother's Day celebration</div></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ═══════════════ AFTER MOTHER'S DAY ═══════════════ -->
+  <div class="section">
+    <div class="section-head">
+      <h2>After Mother's Day</h2>
+      <div class="rule"></div>
+    </div>
+    <ol class="after-list">
+      <li>Post-purchase email → review request → cross-sell → repeat buyer offer</li>
+      <li>Father's Day (June 21) — reuse this exact campaign framework for Dad collection</li>
+      <li>Analyze which acquisition channel produced highest-LTV buyers — double down for Q3</li>
+      <li>Keep email list warm: weekly content emails, not just promos</li>
+    </ol>
+  </div>
+
+  <!-- ═══════════════ FOOTER ═══════════════ -->
+  <div class="footer">
+    <span>Mama Fern · Action Plan · Mother's Day 2026</span>
+    <span>Reference: PRD.md · MARKETING_PLAN.md · MOTHERS_DAY_CAMPAIGN.md</span>
+  </div>
+
+</div>
+</body>
+</html>

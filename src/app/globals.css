@@ -21,6 +21,38 @@
     color: var(--foreground);
   }
 
+  /* ===== ADA Accessibility — Focus Styles ===== */
+  /* Visible focus ring for keyboard navigation (WCAG 2.4.7) */
+  *:focus-visible {
+    outline: 2px solid #5B7F5E; /* fern color */
+    outline-offset: 2px;
+    border-radius: 2px;
+  }
+
+  /* Remove default outline only when NOT using keyboard */
+  *:focus:not(:focus-visible) {
+    outline: none;
+  }
+
+  /* Ensure reduced motion is respected (WCAG 2.3.3) */
+  @media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+      scroll-behavior: auto !important;
+    }
+  }
+
+  /* High contrast mode support */
+  @media (forced-colors: active) {
+    a, button {
+      forced-color-adjust: none;
+    }
+  }
+
   @keyframes fade-in-up {
     from {
       opacity: 0;

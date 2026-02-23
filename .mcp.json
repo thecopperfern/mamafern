@@ -1,0 +1,20 @@
+{
+  "mcpServers": {
+    "brevo": {
+      "command": "npx",
+      "args": ["-y", "@houtini/brevo-mcp"],
+      "env": {
+        "BREVO_API_KEY": "REPLACE_WITH_BREVO_API_KEY"
+      }
+    },
+    "shopify": {
+      "command": "npx",
+      "args": ["-y", "shopify-mcp"],
+      "env": {
+        "SHOPIFY_CLIENT_ID": "REPLACE_WITH_SHOPIFY_CLIENT_ID",
+        "SHOPIFY_CLIENT_SECRET": "REPLACE_WITH_SHOPIFY_CLIENT_SECRET",
+        "MYSHOPIFY_DOMAIN": "mama-fern.myshopify.com"
+      }
+    }
+  }
+}

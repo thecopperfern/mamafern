@@ -7,26 +7,30 @@ export const metadata: Metadata = {
   description: "Learn about Mama Fern — grounded family apparel for crunchy, cozy homes.",
 };
 
+/**
+ * ⚠️ PLACEHOLDER VALUES — Replace with real brand story and imagery.
+ * Search for "PLACEHOLDER" to find all items that need updating.
+ */
 const VALUES = [
   {
     emoji: "🌱",
     title: "Skin-Friendlier Fabrics",
-    desc: "Organic cotton where possible — always gentle on little ones.",
+    desc: "⚠️ PLACEHOLDER — Describe your fabric choices and sourcing story here.",
   },
   {
     emoji: "✨",
     title: "Intentional Drops",
-    desc: "Small, quality releases over mass production. Every piece is considered.",
+    desc: "⚠️ PLACEHOLDER — Explain your release strategy and production philosophy.",
   },
   {
     emoji: "👨‍👩‍👧‍👦",
     title: "Family Coordination",
-    desc: "Matching without being matchy. Designs that work together naturally.",
+    desc: "⚠️ PLACEHOLDER — Describe how your designs work together for families.",
   },
   {
     emoji: "🎨",
     title: "Playful & Grounded",
-    desc: "Designs that bring joy while staying true to the natural, cozy life.",
+    desc: "⚠️ PLACEHOLDER — Share what 'playful & grounded' means for Mama Fern.",
   },
 ];
 
@@ -39,8 +43,20 @@ export default function AboutPage() {
         subtitle="Grounded family apparel for crunchy, cozy homes."
       />
 
-      {/* Brand story */}
-      <section className="mx-auto max-w-3xl px-4 py-14 animate-fade-in-up">
+      {/* ⚠️ PLACEHOLDER — Brand story section */}
+      <section className="mx-auto max-w-3xl px-4 py-14 animate-fade-in-up" aria-labelledby="brand-story-heading">
+        <h2 id="brand-story-heading" className="sr-only">Brand Story</h2>
+
+        {/* Placeholder banner */}
+        <div className="bg-yellow-50 border-2 border-dashed border-yellow-400 rounded-xl p-6 mb-8 text-center">
+          <p className="text-yellow-700 font-semibold text-lg mb-1">
+            ⚠️ PLACEHOLDER — Brand Story
+          </p>
+          <p className="text-yellow-600 text-sm">
+            Replace this section with Mama Fern&apos;s authentic brand story, founder bio, and mission.
+          </p>
+        </div>
+
         <div className="space-y-5 text-warm-brown/80 leading-relaxed text-[15px]">
           <p>
             Mama Fern started with a simple idea: family apparel that feels as good as it looks.
@@ -56,12 +72,12 @@ export default function AboutPage() {
       </section>
 
       {/* Mission */}
-      <section className="bg-texture-linen border-y border-oat py-14">
+      <section className="bg-texture-linen border-y border-oat py-14" aria-labelledby="mission-heading">
         <div className="mx-auto max-w-3xl px-4">
           <p className="text-xs font-medium text-fern uppercase tracking-[0.18em] mb-3">
             Why We Exist
           </p>
-          <h2 className="font-display font-bold text-2xl md:text-3xl text-charcoal mb-5">
+          <h2 id="mission-heading" className="font-display font-bold text-2xl md:text-3xl text-charcoal mb-5">
             Our Mission
           </h2>
           <p className="text-warm-brown/70 leading-relaxed text-[15px]">
@@ -73,8 +89,8 @@ export default function AboutPage() {
       </section>
 
       {/* Values grid */}
-      <section className="mx-auto max-w-5xl px-4 py-14">
-        <h2 className="font-display font-bold text-2xl text-charcoal text-center mb-10">
+      <section className="mx-auto max-w-5xl px-4 py-14" aria-labelledby="values-heading">
+        <h2 id="values-heading" className="font-display font-bold text-2xl text-charcoal text-center mb-10">
           What We Stand For
         </h2>
         <div className="grid sm:grid-cols-2 gap-4">
@@ -83,7 +99,7 @@ export default function AboutPage() {
               key={v.title}
               className="bg-texture-linen rounded-xl border border-oat p-6 flex gap-4 items-start"
             >
-              <div className="text-2xl shrink-0 mt-0.5">{v.emoji}</div>
+              <div className="text-2xl shrink-0 mt-0.5" aria-hidden="true">{v.emoji}</div>
               <div>
                 <h3 className="font-semibold text-charcoal mb-1.5">{v.title}</h3>
                 <p className="text-warm-brown/60 text-sm leading-relaxed">{v.desc}</p>
@@ -94,12 +110,12 @@ export default function AboutPage() {
       </section>
 
       {/* Family CTA */}
-      <section className="bg-texture-linen border-t border-oat py-14">
+      <section className="bg-texture-linen border-t border-oat py-14" aria-labelledby="family-cta-heading">
         <div className="mx-auto max-w-3xl px-4">
           <p className="text-xs font-medium text-fern uppercase tracking-[0.18em] mb-3">
             Dress the Whole Crew
           </p>
-          <h2 className="font-display font-bold text-2xl md:text-3xl text-charcoal mb-5">
+          <h2 id="family-cta-heading" className="font-display font-bold text-2xl md:text-3xl text-charcoal mb-5">
             Made for Your Family
           </h2>
           <p className="text-warm-brown/70 leading-relaxed text-[15px] mb-8 max-w-xl">

@@ -84,7 +84,7 @@ Set this to whatever your actual free shipping threshold is, or expose it as
 4. Copy the key — it is shown only once
 
 ```
-BREVO_API_KEY=xkeysib-...
+BREVO_API_KEY=your_brevo_api_key_here
 ```
 
 ### 2b. Newsletter Contact List

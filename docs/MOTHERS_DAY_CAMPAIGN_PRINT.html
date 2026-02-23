@@ -1,0 +1,1058 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Mama Fern — Mother's Day 2026 Campaign</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  /* ── Root palette ── */
+  :root {
+    --cream:       #faf6ef;
+    --cream-mid:   #f0e9dc;
+    --cream-dark:  #ddd0bc;
+    --fern:        #4a7c59;
+    --fern-dark:   #355c40;
+    --fern-light:  #d1e8d8;
+    --sage:        #7aad8a;
+    --sage-light:  #e3f0e7;
+    --terracotta:  #b9602a;
+    --terra-light: #f5e0d0;
+    --ink:         #2a2217;
+    --muted:       #6b5e4e;
+    --rule:        #c9baa5;
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    font-family: 'Inter', system-ui, sans-serif;
+    background: var(--cream);
+    color: var(--ink);
+    font-size: 10.5pt;
+    line-height: 1.6;
+  }
+
+  .page { max-width: 820px; margin: 0 auto; }
+
+  /* ── Cover ── */
+  .cover {
+    background: linear-gradient(135deg, var(--terracotta) 0%, #8a3918 100%);
+    color: #fff;
+    padding: 56px 48px 48px;
+    position: relative;
+    page-break-after: always;
+  }
+  .cover::after {
+    content: '';
+    display: block;
+    height: 6px;
+    background: linear-gradient(90deg, var(--fern), var(--sage), #c8e6c2);
+    position: absolute;
+    bottom: 0; left: 0; right: 0;
+  }
+  .cover-eyebrow {
+    font-size: 8.5pt;
+    font-weight: 700;
+    letter-spacing: .2em;
+    text-transform: uppercase;
+    opacity: .7;
+    margin-bottom: 12px;
+  }
+  .cover h1 {
+    font-family: 'Playfair Display', Georgia, serif;
+    font-size: 36pt;
+    font-weight: 900;
+    line-height: 1.1;
+    letter-spacing: -.02em;
+    margin-bottom: 10px;
+  }
+  .cover h1 span { color: #ffd6b8; }
+  .cover-sub {
+    font-size: 12.5pt;
+    opacity: .9;
+    font-weight: 500;
+    margin-bottom: 28px;
+  }
+  .cover-stats {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 12px;
+    margin-top: 32px;
+    padding-top: 24px;
+    border-top: 1px solid rgba(255,255,255,.2);
+  }
+  .stat-box {
+    background: rgba(255,255,255,.12);
+    border: 1px solid rgba(255,255,255,.2);
+    border-radius: 8px;
+    padding: 14px 12px;
+    text-align: center;
+  }
+  .stat-box .s-val {
+    font-family: 'Playfair Display', serif;
+    font-size: 18pt;
+    font-weight: 900;
+    line-height: 1;
+    margin-bottom: 4px;
+  }
+  .stat-box .s-lbl { font-size: 7.5pt; opacity: .75; letter-spacing: .06em; text-transform: uppercase; }
+  .cover-idea {
+    margin-top: 28px;
+    background: rgba(255,255,255,.1);
+    border: 1px solid rgba(255,255,255,.25);
+    border-radius: 8px;
+    padding: 16px 20px;
+    font-size: 12pt;
+    font-style: italic;
+    font-family: 'Playfair Display', Georgia, serif;
+    letter-spacing: .01em;
+    color: #ffe8d6;
+  }
+
+  /* ── Sections ── */
+  .section { padding: 32px 48px; border-bottom: 1px solid var(--cream-dark); }
+  .section-sm { padding: 24px 48px; border-bottom: 1px solid var(--cream-dark); }
+
+  /* ── Headings ── */
+  .section-head {
+    display: flex;
+    align-items: baseline;
+    gap: 12px;
+    margin-bottom: 18px;
+  }
+  .section-head h2 {
+    font-family: 'Playfair Display', Georgia, serif;
+    font-size: 16pt;
+    font-weight: 700;
+    color: var(--fern-dark);
+    white-space: nowrap;
+  }
+  .section-head .rule { flex: 1; height: 1px; background: var(--rule); align-self: center; margin-top: 4px; }
+
+  /* ── Phase header ── */
+  .phase-header {
+    background: var(--fern-dark);
+    color: #fff;
+    padding: 14px 20px;
+    border-radius: 6px;
+    margin-bottom: 20px;
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    page-break-inside: avoid;
+  }
+  .phase-header.phase2 { background: #3b6fa0; }
+  .phase-header.phase3 { background: #1a6b3c; }
+  .phase-header.phase4 { background: var(--terracotta); }
+  .ph-num {
+    font-family: 'Playfair Display', serif;
+    font-size: 22pt;
+    font-weight: 900;
+    opacity: .5;
+    line-height: 1;
+  }
+  .ph-info { flex: 1; }
+  .ph-info .ph-name {
+    font-family: 'Playfair Display', serif;
+    font-size: 14pt;
+    font-weight: 700;
+  }
+  .ph-info .ph-dates {
+    font-size: 8.5pt;
+    opacity: .75;
+    letter-spacing: .04em;
+  }
+  .ph-badge {
+    background: rgba(255,255,255,.18);
+    border: 1px solid rgba(255,255,255,.25);
+    border-radius: 20px;
+    padding: 4px 12px;
+    font-size: 8pt;
+    font-weight: 600;
+  }
+
+  /* ── Week card ── */
+  .week-card {
+    background: #fff;
+    border: 1px solid var(--cream-dark);
+    border-radius: 8px;
+    margin-bottom: 16px;
+    overflow: hidden;
+    page-break-inside: avoid;
+  }
+  .week-card-head {
+    background: var(--fern);
+    color: #fff;
+    padding: 10px 16px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+  .week-card-head.wk1  { background: #4a7c59; }
+  .week-card-head.wk2  { background: #5a8c68; }
+  .week-card-head.wk3  { background: #3e6e52; }
+  .week-card-head.wk4  { background: #c0392b; }
+  .week-card-head.wk5  { background: #8a6f2e; }
+  .week-card-head.wk6  { background: #1a6b3c; }
+  .week-card-head.wk7  { background: #855c9e; }
+  .week-card-head.wk8  { background: var(--terracotta); }
+  .wch-left .wch-label {
+    font-size: 7.5pt;
+    font-weight: 700;
+    letter-spacing: .15em;
+    text-transform: uppercase;
+    opacity: .75;
+  }
+  .wch-left .wch-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 12pt;
+    font-weight: 700;
+    line-height: 1.2;
+  }
+  .wch-target {
+    background: rgba(255,255,255,.18);
+    border-radius: 20px;
+    padding: 4px 10px;
+    font-size: 7.5pt;
+    font-weight: 600;
+    text-align: right;
+  }
+  .week-card-body { padding: 14px 16px; }
+
+  /* ── Checklist ── */
+  .checklist { list-style: none; padding: 0; margin: 0; }
+  .checklist li {
+    display: flex;
+    gap: 10px;
+    padding: 6px 0;
+    border-bottom: 1px dotted var(--cream-dark);
+    font-size: 9.5pt;
+    align-items: flex-start;
+  }
+  .checklist li:last-child { border-bottom: none; }
+  .cb {
+    display: inline-block;
+    width: 14px; height: 14px;
+    min-width: 14px;
+    border: 2px solid var(--fern);
+    border-radius: 3px;
+    margin-top: 2px;
+  }
+  .checklist li.sub {
+    padding-left: 28px;
+    font-size: 9pt;
+    color: var(--muted);
+  }
+  .checklist li.sub .cb { border-color: var(--cream-dark); }
+
+  /* cat badges */
+  .cat {
+    display: inline-flex;
+    align-items: center;
+    font-size: 7.5pt;
+    font-weight: 600;
+    padding: 1px 7px;
+    border-radius: 20px;
+    white-space: nowrap;
+    margin-left: auto;
+    flex-shrink: 0;
+  }
+
+  /* ── Day block (Week 6-8 Daily) ── */
+  .day-block {
+    margin-bottom: 14px;
+    page-break-inside: avoid;
+  }
+  .day-label {
+    font-family: 'Inter', sans-serif;
+    font-size: 8pt;
+    font-weight: 700;
+    letter-spacing: .1em;
+    text-transform: uppercase;
+    color: var(--terracotta);
+    padding: 4px 0;
+    border-bottom: 2px solid var(--terra-light);
+    margin-bottom: 6px;
+  }
+
+  /* ── Note / callout ── */
+  .note {
+    border-left: 4px solid var(--fern);
+    background: var(--sage-light);
+    padding: 10px 14px;
+    border-radius: 0 6px 6px 0;
+    font-size: 9pt;
+    margin: 8px 0;
+  }
+  .note strong { color: var(--fern-dark); }
+  .warn {
+    border-left: 4px solid var(--terracotta);
+    background: var(--terra-light);
+    padding: 10px 14px;
+    border-radius: 0 6px 6px 0;
+    font-size: 9pt;
+    margin: 8px 0;
+  }
+  .warn strong { color: var(--terracotta); }
+
+  /* ── Tables ── */
+  table { width: 100%; border-collapse: collapse; margin-bottom: 6px; page-break-inside: auto; }
+  thead tr { background: var(--fern-dark); color: #fff; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+  thead th { padding: 8px 12px; text-align: left; font-size: 8pt; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; }
+  tbody tr:nth-child(even) { background: var(--cream-mid); }
+  tbody tr:nth-child(odd)  { background: #fff; }
+  tbody td { padding: 7px 12px; font-size: 9pt; vertical-align: top; }
+  tbody tr:last-child td { border-bottom: 2px solid var(--fern-dark); }
+
+  /* ── Strategy bullets ── */
+  .strategy-list { list-style: none; padding: 0; counter-reset: strat; }
+  .strategy-list li {
+    display: flex;
+    gap: 12px;
+    padding: 8px 0;
+    border-bottom: 1px dotted var(--cream-dark);
+    font-size: 9.5pt;
+    align-items: flex-start;
+  }
+  .strategy-list li::before {
+    content: counter(strat);
+    counter-increment: strat;
+    min-width: 22px; height: 22px;
+    background: var(--terracotta);
+    color: #fff;
+    font-size: 8pt;
+    font-weight: 700;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    margin-top: 1px;
+  }
+
+  /* ── Hashtag grid ── */
+  .hashtag-grid {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+    margin-top: 8px;
+  }
+  .hashtag {
+    background: var(--fern-light);
+    color: var(--fern-dark);
+    font-size: 8pt;
+    font-weight: 600;
+    padding: 3px 10px;
+    border-radius: 20px;
+    font-family: 'Inter', monospace;
+  }
+
+  /* ── Two-col grid ── */
+  .two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+  .two-col-65 { display: grid; grid-template-columns: 2fr 1fr; gap: 16px; }
+  .info-card {
+    background: #fff;
+    border: 1px solid var(--cream-dark);
+    border-top: 3px solid var(--fern);
+    border-radius: 6px;
+    padding: 14px 16px;
+    page-break-inside: avoid;
+  }
+  .info-card h3 {
+    font-size: 8.5pt;
+    font-weight: 700;
+    letter-spacing: .1em;
+    text-transform: uppercase;
+    color: var(--fern-dark);
+    margin-bottom: 8px;
+  }
+  .info-card.terra { border-top-color: var(--terracotta); }
+  .info-card.terra h3 { color: var(--terracotta); }
+  .info-card.blue { border-top-color: #3b6fa0; }
+  .info-card.blue h3 { color: #3b6fa0; }
+
+  /* ── Paid budget rows ── */
+  .budget-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 6px 0;
+    border-bottom: 1px dotted var(--cream-dark);
+    font-size: 9pt;
+  }
+  .budget-amount {
+    font-weight: 700;
+    color: var(--terracotta);
+    white-space: nowrap;
+  }
+
+  /* ── KPI section ── */
+  .kpi-group {
+    margin-bottom: 20px;
+  }
+  .kpi-group h3 {
+    font-size: 9pt;
+    font-weight: 700;
+    letter-spacing: .08em;
+    text-transform: uppercase;
+    color: var(--fern-dark);
+    border-bottom: 2px solid var(--fern-light);
+    padding-bottom: 4px;
+    margin-bottom: 8px;
+  }
+  .kpi-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 5px 0;
+    border-bottom: 1px dotted var(--cream-dark);
+    font-size: 9pt;
+  }
+  .kpi-row:last-child { border-bottom: none; }
+  .kpi-val { font-weight: 700; color: var(--fern-dark); }
+
+  /* ── Footer ── */
+  .footer {
+    padding: 18px 48px;
+    font-size: 7.5pt;
+    color: var(--muted);
+    display: flex;
+    justify-content: space-between;
+    border-top: 2px solid var(--terracotta);
+    background: var(--cream-mid);
+  }
+
+  code { font-family: 'Courier New', monospace; font-size: 8.5pt; background: var(--cream-mid); padding: 1px 4px; border-radius: 3px; }
+  .spacer { height: 10px; }
+  p.lead { font-size: 9.5pt; color: var(--muted); margin-bottom: 10px; line-height: 1.7; }
+
+  /* ─────────────── PRINT ─────────────── */
+  @page { size: letter portrait; margin: 13mm 12mm 13mm 12mm; }
+  @media print {
+    body { background: #fff; font-size: 9pt; }
+    .cover, .phase-header, .week-card-head, thead tr,
+    .cat, .note, .warn, .info-card, .hashtag {
+      -webkit-print-color-adjust: exact;
+      print-color-adjust: exact;
+    }
+    .week-card { page-break-inside: avoid; }
+    .day-block { page-break-inside: avoid; }
+    h2, h3 { page-break-after: avoid; }
+    tr { page-break-inside: avoid; }
+  }
+</style>
+</head>
+<body>
+<div class="page">
+
+  <!-- ═══════════════ COVER ═══════════════ -->
+  <div class="cover">
+    <div class="cover-eyebrow">Campaign Brief · 8-Week Playbook</div>
+    <h1>Mother's Day<br><span>2026 Campaign</span></h1>
+    <div class="cover-sub">Mama Fern · March 16 – May 10, 2026</div>
+    <div class="cover-idea">"Made for every kind of mama."</div>
+    <div class="cover-stats">
+      <div class="stat-box"><div class="s-val">8</div><div class="s-lbl">Weeks</div></div>
+      <div class="stat-box"><div class="s-val">600</div><div class="s-lbl">Email goal</div></div>
+      <div class="stat-box"><div class="s-val">15+</div><div class="s-lbl">Influencers</div></div>
+      <div class="stat-box"><div class="s-val">$15k</div><div class="s-lbl">Revenue target</div></div>
+    </div>
+  </div>
+
+  <!-- ═══════════════ STRATEGY ═══════════════ -->
+  <div class="section">
+    <div class="section-head">
+      <h2>The Strategy</h2>
+      <div class="rule"></div>
+    </div>
+    <p class="lead">Mother's Day is not a side campaign for Mama Fern. It <em>is</em> the launch vehicle. "Mama" is in the name — own it. Every first impression should feel like it was made for this moment.</p>
+    <ol class="strategy-list">
+      <li>Build an email list in weeks 1–4</li>
+      <li>Seed product to influencers in weeks 2–5</li>
+      <li>Open the store to early access in week 6</li>
+      <li>Run the full Mother's Day push in weeks 7–8</li>
+      <li>Capture gift buyers, self-purchasing moms, and family coordinators simultaneously</li>
+    </ol>
+  </div>
+
+  <!-- ═══════════════ PHASE 1 ═══════════════ -->
+  <div class="section">
+    <div class="phase-header">
+      <div class="ph-num">01</div>
+      <div class="ph-info">
+        <div class="ph-name">Build Anticipation</div>
+        <div class="ph-dates">March 16 – April 5 · Weeks 1–3 · Store is NOT open yet</div>
+      </div>
+      <div class="ph-badge">Audience Building</div>
+    </div>
+
+    <!-- Week 1 -->
+    <div class="week-card">
+      <div class="week-card-head wk1">
+        <div class="wch-left">
+          <div class="wch-label">Week 1 · March 16–22</div>
+          <div class="wch-title">Start Content + Waitlist</div>
+        </div>
+        <div class="wch-target">Target: 100 email subscribers</div>
+      </div>
+      <div class="week-card-body">
+        <ul class="checklist">
+          <li><span class="cb"></span><span>Launch a simple waitlist landing page at mamafern.com<br><small style="color:var(--muted);">Headline: "Grounded family apparel. Launching for Mother's Day." — Email capture + early access discount promise</small></span></li>
+          <li><span class="cb"></span><span>Start TikTok (3–5 posts/week): founder story, fabric close-ups, "crunchy mom starter pack" trend content</span></li>
+          <li><span class="cb"></span><span>Instagram: 3–4 feed posts establishing brand aesthetic (cream/fern/terracotta palette)</span></li>
+          <li><span class="cb"></span><span>Instagram Stories: polls ("sage green or terracotta for the spring drop?")</span></li>
+          <li><span class="cb"></span><span>Create 3 Pinterest boards: <em>Mama Fern Style</em> · <em>Mother's Day Gift Ideas</em> · <em>Family Outfit Coordination</em></span></li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- Week 2 -->
+    <div class="week-card">
+      <div class="week-card-head wk2">
+        <div class="wch-left">
+          <div class="wch-label">Week 2 · March 23–29</div>
+          <div class="wch-title">Product Seeding — Influencer Outreach</div>
+        </div>
+        <div class="wch-target">Target: 250 subscribers · 10 samples shipped</div>
+      </div>
+      <div class="week-card-body">
+        <ul class="checklist">
+          <li><span class="cb"></span><span>Identify 15–20 crunchy mom / family lifestyle micro-influencers (1K–50K followers): authentic engagement, real family life, not polished production</span></li>
+          <li><span class="cb"></span><span>Send DMs offering free product in exchange for honest content (no payment required)</span></li>
+          <li><span class="cb"></span><span>Ship product samples to first 10 influencers who respond</span></li>
+          <li><span class="cb"></span><span>Continue TikTok + Instagram content cadence (3–5 TikToks, 2–3 Reels, daily Stories)</span></li>
+        </ul>
+        <div class="note" style="margin-top:8px;">
+          <strong>DM Template:</strong> "Hey [name]! I'm launching Mama Fern — organic cotton tees and onesies for the whole family. I'd love to send you a set for your family. No strings attached, just hoping you'll share if you love them."
+        </div>
+        <div class="spacer"></div>
+        <p style="font-size:8.5pt; font-weight:600; color:var(--fern-dark); margin-bottom:6px;">Search these hashtags:</p>
+        <div class="hashtag-grid">
+          <div class="hashtag">#crunchymom</div>
+          <div class="hashtag">#organicbaby</div>
+          <div class="hashtag">#familymatching</div>
+          <div class="hashtag">#momlife</div>
+          <div class="hashtag">#matchingfamily</div>
+          <div class="hashtag">#organickids</div>
+          <div class="hashtag">#slowfashion</div>
+          <div class="hashtag">#boymom</div>
+          <div class="hashtag">#girlmom</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Week 3 -->
+    <div class="week-card">
+      <div class="week-card-head wk3">
+        <div class="wch-left">
+          <div class="wch-label">Week 3 · March 30 – April 5</div>
+          <div class="wch-title">Build Social Proof</div>
+        </div>
+        <div class="wch-target">Target: 400 subscribers · first UGC arriving</div>
+      </div>
+      <div class="week-card-body">
+        <ul class="checklist">
+          <li><span class="cb"></span><span>Ship remaining influencer samples</span></li>
+          <li><span class="cb"></span><span>Start product-specific content: sneak peek tees, fabric detail shots ("100% organic cotton — soft enough for the smallest humans"), "What's in the box" packaging content</span></li>
+          <li><span class="cb"></span><span>Collect early influencer content — save for launch week</span></li>
+          <li><span class="cb"></span><span>Set up Judge.me in Shopify admin (review requests auto-send after orders)</span></li>
+          <li><span class="cb"></span><span>Begin drafting email flows (welcome series + abandoned cart)</span></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <!-- ═══════════════ PHASE 2 ═══════════════ -->
+  <div class="section">
+    <div class="phase-header phase2">
+      <div class="ph-num">02</div>
+      <div class="ph-info">
+        <div class="ph-name">Pre-Launch</div>
+        <div class="ph-dates">April 6–19 · Weeks 4–5 · Store goes live</div>
+      </div>
+      <div class="ph-badge">Store Must Be Live</div>
+    </div>
+
+    <!-- Week 4 -->
+    <div class="week-card">
+      <div class="week-card-head wk4">
+        <div class="wch-left">
+          <div class="wch-label">Week 4 ⚠️ Hard Deadline · April 6–12</div>
+          <div class="wch-title">Finalize Store + Email Flows</div>
+        </div>
+        <div class="wch-target">Target: 500 subscribers</div>
+      </div>
+      <div class="week-card-body">
+        <div class="warn"><strong>Hard deadline.</strong> Store opens for early access April 20. Everything in this week must be done.</div>
+        <div class="spacer"></div>
+        <p style="font-size:8pt; font-weight:700; color:var(--muted); letter-spacing:.08em; text-transform:uppercase; margin-bottom:6px;">Store Functionality</p>
+        <ul class="checklist">
+          <li><span class="cb"></span><span>Checkout works (Shopify hosted checkout via <code>cart.checkoutUrl</code>)</span></li>
+          <li><span class="cb"></span><span>Product pages show all items with variants, images, and descriptions</span></li>
+          <li><span class="cb"></span><span>Collections live: Moms, Kids, Family Sets, Mother's Day 2026</span></li>
+          <li><span class="cb"></span><span>"Complete the Family Look" cross-sell section live on product pages</span></li>
+          <li><span class="cb"></span><span>Mobile responsive — most traffic will be TikTok/Instagram mobile</span></li>
+        </ul>
+        <div class="spacer"></div>
+        <p style="font-size:8pt; font-weight:700; color:var(--muted); letter-spacing:.08em; text-transform:uppercase; margin-bottom:6px;">Email Flows Live in Klaviyo</p>
+        <ul class="checklist">
+          <li><span class="cb"></span><span>Welcome series (3 emails)</span></li>
+          <li><span class="cb"></span><span>Abandoned cart recovery (3 emails)</span></li>
+          <li><span class="cb"></span><span>Post-purchase series (4 emails)</span></li>
+        </ul>
+        <div class="spacer"></div>
+        <p style="font-size:8pt; font-weight:700; color:var(--muted); letter-spacing:.08em; text-transform:uppercase; margin-bottom:6px;">Gift Bundles to Create</p>
+        <ul class="checklist">
+          <li><span class="cb"></span><span><strong>The Mama Bundle</strong> — Mom tee + tote bag · $55–$70</span></li>
+          <li><span class="cb"></span><span><strong>The Family Set</strong> — Mom tee + kids onesie + dad tee · $80–$105</span></li>
+          <li><span class="cb"></span><span><strong>The New Mama Gift</strong> — Mom tee + baby onesie + gift wrapping · $60–$80</span></li>
+          <li><span class="cb"></span><span><strong>The Mini Match</strong> — Mom tee + kids tee (matching) · $50–$65</span></li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- Week 5 -->
+    <div class="week-card">
+      <div class="week-card-head wk5">
+        <div class="wch-left">
+          <div class="wch-label">Week 5 · April 13–19</div>
+          <div class="wch-title">Earth Day Prep + Confirm Influencers</div>
+        </div>
+        <div class="wch-target">Target: 600 subscribers · all influencers confirmed</div>
+      </div>
+      <div class="week-card-body">
+        <p style="font-size:8pt; font-weight:700; color:var(--muted); letter-spacing:.08em; text-transform:uppercase; margin-bottom:6px;">Earth Day Content (Apr 22)</p>
+        <ul class="checklist">
+          <li><span class="cb"></span><span>Blog post: "Why we chose organic cotton" (SEO keyword: "organic cotton baby clothes")</span></li>
+          <li><span class="cb"></span><span>TikTok: "What 'organic cotton' actually means for your baby's skin"</span></li>
+          <li><span class="cb"></span><span>Instagram: Earth Day carousel with brand story</span></li>
+          <li><span class="cb"></span><span>Email: "We're launching next week — here's why we care about what touches your skin"</span></li>
+        </ul>
+        <div class="spacer"></div>
+        <p style="font-size:8pt; font-weight:700; color:var(--muted); letter-spacing:.08em; text-transform:uppercase; margin-bottom:6px;">Logistics</p>
+        <ul class="checklist">
+          <li><span class="cb"></span><span>Confirm 8–12 influencers will post content in weeks 6–7; stagger posts at 2–3/day</span></li>
+          <li><span class="cb"></span><span>Finalize gift wrapping option in Shopify (add as cart attribute or product)</span></li>
+          <li><span class="cb"></span><span>Test full purchase flow end-to-end: add to cart → checkout → order confirmation</span></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <!-- ═══════════════ PHASE 3 ═══════════════ -->
+  <div class="section">
+    <div class="phase-header phase3">
+      <div class="ph-num">03</div>
+      <div class="ph-info">
+        <div class="ph-name">Launch Week</div>
+        <div class="ph-dates">April 20–26 · Week 6</div>
+      </div>
+      <div class="ph-badge">🚀 Go Live</div>
+    </div>
+
+    <div class="day-block">
+      <div class="day-label">Monday, April 20 — Email Early Access (24 hours)</div>
+      <ul class="checklist">
+        <li><span class="cb"></span><span>Email full waitlist — Subject: <em>"You're in first. Mama Fern is live."</em> · Founder letter + link to shop + 15% off code <code>FIRSTFERN</code> (48 hr expiry)</span></li>
+        <li><span class="cb"></span><span><strong>Do NOT post publicly</strong> — give email subscribers 24 hours of exclusive access</span></li>
+      </ul>
+    </div>
+
+    <div class="day-block">
+      <div class="day-label">Tuesday, April 21 — Public Launch</div>
+      <ul class="checklist">
+        <li><span class="cb"></span><span>TikTok: "IT'S LIVE" founder video + unboxing + family wearing first drop</span></li>
+        <li><span class="cb"></span><span>Instagram: Reels + feed post + Stories carousel</span></li>
+        <li><span class="cb"></span><span>Pinterest: Pin every product to "Mother's Day Gift Ideas" board</span></li>
+        <li><span class="cb"></span><span>Enable Fomo/Sales Pop app to show real-time purchases</span></li>
+        <li><span class="cb"></span><span>Public discount: 10% off with <code>MAMAFERN10</code> (expires May 1)</span></li>
+      </ul>
+    </div>
+
+    <div class="day-block">
+      <div class="day-label">Wednesday, April 22 — Earth Day</div>
+      <ul class="checklist">
+        <li><span class="cb"></span><span>Publish Earth Day blog post</span></li>
+        <li><span class="cb"></span><span>Earth Day email to full list: "Why organic matters — and 10% off to celebrate"</span></li>
+        <li><span class="cb"></span><span>Earth Day TikTok + Instagram content</span></li>
+      </ul>
+    </div>
+
+    <div class="day-block">
+      <div class="day-label">April 23–26 — First Influencer Wave</div>
+      <ul class="checklist">
+        <li><span class="cb"></span><span>2–3 influencer posts per day across TikTok and Instagram</span></li>
+        <li><span class="cb"></span><span>Repost every piece of UGC on your channels immediately</span></li>
+        <li><span class="cb"></span><span>Respond to every comment and DM personally</span></li>
+        <li><span class="cb"></span><span>Monitor which products sell fastest — update homepage featured section accordingly</span></li>
+      </ul>
+    </div>
+
+    <div class="note"><strong>Week 6 Targets:</strong> 50–100 orders · 10+ reviews requested via Judge.me · 800+ email subscribers</div>
+  </div>
+
+  <!-- ═══════════════ PHASE 4 ═══════════════ -->
+  <div class="section">
+    <div class="phase-header phase4">
+      <div class="ph-num">04</div>
+      <div class="ph-info">
+        <div class="ph-name">Mother's Day Push — Revenue Sprint</div>
+        <div class="ph-dates">April 27 – May 10 · Weeks 7–8 · Everything converges on May 10</div>
+      </div>
+      <div class="ph-badge">💰 Revenue Sprint</div>
+    </div>
+
+    <!-- Week 7 -->
+    <div class="week-card">
+      <div class="week-card-head wk7">
+        <div class="wch-left">
+          <div class="wch-label">Week 7 · April 27 – May 3</div>
+          <div class="wch-title">Gift Buyer Capture</div>
+        </div>
+        <div class="wch-target">Gift guide + 2nd influencer wave</div>
+      </div>
+      <div class="week-card-body">
+        <p style="font-size:8pt; font-weight:700; color:var(--muted); letter-spacing:.08em; text-transform:uppercase; margin-bottom:6px;">Gift Guide Page (<code>/collections/mothers-day-2026</code>)</p>
+        <ul class="checklist">
+          <li><span class="cb"></span><span>Organize by: "For the New Mama" / "For the Mama of Many" / "The Family Set"</span></li>
+          <li><span class="cb"></span><span>Prominently feature gift wrapping + gift note options</span></li>
+          <li><span class="cb"></span><span>Add "Not sure what to get?" section leading to best sellers</span></li>
+        </ul>
+        <div class="spacer"></div>
+        <p style="font-size:8pt; font-weight:700; color:var(--muted); letter-spacing:.08em; text-transform:uppercase; margin-bottom:6px;">Email + Social</p>
+        <ul class="checklist">
+          <li><span class="cb"></span><span>Email: "The Mama Fern Mother's Day Gift Guide" — bundles with prices + photos + "ships in time for Mother's Day" guarantee</span></li>
+          <li><span class="cb"></span><span>TikTok: "Mother's Day gift ideas for the crunchy mama in your life"</span></li>
+          <li><span class="cb"></span><span>Instagram: Gift guide carousel (saveable/shareable) + Stories vote: "Which gift would YOUR mama love?"</span></li>
+          <li><span class="cb"></span><span>Pinterest: Pin gift guide images with SEO-optimized descriptions</span></li>
+        </ul>
+        <div class="spacer"></div>
+        <p style="font-size:8pt; font-weight:700; color:var(--muted); letter-spacing:.08em; text-transform:uppercase; margin-bottom:6px;">UGC + Influencers</p>
+        <ul class="checklist">
+          <li><span class="cb"></span><span>Email recent customers: "Share a photo for 15% off your next order"</span></li>
+          <li><span class="cb"></span><span>Second influencer wave: 5–8 posts specifically themed "Mother's Day gift idea"</span></li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- Week 8 -->
+    <div class="week-card">
+      <div class="week-card-head wk8">
+        <div class="wch-left">
+          <div class="wch-label">Week 8 · May 4–10</div>
+          <div class="wch-title">Final Push + Last Order Dates</div>
+        </div>
+        <div class="wch-target">Close out Mother's Day strong</div>
+      </div>
+      <div class="week-card-body">
+        <div class="day-block">
+          <div class="day-label">Monday, May 4</div>
+          <ul class="checklist">
+            <li><span class="cb"></span><span>Email: "Last week to order for Mother's Day" — clear shipping cutoff date + remaining bundle inventory</span></li>
+            <li><span class="cb"></span><span>TikTok/Instagram: "What I'm getting my mom for Mother's Day" format content</span></li>
+          </ul>
+        </div>
+        <div class="day-block">
+          <div class="day-label">Wednesday, May 7 — Last Order Date (Standard Shipping)</div>
+          <ul class="checklist">
+            <li><span class="cb"></span><span>Email: "Final call — order today for Mother's Day delivery" — single CTA + exact shipping cutoff time</span></li>
+            <li><span class="cb"></span><span>All social: "LAST DAY to order for Mother's Day"</span></li>
+          </ul>
+        </div>
+        <div class="day-block">
+          <div class="day-label">Thursday–Friday, May 8–9 — Digital Gift Card Push</div>
+          <ul class="checklist">
+            <li><span class="cb"></span><span>Email: "Missed the shipping window? We've got you." — promote Shopify gift cards: "Send a Mama Fern gift card — delivered instantly by email"</span></li>
+            <li><span class="cb"></span><span>Social: "It's not too late" gift card content</span></li>
+          </ul>
+        </div>
+        <div class="day-block">
+          <div class="day-label">Sunday, May 10 — Mother's Day</div>
+          <ul class="checklist">
+            <li><span class="cb"></span><span>Email: "Happy Mother's Day from Mama Fern" — warm founder letter + UGC feature + soft self-purchase CTA: "Treat yourself today — you deserve it"</span></li>
+            <li><span class="cb"></span><span>Social: Celebrate. Repost UGC. No hard selling. Let the brand speak.</span></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ═══════════════ EMAIL SEQUENCE ═══════════════ -->
+  <div class="section">
+    <div class="section-head">
+      <h2>Email Sequence — All 8 Sends</h2>
+      <div class="rule"></div>
+    </div>
+    <table>
+      <thead><tr><th style="width:24px;">#</th><th style="width:68px;">Date</th><th>Subject Line</th><th>Goal</th></tr></thead>
+      <tbody>
+        <tr><td><strong>1</strong></td><td>Apr 20</td><td>"You're in first. Mama Fern is live."</td><td>Early access launch (waitlist only)</td></tr>
+        <tr><td><strong>2</strong></td><td>Apr 21</td><td>"We're officially open"</td><td>Public launch announcement</td></tr>
+        <tr><td><strong>3</strong></td><td>Apr 22</td><td>"Why organic matters — Happy Earth Day 🌿"</td><td>Earth Day brand story + 10% off</td></tr>
+        <tr><td><strong>4</strong></td><td>Apr 27</td><td>"The Mama Fern Mother's Day Gift Guide"</td><td>Gift guide + bundles feature</td></tr>
+        <tr><td><strong>5</strong></td><td>May 4</td><td>"Last week to order for Mother's Day"</td><td>Urgency + shipping cutoff</td></tr>
+        <tr><td><strong>6</strong></td><td>May 7</td><td>"Final call: order today for delivery by May 10"</td><td>Hard shipping deadline</td></tr>
+        <tr><td><strong>7</strong></td><td>May 8–9</td><td>"Missed the window? Send a gift card"</td><td>Digital gift card push</td></tr>
+        <tr><td><strong>8</strong></td><td>May 10</td><td>"Happy Mother's Day from Mama Fern"</td><td>Community + self-purchase nudge</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- ═══════════════ PRODUCT STRATEGY ═══════════════ -->
+  <div class="section">
+    <div class="section-head">
+      <h2>Product Strategy</h2>
+      <div class="rule"></div>
+    </div>
+    <div class="two-col">
+      <div>
+        <p style="font-size:8pt; font-weight:700; color:var(--fern-dark); letter-spacing:.08em; text-transform:uppercase; margin-bottom:8px;">Collections to Build</p>
+        <table>
+          <thead><tr><th>Handle</th><th>Display Name</th><th>Products</th></tr></thead>
+          <tbody>
+            <tr><td><code>mothers-day-2026</code></td><td>Mother's Day 2026</td><td>Mom items + family sets + gift bundles</td></tr>
+            <tr><td><code>moms</code></td><td>Moms</td><td>All women's styles (evergreen)</td></tr>
+            <tr><td><code>family</code></td><td>Family Sets</td><td>Coordinating family outfits</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <div>
+        <div class="info-card terra">
+          <h3>Gift Wrapping</h3>
+          <div class="budget-row"><span>Add-on price at cart</span><span class="budget-amount">$5–$8</span></div>
+          <div class="budget-row"><span>Included with New Mama Gift bundle</span><span class="budget-amount">Free</span></div>
+          <div style="margin-top:8px; font-size:8.5pt; color:var(--muted);">Kraft paper · fern-green ribbon · handwritten-style tag · gift note option at checkout</div>
+        </div>
+      </div>
+    </div>
+    <div class="spacer"></div>
+    <p style="font-size:8pt; font-weight:700; color:var(--fern-dark); letter-spacing:.08em; text-transform:uppercase; margin-bottom:8px;">Gift Bundles</p>
+    <table>
+      <thead><tr><th>Bundle Name</th><th>Contents</th><th>Price</th><th>Discount</th></tr></thead>
+      <tbody>
+        <tr><td><strong>The Mama Bundle</strong></td><td>Mom tee + tote bag</td><td>$55–$70</td><td>~10% off</td></tr>
+        <tr><td><strong>The Family Set</strong></td><td>Mom tee + dad tee + kids onesie</td><td>$80–$105</td><td>~12% off</td></tr>
+        <tr><td><strong>The New Mama Gift</strong></td><td>Mom tee + baby onesie + gift wrap</td><td>$60–$80</td><td>~10% + wrap</td></tr>
+        <tr><td><strong>The Mini Match</strong></td><td>Mom tee + matching kids tee</td><td>$50–$65</td><td>~10% off</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- ═══════════════ CONTENT CALENDAR ═══════════════ -->
+  <div class="section">
+    <div class="section-head">
+      <h2>Content Calendar</h2>
+      <div class="rule"></div>
+    </div>
+
+    <p style="font-size:8pt; font-weight:700; color:var(--fern-dark); letter-spacing:.08em; text-transform:uppercase; margin-bottom:8px;">TikTok (3–5 posts/week)</p>
+    <table>
+      <thead><tr><th>Week</th><th>Content Themes</th></tr></thead>
+      <tbody>
+        <tr><td>Weeks 1–3</td><td>Founder story, brand building, fabric close-ups, "crunchy mom" community content</td></tr>
+        <tr><td>Week 4</td><td>Product reveals, Earth Day prep, "why organic cotton?"</td></tr>
+        <tr><td>Week 5</td><td>Behind the scenes: packing first orders, packaging, Earth Day content</td></tr>
+        <tr><td>Week 6</td><td>LAUNCH content, influencer reposts, customer reactions, "it's live"</td></tr>
+        <tr><td>Week 7</td><td>Gift guide format, "what to get the crunchy mama", family matching content</td></tr>
+        <tr><td>Week 8</td><td>Urgency — "last chance for Mother's Day", gift card option, UGC celebration</td></tr>
+      </tbody>
+    </table>
+
+    <div class="spacer"></div>
+    <div class="two-col">
+      <div>
+        <p style="font-size:8pt; font-weight:700; color:var(--fern-dark); letter-spacing:.08em; text-transform:uppercase; margin-bottom:8px;">Instagram</p>
+        <table>
+          <thead><tr><th>Type</th><th>Frequency</th></tr></thead>
+          <tbody>
+            <tr><td>Reels</td><td>3/week — repurpose TikTok</td></tr>
+            <tr><td>Stories</td><td>Daily — polls, UGC, BTS</td></tr>
+            <tr><td>Feed</td><td>2–3/week — brand aesthetic</td></tr>
+            <tr><td>Highlights</td><td>Ongoing — Story, MD Gifts, Reviews</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <div>
+        <p style="font-size:8pt; font-weight:700; color:var(--fern-dark); letter-spacing:.08em; text-transform:uppercase; margin-bottom:8px;">Pinterest Boards</p>
+        <table>
+          <thead><tr><th>Board</th></tr></thead>
+          <tbody>
+            <tr><td>Mother's Day Gift Ideas 2026</td></tr>
+            <tr><td>Family Outfit Coordination</td></tr>
+            <tr><td>Crunchy Mom Style</td></tr>
+            <tr><td>Mama Fern Shop (all products)</td></tr>
+          </tbody>
+        </table>
+        <div class="note" style="margin-top:8px;"><strong>Pin early and often</strong> — Pinterest results compound. Content pinned in March will surface in April–May search results.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ═══════════════ INFLUENCER STRATEGY ═══════════════ -->
+  <div class="section">
+    <div class="section-head">
+      <h2>Influencer Strategy</h2>
+      <div class="rule"></div>
+    </div>
+    <div class="two-col">
+      <div>
+        <div class="info-card">
+          <h3>Selection Criteria</h3>
+          <ul style="list-style:none; padding:0; font-size:9pt;">
+            <li style="padding:4px 0; border-bottom:1px dotted var(--cream-dark);">1K–50K followers (nano/micro)</li>
+            <li style="padding:4px 0; border-bottom:1px dotted var(--cream-dark);">Engagement rate above 3% (check last 10 posts)</li>
+            <li style="padding:4px 0; border-bottom:1px dotted var(--cream-dark);">Aesthetic matches Mama Fern: warm, real, not polished</li>
+            <li style="padding:4px 0; border-bottom:1px dotted var(--cream-dark);">Kids visible in content (family brand fit)</li>
+            <li style="padding:4px 0;">Active on TikTok, Instagram, or both</li>
+          </ul>
+        </div>
+      </div>
+      <div>
+        <div class="info-card terra">
+          <h3>Budget</h3>
+          <div style="font-size:9pt; line-height:1.6; color:var(--muted);">
+            <strong style="color:var(--terracotta);">Product seeding only — no cash payment.</strong><br>
+            15–20 family sets × $25–$40 per set =<br>
+            <span style="font-size:13pt; font-weight:900; color:var(--terracotta);">$375–$800</span> total influencer cost
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="spacer"></div>
+    <table>
+      <thead><tr><th>When</th><th>Action</th></tr></thead>
+      <tbody>
+        <tr><td>Week 2</td><td>DM 20 creators, offer free family set</td></tr>
+        <tr><td>Week 3</td><td>Ship to first 10 who respond</td></tr>
+        <tr><td>Week 4</td><td>Ship to remaining respondents</td></tr>
+        <tr><td>Week 5</td><td>Confirm posting schedule for weeks 6–7</td></tr>
+        <tr><td>Week 6</td><td>First wave: 2–3 posts/day around launch</td></tr>
+        <tr><td>Week 7</td><td>Second wave: "Mother's Day gift idea" themed posts</td></tr>
+      </tbody>
+    </table>
+    <div class="spacer"></div>
+    <p style="font-size:8pt; font-weight:700; color:var(--fern-dark); letter-spacing:.08em; text-transform:uppercase; margin-bottom:8px;">Suggested Content Angles (Give Freedom, Not Scripts)</p>
+    <div style="display:flex; flex-wrap:wrap; gap:6px;">
+      <div style="background:var(--cream-mid); border-radius:6px; padding:6px 10px; font-size:8.5pt; font-style:italic;">"Unboxing our first Mama Fern family set"</div>
+      <div style="background:var(--cream-mid); border-radius:6px; padding:6px 10px; font-size:8.5pt; font-style:italic;">"Mother's Day gift idea: matching organic cotton for the whole family"</div>
+      <div style="background:var(--cream-mid); border-radius:6px; padding:6px 10px; font-size:8.5pt; font-style:italic;">"Why I love that this brand uses organic cotton for my kids"</div>
+      <div style="background:var(--cream-mid); border-radius:6px; padding:6px 10px; font-size:8.5pt; font-style:italic;">"Rating this new family apparel brand — honest review"</div>
+    </div>
+  </div>
+
+  <!-- ═══════════════ PAID ADS ═══════════════ -->
+  <div class="section">
+    <div class="section-head">
+      <h2>Paid Advertising — Week 7 Only</h2>
+      <div class="rule"></div>
+    </div>
+    <div class="warn"><strong>Do not run cold traffic ads before May 1.</strong> Build organic momentum first. All paid spend is optional — if organic is working, skip it entirely and reinvest in product seeding.</div>
+    <div class="spacer"></div>
+    <table>
+      <thead><tr><th>Tactic</th><th>Budget</th><th>Audience</th></tr></thead>
+      <tbody>
+        <tr><td>Boost top TikTok (highest organic views)</td><td>$50–$100</td><td>Broad (let TikTok algo optimize)</td></tr>
+        <tr><td>Instagram Reels boost</td><td>$50–$100</td><td>Women 25–40, interests: organic, motherhood, family</td></tr>
+        <tr><td>Meta retargeting</td><td>$100–$200</td><td>Site visitors last 14 days who didn't purchase</td></tr>
+        <tr><td>Google Shopping (if set up)</td><td>$50–$100</td><td>"organic cotton mom gift", "mother's day family outfit"</td></tr>
+      </tbody>
+    </table>
+    <div class="note" style="margin-top:10px;"><strong>Total paid budget for Mother's Day campaign: $250–$500</strong></div>
+  </div>
+
+  <!-- ═══════════════ KPIs ═══════════════ -->
+  <div class="section">
+    <div class="section-head">
+      <h2>KPIs</h2>
+      <div class="rule"></div>
+    </div>
+    <div class="two-col">
+      <div>
+        <div class="kpi-group">
+          <h3>Pre-Launch (Weeks 1–5)</h3>
+          <div class="kpi-row"><span>Email waitlist</span><span class="kpi-val">500–600</span></div>
+          <div class="kpi-row"><span>TikTok followers</span><span class="kpi-val">200–500</span></div>
+          <div class="kpi-row"><span>Instagram followers</span><span class="kpi-val">150–300</span></div>
+          <div class="kpi-row"><span>Influencer partnerships confirmed</span><span class="kpi-val">12–15</span></div>
+        </div>
+        <div class="kpi-group">
+          <h3>Post-Campaign (May 11–31)</h3>
+          <div class="kpi-row"><span>Repeat purchase rate (30 days)</span><span class="kpi-val">10–15%</span></div>
+          <div class="kpi-row"><span>Email open rate</span><span class="kpi-val">30%+</span></div>
+          <div class="kpi-row"><span>Gift card redemptions</span><span class="kpi-val">50%+ of cards</span></div>
+        </div>
+      </div>
+      <div>
+        <div class="kpi-group">
+          <h3>Launch + Campaign (Weeks 6–8)</h3>
+          <div class="kpi-row"><span>Total orders (3-week window)</span><span class="kpi-val">75–200</span></div>
+          <div class="kpi-row"><span>Revenue</span><span class="kpi-val">$5,000–$15,000</span></div>
+          <div class="kpi-row"><span>AOV</span><span class="kpi-val">$70–$100</span></div>
+          <div class="kpi-row"><span>Email list total by May 10</span><span class="kpi-val">1,000+</span></div>
+          <div class="kpi-row"><span>Reviews collected</span><span class="kpi-val">15–25</span></div>
+          <div class="kpi-row"><span>UGC pieces (customer + influencer)</span><span class="kpi-val">20–30</span></div>
+          <div class="kpi-row"><span>Conversion rate</span><span class="kpi-val">1.5–3%</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ═══════════════ WHAT MUST BE BUILT ═══════════════ -->
+  <div class="section">
+    <div class="section-head">
+      <h2>What Must Be Built Before March 16</h2>
+      <div class="rule"></div>
+    </div>
+    <div class="two-col">
+      <div>
+        <p style="font-size:8pt; font-weight:700; color:var(--fern-dark); letter-spacing:.08em; text-transform:uppercase; margin-bottom:6px;">Minimum Viable Storefront</p>
+        <ul class="checklist">
+          <li><span class="cb"></span><span>Checkout flow — <code>cart.checkoutUrl</code> redirect working</span></li>
+          <li><span class="cb"></span><span>Product pages — all Mother's Day products live with images, variants, descriptions</span></li>
+          <li><span class="cb"></span><span>Collections — Moms, Kids, Family, Mother's Day 2026</span></li>
+          <li><span class="cb"></span><span>Cart — add, update, remove items + subtotal display</span></li>
+          <li><span class="cb"></span><span>Email capture — popup or inline form on homepage</span></li>
+          <li><span class="cb"></span><span>Logo + branding — "Mama Fern" (not "Minimal Store"), correct palette</span></li>
+          <li><span class="cb"></span><span>Mobile responsive — most traffic will be mobile</span></li>
+        </ul>
+      </div>
+      <div>
+        <p style="font-size:8pt; font-weight:700; color:var(--muted); letter-spacing:.08em; text-transform:uppercase; margin-bottom:6px;">Nice to Have (Not Blockers)</p>
+        <ul class="checklist">
+          <li><span class="cb"></span><span>"Complete the Family Look" cross-sell section</span></li>
+          <li><span class="cb"></span><span>Gift wrapping option in cart</span></li>
+          <li><span class="cb"></span><span>Blog / about page</span></li>
+          <li><span class="cb"></span><span>Account / order history pages</span></li>
+          <li><span class="cb"></span><span>Search</span></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <!-- ═══════════════ POST MOTHERS DAY ═══════════════ -->
+  <div class="section">
+    <div class="section-head">
+      <h2>Post–Mother's Day: What Happens Next</h2>
+      <div class="rule"></div>
+    </div>
+    <p class="lead">Mother's Day is the launch moment, not the whole business. The Mother's Day buyers are your <strong>founding customer cohort</strong> — they will define your repeat purchase rate and word-of-mouth for the rest of Year 1.</p>
+    <ol class="strategy-list">
+      <li>Send post-purchase emails — review requests, cross-sell, repeat buyer incentive</li>
+      <li>Father's Day (June 21) — pivot Dad collection spotlight, reuse this campaign framework</li>
+      <li>Summer drop — use Mother's Day customer data to inform products/colorways that resonated</li>
+      <li>Analyze cohort — which acquisition channel produced the highest LTV buyers? Double down for Q3</li>
+      <li>Keep the email list warm — weekly content emails through June, not just promotional blasts</li>
+    </ol>
+  </div>
+
+  <!-- FOOTER -->
+  <div class="footer">
+    <span>Mama Fern · Mother's Day 2026 Campaign Brief</span>
+    <span>Campaign window: March 16 – May 10, 2026 · Mother's Day: Sunday, May 10</span>
+  </div>
+
+</div>
+</body>
+</html>

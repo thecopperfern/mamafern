@@ -1,7 +1,8 @@
 import type { MetadataRoute } from "next";
 import { commerceClient } from "@/lib/commerce";
 
-export const dynamic = "force-dynamic";
+// ISR: regenerate sitemap every 5 minutes
+export const revalidate = 300;
 
 const BASE_URL = "https://mamafern.com";
 
