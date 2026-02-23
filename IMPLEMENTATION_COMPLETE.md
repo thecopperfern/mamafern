@@ -51,7 +51,7 @@ The previous development sprint had already completed most of the heavy lifting:
    - Metadata: "Mama Fern | Grounded Family Apparel"
 
 6. ✅ **Environment Configuration** - `.env.local` created with:
-   - Shopify Storefront API token: `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`
+   - Shopify Storefront API token: `[STORED SECURELY - NOT IN REPO]`
    - Store domain: `mama-fern.myshopify.com`
    - Free shipping threshold: $70
    - Email sender: `hello@mamafern.com`
@@ -153,7 +153,7 @@ src/
 ### Your Responsibilities (Product/Content)
 
 1. **Shopify Store Setup** (1-2 hours)
-   - ✅ Token available: `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`
+   - ✅ Token available in `.env.local` (stored securely)
    - ⏳ Create 6 collections in Shopify Admin:
      - For Moms (`moms`)
      - For Kids (`kids`)
@@ -247,7 +247,7 @@ Current `.env.local` configuration:
 # Shopify Storefront API
 NEXT_PUBLIC_SHOPIFY_STORE_DOMAIN=mama-fern.myshopify.com
 SHOPIFY_STORE_API_URL=https://mama-fern.myshopify.com/api/2026-04/graphql.json
-SHOPIFY_STOREFRONT_ACCESS_TOKEN=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
+SHOPIFY_STOREFRONT_ACCESS_TOKEN=[STORED SECURELY - NOT IN REPO]
 
 # Email (Brevo)
 BREVO_API_KEY=                      # ⏳ TO BE ADDED

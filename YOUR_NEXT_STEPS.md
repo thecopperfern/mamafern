@@ -90,7 +90,7 @@ The Mama Fern store is **technically complete**. All core features have been bui
    - Product detail pages with variant selectors
    - Cart drawer working when you add items
 
-**If something doesn't look right**: The Shopify API token is already configured (`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`), so it should "just work."
+**If something doesn't look right**: The Shopify API token is already configured in `.env.local` (stored securely), so it should "just work."
 
 ---
 
