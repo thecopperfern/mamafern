@@ -14,6 +14,7 @@ import { trackEvent } from "@/components/view/Analytics";
 import ProductReviews from "@/components/view/ProductReviews";
 import StickyATC from "@/components/view/StickyATC";
 import NotifyMe from "@/components/view/NotifyMe";
+import FabricSpecs from "@/components/view/FabricSpecs";
 
 export default function ProductDetail({
   product,
@@ -76,6 +77,8 @@ export default function ProductDetail({
             options={product.options}
           />
           <ProductPrice priceRange={product.priceRange} />
+
+          <FabricSpecs />
 
           {isOOS ? (
             <NotifyMe

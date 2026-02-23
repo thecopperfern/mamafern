@@ -8,6 +8,7 @@ import { Toaster } from "@/components/ui/sonner";
 import { commerceClient } from "@/lib/commerce";
 import Analytics from "@/components/view/Analytics";
 import SkipNav from "@/components/view/SkipNav";
+import EmailCaptureModal from "@/components/view/EmailCaptureModal";
 
 const dmSans = DM_Sans({
   variable: "--font-dm-sans",
@@ -59,6 +60,7 @@ export default async function RootLayout({
           <SkipNav />
           <Analytics />
           <Toaster />
+          <EmailCaptureModal />
           <Navbar collectionLinks={collectionLinks} />
           <main id="main-content" className="min-h-screen" role="main" tabIndex={-1}>
             {children}

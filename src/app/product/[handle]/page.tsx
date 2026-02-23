@@ -1,7 +1,7 @@
 import { commerceClient } from "@/lib/commerce";
 import ProductDetail from "@/components/view/ProductDetail";
-import ProductCard from "@/components/view/ProductCard";
 import Breadcrumbs from "@/components/view/Breadcrumbs";
+import RelatedProducts from "@/components/view/RelatedProducts";
 import { notFound } from "next/navigation";
 import type { Metadata } from "next";
 
@@ -46,16 +46,10 @@ export default async function ProductPage({ params }: Props) {
       />
       <ProductDetail product={product} />
       {recommendations.length > 0 && (
-        <section className="mx-auto max-w-6xl py-12">
-          <h2 className="text-2xl font-display font-bold text-charcoal mb-6">
-            You Might Also Like
-          </h2>
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
-            {recommendations.slice(0, 4).map((rec) => (
-              <ProductCard key={rec.id} product={rec} />
-            ))}
-          </div>
-        </section>
+        <RelatedProducts
+          products={recommendations}
+          title="Complete the Family Look"
+        />
       )}
     </div>
   );
