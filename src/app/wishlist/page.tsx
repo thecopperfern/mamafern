@@ -6,7 +6,6 @@ import { commerceClient, type CommerceProduct } from "@/lib/commerce";
 import ProductCard from "@/components/view/ProductCard";
 import { Heart } from "lucide-react";
 import Link from "next/link";
-import PageHero from "@/components/view/PageHero";
 
 export default function WishlistPage() {
   const { items, initialize } = useWishlist();
@@ -38,11 +37,19 @@ export default function WishlistPage() {
 
   return (
     <div>
-      <PageHero
-        eyebrow="Your Saved Items"
-        title="My Wishlist"
-        subtitle="Products you&rsquo;ve saved for later."
-      />
+      <div className="relative bg-texture-linen border-b border-oat py-16 md:py-20">
+        <div className="mx-auto max-w-3xl px-4 text-center">
+          <p className="text-xs font-medium text-fern uppercase tracking-[0.2em] mb-3">
+            Your Saved Items
+          </p>
+          <h1 className="font-display font-bold text-4xl md:text-5xl text-charcoal">
+            My Wishlist
+          </h1>
+          <p className="mt-4 text-warm-brown/70 text-lg">
+            Products you&apos;ve saved for later.
+          </p>
+        </div>
+      </div>
 
       <div className="mx-auto max-w-6xl px-4 py-14">
         {loading ? (

@@ -3,7 +3,6 @@
 import { useActionState, useEffect, useRef } from "react";
 import { submitContactForm, type ContactFormState } from "./action";
 import { toast } from "sonner";
-import PageHero from "@/components/view/PageHero";
 
 const CONTACT_INFO = [
   {
@@ -42,16 +41,24 @@ export default function ContactPage() {
 
   return (
     <div>
-      <PageHero
-        eyebrow="Say Hello"
-        title="Get in Touch"
-        subtitle="Have a question, suggestion, or just want to say hi? We'd love to hear from you."
-      />
+      <div className="relative bg-texture-linen border-b border-oat py-16 md:py-20">
+        <div className="mx-auto max-w-3xl px-4 text-center">
+          <p className="text-xs font-medium text-fern uppercase tracking-[0.2em] mb-3">
+            Say Hello
+          </p>
+          <h1 className="font-display font-bold text-4xl md:text-5xl text-charcoal">
+            Get in Touch
+          </h1>
+          <p className="mt-4 text-warm-brown/70 text-lg">
+            Have a question or feedback? We&apos;d love to hear from you.
+          </p>
+        </div>
+      </div>
 
       <div className="mx-auto max-w-5xl px-4 py-14">
         <div className="grid md:grid-cols-2 gap-10 lg:gap-16">
           {/* Left: info panel */}
-          <div className="animate-fade-in-up">
+          <div>
             <h2 className="font-display font-bold text-xl text-charcoal mb-6">
               How we can help
             </h2>
@@ -71,14 +78,14 @@ export default function ContactPage() {
               <p className="text-xs font-medium text-fern uppercase tracking-[0.18em] mb-1.5">
                 Response Time
               </p>
-              <p className="text-warm-brown/70 text-sm leading-relaxed">
+              <p className="text-warm-brown/70 text-sm">
                 We typically respond within 1&ndash;2 business days.
               </p>
             </div>
           </div>
 
           {/* Right: form panel */}
-          <div className="bg-texture-linen rounded-2xl border border-oat p-6 md:p-8 animate-fade-in-up-1">
+          <div className="bg-texture-linen rounded-2xl border border-oat p-6 md:p-8">
             {state.success && (
               <div className="mb-5 rounded-md bg-fern/10 border border-fern/30 px-4 py-3 text-fern text-sm">
                 Thanks for reaching out! We&apos;ll get back to you soon.
