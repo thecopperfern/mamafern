@@ -13,11 +13,20 @@ export default async function FeaturedCollection({
   title,
   subtitle,
 }: Props) {
-  const products = await commerceClient.getProductsByCollection(handle, {
-    first: 4,
-  });
+  let products;
+  try {
+    products = await commerceClient.getProductsByCollection(handle, {
+      first: 4,
+    });
+  } catch (error) {
+    // Gracefully handle missing Shopify credentials or API errors
+    if (process.env.NODE_ENV === "development") {
+      console.warn(`Failed to load collection "${handle}":`, error);
+    }
+    return null;
+  }
 
-  if (products.length === 0) return null;
+  if (!products || products.length === 0) return null;
 
   const formatPrice = (amount: string, currencyCode: string) => {
     return new Intl.NumberFormat(undefined, {

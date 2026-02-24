@@ -74,43 +74,33 @@ const Navbar = ({ collectionLinks }: NavbarProps) => {
     <>
       <header className="sticky top-0 z-50 bg-texture-linen-wash border-b border-oat/60" role="banner">
         <div className="mx-auto max-w-6xl px-4 py-4">
-          {/* Logo centered */}
-          <div className="flex justify-center mb-3">
-            <Logo />
-          </div>
+          {/* Combined logo and navigation row */}
+          <div className="flex items-center justify-between gap-4">
+            {/* Left spacer on desktop / Mobile menu on mobile */}
+            <div className="flex-1 flex items-center">
+              <Button
+                className="md:hidden text-charcoal hover:text-fern"
+                size="icon"
+                variant="ghost"
+                onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+                aria-label={mobileMenuOpen ? "Close menu" : "Open menu"}
+                aria-expanded={mobileMenuOpen}
+              >
+                {mobileMenuOpen ? (
+                  <X className="h-6 w-6" aria-hidden="true" />
+                ) : (
+                  <Menu className="h-6 w-6" aria-hidden="true" />
+                )}
+              </Button>
+            </div>
 
-          {/* Navigation and actions */}
-          <div className="flex items-center justify-between">
-            {/* Desktop nav */}
-            <nav className="hidden md:flex items-center gap-x-6" aria-label="Main navigation">
-              {NAV_LINKS.map((link) => (
-                <Link
-                  key={link.href}
-                  className="text-sm font-medium text-charcoal/80 hover:text-fern transition-colors"
-                  href={link.href}
-                >
-                  {link.label}
-                </Link>
-              ))}
-            </nav>
+            {/* Logo centered with padding */}
+            <div className="pt-2">
+              <Logo />
+            </div>
 
-            {/* Mobile menu button - left side on mobile */}
-            <Button
-              className="md:hidden text-charcoal hover:text-fern"
-              size="icon"
-              variant="ghost"
-              onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-              aria-label={mobileMenuOpen ? "Close menu" : "Open menu"}
-              aria-expanded={mobileMenuOpen}
-            >
-              {mobileMenuOpen ? (
-                <X className="h-6 w-6" aria-hidden="true" />
-              ) : (
-                <Menu className="h-6 w-6" aria-hidden="true" />
-              )}
-            </Button>
-
-            <div className="flex items-center gap-x-2">
+            {/* Right: actions */}
+            <div className="flex-1 flex items-center justify-end gap-x-2">
             <Button
               size="icon"
               variant="ghost"
@@ -186,6 +176,19 @@ const Navbar = ({ collectionLinks }: NavbarProps) => {
             )}
           </div>
           </div>
+
+          {/* Desktop nav - centered below logo */}
+          <nav className="hidden md:flex items-center justify-center gap-x-6 mt-3 border-t border-oat/40 pt-3" aria-label="Main navigation">
+            {NAV_LINKS.map((link) => (
+              <Link
+                key={link.href}
+                className="text-sm font-medium text-charcoal/80 hover:text-fern transition-colors"
+                href={link.href}
+              >
+                {link.label}
+              </Link>
+            ))}
+          </nav>
         </div>
 
         {/* Search bar */}

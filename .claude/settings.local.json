@@ -6,7 +6,9 @@
       "Bash(git commit:*)",
       "Bash(git push:*)",
       "Bash(git ls-tree:*)",
-      "Bash(curl:*)"
+      "Bash(curl:*)",
+      "Bash(ls:*)",
+      "Bash(git reset:*)"
     ]
   }
 }
