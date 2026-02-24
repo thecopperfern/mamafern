@@ -2,8 +2,7 @@ import AllCollections from "@/components/view/AllCollections";
 import PageHero from "@/components/view/PageHero";
 import type { Metadata } from "next";
 
-// ISR: revalidate every 60 seconds for fresh collection data
-export const revalidate = 60;
+export const dynamic = "force-dynamic";
 
 export const metadata: Metadata = {
   title: "Shop | Mama Fern",

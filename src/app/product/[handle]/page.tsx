@@ -5,34 +5,7 @@ import RelatedProducts from "@/components/view/RelatedProducts";
 import { notFound } from "next/navigation";
 import type { Metadata } from "next";
 
-// ISR: revalidate every 60 seconds
-export const revalidate = 60;
-
-/**
- * Pre-render product pages at build time.
- * Fetches all products from all collections and returns their handles.
- * New products added after build will be rendered on-demand via ISR.
- */
-export async function generateStaticParams() {
-  try {
-    const collections = await commerceClient.getCollections();
-    const handles = new Set<string>();
-    for (const collection of collections) {
-      const result = await commerceClient.getCollectionByHandle(
-        collection.handle,
-        { first: 50 }
-      );
-      if (result) {
-        for (const product of result.products) {
-          handles.add(product.handle);
-        }
-      }
-    }
-    return Array.from(handles).map((handle) => ({ handle }));
-  } catch {
-    return [];
-  }
-}
+export const dynamic = "force-dynamic";
 
 type Props = {
   params: Promise<{ handle: string }>;

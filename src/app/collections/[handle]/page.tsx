@@ -4,21 +4,7 @@ import type { Metadata } from "next";
 import CollectionContent from "@/components/view/CollectionContent";
 import Breadcrumbs from "@/components/view/Breadcrumbs";
 
-// ISR: revalidate every 60 seconds
-export const revalidate = 60;
-
-/**
- * Pre-render all collection pages at build time.
- * New collections added after build will be rendered on-demand via ISR.
- */
-export async function generateStaticParams() {
-  try {
-    const collections = await commerceClient.getCollections();
-    return collections.map((c) => ({ handle: c.handle }));
-  } catch {
-    return [];
-  }
-}
+export const dynamic = "force-dynamic";
 
 type Props = {
   params: Promise<{ handle: string }>;
