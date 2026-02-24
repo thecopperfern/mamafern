@@ -73,23 +73,44 @@ const Navbar = ({ collectionLinks }: NavbarProps) => {
   return (
     <>
       <header className="sticky top-0 z-50 bg-texture-linen-wash border-b border-oat/60" role="banner">
-        <div className="mx-auto max-w-6xl px-4 py-4 flex items-center justify-between">
-          <Logo />
+        <div className="mx-auto max-w-6xl px-4 py-4">
+          {/* Logo centered */}
+          <div className="flex justify-center mb-3">
+            <Logo />
+          </div>
 
-          {/* Desktop nav */}
-          <nav className="hidden md:flex items-center gap-x-6" aria-label="Main navigation">
-            {NAV_LINKS.map((link) => (
-              <Link
-                key={link.href}
-                className="text-sm font-medium text-charcoal/80 hover:text-fern transition-colors"
-                href={link.href}
-              >
-                {link.label}
-              </Link>
-            ))}
-          </nav>
+          {/* Navigation and actions */}
+          <div className="flex items-center justify-between">
+            {/* Desktop nav */}
+            <nav className="hidden md:flex items-center gap-x-6" aria-label="Main navigation">
+              {NAV_LINKS.map((link) => (
+                <Link
+                  key={link.href}
+                  className="text-sm font-medium text-charcoal/80 hover:text-fern transition-colors"
+                  href={link.href}
+                >
+                  {link.label}
+                </Link>
+              ))}
+            </nav>
 
-          <div className="flex items-center gap-x-2">
+            {/* Mobile menu button - left side on mobile */}
+            <Button
+              className="md:hidden text-charcoal hover:text-fern"
+              size="icon"
+              variant="ghost"
+              onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+              aria-label={mobileMenuOpen ? "Close menu" : "Open menu"}
+              aria-expanded={mobileMenuOpen}
+            >
+              {mobileMenuOpen ? (
+                <X className="h-6 w-6" aria-hidden="true" />
+              ) : (
+                <Menu className="h-6 w-6" aria-hidden="true" />
+              )}
+            </Button>
+
+            <div className="flex items-center gap-x-2">
             <Button
               size="icon"
               variant="ghost"
@@ -163,23 +184,7 @@ const Navbar = ({ collectionLinks }: NavbarProps) => {
                 </Button>
               </Link>
             )}
-
-            {/* Mobile menu button */}
-            <Button
-              size="icon"
-              variant="ghost"
-              className="md:hidden text-charcoal"
-              onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-              aria-label={mobileMenuOpen ? "Close menu" : "Open menu"}
-              aria-expanded={mobileMenuOpen}
-              aria-controls="mobile-nav"
-            >
-              {mobileMenuOpen ? (
-                <X className="h-5 w-5" aria-hidden="true" />
-              ) : (
-                <Menu className="h-5 w-5" aria-hidden="true" />
-              )}
-            </Button>
+          </div>
           </div>
         </div>
 
