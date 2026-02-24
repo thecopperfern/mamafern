@@ -38,7 +38,7 @@ export default function Footer() {
             </h3>
             <p className="text-sm text-white/60 max-w-xs">
               Grounded family apparel for crunchy, cozy homes. Cute patterns and
-              sayings in skin-friendlier fabrics.
+              sayings in skin-friendly fabrics.
             </p>
             {(instagramUrl || tiktokUrl) && (
               <div className="flex items-center gap-3 mt-4">

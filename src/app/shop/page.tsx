@@ -19,7 +19,7 @@ export default function ShopPage() {
       <PageHero
         eyebrow="All Collections"
         title="Shop All"
-        subtitle="Family apparel in skin-friendlier fabrics for every stage of growing together."
+        subtitle="Family apparel in skin-friendly fabrics for every stage of growing together."
       />
       <div className="mx-auto max-w-6xl px-4">
         <AllCollections />

@@ -14,7 +14,7 @@ export const metadata: Metadata = {
 const VALUES = [
   {
     emoji: "🌱",
-    title: "Skin-Friendlier Fabrics",
+    title: "Skin-Friendly Fabrics",
     desc: "⚠️ PLACEHOLDER — Describe your fabric choices and sourcing story here.",
   },
   {
@@ -61,7 +61,7 @@ export default function AboutPage() {
           <p>
             Mama Fern started with a simple idea: family apparel that feels as good as it looks.
             As a mom who cares about what touches her family&apos;s skin, I wanted clothing that
-            combined cute designs with skin-friendlier fabrics.
+            combined cute designs with skin-friendly fabrics.
           </p>
           <blockquote className="border-l-2 border-sage pl-5 py-1">
             <p className="font-display text-xl text-charcoal italic leading-snug">

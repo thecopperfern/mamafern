@@ -28,7 +28,7 @@ export const metadata: Metadata = {
     template: "%s | Mama Fern",
   },
   description:
-    "Grounded family apparel for crunchy, cozy homes. Cute patterns and sayings in skin-friendlier fabrics, designed for moms, dads, and kids.",
+    "Grounded family apparel for crunchy, cozy homes. Cute patterns and sayings in skin-friendly fabrics, designed for moms, dads, and kids.",
   openGraph: {
     siteName: "Mama Fern",
     type: "website",
