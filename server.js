@@ -1,43 +1,34 @@
 /**
- * Startup wrapper for Hostinger Node.js panel.
+ * Production server for Hostinger Node.js panel.
  *
- * Hostinger expects a startup file (server.js). This spawns the built-in
- * Next.js production server (`next start`) which is more reliable than a
- * custom http.createServer wrapper.
- *
- * HTTP/2 chunk fixes are handled in next.config.ts:
- *   - compress: false  (prevents double-gzip with nginx)
- *   - maxSize: 150 KB  (keeps JS chunks small)
+ * Runs Next.js in-process (no child process spawning) to ensure all
+ * environment variables from Hostinger's panel are available to route
+ * handlers and server components.
  */
 
-const { spawn } = require("child_process");
-const path = require("path");
-
-const port = process.env.PORT || "3000";
-const nextBin = path.join(__dirname, "node_modules", "next", "dist", "bin", "next");
-
-// Ensure production mode
 process.env.NODE_ENV = "production";
+
+const next = require("next");
+const { createServer } = require("http");
+
+const port = parseInt(process.env.PORT || "3000", 10);
 
 // Log env var availability for diagnostics
 console.log(`> NODE_ENV=${process.env.NODE_ENV}`);
 console.log(`> PORT=${port}`);
 console.log(`> SHOPIFY_STORE_API_URL=${process.env.SHOPIFY_STORE_API_URL ? "set" : "MISSING"}`);
 console.log(`> SHOPIFY_STOREFRONT_ACCESS_TOKEN=${process.env.SHOPIFY_STOREFRONT_ACCESS_TOKEN ? "set" : "MISSING"}`);
-console.log(`> Starting Next.js on port ${port}...`);
 
-// Don't pass explicit `env` — inherit the parent process environment as-is
-const child = spawn(process.execPath, [nextBin, "start", "-H", "0.0.0.0", "-p", port], {
-  stdio: "inherit",
-  cwd: __dirname,
-});
+const app = next({ dev: false, dir: __dirname, hostname: "0.0.0.0", port });
+const handle = app.getRequestHandler();
 
-child.on("error", (err) => {
-  console.error("❌ Failed to start Next.js:", err);
+app.prepare().then(() => {
+  createServer((req, res) => handle(req, res))
+    .listen(port, "0.0.0.0", () => {
+      console.log(`> Mama Fern ready on http://0.0.0.0:${port}`);
+    });
+}).catch((err) => {
+  console.error("❌ Failed to start server:", err);
   process.exit(1);
-});
-
-child.on("exit", (code) => {
-  process.exit(code || 0);
 });
 
