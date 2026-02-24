@@ -73,16 +73,21 @@ const Navbar = ({ collectionLinks }: NavbarProps) => {
   return (
     <>
       <header className="sticky top-0 z-50 bg-texture-linen-wash border-b border-oat/60" role="banner">
-        <div className="mx-auto max-w-6xl px-4 py-4">
-          {/* Combined logo and navigation row */}
-          <div className="flex items-center justify-between gap-4">
-            {/* Left spacer on desktop / Mobile menu on mobile */}
-            <div className="flex-1 flex items-center">
+        <div className="mx-auto max-w-6xl px-4 py-3 md:py-4">
+          {/* Mobile Layout: Logo on top, actions below */}
+          <div className="md:hidden">
+            {/* Logo centered, smaller on mobile */}
+            <div className="flex justify-center mb-2">
+              <Logo className="h-14" />
+            </div>
+
+            {/* Actions row */}
+            <div className="flex items-center justify-between">
               <Button
-                className="md:hidden text-charcoal hover:text-fern"
                 size="icon"
                 variant="ghost"
                 onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+                className="text-charcoal hover:text-fern"
                 aria-label={mobileMenuOpen ? "Close menu" : "Open menu"}
                 aria-expanded={mobileMenuOpen}
               >
@@ -92,15 +97,8 @@ const Navbar = ({ collectionLinks }: NavbarProps) => {
                   <Menu className="h-6 w-6" aria-hidden="true" />
                 )}
               </Button>
-            </div>
 
-            {/* Logo centered with padding */}
-            <div className="pt-2">
-              <Logo />
-            </div>
-
-            {/* Right: actions */}
-            <div className="flex-1 flex items-center justify-end gap-x-2">
+              <div className="flex items-center gap-x-2">
             <Button
               size="icon"
               variant="ghost"
@@ -174,11 +172,101 @@ const Navbar = ({ collectionLinks }: NavbarProps) => {
                 </Button>
               </Link>
             )}
-          </div>
+              </div>
+            </div>
           </div>
 
-          {/* Desktop nav - centered below logo */}
-          <nav className="hidden md:flex items-center justify-center gap-x-6 mt-3 border-t border-oat/40 pt-3" aria-label="Main navigation">
+          {/* Desktop Layout: Logo and actions in single row */}
+          <div className="hidden md:block">
+            <div className="flex items-center justify-between gap-4">
+              {/* Left spacer */}
+              <div className="flex-1"></div>
+
+              {/* Logo centered with padding */}
+              <div className="pt-2">
+                <Logo className="h-26" />
+              </div>
+
+              {/* Right: actions */}
+              <div className="flex-1 flex items-center justify-end gap-x-2">
+                <Button
+                  size="icon"
+                  variant="ghost"
+                  onClick={() => setSearchOpen(!searchOpen)}
+                  className="text-charcoal hover:text-fern"
+                  aria-label={searchOpen ? "Close search" : "Open search"}
+                  aria-expanded={searchOpen}
+                >
+                  <Search className="h-5 w-5" aria-hidden="true" />
+                </Button>
+                <Link href="/wishlist" aria-label="Wishlist">
+                  <Button
+                    size="icon"
+                    variant="ghost"
+                    className="text-charcoal hover:text-fern"
+                    aria-label="View wishlist"
+                  >
+                    <Heart className="h-5 w-5" aria-hidden="true" />
+                  </Button>
+                </Link>
+                <div className="relative">
+                  <Button
+                    size="icon"
+                    variant="ghost"
+                    onClick={() => setCartOpen(true)}
+                    className="text-charcoal hover:text-fern"
+                    aria-label={`Shopping cart${cart?.totalQuantity > 0 ? `, ${cart.totalQuantity} items` : ''}`}
+                  >
+                    <ShoppingCart className="h-5 w-5" aria-hidden="true" />
+                  </Button>
+                  {cart?.totalQuantity > 0 && (
+                    <Badge
+                      className="absolute -top-1 -right-1 h-5 w-5 rounded-full p-0 flex items-center justify-center text-[10px] bg-fern text-white"
+                      aria-hidden="true"
+                    >
+                      {cart.totalQuantity}
+                    </Badge>
+                  )}
+                </div>
+                {isLoggedIn ? (
+                  <>
+                    <Link href="/account" aria-label="My account">
+                      <Button
+                        size="icon"
+                        variant="ghost"
+                        className="text-charcoal hover:text-fern"
+                        aria-label="My account"
+                      >
+                        <User className="h-5 w-5" aria-hidden="true" />
+                      </Button>
+                    </Link>
+                    <Button
+                      size="icon"
+                      variant="ghost"
+                      className="text-charcoal hover:text-fern"
+                      onClick={handleLogout}
+                      aria-label="Log out"
+                    >
+                      <LogOut className="h-5 w-5" aria-hidden="true" />
+                    </Button>
+                  </>
+                ) : (
+                  <Link href="/auth" aria-label="Log in or sign up">
+                    <Button
+                      size="icon"
+                      variant="ghost"
+                      className="text-charcoal hover:text-fern"
+                      aria-label="Log in or sign up"
+                    >
+                      <User className="h-5 w-5" aria-hidden="true" />
+                    </Button>
+                  </Link>
+                )}
+              </div>
+            </div>
+
+            {/* Desktop nav - centered below logo */}
+            <nav className="flex items-center justify-center gap-x-6 mt-3 border-t border-oat/40 pt-3" aria-label="Main navigation">
             {NAV_LINKS.map((link) => (
               <Link
                 key={link.href}
@@ -188,7 +276,8 @@ const Navbar = ({ collectionLinks }: NavbarProps) => {
                 {link.label}
               </Link>
             ))}
-          </nav>
+            </nav>
+          </div>
         </div>
 
         {/* Search bar */}
