@@ -74,31 +74,31 @@ const Navbar = ({ collectionLinks }: NavbarProps) => {
     <>
       <header className="sticky top-0 z-50 bg-texture-linen-wash border-b border-oat/60" role="banner">
         <div className="mx-auto max-w-6xl px-4 py-3 md:py-4">
-          {/* Mobile Layout: Logo on top, actions below */}
-          <div className="md:hidden">
-            {/* Logo centered, smaller on mobile */}
-            <div className="flex justify-center mb-2">
+          {/* Mobile Layout: Single horizontal row */}
+          <div className="md:hidden flex items-center justify-between gap-2">
+            {/* Menu button */}
+            <Button
+              size="icon"
+              variant="ghost"
+              onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+              className="text-charcoal hover:text-fern shrink-0"
+              aria-label={mobileMenuOpen ? "Close menu" : "Open menu"}
+              aria-expanded={mobileMenuOpen}
+            >
+              {mobileMenuOpen ? (
+                <X className="h-5 w-5" aria-hidden="true" />
+              ) : (
+                <Menu className="h-5 w-5" aria-hidden="true" />
+              )}
+            </Button>
+
+            {/* Logo centered */}
+            <div className="flex-1 flex justify-center">
               <Logo className="h-8" />
             </div>
 
-            {/* Actions row */}
-            <div className="flex items-center justify-between">
-              <Button
-                size="icon"
-                variant="ghost"
-                onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-                className="text-charcoal hover:text-fern"
-                aria-label={mobileMenuOpen ? "Close menu" : "Open menu"}
-                aria-expanded={mobileMenuOpen}
-              >
-                {mobileMenuOpen ? (
-                  <X className="h-6 w-6" aria-hidden="true" />
-                ) : (
-                  <Menu className="h-6 w-6" aria-hidden="true" />
-                )}
-              </Button>
-
-              <div className="flex items-center gap-x-2">
+            {/* Actions */}
+            <div className="flex items-center gap-x-1 shrink-0">
             <Button
               size="icon"
               variant="ghost"
@@ -172,7 +172,6 @@ const Navbar = ({ collectionLinks }: NavbarProps) => {
                 </Button>
               </Link>
             )}
-              </div>
             </div>
           </div>
 
@@ -184,7 +183,7 @@ const Navbar = ({ collectionLinks }: NavbarProps) => {
 
               {/* Logo centered with padding */}
               <div className="pt-2">
-                <Logo className="h-10" />
+                <Logo className="h-20" />
               </div>
 
               {/* Right: actions */}
