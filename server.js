@@ -16,14 +16,20 @@ const path = require("path");
 const port = process.env.PORT || "3000";
 const nextBin = path.join(__dirname, "node_modules", "next", "dist", "bin", "next");
 
+// Ensure production mode
 process.env.NODE_ENV = "production";
 
+// Log env var availability for diagnostics
+console.log(`> NODE_ENV=${process.env.NODE_ENV}`);
+console.log(`> PORT=${port}`);
+console.log(`> SHOPIFY_STORE_API_URL=${process.env.SHOPIFY_STORE_API_URL ? "set" : "MISSING"}`);
+console.log(`> SHOPIFY_STOREFRONT_ACCESS_TOKEN=${process.env.SHOPIFY_STOREFRONT_ACCESS_TOKEN ? "set" : "MISSING"}`);
 console.log(`> Starting Next.js on port ${port}...`);
 
+// Don't pass explicit `env` — inherit the parent process environment as-is
 const child = spawn(process.execPath, [nextBin, "start", "-H", "0.0.0.0", "-p", port], {
   stdio: "inherit",
   cwd: __dirname,
-  env: { ...process.env, NODE_ENV: "production" },
 });
 
 child.on("error", (err) => {
