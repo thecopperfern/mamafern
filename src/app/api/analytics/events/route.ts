@@ -1,9 +1,17 @@
 import { NextRequest, NextResponse } from 'next/server';
-import db from '@/lib/db';
+import getDb from '@/lib/db';
 import { AnalyticsEvent } from '@/types/analytics';
 
 export async function POST(req: NextRequest) {
   try {
+    const db = getDb();
+    if (!db) {
+      return NextResponse.json(
+        { error: 'Analytics unavailable' },
+        { status: 503 }
+      );
+    }
+
     const event: AnalyticsEvent = await req.json();
 
     // Validation

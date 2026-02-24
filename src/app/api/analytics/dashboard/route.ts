@@ -1,9 +1,17 @@
 import { NextRequest, NextResponse } from 'next/server';
-import db from '@/lib/db';
+import getDb from '@/lib/db';
 import { DashboardData, FunnelStep, EngagementMetrics } from '@/types/analytics';
 
 export async function GET(req: NextRequest) {
   try {
+    const db = getDb();
+    if (!db) {
+      return NextResponse.json(
+        { error: 'Analytics unavailable' },
+        { status: 503 }
+      );
+    }
+
     const { searchParams } = new URL(req.url);
     const shop_id = searchParams.get('shop_id');
     const days = parseInt(searchParams.get('days') || '7');
