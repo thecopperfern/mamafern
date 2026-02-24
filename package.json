@@ -7,7 +7,7 @@
   },
   "scripts": {
     "dev": "next dev",
-    "build": "next build",
+    "build": "node scripts/persist-env.js && next build",
     "start": "node server.js",
     "lint": "next lint",
     "codegen": "node -r dotenv/config ./node_modules/.bin/graphql-codegen",
