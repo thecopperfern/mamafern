@@ -49,7 +49,13 @@ export const fetchGraphQL = async <T = any>(
     });
     const json = await res.json();
     if (json.errors) {
-      console.error("Shopify GraphQL errors:", json.errors);
+      // Only log errors in development, or if they're not auth-related
+      const isAuthError = json.errors.some(
+        (e: any) => e.extensions?.code === "UNAUTHORIZED"
+      );
+      if (!isAuthError || process.env.NODE_ENV !== "development") {
+        console.error("Shopify GraphQL errors:", json.errors);
+      }
       throw new Error(json.errors[0]?.message || "GraphQL error");
     }
     return json.data as T;
@@ -62,7 +68,13 @@ export const fetchGraphQL = async <T = any>(
     });
     const json = await res.json();
     if (json.errors) {
-      console.error("Shopify GraphQL errors:", json.errors);
+      // Only log errors in development, or if they're not auth-related
+      const isAuthError = json.errors.some(
+        (e: any) => e.extensions?.code === "UNAUTHORIZED"
+      );
+      if (!isAuthError || process.env.NODE_ENV !== "development") {
+        console.error("Shopify GraphQL errors:", json.errors);
+      }
       throw new Error(json.errors[0]?.message || "GraphQL error");
     }
     return json.data as T;

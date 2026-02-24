@@ -30,6 +30,7 @@ export const useCartActions = () => {
       setCartOpen(true);
     } catch (error) {
       console.error("Error adding to cart:", error);
+      throw error; // Re-throw so caller can handle (e.g., show toast)
     }
   };
 
@@ -77,14 +78,14 @@ export const useCartActions = () => {
       const fetchedCart = await commerceClient.getCart(cartId);
       setCart(fetchedCart);
     } catch (error) {
-      console.error("Error initializing cart:", error);
-      // If cart fetch fails, create a new one
-      try {
-        const newCart = await commerceClient.createCart();
-        localStorage.setItem("cartId", newCart.id);
-        setCart(newCart);
-      } catch (e) {
-        console.error("Error creating fallback cart:", e);
+      // Silently fall back to empty cart if Shopify is unavailable
+      // This is expected during development without credentials
+      setCart(initialCartState);
+      if (process.env.NODE_ENV === "development") {
+        console.warn(
+          "Cart initialization failed - using local cart. " +
+            "Set SHOPIFY_STOREFRONT_ACCESS_TOKEN to enable Shopify integration."
+        );
       }
     }
   };
