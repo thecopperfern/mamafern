@@ -120,3 +120,4 @@ pm2 restart mamafern
 | Missing env vars | Check `.env` file or hPanel env var settings |
 | Static files 404 | Ensure `public/` and `.next/static/` were copied into standalone |
 | SQLite errors | `analytics.db` requires a persistent filesystem — works on Hostinger VPS, may not on shared |
+| `ChunkLoadError` / `ERR_HTTP2_PROTOCOL_ERROR` | Hostinger's nginx drops large JS chunks mid-HTTP/2 stream. Fixed by: (1) `compress: false` in next.config.ts (prevents double-gzip), (2) webpack `maxSize: 150_000` to keep chunks small, (3) server.js serves `_next/static/` directly with explicit `Content-Length`. Rebuild and redeploy. |
