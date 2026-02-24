@@ -2,7 +2,7 @@ module.exports = {
   apps: [
     {
       name: "mamafern",
-      script: ".next/standalone/server.js",
+      script: "server.js",
       cwd: "/home/u-your-username/domains/mamafern.com/public_html",
       instances: 1,
       exec_mode: "fork",

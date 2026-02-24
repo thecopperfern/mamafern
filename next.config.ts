@@ -1,10 +1,6 @@
 import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
-  // Standalone output for self-hosted Node.js (Hostinger)
-  // Produces a minimal .next/standalone folder with all deps bundled
-  output: "standalone",
-
   // Transpile CVA to fix ESM/CJS interop issue in server builds
   transpilePackages: ["class-variance-authority"],
 

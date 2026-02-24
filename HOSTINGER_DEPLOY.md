@@ -16,25 +16,11 @@
 npm run build
 ```
 
-This produces `.next/standalone/` thanks to `output: "standalone"` in `next.config.ts`.
+This produces the `.next/` build output. The custom `server.js` serves the app with HTTP/2-safe Content-Length headers for static assets.
 
-## 2. Prepare the Deploy Bundle
+## 2. Upload to Hostinger
 
-```bash
-# Copy static assets into the standalone folder
-cp -r public .next/standalone/public
-cp -r .next/static .next/standalone/.next/static
-
-# Copy the custom server
-cp server.js .next/standalone/server.js
-
-# Copy ecosystem config (for PM2)
-cp ecosystem.config.js .next/standalone/ecosystem.config.js
-```
-
-## 3. Upload to Hostinger
-
-Upload the **entire `.next/standalone/`** folder to your Hostinger site root:
+Upload the **entire project** to your Hostinger site root:
 
 ```
 /home/u-your-username/domains/mamafern.com/public_html/
@@ -62,7 +48,7 @@ NEXT_PUBLIC_GA_ID=G-XXXXXXXXXX
 > **Important**: `SHOPIFY_STOREFRONT_ACCESS_TOKEN` and `SHOPIFY_STORE_API_URL` are server-only.
 > They are NOT prefixed with `NEXT_PUBLIC_` and are never sent to the browser.
 
-## 5. Start the App
+## 4. Start the App
 
 ### Option A: Hostinger Node.js Panel
 1. Go to hPanel → **Advanced** → **Node.js**
@@ -81,7 +67,7 @@ pm2 save
 pm2 startup          # auto-start on reboot
 ```
 
-## 6. Verify
+## 5. Verify
 
 - Visit `https://mamafern.com` — should load the homepage
 - Check `https://mamafern.com/sitemap.xml` — should list all products/collections
@@ -89,23 +75,17 @@ pm2 startup          # auto-start on reboot
 - Open browser DevTools → Network tab: confirm NO requests contain the Shopify token
 - Test add to cart → checkout flow
 
-## 7. SSL
+## 6. SSL
 
 Hostinger provides free SSL via Let's Encrypt. Enable it in hPanel → **Security** → **SSL**.
 
-## 8. Updating the Site
+## 7. Updating the Site
 
 ```bash
 # Local: rebuild
 npm run build
 
-# Prepare bundle
-cp -r public .next/standalone/public
-cp -r .next/static .next/standalone/.next/static
-cp server.js .next/standalone/server.js
-
-# Upload .next/standalone/ to Hostinger
-# Then restart:
+# Upload project to Hostinger, then restart:
 pm2 restart mamafern
 ```
 

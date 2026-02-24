@@ -1,16 +1,11 @@
 /**
  * Custom Node.js server for Hostinger deployment.
  *
- * Usage (after `npm run build`):
- *   node server.js
+ * Serves the Next.js production build with explicit Content-Length headers
+ * on static assets so Hostinger's nginx HTTP/2 proxy never drops a large
+ * chunk stream mid-transfer.
  *
- * The standalone output from Next.js bundles everything needed.
- * Copy this file into .next/standalone/ alongside the built output,
- * then copy the `public/` and `.next/static/` folders:
- *
- *   cp -r public .next/standalone/public
- *   cp -r .next/static .next/standalone/.next/static
- *   cd .next/standalone && node server.js
+ * Usage: NODE_ENV=production node server.js
  */
 
 const { createServer } = require("http");
@@ -43,8 +38,8 @@ const MIME_TYPES = {
   ".webp": "image/webp",
 };
 
-// Base directory of the standalone bundle (where this server.js lives)
-const STANDALONE_DIR = __dirname;
+// Base directory (where this server.js lives, i.e. project root)
+const BASE_DIR = __dirname;
 
 app.prepare().then(() => {
   console.log(`> Preparing Next.js (dev=${dev})...`);
@@ -58,7 +53,7 @@ app.prepare().then(() => {
       // the size is unknown. Sending Content-Length up-front prevents this.
       if (pathname && pathname.startsWith("/_next/static/")) {
         const filePath = path.join(
-          STANDALONE_DIR,
+          BASE_DIR,
           ".next",
           "static",
           pathname.replace("/_next/static/", "")
