@@ -78,7 +78,7 @@ const Navbar = ({ collectionLinks }: NavbarProps) => {
           <div className="md:hidden">
             {/* Logo centered, smaller on mobile */}
             <div className="flex justify-center mb-2">
-              <Logo className="h-8" />
+              <Logo className="h-6" />
             </div>
 
             {/* Actions row */}
@@ -184,7 +184,7 @@ const Navbar = ({ collectionLinks }: NavbarProps) => {
 
               {/* Logo centered with padding */}
               <div className="pt-2">
-                <Logo className="h-12" />
+                <Logo className="h-8" />
               </div>
 
               {/* Right: actions */}
