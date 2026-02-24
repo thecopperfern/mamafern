@@ -18,10 +18,18 @@ const isServer = typeof window === "undefined";
  * backward compatibility during migration.
  */
 function getServerConfig() {
-  return {
-    url: process.env.SHOPIFY_STORE_API_URL || "",
-    token: process.env.SHOPIFY_STOREFRONT_ACCESS_TOKEN || "",
-  };
+  const url = process.env.SHOPIFY_STORE_API_URL || "";
+  const token = process.env.SHOPIFY_STOREFRONT_ACCESS_TOKEN || "";
+  if (!url || !token) {
+    console.error(
+      "[Shopify Client] Missing env vars at runtime —",
+      `SHOPIFY_STORE_API_URL=${url ? "set" : "EMPTY"},`,
+      `SHOPIFY_STOREFRONT_ACCESS_TOKEN=${token ? "set" : "EMPTY"},`,
+      `NODE_ENV=${process.env.NODE_ENV},`,
+      `cwd=${process.cwd()}`
+    );
+  }
+  return { url, token };
 }
 
 export const fetchGraphQL = async <T = any>(
