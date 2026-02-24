@@ -20,8 +20,10 @@ const fs = require("fs");
 const next = require("next");
 
 const port = parseInt(process.env.PORT || "3000", 10);
-const hostname = process.env.HOSTNAME || "0.0.0.0";
-const dev = process.env.NODE_ENV !== "production";
+// Use HOST (not HOSTNAME) — Linux sets $HOSTNAME to the machine name
+// (e.g. srv-123.hostinger.com) which isn't a bindable address.
+const hostname = process.env.HOST || "0.0.0.0";
+const dev = process.env.NODE_ENV === "development";
 
 const app = next({ dev, hostname, port });
 const handle = app.getRequestHandler();
@@ -45,6 +47,7 @@ const MIME_TYPES = {
 const STANDALONE_DIR = __dirname;
 
 app.prepare().then(() => {
+  console.log(`> Preparing Next.js (dev=${dev})...`);
   createServer(async (req, res) => {
     try {
       const parsedUrl = parse(req.url, true);
@@ -86,5 +89,8 @@ app.prepare().then(() => {
       `> Mama Fern ready on http://${hostname}:${port} (${dev ? "dev" : "production"})`
     );
   });
+}).catch((err) => {
+  console.error("❌ Failed to start server:", err);
+  process.exit(1);
 });
 
