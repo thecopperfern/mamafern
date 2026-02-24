@@ -60,30 +60,23 @@ describe("Navbar", () => {
     // Should not show search input initially
     expect(screen.queryByPlaceholderText("Search products...")).not.toBeInTheDocument();
 
-    // Find the search button (has Search icon)
-    const buttons = screen.getAllByRole("button");
-    // Search button is the first action button
-    const searchBtn = buttons.find((b) => !b.textContent);
-    if (searchBtn) {
-      await user.click(searchBtn);
-      expect(screen.getByPlaceholderText("Search products...")).toBeInTheDocument();
-    }
+    // Find the search button by aria-label
+    const searchBtn = screen.getAllByLabelText("Open search")[0];
+    await user.click(searchBtn);
+    expect(screen.getByPlaceholderText("Search products...")).toBeInTheDocument();
   });
 
   it("navigates to search page on form submit", async () => {
     render(<Navbar />);
     const user = userEvent.setup();
 
-    // Open search
-    const buttons = screen.getAllByRole("button");
-    const searchBtn = buttons.find((b) => !b.textContent);
-    if (searchBtn) {
-      await user.click(searchBtn);
-      const input = screen.getByPlaceholderText("Search products...");
-      await user.type(input, "onesie");
-      await user.click(screen.getByText("Search"));
-      expect(mockPush).toHaveBeenCalledWith("/search?q=onesie");
-    }
+    // Open search via aria-label
+    const searchBtn = screen.getAllByLabelText("Open search")[0];
+    await user.click(searchBtn);
+    const input = screen.getByPlaceholderText("Search products...");
+    await user.type(input, "onesie");
+    await user.click(screen.getByText("Search"));
+    expect(mockPush).toHaveBeenCalledWith("/search?q=onesie");
   });
 
   it("shows login button when not logged in", () => {

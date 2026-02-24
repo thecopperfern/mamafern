@@ -11,11 +11,56 @@ import { NextRequest, NextResponse } from "next/server";
  *   SHOPIFY_STOREFRONT_ACCESS_TOKEN – Storefront API token
  */
 
-const SHOPIFY_API_URL = process.env.SHOPIFY_STORE_API_URL || process.env.NEXT_PUBLIC_SHOPIFY_STORE_API_URL || "";
-const SHOPIFY_TOKEN = process.env.SHOPIFY_STOREFRONT_ACCESS_TOKEN || process.env.NEXT_PUBLIC_SHOPIFY_STOREFRONT_ACCESS_TOKEN || "";
+const SHOPIFY_API_URL = process.env.SHOPIFY_STORE_API_URL || "";
+const SHOPIFY_TOKEN = process.env.SHOPIFY_STOREFRONT_ACCESS_TOKEN || "";
+
+// --- Simple in-memory rate limiter ---
+const RATE_LIMIT_WINDOW_MS = 60 * 1000; // 1 minute
+const RATE_LIMIT_MAX_REQUESTS = 60; // 60 requests per minute per IP
+
+const requestCounts = new Map<string, { count: number; resetAt: number }>();
+
+function isRateLimited(ip: string): boolean {
+  const now = Date.now();
+  const entry = requestCounts.get(ip);
+
+  if (!entry || now > entry.resetAt) {
+    requestCounts.set(ip, { count: 1, resetAt: now + RATE_LIMIT_WINDOW_MS });
+    return false;
+  }
+
+  entry.count++;
+  if (entry.count > RATE_LIMIT_MAX_REQUESTS) {
+    return true;
+  }
+  return false;
+}
+
+// Periodically clean up expired entries to prevent memory leaks
+setInterval(() => {
+  const now = Date.now();
+  for (const [ip, entry] of requestCounts) {
+    if (now > entry.resetAt) {
+      requestCounts.delete(ip);
+    }
+  }
+}, 5 * 60 * 1000); // Clean up every 5 minutes
 
 export async function POST(req: NextRequest) {
   try {
+    // Rate limiting by IP
+    const ip =
+      req.headers.get("x-forwarded-for")?.split(",")[0]?.trim() ||
+      req.headers.get("x-real-ip") ||
+      "unknown";
+
+    if (isRateLimited(ip)) {
+      return NextResponse.json(
+        { errors: [{ message: "Too many requests. Please try again later." }] },
+        { status: 429 }
+      );
+    }
+
     if (!SHOPIFY_API_URL || !SHOPIFY_TOKEN) {
       console.error("[Shopify Proxy] Missing SHOPIFY_STORE_API_URL or SHOPIFY_STOREFRONT_ACCESS_TOKEN");
       return NextResponse.json(

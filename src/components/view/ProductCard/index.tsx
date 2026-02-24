@@ -51,6 +51,7 @@ const ProductCard = ({ product }: { product: CommerceProduct }) => {
             src={product.featuredImage?.url ?? product.images[0]?.url}
             alt={product.featuredImage?.altText ?? product.title}
             fill
+            sizes="(max-width: 640px) 50vw, (max-width: 1024px) 33vw, 25vw"
             className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105"
           />
         ) : (

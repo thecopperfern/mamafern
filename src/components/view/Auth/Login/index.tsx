@@ -15,7 +15,6 @@ import { useStorefrontMutation } from "@/hooks/useStorefront";
 import { CUSTOMER_ACCESS_TOKEN_CREATE } from "@/graphql/auth";
 import { toast } from "sonner";
 import { useForm } from "react-hook-form";
-import { setCookie } from "nookies";
 import { useRouter } from "next/navigation";
 
 const loginSchema = z.object({
@@ -62,16 +61,18 @@ const Login = ({ setShowRegister }: LoginFormProps) => {
         throw new Error("Failed to login");
       }
 
-      // Set the cookie
-      setCookie(
-        null,
-        "customerAccessToken",
-        response.customerAccessTokenCreate.customerAccessToken.accessToken,
-        {
-          maxAge: 60 * 60 * 24 * 30, // 30 days
-          path: "/",
-        }
-      );
+      const { accessToken } = response.customerAccessTokenCreate.customerAccessToken;
+
+      // Set httpOnly cookie via server route (prevents XSS token theft)
+      await fetch("/api/auth", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ accessToken }),
+      });
+
+      // Also set a JS-readable flag cookie so client components can check auth state
+      document.cookie = `customerAccessToken=${encodeURIComponent(accessToken)}; path=/; max-age=${60 * 60 * 24 * 30}`;
+
       router.push("/account");
     } catch (error) {
       toast.error(

@@ -106,6 +106,7 @@ export default function CartSlideout({ open, onClose }: Props) {
                         src={line.image.url}
                         alt={line.image.altText ?? line.productTitle}
                         fill
+                        sizes="80px"
                         className="object-cover"
                       />
                     </div>

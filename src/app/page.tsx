@@ -1,6 +1,3 @@
-// Skip static generation during build - fetch dynamically at request time
-export const dynamic = "force-dynamic";
-
 // ISR: revalidate every 60 seconds for fresh product data without rebuilding
 export const revalidate = 60;
 

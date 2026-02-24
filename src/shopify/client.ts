@@ -19,14 +19,8 @@ const isServer = typeof window === "undefined";
  */
 function getServerConfig() {
   return {
-    url:
-      process.env.SHOPIFY_STORE_API_URL ||
-      process.env.NEXT_PUBLIC_SHOPIFY_STORE_API_URL ||
-      "",
-    token:
-      process.env.SHOPIFY_STOREFRONT_ACCESS_TOKEN ||
-      process.env.NEXT_PUBLIC_SHOPIFY_STOREFRONT_ACCESS_TOKEN ||
-      "",
+    url: process.env.SHOPIFY_STORE_API_URL || "",
+    token: process.env.SHOPIFY_STOREFRONT_ACCESS_TOKEN || "",
   };
 }
 

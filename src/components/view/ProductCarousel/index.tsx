@@ -95,6 +95,7 @@ export default function ProductCarousel({
                 height={96}
                 src={image.url}
                 alt={image.altText ?? ""}
+                sizes="96px"
                 className="h-full w-full object-cover"
                 style={{ objectFit: "cover" }}
               />
@@ -114,6 +115,7 @@ export default function ProductCarousel({
                   height={400}
                   src={image.url}
                   alt={image.altText ?? ""}
+                  sizes="(max-width: 768px) 100vw, 50vw"
                   className="h-full max-h-[650px] w-full object-contain"
                 />
               </div>

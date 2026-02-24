@@ -19,6 +19,7 @@ export default async function AllCollections() {
                 src={collection.image.url}
                 alt={collection.image.altText ?? collection.title}
                 fill
+                sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 33vw"
                 className="w-full h-full object-cover rounded-lg transition-transform duration-300 group-hover:scale-105"
               />
             ) : (

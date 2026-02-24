@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { X } from "lucide-react";
@@ -10,30 +10,41 @@ const COOKIE_NAME = "email_capture_shown";
 const COOKIE_EXPIRY_DAYS = 30;
 const SHOW_DELAY_MS = 8000; // 8 seconds
 
+function setDismissedCookie() {
+  const expires = new Date();
+  expires.setDate(expires.getDate() + COOKIE_EXPIRY_DAYS);
+  document.cookie = `${COOKIE_NAME}=1; expires=${expires.toUTCString()}; path=/`;
+}
+
+function hasDismissedCookie() {
+  return document.cookie
+    .split("; ")
+    .some((row) => row.startsWith(`${COOKIE_NAME}=`));
+}
+
 export default function EmailCaptureModal() {
   const [isOpen, setIsOpen] = useState(false);
   const [email, setEmail] = useState("");
   const [isSubmitting, setIsSubmitting] = useState(false);
+  // Ref so event listeners always see the latest dismissed state
+  const dismissedRef = useRef(false);
 
   useEffect(() => {
-    // Check if modal was already shown
-    const hasShown = document.cookie
-      .split("; ")
-      .find((row) => row.startsWith(`${COOKIE_NAME}=`));
+    // Already dismissed in a previous session
+    if (hasDismissedCookie()) return;
 
-    if (hasShown) return;
+    function openOnce() {
+      if (dismissedRef.current) return;
+      setIsOpen(true);
+    }
 
     // Show after delay
-    const timer = setTimeout(() => {
-      setIsOpen(true);
-    }, SHOW_DELAY_MS);
+    const timer = setTimeout(openOnce, SHOW_DELAY_MS);
 
-    // Exit-intent detection (when mouse leaves viewport)
-    const handleMouseLeave = (e: MouseEvent) => {
-      if (e.clientY <= 0 && !hasShown) {
-        setIsOpen(true);
-      }
-    };
+    // Exit-intent: mouse leaves the top of the viewport
+    function handleMouseLeave(e: MouseEvent) {
+      if (e.clientY <= 0) openOnce();
+    }
 
     document.addEventListener("mouseleave", handleMouseLeave);
 
@@ -44,11 +55,9 @@ export default function EmailCaptureModal() {
   }, []);
 
   const handleClose = () => {
+    dismissedRef.current = true;
     setIsOpen(false);
-    // Set cookie to prevent showing again
-    const expires = new Date();
-    expires.setDate(expires.getDate() + COOKIE_EXPIRY_DAYS);
-    document.cookie = `${COOKIE_NAME}=1; expires=${expires.toUTCString()}; path=/`;
+    setDismissedCookie();
   };
 
   const handleSubmit = async (e: React.FormEvent) => {

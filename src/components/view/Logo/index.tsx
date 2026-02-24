@@ -10,6 +10,7 @@ const Logo = ({ className }: { className?: string }) => {
         alt="Mama Fern"
         width={19333}
         height={7150}
+        sizes="200px"
         className={cn("w-auto max-w-full", className)}
         priority
       />
