@@ -77,7 +77,7 @@ export const useCartActions = () => {
       }
       const fetchedCart = await commerceClient.getCart(cartId);
       setCart(fetchedCart);
-    } catch (error) {
+    } catch {
       // Silently fall back to empty cart if Shopify is unavailable
       // This is expected during development without credentials
       setCart(initialCartState);
