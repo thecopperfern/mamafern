@@ -10,5 +10,10 @@
       "Bash(ls:*)",
       "Bash(git reset:*)"
     ]
-  }
+  },
+  "enabledMcpjsonServers": [
+    "brevo",
+    "shopify"
+  ],
+  "enableAllProjectMcpServers": true
 }
