@@ -14,7 +14,8 @@
     "test": "vitest run",
     "test:watch": "vitest",
     "test:coverage": "vitest run --coverage",
-    "shopify:token": "node scripts/shopify-token.js"
+    "shopify:token": "node scripts/shopify-token.js",
+    "seo:check": "npx tsx scripts/seo-health-check.ts"
   },
   "dependencies": {
     "@hookform/resolvers": "^3.10.0",

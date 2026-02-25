@@ -6,6 +6,8 @@ import { buildMetadata, SITE_CONFIG } from "@/lib/seo";
 import Breadcrumbs from "@/components/view/Breadcrumbs";
 import JsonLd from "@/components/seo/JsonLd";
 
+import RelatedPosts from "@/components/blog/RelatedPosts";
+
 export const revalidate = 3600;
 
 type Props = {
@@ -110,29 +112,7 @@ export default async function BlogPostPage({ params }: Props) {
       </article>
 
       {/* Related Posts */}
-      {relatedPosts.length > 0 && (
-        <section className="mt-16 pt-8 border-t border-oat">
-          <h2 className="font-display font-bold text-xl text-charcoal mb-6">
-            Related Reads
-          </h2>
-          <div className="grid gap-4">
-            {relatedPosts.map((related) => (
-              <Link
-                key={related.slug}
-                href={`/blog/${related.slug}`}
-                className="block bg-texture-linen rounded-xl border border-oat p-5 hover:border-fern/30 transition-colors"
-              >
-                <h3 className="font-semibold text-charcoal mb-1">
-                  {related.title}
-                </h3>
-                <p className="text-warm-brown/60 text-sm">
-                  {related.description}
-                </p>
-              </Link>
-            ))}
-          </div>
-        </section>
-      )}
+      <RelatedPosts posts={relatedPosts} />
 
       {/* Internal Links */}
       <nav className="mt-12 pt-8 border-t border-oat" aria-label="Explore more">

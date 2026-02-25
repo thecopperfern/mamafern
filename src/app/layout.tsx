@@ -77,6 +77,9 @@ export const metadata: Metadata = {
   },
   alternates: {
     canonical: "https://mamafern.com",
+    types: {
+      "application/rss+xml": "https://mamafern.com/blog/feed.xml",
+    },
   },
   verification: {
     google: "REPLACE_WITH_GOOGLE_VERIFICATION_CODE",
