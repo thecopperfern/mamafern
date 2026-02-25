@@ -6,6 +6,8 @@ import { buildMetadata, SITE_CONFIG } from "@/lib/seo";
 import Breadcrumbs from "@/components/view/Breadcrumbs";
 import JsonLd from "@/components/seo/JsonLd";
 
+export const revalidate = 3600;
+
 type Props = {
   params: Promise<{ slug: string }>;
 };

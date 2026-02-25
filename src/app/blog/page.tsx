@@ -1,3 +1,5 @@
+export const revalidate = 3600;
+
 import Link from "next/link";
 import { getAllPosts } from "@/lib/blog";
 import { buildMetadata } from "@/lib/seo";

@@ -109,6 +109,10 @@ export default async function RootLayout({
 
   return (
     <html lang="en">
+      <head>
+        <link rel="preconnect" href="https://cdn.shopify.com" />
+        <link rel="dns-prefetch" href="https://cdn.shopify.com" />
+      </head>
       <Providers>
         <body
           className={`${dmSans.variable} ${playfair.variable} font-sans antialiased`}

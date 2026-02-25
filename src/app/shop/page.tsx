@@ -2,7 +2,7 @@ import AllCollections from "@/components/view/AllCollections";
 import PageHero from "@/components/view/PageHero";
 import { buildMetadata } from "@/lib/seo";
 
-export const dynamic = "force-dynamic";
+export const revalidate = 300;
 
 export const metadata = buildMetadata({
   title: "Shop All",
