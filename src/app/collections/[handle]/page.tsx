@@ -3,6 +3,7 @@ import { notFound } from "next/navigation";
 import type { Metadata } from "next";
 import CollectionContent from "@/components/view/CollectionContent";
 import Breadcrumbs from "@/components/view/Breadcrumbs";
+import InternalLinks from "@/components/seo/InternalLinks";
 import { buildCollectionMetadata } from "@/lib/seo";
 
 export const revalidate = 3600;
@@ -69,6 +70,7 @@ export default async function CollectionPage({
         handle={handle}
         currentSort={sort ?? "default"}
       />
+      <InternalLinks context="collection" />
     </div>
   );
 }

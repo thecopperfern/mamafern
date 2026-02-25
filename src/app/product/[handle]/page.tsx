@@ -2,6 +2,7 @@ import { commerceClient } from "@/lib/commerce";
 import ProductDetail from "@/components/view/ProductDetail";
 import Breadcrumbs from "@/components/view/Breadcrumbs";
 import RelatedProducts from "@/components/view/RelatedProducts";
+import InternalLinks from "@/components/seo/InternalLinks";
 import { notFound } from "next/navigation";
 import type { Metadata } from "next";
 import { buildProductMetadata } from "@/lib/seo";
@@ -46,6 +47,7 @@ export default async function ProductPage({ params }: Props) {
           title="Complete the Family Look"
         />
       )}
+      <InternalLinks context="product" />
     </div>
   );
 }

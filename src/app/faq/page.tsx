@@ -11,45 +11,69 @@ export const metadata = buildMetadata({
 });
 
 /**
- * ⚠️ PLACEHOLDER FAQ CONTENT
- * Replace these with real answers once store policies, shipping, and product
- * details are finalized. Search for "PLACEHOLDER" to find all items.
+ * FAQ content — real answers for launch.
+ * Each question is structured for FAQPage JSON-LD (Phase 3).
  */
 const FAQS = [
   {
-    question: "What materials do you use?",
+    question: "What materials does Mama Fern use?",
     answer:
-      "⚠️ PLACEHOLDER — Describe your actual fabric sourcing, certifications, and care instructions here once finalized.",
+      "We prioritize natural, skin-friendly fabrics in every piece we make. Our core materials include organic cotton, cotton-linen blends, and bamboo viscose. All fabrics are selected for breathability, softness, and durability — especially important for babies and kids with sensitive skin. We avoid synthetic materials like polyester wherever possible.",
   },
   {
     question: "How do your sizes run?",
     answer:
-      "⚠️ PLACEHOLDER — Add sizing guide details, fit descriptions, and link to a size chart once products are available.",
+      "Our clothing runs true to size with a relaxed, comfortable fit. We design for real bodies and real movement — nothing restrictive. Each product page includes a detailed size chart with measurements. For kids, we recommend sizing up if your child is between sizes for a longer wear life.",
   },
   {
     question: "Do you offer family matching sets?",
     answer:
-      "⚠️ PLACEHOLDER — Explain which designs are available in coordinating family sizes and link to the Family collection.",
+      "Yes! Coordinating family sets are at the heart of what we do. Our collections feature matching color palettes and complementary designs across baby, kids, mom, and dad sizes. We believe in coordinating — not identical — so each family member gets a piece that fits their style while creating a beautiful unified look.",
   },
   {
     question: "What is your return policy?",
     answer:
-      "⚠️ PLACEHOLDER — Add your actual return window, conditions, and process. Link to the /returns page for the full policy.",
+      "We offer hassle-free returns within 30 days of delivery. Items must be unworn, unwashed, and in original condition with tags attached. Visit our Returns & Exchanges page for step-by-step instructions on how to start a return. Exchanges are always free.",
   },
   {
     question: "How long does shipping take?",
     answer:
-      "⚠️ PLACEHOLDER — Add real shipping timeframes, carriers, and any expedited options available.",
+      "Standard shipping within the United States takes 5–7 business days. Expedited shipping (2–3 business days) is available at checkout for an additional fee. All orders include tracking information sent to your email once your package ships.",
   },
   {
     question: "Do you ship internationally?",
     answer:
-      "⚠️ PLACEHOLDER — Confirm whether international shipping is available and list supported countries.",
+      "Currently, we ship within the United States. International shipping is coming soon — join our email list to be the first to know when we expand to your country.",
   },
   {
-    question: "Are your products truly organic?",
+    question: "Are your products organic and sustainable?",
     answer:
-      "⚠️ PLACEHOLDER — Detail your certifications (GOTS, OEKO-TEX, etc.) and transparency commitments.",
+      "We use organic cotton certified to GOTS standards wherever available, and all our fabrics meet OEKO-TEX Standard 100 Class I safety requirements — the strictest level, designed for baby products. We're committed to sustainable practices including minimal-waste packaging and responsible sourcing.",
+  },
+  {
+    question: "How should I care for Mama Fern clothing?",
+    answer:
+      "Machine wash cold on a gentle cycle with like colors. Tumble dry low or lay flat to dry for the longest garment life. Our natural fabrics get softer with every wash. Avoid bleach and fabric softeners, which can break down natural fibers over time. Iron on low heat if needed.",
+  },
+  {
+    question: "Do you offer gift wrapping?",
+    answer:
+      "Yes! We offer eco-friendly gift wrapping at checkout. Each gift arrives in recycled kraft paper with a hand-stamped Mama Fern seal and a blank gift note card. Perfect for baby showers, birthdays, and holidays.",
+  },
+  {
+    question: "Where are Mama Fern products made?",
+    answer:
+      "Our products are designed in the United States and produced in small-batch runs with ethical manufacturing partners. We personally vet every production facility for fair labor practices, safe working conditions, and environmental responsibility.",
+  },
+  {
+    question: "Do you have a loyalty or rewards program?",
+    answer:
+      "We're building a community rewards program that will launch soon. In the meantime, newsletter subscribers get early access to new drops, exclusive discounts, and first looks at seasonal collections. Join our community to stay in the loop.",
+  },
+  {
+    question: "Can I cancel or modify my order?",
+    answer:
+      "We process orders quickly to get them to you fast. If you need to cancel or modify your order, contact us within 2 hours of placing it and we'll do our best to accommodate your request. After that window, the order may already be in fulfillment.",
   },
 ];
 
@@ -63,36 +87,26 @@ export default function FAQPage() {
       />
 
       <div className="mx-auto max-w-3xl px-4 py-14 animate-fade-in-up">
-        {/* ⚠️ PLACEHOLDER banner */}
-        <div className="bg-yellow-50 border-2 border-dashed border-yellow-400 rounded-xl p-6 mb-8 text-center">
-          <p className="text-yellow-700 font-semibold text-lg mb-1">
-            ⚠️ PLACEHOLDER — FAQ Answers
-          </p>
-          <p className="text-yellow-600 text-sm">
-            The answers below are placeholder text. Replace each one with real
-            policies and product information before launch.
-          </p>
-        </div>
-
-        <div className="space-y-3" role="list" aria-label="Frequently asked questions">
-          {FAQS.map((faq, i) => (
-            <details
-              key={i}
-              className="group bg-texture-linen border border-oat rounded-xl overflow-hidden"
-              role="listitem"
-            >
-              <summary className="cursor-pointer px-6 py-5 font-medium text-charcoal hover:text-fern transition-colors list-none flex items-center justify-between gap-4">
-                <span>{faq.question}</span>
-                <span className="text-fern shrink-0 group-open:rotate-45 transition-transform duration-200 text-xl leading-none" aria-hidden="true">
-                  +
-                </span>
-              </summary>
-              <div className="px-6 pb-5 pt-1 text-warm-brown/70 leading-relaxed text-[14px] border-t border-oat/60">
-                {faq.answer}
-              </div>
-            </details>
-          ))}
-        </div>
+        <section id="faq" aria-label="Frequently Asked Questions">
+          <div className="space-y-3">
+            {FAQS.map((faq, i) => (
+              <details
+                key={i}
+                className="group bg-texture-linen border border-oat rounded-xl overflow-hidden"
+              >
+                <summary className="cursor-pointer px-6 py-5 font-medium text-charcoal hover:text-fern transition-colors list-none flex items-center justify-between gap-4">
+                  <h3 className="text-[15px] font-medium">{faq.question}</h3>
+                  <span className="text-fern shrink-0 group-open:rotate-45 transition-transform duration-200 text-xl leading-none" aria-hidden="true">
+                    +
+                  </span>
+                </summary>
+                <div className="px-6 pb-5 pt-1 text-warm-brown/70 leading-relaxed text-[14px] border-t border-oat/60">
+                  <p>{faq.answer}</p>
+                </div>
+              </details>
+            ))}
+          </div>
+        </section>
 
         {/* Still have questions CTA */}
         <div className="mt-12 bg-texture-linen rounded-2xl border border-oat p-8 text-center">
