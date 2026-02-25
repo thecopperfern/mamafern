@@ -4,8 +4,9 @@ import Breadcrumbs from "@/components/view/Breadcrumbs";
 import RelatedProducts from "@/components/view/RelatedProducts";
 import { notFound } from "next/navigation";
 import type { Metadata } from "next";
+import { buildProductMetadata } from "@/lib/seo";
 
-export const dynamic = "force-dynamic";
+export const revalidate = 3600;
 
 type Props = {
   params: Promise<{ handle: string }>;
@@ -15,15 +16,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { handle } = await params;
   const product = await commerceClient.getProductByHandle(handle);
   if (!product) return { title: "Product Not Found" };
-  return {
-    title: `${product.title} | Mama Fern`,
-    description: product.seo?.description || product.description,
-    openGraph: {
-      title: product.seo?.title || product.title,
-      description: product.seo?.description || product.description,
-      images: product.images[0]?.url ? [{ url: product.images[0].url }] : [],
-    },
-  };
+  return buildProductMetadata(product);
 }
 
 export default async function ProductPage({ params }: Props) {

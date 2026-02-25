@@ -1,13 +1,16 @@
 import AllCollections from "@/components/view/AllCollections";
 import PageHero from "@/components/view/PageHero";
-import type { Metadata } from "next";
+import { buildMetadata } from "@/lib/seo";
 
 export const dynamic = "force-dynamic";
 
-export const metadata: Metadata = {
-  title: "Shop | Mama Fern",
-  description: "Browse all Mama Fern collections. Family apparel for moms, dads, and kids.",
-};
+export const metadata = buildMetadata({
+  title: "Shop All",
+  description:
+    "Browse all Mama Fern collections — grounded family apparel in natural fabrics for moms, dads, and kids. Cute patterns, earthy designs, and skin-friendly materials.",
+  path: "/shop",
+  keywords: ["shop mama fern", "family apparel store", "buy natural kids clothes", "organic family fashion"],
+});
 
 export default function ShopPage() {
   return (

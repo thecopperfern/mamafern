@@ -1,7 +1,7 @@
-import type { Metadata } from "next";
 import PageHero from "@/components/view/PageHero";
 import { fetchGraphQL } from "@/shopify/client";
 import { gql } from "graphql-tag";
+import { buildMetadata } from "@/lib/seo";
 
 const REFUND_POLICY_QUERY = gql`
   query GetRefundPolicy {
@@ -14,10 +14,12 @@ const REFUND_POLICY_QUERY = gql`
   }
 `;
 
-export const metadata: Metadata = {
-  title: "Returns & Refunds | Mama Fern",
-  description: "Mama Fern returns and refund policy — how to return or exchange items.",
-};
+export const metadata = buildMetadata({
+  title: "Returns & Exchanges",
+  description:
+    "Mama Fern returns and refund policy — how to return or exchange items. Easy, hassle-free returns on family apparel.",
+  path: "/returns",
+});
 
 export default async function ReturnsPage() {
   let policy: { title: string; body: string } | null = null;

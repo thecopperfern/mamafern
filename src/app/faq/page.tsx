@@ -1,11 +1,14 @@
-import type { Metadata } from "next";
 import Link from "next/link";
 import PageHero from "@/components/view/PageHero";
+import { buildMetadata } from "@/lib/seo";
 
-export const metadata: Metadata = {
-  title: "FAQ | Mama Fern",
-  description: "Frequently asked questions about Mama Fern orders, shipping, returns, and more.",
-};
+export const metadata = buildMetadata({
+  title: "FAQ",
+  description:
+    "Frequently asked questions about Mama Fern orders, shipping, returns, fabric materials, and sizing. Everything you need to know about our family apparel.",
+  path: "/faq",
+  keywords: ["mama fern faq", "family clothing questions", "natural fabric care", "mama fern shipping"],
+});
 
 /**
  * ⚠️ PLACEHOLDER FAQ CONTENT

@@ -1,7 +1,7 @@
-import type { Metadata } from "next";
 import PageHero from "@/components/view/PageHero";
 import { fetchGraphQL } from "@/shopify/client";
 import { gql } from "graphql-tag";
+import { buildMetadata } from "@/lib/seo";
 
 const PRIVACY_POLICY_QUERY = gql`
   query GetPrivacyPolicy {
@@ -14,10 +14,13 @@ const PRIVACY_POLICY_QUERY = gql`
   }
 `;
 
-export const metadata: Metadata = {
-  title: "Privacy Policy | Mama Fern",
-  description: "Mama Fern privacy policy — how we collect, use, and protect your information.",
-};
+export const metadata = buildMetadata({
+  title: "Privacy Policy",
+  description:
+    "Mama Fern privacy policy — how we collect, use, and protect your information.",
+  path: "/privacy",
+  noIndex: true,
+});
 
 export default async function PrivacyPage() {
   let policy: { title: string; body: string } | null = null;

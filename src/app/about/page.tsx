@@ -1,11 +1,14 @@
-import type { Metadata } from "next";
 import Link from "next/link";
 import PageHero from "@/components/view/PageHero";
+import { buildMetadata } from "@/lib/seo";
 
-export const metadata: Metadata = {
-  title: "About | Mama Fern",
-  description: "Learn about Mama Fern — grounded family apparel for crunchy, cozy homes.",
-};
+export const metadata = buildMetadata({
+  title: "Our Story",
+  description:
+    "Learn about Mama Fern — grounded family apparel for crunchy, cozy homes. Natural fabrics, earthy patterns, and family-forward designs rooted in nature.",
+  path: "/about",
+  keywords: ["mama fern story", "about mama fern", "crunchy mom brand", "natural family clothing brand"],
+});
 
 /**
  * ⚠️ PLACEHOLDER VALUES — Replace with real brand story and imagery.

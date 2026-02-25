@@ -1,7 +1,7 @@
-import type { Metadata } from "next";
 import PageHero from "@/components/view/PageHero";
 import { fetchGraphQL } from "@/shopify/client";
 import { gql } from "graphql-tag";
+import { buildMetadata } from "@/lib/seo";
 
 const TERMS_QUERY = gql`
   query GetTermsOfService {
@@ -14,10 +14,13 @@ const TERMS_QUERY = gql`
   }
 `;
 
-export const metadata: Metadata = {
-  title: "Terms of Service | Mama Fern",
-  description: "Mama Fern terms of service — the rules and guidelines for using our store.",
-};
+export const metadata = buildMetadata({
+  title: "Terms of Service",
+  description:
+    "Mama Fern terms of service — the rules and guidelines for using our store.",
+  path: "/terms",
+  noIndex: true,
+});
 
 export default async function TermsPage() {
   let policy: { title: string; body: string } | null = null;

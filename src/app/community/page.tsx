@@ -1,11 +1,14 @@
-import type { Metadata } from "next";
 import Link from "next/link";
 import PageHero from "@/components/view/PageHero";
+import { buildMetadata } from "@/lib/seo";
 
-export const metadata: Metadata = {
-  title: "Community | Mama Fern",
-  description: "Updates, stories, and inspiration from the Mama Fern community.",
-};
+export const metadata = buildMetadata({
+  title: "Community",
+  description:
+    "Stories, updates, and inspiration from the Mama Fern community. Join families who value natural living, comfort, and grounded family fashion.",
+  path: "/community",
+  keywords: ["mama fern community", "crunchy mom community", "natural family lifestyle"],
+});
 
 const VALUES = [
   {

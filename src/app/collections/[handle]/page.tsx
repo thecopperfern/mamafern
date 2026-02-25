@@ -3,8 +3,9 @@ import { notFound } from "next/navigation";
 import type { Metadata } from "next";
 import CollectionContent from "@/components/view/CollectionContent";
 import Breadcrumbs from "@/components/view/Breadcrumbs";
+import { buildCollectionMetadata } from "@/lib/seo";
 
-export const dynamic = "force-dynamic";
+export const revalidate = 3600;
 
 type Props = {
   params: Promise<{ handle: string }>;
@@ -17,12 +18,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     first: 1,
   });
   if (!result) return { title: "Collection Not Found" };
-  return {
-    title: `${result.collection.title} | Mama Fern`,
-    description:
-      result.collection.description ||
-      `Shop ${result.collection.title} at Mama Fern`,
-  };
+  return buildCollectionMetadata(result.collection);
 }
 
 const SORT_OPTIONS: Record<string, { sortKey: string; reverse: boolean }> = {
