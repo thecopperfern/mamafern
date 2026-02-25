@@ -1,0 +1,3 @@
+[submodule "greentrail"]
+	path = greentrail
+	url = https://github.com/thecopperfern/greentrail.git
