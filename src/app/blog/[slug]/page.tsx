@@ -2,8 +2,9 @@ import { notFound } from "next/navigation";
 import Link from "next/link";
 import type { Metadata } from "next";
 import { getPostBySlug, getRelatedPosts, getAllPosts, markdownToHtml } from "@/lib/blog";
-import { buildMetadata } from "@/lib/seo";
+import { buildMetadata, SITE_CONFIG } from "@/lib/seo";
 import Breadcrumbs from "@/components/view/Breadcrumbs";
+import JsonLd from "@/components/seo/JsonLd";
 
 type Props = {
   params: Promise<{ slug: string }>;
@@ -36,8 +37,35 @@ export default async function BlogPostPage({ params }: Props) {
   const relatedPosts = getRelatedPosts(post.slug, post.tags);
   const htmlContent = markdownToHtml(post.content);
 
+  const articleSchema = {
+    "@context": "https://schema.org",
+    "@type": "Article",
+    headline: post.title,
+    description: post.description,
+    datePublished: post.date,
+    dateModified: post.date,
+    author: {
+      "@type": "Organization",
+      name: "Mama Fern",
+      url: SITE_CONFIG.baseUrl,
+    },
+    publisher: {
+      "@type": "Organization",
+      name: "Mama Fern",
+      logo: {
+        "@type": "ImageObject",
+        url: `${SITE_CONFIG.baseUrl}/logo.png`,
+      },
+    },
+    mainEntityOfPage: `${SITE_CONFIG.baseUrl}/blog/${post.slug}`,
+    image: post.featuredImage.startsWith("/")
+      ? `${SITE_CONFIG.baseUrl}${post.featuredImage}`
+      : post.featuredImage,
+  };
+
   return (
     <div className="mx-auto max-w-3xl px-4 py-10">
+      <JsonLd data={articleSchema} />
       <Breadcrumbs
         items={[
           { label: "Journal", href: "/blog" },

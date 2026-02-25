@@ -5,6 +5,40 @@ import CategoryCards from "@/components/view/CategoryCards";
 import FeaturedCollection from "@/components/view/FeaturedCollection";
 import { Suspense } from "react";
 import { Skeleton } from "@/components/ui/skeleton";
+import JsonLd from "@/components/seo/JsonLd";
+
+const organizationSchema = {
+  "@context": "https://schema.org",
+  "@type": "Organization",
+  name: "Mama Fern",
+  url: "https://mamafern.com",
+  logo: "https://mamafern.com/logo.png",
+  description:
+    "Grounded family apparel for crunchy, cozy homes. Natural fabrics, earthy patterns, and family-forward designs for moms, dads, and kids.",
+  sameAs: [],
+  contactPoint: {
+    "@type": "ContactPoint",
+    contactType: "customer support",
+    url: "https://mamafern.com/contact",
+  },
+};
+
+const websiteSchema = {
+  "@context": "https://schema.org",
+  "@type": "WebSite",
+  name: "Mama Fern",
+  url: "https://mamafern.com",
+  description:
+    "Grounded family apparel in natural fabrics for crunchy, cottagecore, and outdoor-loving families.",
+  potentialAction: {
+    "@type": "SearchAction",
+    target: {
+      "@type": "EntryPoint",
+      urlTemplate: "https://mamafern.com/search?q={search_term_string}",
+    },
+    "query-input": "required name=search_term_string",
+  },
+};
 
 function CollectionSkeleton() {
   return (
@@ -22,6 +56,8 @@ function CollectionSkeleton() {
 export default function Home() {
   return (
     <div>
+      <JsonLd data={organizationSchema} />
+      <JsonLd data={websiteSchema} />
       <Hero />
       <CategoryCards />
       <Suspense fallback={<CollectionSkeleton />}>

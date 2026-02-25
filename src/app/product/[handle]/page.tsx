@@ -3,9 +3,10 @@ import ProductDetail from "@/components/view/ProductDetail";
 import Breadcrumbs from "@/components/view/Breadcrumbs";
 import RelatedProducts from "@/components/view/RelatedProducts";
 import InternalLinks from "@/components/seo/InternalLinks";
+import JsonLd from "@/components/seo/JsonLd";
 import { notFound } from "next/navigation";
 import type { Metadata } from "next";
-import { buildProductMetadata } from "@/lib/seo";
+import { buildProductMetadata, stripHtml, SITE_CONFIG } from "@/lib/seo";
 
 export const revalidate = 3600;
 
@@ -32,8 +33,29 @@ export default async function ProductPage({ params }: Props) {
     // Recommendations are non-critical
   }
 
+  const productSchema = {
+    "@context": "https://schema.org",
+    "@type": "Product",
+    name: product.title,
+    description: stripHtml(product.description || ""),
+    image: product.images[0]?.url,
+    brand: { "@type": "Brand", name: "Mama Fern" },
+    offers: {
+      "@type": "Offer",
+      price: product.priceRange.minVariantPrice.amount,
+      priceCurrency: product.priceRange.minVariantPrice.currencyCode,
+      availability: product.variants.some((v) => v.availableForSale)
+        ? "https://schema.org/InStock"
+        : "https://schema.org/OutOfStock",
+      url: `${SITE_CONFIG.baseUrl}/product/${product.handle}`,
+      seller: { "@type": "Organization", name: "Mama Fern" },
+    },
+    ...(product.variants[0]?.id ? { sku: product.variants[0].id } : {}),
+  };
+
   return (
     <div className="px-4 mt-6">
+      <JsonLd data={productSchema} />
       <Breadcrumbs
         items={[
           { label: "Shop", href: "/shop" },

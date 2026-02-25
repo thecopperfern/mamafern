@@ -4,7 +4,8 @@ import type { Metadata } from "next";
 import CollectionContent from "@/components/view/CollectionContent";
 import Breadcrumbs from "@/components/view/Breadcrumbs";
 import InternalLinks from "@/components/seo/InternalLinks";
-import { buildCollectionMetadata } from "@/lib/seo";
+import JsonLd from "@/components/seo/JsonLd";
+import { buildCollectionMetadata, SITE_CONFIG } from "@/lib/seo";
 
 export const revalidate = 3600;
 
@@ -46,8 +47,19 @@ export default async function CollectionPage({
 
   if (!result) notFound();
 
+  const collectionSchema = {
+    "@context": "https://schema.org",
+    "@type": "CollectionPage",
+    name: result.collection.title,
+    description:
+      result.collection.description ||
+      `Shop the ${result.collection.title} collection at Mama Fern.`,
+    url: `${SITE_CONFIG.baseUrl}/collections/${handle}`,
+  };
+
   return (
     <div className="my-10 flex flex-col gap-y-6 px-4">
+      <JsonLd data={collectionSchema} />
       <Breadcrumbs
         items={[
           { label: "Shop", href: "/shop" },

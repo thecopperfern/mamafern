@@ -1,5 +1,6 @@
 import Link from "next/link";
 import PageHero from "@/components/view/PageHero";
+import JsonLd from "@/components/seo/JsonLd";
 import { buildMetadata } from "@/lib/seo";
 
 export const metadata = buildMetadata({
@@ -77,9 +78,23 @@ const FAQS = [
   },
 ];
 
+const faqSchema = {
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  mainEntity: FAQS.map((faq) => ({
+    "@type": "Question",
+    name: faq.question,
+    acceptedAnswer: {
+      "@type": "Answer",
+      text: faq.answer,
+    },
+  })),
+};
+
 export default function FAQPage() {
   return (
     <div>
+      <JsonLd data={faqSchema} />
       <PageHero
         eyebrow="Got Questions?"
         title="Frequently Asked Questions"
