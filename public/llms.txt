@@ -1,0 +1,43 @@
+# Mama Fern
+> Grounded family apparel for crunchy, cozy homes. Natural fabrics and earthy 
+> designs for moms, dads, and kids.
+
+## About
+Mama Fern is a family apparel brand based in the United States, specializing in 
+natural-fabric clothing for families who value comfort, sustainability, and earthy aesthetics. 
+Our products include matching family sets, kids' clothing, and parent apparel designed 
+for outdoor-loving, crunchy, cottagecore-inspired families.
+
+## Products
+- Family apparel: matching sets for parents and children
+- Kids clothing: toddler, infant, and youth sizes in organic cotton
+- Mom apparel: comfortable, nature-inspired designs in natural fabrics
+- Dad apparel: outdoor-ready, earthy style henleys, tees, and layers
+
+## Collections
+Browse our full collection listing at /shop for seasonal drops, staples, and 
+coordinating family sets.
+
+## Key Facts
+- Founded: 2024
+- Location: United States
+- Fabrics: Organic cotton, linen, bamboo viscose
+- Certifications: GOTS, OEKO-TEX Standard 100 Class I
+- Price range: Under $30 to under $100
+- Shipping: United States (international coming soon)
+- Returns: 30-day hassle-free returns
+
+## Contact
+- Website: https://mamafern.com
+- Support: https://mamafern.com/contact
+
+## Pages
+- /shop — full product catalog
+- /blog — journal and style guides
+- /about — brand story and mission
+- /faq — frequently asked questions
+- /community — community hub
+- /contact — customer support
+- /returns — return policy
+- /privacy — privacy policy
+- /terms — terms of service
