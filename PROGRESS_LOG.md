@@ -36,6 +36,7 @@
 | 10 | Legal pages created | `/privacy`, `/terms`, `/returns` — all with Shopify policy embed instructions |
 | 11 | ISR / performance tuning | Homepage + shop + collection → `revalidate=60`, sitemap → `revalidate=300`, removed all unnecessary `force-dynamic` |
 | 12 | Verify build & tests | Build: ✅ clean. Tests: 92/92 pass (16 files). Fixed 13 pre-existing test failures (Navbar mocks, IntersectionObserver polyfill, multi-element assertions) |
+| 13 | SEO Implementation | **Phases 1-6 complete.** Implemented robots.ts, dynamic sitemap, 10+ JSON-LD schemas, AI/LLM visibility (`llms.txt`, etc.), blog system, and style guide clusters. See [SEO_IMPLEMENTATION_LOG.md](SEO_IMPLEMENTATION_LOG.md) for full technical breakdown. |
 
 ---
 
