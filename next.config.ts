@@ -12,6 +12,10 @@ const nextConfig: NextConfig = {
       process.env.SHOPIFY_STOREFRONT_ACCESS_TOKEN || "",
   },
 
+  // Skip ESLint during build — Hostinger's production-only npm install
+  // sometimes misses ESLint plugins, causing build failures. Lint locally instead.
+  eslint: { ignoreDuringBuilds: true },
+
   // Transpile CVA to fix ESM/CJS interop issue in server builds
   transpilePackages: ["class-variance-authority"],
 

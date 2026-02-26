@@ -8,20 +8,31 @@
 
 process.env.NODE_ENV = "production";
 
-// Load .env.local FIRST — persist-env.js writes Shopify credentials here
-// during build. This ensures env vars survive Hostinger's process restarts
-// even if hPanel doesn't inject them into the runtime environment.
 const path = require("path");
-require("dotenv").config({ path: path.join(__dirname, ".env.local") });
+const fs = require("fs");
+
+// Load .env.local FIRST — persist-env.js writes Shopify credentials here
+// during build. Fallback in case next.config.ts env inlining isn't enough.
+try {
+  require("dotenv").config({ path: path.join(__dirname, ".env.local") });
+} catch {
+  // dotenv may not be installed — env vars are also inlined by next.config.ts
+}
 
 const next = require("next");
 const { createServer } = require("http");
 
 const port = parseInt(process.env.PORT || "3000", 10);
 
+// Write PID file so post-build-restart.js can kill this process after a new build.
+// This is the reliable restart mechanism for Hostinger's auto-deploy.
+const pidFile = path.join(__dirname, ".server.pid");
+fs.writeFileSync(pidFile, process.pid.toString());
+
 // Log env var availability for diagnostics
 console.log(`> NODE_ENV=${process.env.NODE_ENV}`);
 console.log(`> PORT=${port}`);
+console.log(`> PID=${process.pid} (written to .server.pid)`);
 console.log(`> SHOPIFY_STORE_API_URL=${process.env.SHOPIFY_STORE_API_URL ? "set" : "MISSING"}`);
 console.log(`> SHOPIFY_STOREFRONT_ACCESS_TOKEN=${process.env.SHOPIFY_STOREFRONT_ACCESS_TOKEN ? "set" : "MISSING"}`);
 

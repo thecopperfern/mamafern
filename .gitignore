@@ -41,6 +41,9 @@ ENV_VARS_UPDATED.md
 MCP_SETUP_GUIDE.md
 dev-server.log
 
+# server PID file (written by server.js, used by post-build restart)
+.server.pid
+
 # vercel
 .vercel
 
