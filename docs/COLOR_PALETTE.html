@@ -1,0 +1,651 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Mama Fern — Color Palette Reference</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --cream:       #faf6ef;
+    --cream-mid:   #f0e9dc;
+    --cream-dark:  #ddd0bc;
+    --fern:        #4a7c59;
+    --fern-dark:   #355c40;
+    --fern-light:  #d1e8d8;
+    --sage:        #7aad8a;
+    --sage-light:  #e3f0e7;
+    --terracotta:  #b9602a;
+    --terra-light: #f5e0d0;
+    --ink:         #2a2217;
+    --muted:       #6b5e4e;
+    --rule:        #c9baa5;
+    --warm-brown:  #6b4d3e;
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    font-family: 'Inter', system-ui, sans-serif;
+    background: var(--cream);
+    color: var(--ink);
+    font-size: 10.5pt;
+    line-height: 1.6;
+  }
+
+  .page { max-width: 820px; margin: 0 auto; }
+
+  /* ── Cover ── */
+  .cover {
+    background: #fff;
+    color: var(--ink);
+    padding: 56px 48px 42px;
+    position: relative;
+    page-break-after: always;
+    border-bottom: 1px solid var(--cream-dark);
+  }
+  .cover::after {
+    content: '';
+    display: block;
+    height: 8px;
+    background: linear-gradient(90deg,
+      #FAF7F2 0%, #F0EBE3 10%, #E8C4B8 18%, #A3B18A 28%,
+      #6B8F63 36%, #4A6741 44%, #35522E 52%,
+      #D4926E 62%, #C4704B 70%, #6B4D3E 82%, #2C2C2C 100%
+    );
+    position: absolute;
+    bottom: 0; left: 0; right: 0;
+  }
+  .cover-eyebrow {
+    font-size: 8.5pt; font-weight: 700; letter-spacing: .22em; text-transform: uppercase;
+    color: var(--fern); margin-bottom: 14px;
+  }
+  .cover h1 {
+    font-family: 'Playfair Display', Georgia, serif; font-size: 38pt; font-weight: 900;
+    line-height: 1.08; letter-spacing: -.02em; margin-bottom: 10px; color: var(--fern-dark);
+  }
+  .cover h1 span { color: var(--terracotta); }
+  .cover-sub {
+    font-size: 12.5pt; color: var(--muted); font-weight: 500; margin-bottom: 20px;
+  }
+
+  /* Mini swatches row on cover */
+  .cover-swatches {
+    display: flex; gap: 6px; margin-top: 24px;
+  }
+  .cover-swatch {
+    width: 40px; height: 40px; border-radius: 6px;
+    box-shadow: 0 1px 3px rgba(0,0,0,.12);
+  }
+  .cover-swatch.light { border: 1px solid var(--cream-dark); }
+
+  /* ── Sections ── */
+  .section { padding: 28px 48px; border-bottom: 1px solid var(--cream-dark); }
+  .section-head { display: flex; align-items: baseline; gap: 12px; margin-bottom: 16px; }
+  .section-head h2 { font-family: 'Playfair Display', Georgia, serif; font-size: 17pt; font-weight: 700; color: var(--fern-dark); white-space: nowrap; }
+  .section-head .rule { flex: 1; height: 1px; background: var(--rule); align-self: center; margin-top: 4px; }
+
+  h3.sub-head {
+    font-size: 9pt; font-weight: 700; letter-spacing: .1em; text-transform: uppercase;
+    color: var(--fern-dark); margin: 18px 0 10px; padding-bottom: 4px; border-bottom: 2px solid var(--fern-light);
+  }
+
+  p.lead { font-size: 9.5pt; color: var(--muted); margin-bottom: 12px; line-height: 1.7; }
+
+  /* ── Swatch cards (large) ── */
+  .swatch-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; margin: 14px 0; }
+  .swatch-card { page-break-inside: avoid; }
+  .swatch-block {
+    height: 72px; border-radius: 8px 8px 0 0;
+    box-shadow: inset 0 -1px 0 rgba(0,0,0,.06);
+  }
+  .swatch-block.light-swatch { border: 1px solid var(--cream-dark); border-bottom: none; }
+  .swatch-info {
+    background: #fff; border: 1px solid var(--cream-dark); border-top: none;
+    border-radius: 0 0 8px 8px; padding: 8px 10px;
+  }
+  .swatch-name { font-weight: 700; font-size: 9pt; color: var(--ink); margin-bottom: 2px; }
+  .swatch-hex { font-family: 'Courier New', monospace; font-size: 8.5pt; color: var(--muted); margin-bottom: 2px; }
+  .swatch-rgb { font-size: 7.5pt; color: var(--rule); }
+  .swatch-tw { font-family: 'Courier New', monospace; font-size: 7pt; color: var(--sage); margin-top: 2px; }
+  .swatch-use { font-size: 7pt; color: var(--muted); margin-top: 2px; font-style: italic; }
+
+  /* ── Two & Three Col ── */
+  .two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin-bottom: 12px; }
+  .three-col { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 12px; margin-bottom: 12px; }
+
+  /* ── Info cards ── */
+  .info-card {
+    background: #fff; border: 1px solid var(--cream-dark); border-top: 3px solid var(--fern);
+    border-radius: 6px; padding: 14px 16px; page-break-inside: avoid;
+  }
+  .info-card h3 { font-size: 8.5pt; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; color: var(--fern-dark); margin-bottom: 8px; }
+  .info-card p { font-size: 9pt; color: var(--muted); line-height: 1.6; }
+  .info-card.terra { border-top-color: var(--terracotta); }
+  .info-card.terra h3 { color: var(--terracotta); }
+
+  /* ── Tables ── */
+  table { width: 100%; border-collapse: collapse; margin-bottom: 10px; page-break-inside: avoid; }
+  thead tr { background: var(--fern-dark); color: #fff; }
+  thead th { padding: 8px 10px; text-align: left; font-size: 7.5pt; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; }
+  tbody tr:nth-child(even) { background: var(--cream-mid); }
+  tbody tr:nth-child(odd) { background: #fff; }
+  tbody td { padding: 6px 10px; font-size: 8.5pt; vertical-align: top; }
+  tbody tr:last-child td { border-bottom: 2px solid var(--fern-dark); }
+
+  /* ── Comparison swatches ── */
+  .compare-dot {
+    display: inline-block; width: 14px; height: 14px; border-radius: 50%;
+    vertical-align: middle; margin-right: 2px; box-shadow: 0 0 0 1px rgba(0,0,0,.1);
+  }
+  .compare-arrow { font-size: 8pt; color: var(--muted); margin: 0 3px; vertical-align: middle; }
+
+  /* ── Contrast combos ── */
+  .combo-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; margin: 12px 0; }
+  .combo-card {
+    border-radius: 8px; padding: 14px 12px 10px; text-align: center;
+    border: 1px solid var(--cream-dark); page-break-inside: avoid;
+    position: relative; overflow: hidden;
+  }
+  .combo-text { font-family: 'Playfair Display', Georgia, serif; font-size: 11pt; font-weight: 700; margin-bottom: 4px; }
+  .combo-detail { font-size: 7pt; opacity: .75; margin-bottom: 2px; }
+  .combo-badge {
+    display: inline-block; font-size: 7pt; font-weight: 700; padding: 1px 6px; border-radius: 10px;
+    letter-spacing: .06em; text-transform: uppercase;
+  }
+  .combo-badge.aaa { background: #1a6b3c; color: #fff; }
+  .combo-badge.aa { background: var(--fern); color: #fff; }
+  .combo-badge.aa-large { background: var(--sage); color: #fff; }
+
+  /* ── Ink colors (screen print) ── */
+  .ink-grid { display: grid; grid-template-columns: repeat(5, 1fr); gap: 10px; margin: 12px 0; }
+  .ink-card {
+    text-align: center; page-break-inside: avoid;
+  }
+  .ink-circle {
+    width: 48px; height: 48px; border-radius: 50%; margin: 0 auto 6px;
+    box-shadow: 0 2px 6px rgba(0,0,0,.12);
+  }
+  .ink-circle.light-ink { border: 1px solid var(--cream-dark); }
+  .ink-name { font-size: 8pt; font-weight: 700; color: var(--ink); }
+  .ink-hex { font-family: 'Courier New', monospace; font-size: 7.5pt; color: var(--muted); }
+  .ink-usage { font-size: 7pt; color: var(--sage); font-style: italic; margin-top: 2px; }
+
+  /* ── Code block ── */
+  .code-block {
+    background: #2a2217; color: #e4ddd0; border-radius: 6px; padding: 14px 18px;
+    font-family: 'Courier New', monospace; font-size: 8pt; line-height: 1.8;
+    overflow-x: auto; margin: 10px 0; page-break-inside: avoid;
+  }
+  .code-block .c-key { color: #7aad8a; }
+  .code-block .c-val { color: #d4926e; }
+  .code-block .c-comment { color: #888; font-style: italic; }
+
+  /* ── Note / callout ── */
+  .note { border-left: 4px solid var(--fern); background: var(--sage-light); padding: 10px 14px; border-radius: 0 6px 6px 0; font-size: 9pt; margin: 10px 0; page-break-inside: avoid; }
+  .note strong { color: var(--fern-dark); }
+
+  code { font-family: 'Courier New', monospace; font-size: 8.5pt; background: var(--cream-mid); padding: 1px 4px; border-radius: 3px; }
+
+  /* ── Footer ── */
+  .footer {
+    padding: 18px 48px; font-size: 7.5pt; color: var(--muted);
+    display: flex; justify-content: space-between; border-top: 2px solid var(--fern);
+  }
+
+  .spacer { height: 12px; }
+
+  /* ─────────────── PRINT ─────────────── */
+  @page { size: letter portrait; margin: 13mm 12mm 13mm 12mm; }
+  @media print {
+    body { background: #fff; font-size: 9pt; }
+    .cover, .swatch-block, .ink-circle, .combo-card, thead tr,
+    .note, .info-card, .code-block, .compare-dot, .combo-badge,
+    .cover-swatch, .cover::after {
+      -webkit-print-color-adjust: exact; print-color-adjust: exact;
+    }
+    .section { page-break-inside: avoid; }
+    h2, h3 { page-break-after: avoid; }
+    tr { page-break-inside: avoid; }
+  }
+</style>
+</head>
+<body>
+<div class="page">
+
+  <!-- ═══════════════ COVER ═══════════════ -->
+  <div class="cover">
+    <div class="cover-eyebrow">Brand Reference · 2026</div>
+    <h1>Color <span>Palette</span></h1>
+    <div class="cover-sub">Mama Fern · Complete Color System, Ink Specs &amp; Accessibility</div>
+    <div class="cover-swatches">
+      <div class="cover-swatch light" style="background:#FAF7F2;"></div>
+      <div class="cover-swatch light" style="background:#F0EBE3;"></div>
+      <div class="cover-swatch light" style="background:#E8C4B8;"></div>
+      <div class="cover-swatch" style="background:#A3B18A;"></div>
+      <div class="cover-swatch" style="background:#6B8F63;"></div>
+      <div class="cover-swatch" style="background:#4A6741;"></div>
+      <div class="cover-swatch" style="background:#35522E;"></div>
+      <div class="cover-swatch" style="background:#D4926E;"></div>
+      <div class="cover-swatch" style="background:#C4704B;"></div>
+      <div class="cover-swatch" style="background:#6B4D3E;"></div>
+      <div class="cover-swatch" style="background:#2C2C2C;"></div>
+    </div>
+  </div>
+
+  <!-- ═══════════════ PRIMARY PALETTE ═══════════════ -->
+  <div class="section">
+    <div class="section-head">
+      <h2>Primary Palette</h2>
+      <div class="rule"></div>
+    </div>
+    <p class="lead">The core four colors that define Mama Fern. These appear most frequently across all brand touchpoints — web, packaging, print, and social.</p>
+
+    <div class="swatch-grid">
+      <div class="swatch-card">
+        <div class="swatch-block light-swatch" style="background:#FAF7F2;"></div>
+        <div class="swatch-info">
+          <div class="swatch-name">Cream</div>
+          <div class="swatch-hex">#FAF7F2</div>
+          <div class="swatch-rgb">RGB(250, 247, 242)</div>
+          <div class="swatch-tw">bg-cream / text-cream</div>
+          <div class="swatch-use">Base background, page canvas</div>
+        </div>
+      </div>
+      <div class="swatch-card">
+        <div class="swatch-block" style="background:#4A6741;"></div>
+        <div class="swatch-info">
+          <div class="swatch-name">Fern</div>
+          <div class="swatch-hex">#4A6741</div>
+          <div class="swatch-rgb">RGB(74, 103, 65)</div>
+          <div class="swatch-tw">bg-fern / text-fern</div>
+          <div class="swatch-use">Primary brand green, CTAs, headers</div>
+        </div>
+      </div>
+      <div class="swatch-card">
+        <div class="swatch-block" style="background:#C4704B;"></div>
+        <div class="swatch-info">
+          <div class="swatch-name">Terracotta</div>
+          <div class="swatch-hex">#C4704B</div>
+          <div class="swatch-rgb">RGB(196, 112, 75)</div>
+          <div class="swatch-tw">bg-terracotta / text-terracotta</div>
+          <div class="swatch-use">Warm accent, sale tags, highlights</div>
+        </div>
+      </div>
+      <div class="swatch-card">
+        <div class="swatch-block" style="background:#2C2C2C;"></div>
+        <div class="swatch-info">
+          <div class="swatch-name">Charcoal</div>
+          <div class="swatch-hex">#2C2C2C</div>
+          <div class="swatch-rgb">RGB(44, 44, 44)</div>
+          <div class="swatch-tw">bg-charcoal / text-charcoal</div>
+          <div class="swatch-use">Primary text, headings</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ═══════════════ EXTENDED PALETTE ═══════════════ -->
+  <div class="section">
+    <div class="section-head">
+      <h2>Extended Palette</h2>
+      <div class="rule"></div>
+    </div>
+
+    <h3 class="sub-head">Fern Scale — Brand Primary</h3>
+    <div class="swatch-grid" style="grid-template-columns: repeat(3, 1fr);">
+      <div class="swatch-card">
+        <div class="swatch-block" style="background:#6B8F63;"></div>
+        <div class="swatch-info">
+          <div class="swatch-name">Fern Light</div>
+          <div class="swatch-hex">#6B8F63</div>
+          <div class="swatch-rgb">RGB(107, 143, 99)</div>
+          <div class="swatch-tw">bg-fern-light</div>
+          <div class="swatch-use">Hover states, secondary buttons</div>
+        </div>
+      </div>
+      <div class="swatch-card">
+        <div class="swatch-block" style="background:#4A6741;"></div>
+        <div class="swatch-info">
+          <div class="swatch-name">Fern (Primary)</div>
+          <div class="swatch-hex">#4A6741</div>
+          <div class="swatch-rgb">RGB(74, 103, 65)</div>
+          <div class="swatch-tw">bg-fern</div>
+          <div class="swatch-use">Primary brand green</div>
+        </div>
+      </div>
+      <div class="swatch-card">
+        <div class="swatch-block" style="background:#35522E;"></div>
+        <div class="swatch-info">
+          <div class="swatch-name">Fern Dark</div>
+          <div class="swatch-hex">#35522E</div>
+          <div class="swatch-rgb">RGB(53, 82, 46)</div>
+          <div class="swatch-tw">bg-fern-dark</div>
+          <div class="swatch-use">Dark accents, footer, doc covers</div>
+        </div>
+      </div>
+    </div>
+
+    <h3 class="sub-head">Supporting Colors</h3>
+    <div class="swatch-grid">
+      <div class="swatch-card">
+        <div class="swatch-block light-swatch" style="background:#F0EBE3;"></div>
+        <div class="swatch-info">
+          <div class="swatch-name">Oat</div>
+          <div class="swatch-hex">#F0EBE3</div>
+          <div class="swatch-rgb">RGB(240, 235, 227)</div>
+          <div class="swatch-tw">bg-oat</div>
+          <div class="swatch-use">Secondary background, card fills</div>
+        </div>
+      </div>
+      <div class="swatch-card">
+        <div class="swatch-block light-swatch" style="background:#E8C4B8;"></div>
+        <div class="swatch-info">
+          <div class="swatch-name">Blush</div>
+          <div class="swatch-hex">#E8C4B8</div>
+          <div class="swatch-rgb">RGB(232, 196, 184)</div>
+          <div class="swatch-tw">bg-blush</div>
+          <div class="swatch-use">Soft accent, feminine touches</div>
+        </div>
+      </div>
+      <div class="swatch-card">
+        <div class="swatch-block" style="background:#A3B18A;"></div>
+        <div class="swatch-info">
+          <div class="swatch-name">Sage</div>
+          <div class="swatch-hex">#A3B18A</div>
+          <div class="swatch-rgb">RGB(163, 177, 138)</div>
+          <div class="swatch-tw">bg-sage</div>
+          <div class="swatch-use">Muted green accents, badges</div>
+        </div>
+      </div>
+      <div class="swatch-card">
+        <div class="swatch-block" style="background:#6B4D3E;"></div>
+        <div class="swatch-info">
+          <div class="swatch-name">Warm Brown</div>
+          <div class="swatch-hex">#6B4D3E</div>
+          <div class="swatch-rgb">RGB(107, 77, 62)</div>
+          <div class="swatch-tw">bg-warm-brown</div>
+          <div class="swatch-use">Text details, icons, warmth</div>
+        </div>
+      </div>
+    </div>
+
+    <h3 class="sub-head">Terracotta Scale</h3>
+    <div class="swatch-grid" style="grid-template-columns: repeat(2, 1fr);">
+      <div class="swatch-card">
+        <div class="swatch-block" style="background:#D4926E;"></div>
+        <div class="swatch-info">
+          <div class="swatch-name">Terracotta Light</div>
+          <div class="swatch-hex">#D4926E</div>
+          <div class="swatch-rgb">RGB(212, 146, 110)</div>
+          <div class="swatch-tw">bg-terracotta-light</div>
+          <div class="swatch-use">Soft accent, hover states</div>
+        </div>
+      </div>
+      <div class="swatch-card">
+        <div class="swatch-block" style="background:#C4704B;"></div>
+        <div class="swatch-info">
+          <div class="swatch-name">Terracotta</div>
+          <div class="swatch-hex">#C4704B</div>
+          <div class="swatch-rgb">RGB(196, 112, 75)</div>
+          <div class="swatch-tw">bg-terracotta</div>
+          <div class="swatch-use">Primary warm accent</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ═══════════════ SCREEN PRINT INK COLORS ═══════════════ -->
+  <div class="section">
+    <div class="section-head">
+      <h2>Screen Print Ink Colors</h2>
+      <div class="rule"></div>
+    </div>
+    <p class="lead">Approved ink colors for screen-printed garments. Ink selection depends on garment base color — see Design Strategy doc for per-product assignments.</p>
+
+    <div class="ink-grid">
+      <div class="ink-card">
+        <div class="ink-circle" style="background:#35522E;"></div>
+        <div class="ink-name">Forest Green</div>
+        <div class="ink-hex">#35522E</div>
+        <div class="ink-usage">Primary ink — on cream, oat, blush garments</div>
+      </div>
+      <div class="ink-card">
+        <div class="ink-circle" style="background:#FAF7F2; border:1px solid #ddd;"></div>
+        <div class="ink-name">Cream White</div>
+        <div class="ink-hex">#FAF7F2</div>
+        <div class="ink-usage">On fern, charcoal, warm-brown garments</div>
+      </div>
+      <div class="ink-card">
+        <div class="ink-circle" style="background:#C4704B;"></div>
+        <div class="ink-name">Terracotta</div>
+        <div class="ink-hex">#C4704B</div>
+        <div class="ink-usage">Accent ink — limited use for emphasis</div>
+      </div>
+      <div class="ink-card">
+        <div class="ink-circle" style="background:#A3B18A;"></div>
+        <div class="ink-name">Sage</div>
+        <div class="ink-hex">#A3B18A</div>
+        <div class="ink-usage">Second color in 2-color prints</div>
+      </div>
+      <div class="ink-card">
+        <div class="ink-circle" style="background:#2C2C2C;"></div>
+        <div class="ink-name">Charcoal</div>
+        <div class="ink-hex">#2C2C2C</div>
+        <div class="ink-usage">Dark prints on light garments</div>
+      </div>
+    </div>
+
+    <div class="note">
+      <strong>Print Process:</strong> 50% of products use 1-color screen print, 40% use 2-color, 10% use embroidery. Keep designs intentionally minimal — identity badges, not billboards.
+    </div>
+  </div>
+
+  <!-- ═══════════════ PRD vs IMPLEMENTATION ═══════════════ -->
+  <div class="section">
+    <div class="section-head">
+      <h2>PRD vs Implementation</h2>
+      <div class="rule"></div>
+    </div>
+    <p class="lead">The original PRD specified slightly different hex values than what was implemented in the Tailwind config. Both are documented here for reference.</p>
+
+    <table>
+      <thead>
+        <tr><th>Color</th><th>PRD Spec</th><th>Implementation</th><th></th><th>Difference</th></tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>Fern</strong></td>
+          <td><code>#4A7C59</code></td>
+          <td><code>#4A6741</code></td>
+          <td><span class="compare-dot" style="background:#4A7C59;"></span><span class="compare-arrow">→</span><span class="compare-dot" style="background:#4A6741;"></span></td>
+          <td>Darker, less saturated</td>
+        </tr>
+        <tr>
+          <td><strong>Sage</strong></td>
+          <td><code>#8FAF8B</code></td>
+          <td><code>#A3B18A</code></td>
+          <td><span class="compare-dot" style="background:#8FAF8B;"></span><span class="compare-arrow">→</span><span class="compare-dot" style="background:#A3B18A;"></span></td>
+          <td>Lighter, warmer</td>
+        </tr>
+        <tr>
+          <td><strong>Terracotta</strong></td>
+          <td><code>#C97B5A</code></td>
+          <td><code>#C4704B</code></td>
+          <td><span class="compare-dot" style="background:#C97B5A;"></span><span class="compare-arrow">→</span><span class="compare-dot" style="background:#C4704B;"></span></td>
+          <td>Slightly deeper</td>
+        </tr>
+        <tr>
+          <td><strong>Blush</strong></td>
+          <td><code>#E8B4A0</code></td>
+          <td><code>#E8C4B8</code></td>
+          <td><span class="compare-dot" style="background:#E8B4A0;"></span><span class="compare-arrow">→</span><span class="compare-dot" style="background:#E8C4B8;"></span></td>
+          <td>Cooler, pinker</td>
+        </tr>
+        <tr>
+          <td><strong>Warm Brown</strong></td>
+          <td><code>#7A5C44</code></td>
+          <td><code>#6B4D3E</code></td>
+          <td><span class="compare-dot" style="background:#7A5C44;"></span><span class="compare-arrow">→</span><span class="compare-dot" style="background:#6B4D3E;"></span></td>
+          <td>Darker</td>
+        </tr>
+        <tr>
+          <td><strong>Oat</strong></td>
+          <td><code>#F2EDE4</code></td>
+          <td><code>#F0EBE3</code></td>
+          <td><span class="compare-dot light-ink" style="background:#F2EDE4; border:1px solid #ccc;"></span><span class="compare-arrow">→</span><span class="compare-dot light-ink" style="background:#F0EBE3; border:1px solid #ccc;"></span></td>
+          <td>Negligible</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <div class="note">
+      <strong>Which to use?</strong> Implementation values (right column) are the source of truth for all digital work. PRD values may still appear in early documents. Both are correct for their context — when in doubt, use the Tailwind config values.
+    </div>
+  </div>
+
+  <!-- ═══════════════ COLOR COMBINATIONS ═══════════════ -->
+  <div class="section">
+    <div class="section-head">
+      <h2>Color Combinations &amp; Contrast</h2>
+      <div class="rule"></div>
+    </div>
+    <p class="lead">Approved color combinations with WCAG accessibility ratings. Always use these tested pairs for text, buttons, and UI elements.</p>
+
+    <div class="combo-grid">
+      <div class="combo-card" style="background:#FAF7F2;">
+        <div class="combo-text" style="color:#2C2C2C;">Charcoal on Cream</div>
+        <div class="combo-detail" style="color:#6B5E4E;">Ratio: 14.5:1</div>
+        <span class="combo-badge aaa">AAA</span>
+      </div>
+      <div class="combo-card" style="background:#FAF7F2;">
+        <div class="combo-text" style="color:#4A6741;">Fern on Cream</div>
+        <div class="combo-detail" style="color:#6B5E4E;">Ratio: 5.2:1</div>
+        <span class="combo-badge aa">AA</span>
+      </div>
+      <div class="combo-card" style="background:#FAF7F2;">
+        <div class="combo-text" style="color:#C4704B;">Terracotta on Cream</div>
+        <div class="combo-detail" style="color:#6B5E4E;">Ratio: 3.8:1</div>
+        <span class="combo-badge aa-large">AA Large</span>
+      </div>
+      <div class="combo-card" style="background:#4A6741;">
+        <div class="combo-text" style="color:#FAF7F2;">Cream on Fern</div>
+        <div class="combo-detail" style="color:rgba(255,255,255,.6);">Ratio: 5.2:1</div>
+        <span class="combo-badge aa">AA</span>
+      </div>
+      <div class="combo-card" style="background:#35522E;">
+        <div class="combo-text" style="color:#fff;">White on Fern Dark</div>
+        <div class="combo-detail" style="color:rgba(255,255,255,.6);">Ratio: 9.1:1</div>
+        <span class="combo-badge aaa">AAA</span>
+      </div>
+      <div class="combo-card" style="background:#2C2C2C;">
+        <div class="combo-text" style="color:#FAF7F2;">Cream on Charcoal</div>
+        <div class="combo-detail" style="color:rgba(255,255,255,.6);">Ratio: 14.5:1</div>
+        <span class="combo-badge aaa">AAA</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- ═══════════════ CSS VARIABLES ═══════════════ -->
+  <div class="section">
+    <div class="section-head">
+      <h2>CSS Variables Reference</h2>
+      <div class="rule"></div>
+    </div>
+    <p class="lead">Custom properties defined in the site's <code>globals.css</code>. These are the computed runtime values.</p>
+
+    <div class="code-block">
+      <span class="c-comment">/* globals.css — root custom properties */</span><br>
+      <span class="c-key">--background</span>: <span class="c-val">#FAF7F2</span>;  <span class="c-comment">/* Page background (cream) */</span><br>
+      <span class="c-key">--foreground</span>: <span class="c-val">#2C2C2C</span>;  <span class="c-comment">/* Default text (charcoal) */</span><br>
+      <span class="c-key">--linen-wash</span>: <span class="c-val">rgba(250,247,242,0.65)</span>;  <span class="c-comment">/* Semi-transparent overlay */</span><br>
+      <span class="c-key">--focus-ring</span>: <span class="c-val">#5B7F5E</span>;  <span class="c-comment">/* WCAG-compliant focus outline */</span><br>
+    </div>
+  </div>
+
+  <!-- ═══════════════ TAILWIND CONFIG ═══════════════ -->
+  <div class="section">
+    <div class="section-head">
+      <h2>Tailwind Config Reference</h2>
+      <div class="rule"></div>
+    </div>
+    <p class="lead">Color values from <code>tailwind.config.ts</code> — the master source of truth for all development.</p>
+
+    <div class="code-block">
+      <span class="c-comment">/* tailwind.config.ts → theme.extend.colors */</span><br><br>
+      <span class="c-key">cream</span>: <span class="c-val">'#FAF7F2'</span>,<br>
+      <span class="c-key">oat</span>: <span class="c-val">'#F0EBE3'</span>,<br>
+      <span class="c-key">blush</span>: <span class="c-val">'#E8C4B8'</span>,<br>
+      <span class="c-key">sage</span>: <span class="c-val">'#A3B18A'</span>,<br>
+      <span class="c-key">fern</span>: {<br>
+      &nbsp;&nbsp;<span class="c-key">light</span>: <span class="c-val">'#6B8F63'</span>,<br>
+      &nbsp;&nbsp;<span class="c-key">DEFAULT</span>: <span class="c-val">'#4A6741'</span>,<br>
+      &nbsp;&nbsp;<span class="c-key">dark</span>: <span class="c-val">'#35522E'</span>,<br>
+      },<br>
+      <span class="c-key">terracotta</span>: {<br>
+      &nbsp;&nbsp;<span class="c-key">light</span>: <span class="c-val">'#D4926E'</span>,<br>
+      &nbsp;&nbsp;<span class="c-key">DEFAULT</span>: <span class="c-val">'#C4704B'</span>,<br>
+      },<br>
+      <span class="c-key">'warm-brown'</span>: <span class="c-val">'#6B4D3E'</span>,<br>
+      <span class="c-key">charcoal</span>: <span class="c-val">'#2C2C2C'</span>,<br>
+    </div>
+  </div>
+
+  <!-- ═══════════════ GARMENT BLANK COLORS ═══════════════ -->
+  <div class="section">
+    <div class="section-head">
+      <h2>Garment Blank Colors</h2>
+      <div class="rule"></div>
+    </div>
+    <p class="lead">Approved garment blank colors for ordering from cotton suppliers. All garments use GOTS-certified organic cotton.</p>
+
+    <table>
+      <thead>
+        <tr><th>Blank Color</th><th>Hex</th><th>Used On</th><th>Ink Pairing</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>Natural / Cream</td><td><code>#FAF7F2</code></td><td>Classic Tees, Wildflower Tees, Onesies</td><td>Forest Green ink</td></tr>
+        <tr><td>Oat / Sand</td><td><code>#F0EBE3</code></td><td>Tote bags, Beanies</td><td>Forest Green or Charcoal ink</td></tr>
+        <tr><td>Sage / Muted Green</td><td><code>#A3B18A</code></td><td>Sage garment option (Future)</td><td>Cream White ink</td></tr>
+        <tr><td>Charcoal / Dark</td><td><code>#2C2C2C</code></td><td>Charcoal garment option (Future)</td><td>Cream White ink</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- ═══════════════ QUICK REFERENCE ═══════════════ -->
+  <div class="section">
+    <div class="section-head">
+      <h2>Quick Reference</h2>
+      <div class="rule"></div>
+    </div>
+
+    <table>
+      <thead>
+        <tr><th>Color</th><th>Hex</th><th>RGB</th><th>Tailwind</th><th>Primary Use</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>Cream</td><td><code>#FAF7F2</code></td><td>250, 247, 242</td><td><code>cream</code></td><td>Page background</td></tr>
+        <tr><td>Oat</td><td><code>#F0EBE3</code></td><td>240, 235, 227</td><td><code>oat</code></td><td>Card / section backgrounds</td></tr>
+        <tr><td>Blush</td><td><code>#E8C4B8</code></td><td>232, 196, 184</td><td><code>blush</code></td><td>Soft accents, badges</td></tr>
+        <tr><td>Sage</td><td><code>#A3B18A</code></td><td>163, 177, 138</td><td><code>sage</code></td><td>Muted green, secondary</td></tr>
+        <tr><td>Fern Light</td><td><code>#6B8F63</code></td><td>107, 143, 99</td><td><code>fern-light</code></td><td>Hover states</td></tr>
+        <tr><td>Fern</td><td><code>#4A6741</code></td><td>74, 103, 65</td><td><code>fern</code></td><td>Primary brand color</td></tr>
+        <tr><td>Fern Dark</td><td><code>#35522E</code></td><td>53, 82, 46</td><td><code>fern-dark</code></td><td>Dark accents</td></tr>
+        <tr><td>Terracotta Light</td><td><code>#D4926E</code></td><td>212, 146, 110</td><td><code>terracotta-light</code></td><td>Warm soft accent</td></tr>
+        <tr><td>Terracotta</td><td><code>#C4704B</code></td><td>196, 112, 75</td><td><code>terracotta</code></td><td>Primary warm accent</td></tr>
+        <tr><td>Warm Brown</td><td><code>#6B4D3E</code></td><td>107, 77, 62</td><td><code>warm-brown</code></td><td>Text / details</td></tr>
+        <tr><td>Charcoal</td><td><code>#2C2C2C</code></td><td>44, 44, 44</td><td><code>charcoal</code></td><td>Primary text</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- ═══════════════ FOOTER ═══════════════ -->
+  <div class="footer">
+    <span>Mama Fern · Color Palette Reference v1.0</span>
+    <span>February 2026 · Internal Use Only</span>
+  </div>
+
+</div>
+</body>
+</html>

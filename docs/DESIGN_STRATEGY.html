@@ -1,0 +1,668 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Mama Fern — Design Strategy &amp; Artwork Brief</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --cream:       #faf6ef;
+    --cream-mid:   #f0e9dc;
+    --cream-dark:  #ddd0bc;
+    --fern:        #4a7c59;
+    --fern-dark:   #355c40;
+    --fern-light:  #d1e8d8;
+    --sage:        #7aad8a;
+    --sage-light:  #e3f0e7;
+    --terracotta:  #b9602a;
+    --terra-light: #f5e0d0;
+    --ink:         #2a2217;
+    --muted:       #6b5e4e;
+    --rule:        #c9baa5;
+    --warm-brown:  #6b4d3e;
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    font-family: 'Inter', system-ui, sans-serif;
+    background: var(--cream);
+    color: var(--ink);
+    font-size: 10.5pt;
+    line-height: 1.6;
+  }
+
+  .page { max-width: 820px; margin: 0 auto; }
+
+  /* ── Cover ── */
+  .cover {
+    background: var(--fern-dark);
+    color: #fff;
+    padding: 60px 48px 48px;
+    position: relative;
+    page-break-after: always;
+  }
+  .cover::after {
+    content: '';
+    display: block;
+    height: 6px;
+    background: linear-gradient(90deg, var(--warm-brown), var(--terracotta), var(--sage));
+    position: absolute;
+    bottom: 0; left: 0; right: 0;
+  }
+  .cover-eyebrow {
+    font-size: 8.5pt;
+    font-weight: 700;
+    letter-spacing: .22em;
+    text-transform: uppercase;
+    opacity: .65;
+    margin-bottom: 14px;
+  }
+  .cover h1 {
+    font-family: 'Playfair Display', Georgia, serif;
+    font-size: 38pt;
+    font-weight: 900;
+    line-height: 1.08;
+    letter-spacing: -.02em;
+    margin-bottom: 10px;
+  }
+  .cover h1 span { color: #c8e6c2; }
+  .cover-sub {
+    font-size: 12.5pt;
+    opacity: .88;
+    font-weight: 500;
+    margin-bottom: 30px;
+    max-width: 540px;
+    line-height: 1.5;
+  }
+  .cover-meta {
+    display: flex;
+    gap: 12px;
+    flex-wrap: wrap;
+  }
+  .cover-pill {
+    background: rgba(255,255,255,.12);
+    border: 1px solid rgba(255,255,255,.25);
+    border-radius: 40px;
+    padding: 6px 16px;
+    font-size: 8.5pt;
+    font-weight: 600;
+    letter-spacing: .04em;
+  }
+  .cover-idea {
+    margin-top: 32px;
+    padding-top: 20px;
+    border-top: 1px solid rgba(255,255,255,.18);
+    font-family: 'Playfair Display', Georgia, serif;
+    font-size: 13pt;
+    font-style: italic;
+    color: #c8e6c2;
+  }
+
+  /* ── Sections ── */
+  .section { padding: 32px 48px; border-bottom: 1px solid var(--cream-dark); }
+  .section-head { display: flex; align-items: baseline; gap: 12px; margin-bottom: 18px; }
+  .section-head h2 { font-family: 'Playfair Display', Georgia, serif; font-size: 17pt; font-weight: 700; color: var(--fern-dark); white-space: nowrap; }
+  .section-head .rule { flex: 1; height: 1px; background: var(--rule); align-self: center; margin-top: 4px; }
+
+  h3.sub-head {
+    font-size: 9pt; font-weight: 700; letter-spacing: .1em; text-transform: uppercase;
+    color: var(--fern-dark); margin: 18px 0 10px; padding-bottom: 4px;
+    border-bottom: 2px solid var(--fern-light);
+  }
+
+  p.lead { font-size: 9.5pt; color: var(--muted); margin-bottom: 12px; line-height: 1.7; }
+
+  /* ── Tables ── */
+  table { width: 100%; border-collapse: collapse; margin-bottom: 10px; page-break-inside: avoid; }
+  thead tr { background: var(--fern-dark); color: #fff; }
+  thead th { padding: 8px 12px; text-align: left; font-size: 8pt; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; }
+  tbody tr:nth-child(even) { background: var(--cream-mid); }
+  tbody tr:nth-child(odd) { background: #fff; }
+  tbody td { padding: 7px 12px; font-size: 9pt; vertical-align: top; }
+  tbody tr:last-child td { border-bottom: 2px solid var(--fern-dark); }
+
+  /* ── Insight cards (numbered) ── */
+  .insight-list { list-style: none; padding: 0; counter-reset: insight; }
+  .insight-list li {
+    display: flex; gap: 14px; padding: 12px 0;
+    border-bottom: 1px solid var(--cream-dark); font-size: 9.5pt; align-items: flex-start;
+    page-break-inside: avoid;
+  }
+  .insight-list li:last-child { border-bottom: none; }
+  .insight-list li::before {
+    content: counter(insight); counter-increment: insight;
+    min-width: 28px; height: 28px; background: var(--fern-dark); color: #fff;
+    font-size: 10pt; font-weight: 700; border-radius: 50%;
+    display: flex; align-items: center; justify-content: center; flex-shrink: 0; margin-top: 1px;
+    font-family: 'Playfair Display', serif;
+  }
+  .insight-list li strong { color: var(--fern-dark); }
+
+  /* ── Technique comparison ── */
+  .tech-grid { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 14px; margin: 12px 0; }
+  .tech-card {
+    background: #fff; border: 1px solid var(--cream-dark); border-radius: 8px; overflow: hidden;
+    page-break-inside: avoid;
+  }
+  .tech-card-head {
+    padding: 10px 14px; color: #fff; text-align: center;
+  }
+  .tech-card-head.t-1c { background: var(--fern); }
+  .tech-card-head.t-2c { background: #6b5094; }
+  .tech-card-head.t-em { background: var(--terracotta); }
+  .tech-card-head h4 {
+    font-family: 'Playfair Display', serif; font-size: 12pt; font-weight: 700;
+  }
+  .tech-card-head .t-pct { font-size: 20pt; font-weight: 900; opacity: .5; font-family: 'Playfair Display', serif; }
+  .tech-card-body { padding: 12px 14px; }
+  .tech-card-body dl { display: grid; grid-template-columns: auto 1fr; gap: 3px 8px; font-size: 8.5pt; }
+  .tech-card-body dt { font-weight: 600; color: var(--fern-dark); }
+  .tech-card-body dd { color: var(--ink); margin: 0; }
+
+  /* ── Two-col ── */
+  .two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-bottom: 14px; }
+
+  /* ── Info cards ── */
+  .info-card {
+    background: #fff; border: 1px solid var(--cream-dark); border-top: 3px solid var(--fern);
+    border-radius: 6px; padding: 14px 16px; page-break-inside: avoid;
+  }
+  .info-card h3 { font-size: 8.5pt; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; color: var(--fern-dark); margin-bottom: 8px; }
+  .info-card p { font-size: 9pt; color: var(--muted); line-height: 1.6; }
+  .info-card.terra { border-top-color: var(--terracotta); }
+  .info-card.terra h3 { color: var(--terracotta); }
+
+  /* ── Prompt blocks ── */
+  .prompt-card {
+    background: #fff; border: 1px solid var(--cream-dark); border-radius: 8px;
+    margin-bottom: 14px; overflow: hidden; page-break-inside: avoid;
+  }
+  .prompt-head {
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 10px 14px; border-bottom: 1px solid var(--cream-dark);
+  }
+  .prompt-head .ph-left { display: flex; align-items: center; gap: 10px; }
+  .prompt-head .ph-num {
+    font-family: 'Playfair Display', serif; font-size: 12pt; font-weight: 900;
+    color: var(--fern-dark); opacity: .5;
+  }
+  .prompt-head .ph-name {
+    font-family: 'Playfair Display', serif; font-size: 10.5pt; font-weight: 700; color: var(--ink);
+  }
+  .prompt-head .ph-type {
+    font-size: 7.5pt; font-weight: 700; padding: 2px 8px; border-radius: 20px;
+    letter-spacing: .04em;
+  }
+  .ph-type.t-1c { background: var(--fern-light); color: var(--fern-dark); }
+  .ph-type.t-2c { background: #e0d4f5; color: #5a3d7a; }
+  .ph-type.t-em { background: var(--terra-light); color: var(--terracotta); }
+  .prompt-body { padding: 12px 14px; }
+  .prompt-specs {
+    display: grid; grid-template-columns: auto 1fr; gap: 2px 10px;
+    font-size: 8.5pt; margin-bottom: 10px;
+  }
+  .prompt-specs dt { font-weight: 600; color: var(--fern-dark); }
+  .prompt-specs dd { color: var(--ink); margin: 0; }
+  .prompt-text {
+    background: var(--sage-light); border: 1px solid var(--fern-light);
+    border-radius: 4px; padding: 10px 12px; font-size: 8.5pt; line-height: 1.6;
+    color: var(--ink); font-family: 'Inter', sans-serif; white-space: pre-wrap;
+  }
+  .prompt-variations {
+    margin-top: 8px; padding-top: 8px; border-top: 1px dotted var(--cream-dark);
+  }
+  .prompt-variations .pv-label {
+    font-size: 7.5pt; font-weight: 700; letter-spacing: .1em; text-transform: uppercase;
+    color: var(--terracotta); margin-bottom: 4px;
+  }
+  .prompt-variations ul { list-style: none; padding: 0; margin: 0; }
+  .prompt-variations li { font-size: 8.5pt; padding: 2px 0; color: var(--muted); display: flex; gap: 6px; }
+  .prompt-variations li::before { content: '→'; color: var(--terracotta); flex-shrink: 0; }
+
+  /* ── Motif grid ── */
+  .motif-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px; margin: 12px 0; }
+  .motif-item {
+    background: #fff; border: 1px solid var(--cream-dark); border-radius: 6px;
+    padding: 10px; text-align: center; page-break-inside: avoid;
+  }
+  .motif-icon { font-size: 20pt; margin-bottom: 2px; }
+  .motif-name { font-size: 8.5pt; font-weight: 700; color: var(--ink); }
+  .motif-desc { font-size: 7.5pt; color: var(--muted); margin-top: 2px; }
+
+  /* ── Color dots ── */
+  .ink-dot { display: inline-block; width: 10px; height: 10px; border-radius: 50%; vertical-align: middle; margin-right: 3px; border: 1px solid rgba(0,0,0,.1); }
+
+  /* ── Note / callout ── */
+  .note { border-left: 4px solid var(--fern); background: var(--sage-light); padding: 10px 14px; border-radius: 0 6px 6px 0; font-size: 9pt; margin: 10px 0; page-break-inside: avoid; }
+  .note strong { color: var(--fern-dark); }
+  .warn { border-left: 4px solid var(--terracotta); background: var(--terra-light); padding: 10px 14px; border-radius: 0 6px 6px 0; font-size: 9pt; margin: 10px 0; page-break-inside: avoid; }
+  .warn strong { color: var(--terracotta); }
+
+  code { font-family: 'Courier New', monospace; font-size: 8.5pt; background: var(--cream-mid); padding: 1px 4px; border-radius: 3px; }
+
+  /* ── Footer ── */
+  .footer {
+    padding: 18px 48px; font-size: 7.5pt; color: var(--muted);
+    display: flex; justify-content: space-between; border-top: 2px solid var(--fern);
+  }
+
+  .spacer { height: 12px; }
+
+  /* ─────────────── PRINT ─────────────── */
+  @page { size: letter portrait; margin: 13mm 12mm 13mm 12mm; }
+  @media print {
+    body { background: #fff; font-size: 9pt; }
+    .cover, thead tr, .tech-card-head, .prompt-text, .note, .warn,
+    .info-card, .motif-item, .insight-list li::before {
+      -webkit-print-color-adjust: exact; print-color-adjust: exact;
+    }
+    .prompt-card { page-break-inside: avoid; }
+    h2, h3 { page-break-after: avoid; }
+    tr { page-break-inside: avoid; }
+  }
+</style>
+</head>
+<body>
+<div class="page">
+
+  <!-- ═══════════════ COVER ═══════════════ -->
+  <div class="cover">
+    <div class="cover-eyebrow">Creative Team Reference · February 2026</div>
+    <h1>Design Strategy<br><span>&amp; Artwork Brief</span></h1>
+    <div class="cover-sub">Design principles, print specifications, artwork prompts, and motif library for the Mama Fern creative team.</div>
+    <div class="cover-meta">
+      <span class="cover-pill">Design Principles</span>
+      <span class="cover-pill">Print Techniques</span>
+      <span class="cover-pill">Artwork Prompts</span>
+      <span class="cover-pill">Motif Library</span>
+      <span class="cover-pill">Embroidery Specs</span>
+    </div>
+    <div class="cover-idea">"The design should feel like a nature journal sketch."</div>
+  </div>
+
+  <!-- ═══════════════ DESIGN PRINCIPLES ═══════════════ -->
+  <div class="section">
+    <div class="section-head">
+      <h2>Design Principles</h2>
+      <div class="rule"></div>
+    </div>
+    <p class="lead">Eight key insights from competitive research in the crunchy/naturalistic mom demographic. These guide every design decision.</p>
+
+    <ol class="insight-list">
+      <li><strong>Small beats loud — by a lot.</strong> Small left-chest designs drastically outsell large all-over graphics. The audience values restraint as a design choice. A tiny fern leaf says "I chose this intentionally."</li>
+      <li><strong>One-color prints feel more intentional.</strong> Single-color screen prints on natural blanks (cream, oat, sage) read as "artisan" and "considered." Three+ colors start feeling mass-produced — avoid it.</li>
+      <li><strong>Embroidery is the ultimate premium signal.</strong> Embroidered apparel commands 40–60% higher perceived value. In the cottagecore/crunchy space, it reads as "handmade, artisanal, worth keeping."</li>
+      <li><strong>Cream/Natural is the #1 colorway.</strong> Cream and natural blanks outsell colored blanks roughly 2:1 across every successful crunchy/natural family brand. Always photograph cream first.</li>
+      <li><strong>Matching family sets drive 2.5–3× AOV.</strong> The single most powerful revenue lever. The naming convention (Mama→Papa→Little Fern) is already the biggest cross-sell tool.</li>
+      <li><strong>Nature journal sketch aesthetic.</strong> Hand-drawn line art that looks sketched in a field guide. Not digitally perfect vectors. Imperfect, warm, organic line work with slight variation.</li>
+      <li><strong>Text works when it's a quiet identity statement.</strong> "mama fern" in handwritten script = identity badge. "rooted" = evocative single word. Avoid full sentences or preachy phrases.</li>
+      <li><strong>Botanical motifs that sell best:</strong> Fern fronds (core icon), wildflower bouquets, mushrooms, acorns/oak leaves, snails/butterflies, root systems, fiddlehead ferns (new beginnings).</li>
+    </ol>
+  </div>
+
+  <!-- ═══════════════ PRINT TECHNIQUE GUIDE ═══════════════ -->
+  <div class="section">
+    <div class="section-head">
+      <h2>Print Techniques</h2>
+      <div class="rule"></div>
+    </div>
+    <p class="lead">Three production techniques across the catalog: one-color screen print (everyday staples), two-color screen print (detailed designs), and chain-stitch embroidery (premium accent).</p>
+
+    <div class="tech-grid">
+      <div class="tech-card">
+        <div class="tech-card-head t-1c">
+          <div class="t-pct">50%</div>
+          <h4>One-Color Screen</h4>
+        </div>
+        <div class="tech-card-body">
+          <dl>
+            <dt>Products</dt><dd>#1, #3, #5, #6, #7</dd>
+            <dt>Ink A</dt><dd><span class="ink-dot" style="background:#6B4D3E;"></span>Warm Brown on light blanks</dd>
+            <dt>Ink B</dt><dd><span class="ink-dot" style="background:#FAF7F2;border:1px solid #ccc;"></span>Cream on dark blanks</dd>
+            <dt>Ink C</dt><dd><span class="ink-dot" style="background:#4A6741;"></span>Forest Green (tote only)</dd>
+            <dt>Feel</dt><dd>Minimal, artisan, everyday</dd>
+            <dt>Cost</dt><dd>Lowest per unit</dd>
+          </dl>
+        </div>
+      </div>
+      <div class="tech-card">
+        <div class="tech-card-head t-2c">
+          <div class="t-pct">40%</div>
+          <h4>Two-Color Screen</h4>
+        </div>
+        <div class="tech-card-body">
+          <dl>
+            <dt>Products</dt><dd>#2, #4, #9, #10</dd>
+            <dt>Color A</dt><dd><span class="ink-dot" style="background:#4A6741;"></span>Forest Green #4A6741</dd>
+            <dt>Color B</dt><dd><span class="ink-dot" style="background:#6B4D3E;"></span>Warm Brown #6B4D3E</dd>
+            <dt>Usage</dt><dd>Green = stems, text · Brown = flowers, roots, detail</dd>
+            <dt>Feel</dt><dd>Detailed, statement, gift-worthy</dd>
+            <dt>Cost</dt><dd>Moderate per unit</dd>
+          </dl>
+        </div>
+      </div>
+      <div class="tech-card">
+        <div class="tech-card-head t-em">
+          <div class="t-pct">10%</div>
+          <h4>Embroidery</h4>
+        </div>
+        <div class="tech-card-body">
+          <dl>
+            <dt>Products</dt><dd>#8 (Beanie)</dd>
+            <dt>Technique</dt><dd>Chain-stitch</dd>
+            <dt>Thread</dt><dd>Color matches blank variant</dd>
+            <dt>File Types</dt><dd>.DST, .PES, .EXP</dd>
+            <dt>Feel</dt><dd>Premium, handmade, gift anchor</dd>
+            <dt>Cost</dt><dd>Highest per unit</dd>
+          </dl>
+        </div>
+      </div>
+    </div>
+
+    <h3 class="sub-head">Screen Print Ink Specifications</h3>
+    <table>
+      <thead>
+        <tr><th>Ink Color</th><th>Hex</th><th>Pantone Approx</th><th>Used On</th><th>AI Prompt Term</th></tr>
+      </thead>
+      <tbody>
+        <tr><td><span class="ink-dot" style="background:#4A6741;"></span>Forest Green</td><td><code>#4A6741</code></td><td>7743 C</td><td>Two-color prints (color A), Tote</td><td>"forest green," "dark sage"</td></tr>
+        <tr><td><span class="ink-dot" style="background:#6B4D3E;"></span>Warm Brown</td><td><code>#6B4D3E</code></td><td>7526 C</td><td>One-color light blanks, two-color (color B)</td><td>"warm brown," "walnut"</td></tr>
+        <tr><td><span class="ink-dot" style="background:#FAF7F2;border:1px solid #ccc;"></span>Cream</td><td><code>#FAF7F2</code></td><td>7527 C</td><td>One-color on dark blanks (reversed)</td><td>"warm cream," "natural white"</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- ═══════════════ DESIGN STRATEGY MATRIX ═══════════════ -->
+  <div class="section">
+    <div class="section-head">
+      <h2>Design Strategy Matrix</h2>
+      <div class="rule"></div>
+    </div>
+    <p class="lead">Complete technique assignment for all 10 launch products.</p>
+
+    <table>
+      <thead>
+        <tr><th>#</th><th>Product</th><th>Technique</th><th>Colors</th><th>Placement</th><th>Design Concept</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>1</td><td>Mama Fern Classic Tee</td><td>1-color screen</td><td>Warm brown / cream</td><td>Left chest 3"×3.5"</td><td>Fern frond + "mama fern" script</td></tr>
+        <tr><td>2</td><td>Mama Fern Rooted Crewneck</td><td>2-color screen</td><td>Forest green + warm brown</td><td>Center chest 10"×8"</td><td>"rooted" serif + root system</td></tr>
+        <tr><td>3</td><td>Papa Fern Classic Tee</td><td>1-color screen</td><td>Warm brown / cream</td><td>Left chest 3"×3.5"</td><td>Fern frond + "papa fern" script</td></tr>
+        <tr><td>4</td><td>Papa Fern Rooted Crewneck</td><td>2-color screen</td><td>Forest green + warm brown</td><td>Center chest 10"×8"</td><td>Identical to #2</td></tr>
+        <tr><td>5</td><td>Little Fern Sprout Tee</td><td>1-color screen</td><td>Warm brown / cream</td><td>Center chest 3.5"×4"</td><td>Baby fern sprout + "little fern"</td></tr>
+        <tr><td>6</td><td>Little Fern Seedling Onesie</td><td>1-color screen</td><td>Warm brown / cream</td><td>Center chest 2.5"×3"</td><td>3 fern leaves + "seedling"</td></tr>
+        <tr><td>7</td><td>Mama Fern Canvas Tote</td><td>1-color screen</td><td>Forest green</td><td>Center front 10"×10"</td><td>Fern wreath + "mama fern" script</td></tr>
+        <tr><td>8</td><td>Mama Fern Cozy Beanie</td><td>Embroidery</td><td>Matching thread</td><td>Cuff 1.5"×1.5"</td><td>Single fern frond (no text)</td></tr>
+        <tr><td>9</td><td>Mama Fern Wildflower Tee</td><td>2-color screen</td><td>Forest green + warm brown</td><td>Center chest 5"×6"</td><td>Wildflower bouquet + "wildly rooted"</td></tr>
+        <tr><td>10</td><td>Little Fern Explorer Tee</td><td>2-color screen</td><td>Forest green + warm brown</td><td>Center chest 5"×5"</td><td>3×2 nature icon grid + "nature explorer"</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- ═══════════════ BOTANICAL MOTIF LIBRARY ═══════════════ -->
+  <div class="section">
+    <div class="section-head">
+      <h2>Botanical Motif Library</h2>
+      <div class="rule"></div>
+    </div>
+    <p class="lead">The visual vocabulary of Mama Fern. All motifs should feel like nature journal sketches — hand-drawn, organic, slightly imperfect.</p>
+
+    <div class="motif-grid">
+      <div class="motif-item">
+        <div class="motif-icon">🌿</div>
+        <div class="motif-name">Fern Fronds</div>
+        <div class="motif-desc">Core brand icon. 6-8 leaflets, slight natural curve. Own this motif.</div>
+      </div>
+      <div class="motif-item">
+        <div class="motif-icon">🌀</div>
+        <div class="motif-name">Fiddleheads</div>
+        <div class="motif-desc">Unfurling = new beginnings. Perfect for baby products.</div>
+      </div>
+      <div class="motif-item">
+        <div class="motif-icon">🌸</div>
+        <div class="motif-name">Wildflowers</div>
+        <div class="motif-desc">Lavender, daisies, Queen Anne's lace. Mother's Day hero.</div>
+      </div>
+      <div class="motif-item">
+        <div class="motif-icon">🍄</div>
+        <div class="motif-name">Mushrooms</div>
+        <div class="motif-desc">Cottagecore crossover appeal. Kids and adults love them.</div>
+      </div>
+      <div class="motif-item">
+        <div class="motif-icon">🌰</div>
+        <div class="motif-name">Acorns &amp; Oak</div>
+        <div class="motif-desc">Grounded, rooted metaphor. Strong for Dad products.</div>
+      </div>
+      <div class="motif-item">
+        <div class="motif-icon">🐌</div>
+        <div class="motif-name">Snails</div>
+        <div class="motif-desc">Gentle nature creatures. Kids love them as characters.</div>
+      </div>
+      <div class="motif-item">
+        <div class="motif-icon">🦋</div>
+        <div class="motif-name">Butterflies</div>
+        <div class="motif-desc">Whimsy + transformation. Universal appeal.</div>
+      </div>
+      <div class="motif-item">
+        <div class="motif-icon">🌱</div>
+        <div class="motif-name">Root Systems</div>
+        <div class="motif-desc">Family, growth, foundation. Key to "rooted" concept.</div>
+      </div>
+    </div>
+
+    <div class="note">
+      <strong>Style Anchor for All Artwork:</strong> Hand-drawn botanical line art, nature journal illustration style, fine pen ink drawing, organic imperfect lines, warm and earthy, vintage field guide aesthetic, not digitally perfect, slight line weight variation, on transparent or white background.
+    </div>
+  </div>
+
+  <!-- ═══════════════ ARTWORK PROMPTS ═══════════════ -->
+  <div class="section">
+    <div class="section-head">
+      <h2>Artwork Prompt Reference</h2>
+      <div class="rule"></div>
+    </div>
+    <p class="lead">Condensed Nano Banana Pro prompts for each product. These generate the artwork/design that goes ON the product (not the product mockup itself).</p>
+
+    <!-- Product 1 -->
+    <div class="prompt-card">
+      <div class="prompt-head">
+        <div class="ph-left"><span class="ph-num">01</span><span class="ph-name">Mama Fern Classic Tee</span></div>
+        <span class="ph-type t-1c">1-Color</span>
+      </div>
+      <div class="prompt-body">
+        <dl class="prompt-specs">
+          <dt>Ink</dt><dd>Warm Brown #6B4D3E · Cream #FAF7F2 on dark</dd>
+          <dt>Size</dt><dd>~3" × 3.5" left chest</dd>
+        </dl>
+        <div class="prompt-text">A small, delicate hand-drawn fern frond illustration in a single color, pen and ink style, with the words "mama fern" written below in loose handwritten script lettering. The fern should be a single unfurling frond with 6-8 leaflets, slightly curved, naturalistic but imperfect like a field guide sketch. The text should feel organic and personal, like handwriting in a journal — not a font. Compact, meant for left chest placement. White or transparent background. Single color only — no gradients, no shading, clean line art with slight line weight variation. Botanical illustration, minimal, cottagecore.</div>
+        <div class="prompt-variations">
+          <div class="pv-label">Variations</div>
+          <ul>
+            <li>Fern arching over the text like a gentle canopy</li>
+            <li>Two small crossed fern fronds above the text</li>
+            <li>Tiny fiddlehead curl accent next to the text</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <!-- Product 2 -->
+    <div class="prompt-card">
+      <div class="prompt-head">
+        <div class="ph-left"><span class="ph-num">02</span><span class="ph-name">Rooted Crewneck</span></div>
+        <span class="ph-type t-2c">2-Color</span>
+      </div>
+      <div class="prompt-body">
+        <dl class="prompt-specs">
+          <dt>Ink</dt><dd>Forest Green #4A6741 (lettering) + Warm Brown #6B4D3E (roots)</dd>
+          <dt>Size</dt><dd>~10" × 8" center chest</dd>
+        </dl>
+        <div class="prompt-text">Hand-lettered serif word "rooted" in large, elegant letterforms with a botanical twist — delicate fern root system growing downward from the bottom of the letters, as if the word is a living plant. Roots are fine, organic, hand-drawn pen lines that branch and spread naturally. Two-color: "rooted" in forest green, root system in warm brown. No background. Print-ready line art. Nature journal style, botanical, grounded, minimal.</div>
+        <div class="prompt-variations">
+          <div class="pv-label">Variations</div>
+          <ul>
+            <li>Small fern leaves sprouting upward from the top of some letters</li>
+            <li>Roots transforming into a gentle fern frond at the bottom</li>
+            <li>Tiny mushrooms and fiddleheads growing among the roots</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <!-- Product 5 -->
+    <div class="prompt-card">
+      <div class="prompt-head">
+        <div class="ph-left"><span class="ph-num">05</span><span class="ph-name">Little Fern Sprout Tee</span></div>
+        <span class="ph-type t-1c">1-Color</span>
+      </div>
+      <div class="prompt-body">
+        <dl class="prompt-specs">
+          <dt>Ink</dt><dd>Warm Brown #6B4D3E · Cream on sage</dd>
+          <dt>Size</dt><dd>~3.5" × 4" center chest (kids scale)</dd>
+        </dl>
+        <div class="prompt-text">A small, adorable hand-drawn sprouting fern — baby fern emerging from the soil, with 2-3 tiny unfurling fiddlehead fronds and one small root visible below a simple soil line. Below: "little fern" in playful, slightly bouncy hand-lettered text that feels childlike but not sloppy. Single color, pen and ink style. Sweet, gentle, whimsical — like a children's nature picture book. Compact for kids tee center chest. No background. Botanical, minimal, nature-inspired.</div>
+        <div class="prompt-variations">
+          <div class="pv-label">Variations</div>
+          <ul>
+            <li>Tiny snail sitting next to the sprout</li>
+            <li>Small dots/stars scattered like morning dew</li>
+            <li>Fiddleheads in different stages of unfurling</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <!-- Product 7 -->
+    <div class="prompt-card">
+      <div class="prompt-head">
+        <div class="ph-left"><span class="ph-num">07</span><span class="ph-name">Canvas Tote</span></div>
+        <span class="ph-type t-1c">1-Color</span>
+      </div>
+      <div class="prompt-body">
+        <dl class="prompt-specs">
+          <dt>Ink</dt><dd>Forest Green #4A6741 on natural canvas</dd>
+          <dt>Size</dt><dd>~10" × 10" center front</dd>
+        </dl>
+        <div class="prompt-text">A circular botanical wreath made of hand-drawn fern fronds, with "mama fern" hand-lettered in elegant script centered inside. The wreath: 8-12 fern fronds arranged in a loose, organic circle — not geometric but natural, like something gathered from a forest floor. Fronds vary slightly in size and angle. Text complements without competing. Single color, line art, pen and ink. ~10 inches diameter. No background. Botanical, cottagecore, farmer's market aesthetic.</div>
+        <div class="prompt-variations">
+          <div class="pv-label">Variations</div>
+          <ul>
+            <li>Wildflowers mixed into the fern wreath</li>
+            <li>Open crescent of ferns with text in the center</li>
+            <li>Small acorn or mushroom tucked into wreath bottom</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <!-- Product 8 -->
+    <div class="prompt-card">
+      <div class="prompt-head">
+        <div class="ph-left"><span class="ph-num">08</span><span class="ph-name">Beanie Embroidery</span></div>
+        <span class="ph-type t-em">Embroidery</span>
+      </div>
+      <div class="prompt-body">
+        <dl class="prompt-specs">
+          <dt>Thread</dt><dd>Color matches blank variant</dd>
+          <dt>Size</dt><dd>~1.5" × 1.5" on fold-up cuff</dd>
+          <dt>Files</dt><dd>.DST, .PES, or .EXP stitch files required</dd>
+        </dl>
+        <div class="prompt-text">A single, small fern frond designed for embroidery on a knit beanie cuff. Simple and clean — one central stem with 5-7 pairs of small leaflets branching symmetrically. Lines slightly thick and smooth, suitable for chain-stitch embroidery at 1.5 inches tall. No text — fern leaf alone. Gentle natural curve, not perfectly straight. Like a pressed fern in a nature journal, simplified for stitching. Clean outlines only, no fine detail lost at small size. Single color.</div>
+        <div class="prompt-variations">
+          <div class="pv-label">Variations</div>
+          <ul>
+            <li>Tiny fiddlehead curl at the top, still unfurling</li>
+            <li>Two small fern fronds crossed at stems (botanical X)</li>
+            <li>A single fern frond inside a small embroidered circle</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <!-- Product 9 -->
+    <div class="prompt-card">
+      <div class="prompt-head">
+        <div class="ph-left"><span class="ph-num">09</span><span class="ph-name">Wildflower Tee</span></div>
+        <span class="ph-type t-2c">2-Color</span>
+      </div>
+      <div class="prompt-body">
+        <dl class="prompt-specs">
+          <dt>Ink</dt><dd>Forest Green #4A6741 (stems/leaves) + Warm Brown #6B4D3E (flowers/text)</dd>
+          <dt>Size</dt><dd>~5" × 6" center chest</dd>
+        </dl>
+        <div class="prompt-text">A delicate hand-drawn wildflower bouquet: fern fronds, daisy-like flowers, lavender sprigs, tiny seed pods, loosely gathered like hand-picked from a meadow. Below: "wildly rooted" in small elegant hand-lettered script. Airy & natural — casual, just-picked-from-the-garden bunch. Two-color: stems/leaves/ferns in forest green, flower heads/petals/text in warm brown. No background. This is the Mother's Day hero product — special, gift-worthy, feminine without being fussy.</div>
+        <div class="prompt-variations">
+          <div class="pv-label">Variations</div>
+          <ul>
+            <li>Bouquet tied with a simple ribbon bow at the stems</li>
+            <li>More emphasis on ferns with just 2-3 small flowers peeking through</li>
+            <li>Arranged vertically — tall and narrow like a pressed flower bookmark</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <!-- Product 10 -->
+    <div class="prompt-card">
+      <div class="prompt-head">
+        <div class="ph-left"><span class="ph-num">10</span><span class="ph-name">Explorer Tee</span></div>
+        <span class="ph-type t-2c">2-Color</span>
+      </div>
+      <div class="prompt-body">
+        <dl class="prompt-specs">
+          <dt>Ink</dt><dd>Forest Green + Warm Brown (alternating icons)</dd>
+          <dt>Size</dt><dd>~5" × 5" center chest (kids scale)</dd>
+        </dl>
+        <div class="prompt-text">A playful grid of 6 small hand-drawn nature icons in 3×2 or 2×3 layout: mushroom, acorn, fern frond, snail, butterfly, pine cone. Each icon is a simple, charming line drawing — nature scavenger hunt checklist style. Above the grid: "nature explorer" in playful, chunky hand-lettered block letters. Two-color: alternate icons between forest green and warm brown for rhythmic pattern. Text in forest green. Curious, outdoorsy, kid-friendly — like a badge of honor for a little adventurer.</div>
+        <div class="prompt-variations">
+          <div class="pv-label">Variations</div>
+          <ul>
+            <li>Icons in a circle around the text instead of a grid</li>
+            <li>Add a seventh icon (small bird) as scattered constellation</li>
+            <li>Hand-stamped feel with slight rotation on each icon</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <div class="warn">
+      <strong>Products #3, #4, #6:</strong> Not shown above as they reuse existing artwork. #3 (Papa Classic) = same art as #1, just change text to "papa fern" with slightly bolder line weight. #4 (Papa Rooted) = identical artwork to #2. #6 (Seedling Onesie) = unique but simple — 3 fern leaves + "seedling" in delicate script.
+    </div>
+  </div>
+
+  <!-- ═══════════════ EMBROIDERY EXPANSION ═══════════════ -->
+  <div class="section">
+    <div class="section-head">
+      <h2>Future Embroidery Expansion</h2>
+      <div class="rule"></div>
+    </div>
+    <p class="lead">Once the beanie validates embroidery demand, expand with premium embroidered tiers of existing screen-printed products.</p>
+
+    <div class="two-col">
+      <div class="info-card">
+        <h3>Embroidered Classic Tee · $42</h3>
+        <p>Small fern leaf, left chest, same placement as screen print version. 2" tall frond with 6-8 pairs of leaflets + "mama fern" single-line script (0.3" tall). Total area: 2" × 2.5". Clean, smooth lines for satin + running stitch. No details smaller than 1mm.</p>
+      </div>
+      <div class="info-card terra">
+        <h3>Embroidered Crewneck · $62</h3>
+        <p>Small fern on left chest (replacing the large "rooted" print). Premium minimalism: the logo + one embroidered frond. Same spec as Classic Tee embroidery but on the heavier French terry blank. The screen print = entry point; embroidery = upgrade tier.</p>
+      </div>
+    </div>
+
+    <div class="note">
+      <strong>Design Rule for Embroidery:</strong> Keep shapes clean with clear outlines. No tiny gaps. Lines should be slightly thick and smooth. Think "simplified for stitching" — if it can't be clearly read at 1.5", it's too detailed.
+    </div>
+  </div>
+
+  <!-- ═══════════════ FOOTER ═══════════════ -->
+  <div class="footer">
+    <span>Mama Fern · Design Strategy v1.0</span>
+    <span>February 2026 · Creative Team Reference</span>
+  </div>
+
+</div>
+</body>
+</html>

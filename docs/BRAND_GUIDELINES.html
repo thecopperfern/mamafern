@@ -1,0 +1,975 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Mama Fern — Brand Guidelines</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  /* ── Root palette ── */
+  :root {
+    --cream:       #faf6ef;
+    --cream-mid:   #f0e9dc;
+    --cream-dark:  #ddd0bc;
+    --fern:        #4a7c59;
+    --fern-dark:   #355c40;
+    --fern-light:  #d1e8d8;
+    --sage:        #7aad8a;
+    --sage-light:  #e3f0e7;
+    --terracotta:  #b9602a;
+    --terra-light: #f5e0d0;
+    --ink:         #2a2217;
+    --muted:       #6b5e4e;
+    --rule:        #c9baa5;
+    --blush:       #e8c4b8;
+    --blush-light: #faf0ec;
+    --warm-brown:  #6b4d3e;
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    font-family: 'Inter', system-ui, sans-serif;
+    background: var(--cream);
+    color: var(--ink);
+    font-size: 10.5pt;
+    line-height: 1.6;
+  }
+
+  .page { max-width: 820px; margin: 0 auto; }
+
+  /* ── Cover ── */
+  .cover {
+    background: var(--fern-dark);
+    color: #fff;
+    padding: 64px 48px 52px;
+    position: relative;
+    page-break-after: always;
+  }
+  .cover::after {
+    content: '';
+    display: block;
+    height: 6px;
+    background: linear-gradient(90deg, var(--terracotta), var(--sage), var(--fern));
+    position: absolute;
+    bottom: 0; left: 0; right: 0;
+  }
+  .cover-eyebrow {
+    font-size: 8.5pt;
+    font-weight: 700;
+    letter-spacing: .22em;
+    text-transform: uppercase;
+    opacity: .65;
+    margin-bottom: 16px;
+  }
+  .cover h1 {
+    font-family: 'Playfair Display', Georgia, serif;
+    font-size: 42pt;
+    font-weight: 900;
+    line-height: 1.05;
+    letter-spacing: -.02em;
+    margin-bottom: 10px;
+  }
+  .cover h1 span { color: #c8e6c2; }
+  .cover-sub {
+    font-size: 13pt;
+    opacity: .88;
+    font-weight: 500;
+    margin-bottom: 36px;
+    max-width: 520px;
+    line-height: 1.5;
+  }
+  .cover-meta {
+    display: flex;
+    gap: 14px;
+    flex-wrap: wrap;
+  }
+  .cover-pill {
+    background: rgba(255,255,255,.12);
+    border: 1px solid rgba(255,255,255,.25);
+    border-radius: 40px;
+    padding: 6px 16px;
+    font-size: 8.5pt;
+    font-weight: 600;
+    letter-spacing: .04em;
+  }
+  .cover-tagline {
+    margin-top: 40px;
+    padding-top: 24px;
+    border-top: 1px solid rgba(255,255,255,.18);
+    font-family: 'Playfair Display', Georgia, serif;
+    font-size: 14pt;
+    font-style: italic;
+    color: #c8e6c2;
+    letter-spacing: .01em;
+  }
+
+  /* ── Sections ── */
+  .section { padding: 32px 48px; border-bottom: 1px solid var(--cream-dark); }
+
+  .section-head {
+    display: flex;
+    align-items: baseline;
+    gap: 12px;
+    margin-bottom: 20px;
+  }
+  .section-head h2 {
+    font-family: 'Playfair Display', Georgia, serif;
+    font-size: 17pt;
+    font-weight: 700;
+    color: var(--fern-dark);
+    white-space: nowrap;
+  }
+  .section-head .rule { flex: 1; height: 1px; background: var(--rule); align-self: center; margin-top: 4px; }
+
+  h3.sub-head {
+    font-size: 9.5pt;
+    font-weight: 700;
+    letter-spacing: .1em;
+    text-transform: uppercase;
+    color: var(--fern-dark);
+    margin: 20px 0 10px;
+    padding-bottom: 4px;
+    border-bottom: 2px solid var(--fern-light);
+  }
+
+  p.lead { font-size: 9.5pt; color: var(--muted); margin-bottom: 14px; line-height: 1.7; }
+
+  /* ── Two-col grid ── */
+  .two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-bottom: 16px; }
+  .three-col { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 14px; margin-bottom: 16px; }
+  .four-col { display: grid; grid-template-columns: 1fr 1fr 1fr 1fr; gap: 12px; margin-bottom: 16px; }
+
+  /* ── Info cards ── */
+  .info-card {
+    background: #fff;
+    border: 1px solid var(--cream-dark);
+    border-top: 3px solid var(--fern);
+    border-radius: 6px;
+    padding: 14px 16px;
+    page-break-inside: avoid;
+  }
+  .info-card h3 {
+    font-size: 8.5pt;
+    font-weight: 700;
+    letter-spacing: .1em;
+    text-transform: uppercase;
+    color: var(--fern-dark);
+    margin-bottom: 8px;
+  }
+  .info-card p { font-size: 9pt; color: var(--muted); line-height: 1.6; }
+  .info-card.terra { border-top-color: var(--terracotta); }
+  .info-card.terra h3 { color: var(--terracotta); }
+  .info-card.sage-card { border-top-color: var(--sage); }
+  .info-card.sage-card h3 { color: #5a8a6a; }
+  .info-card.brown { border-top-color: var(--warm-brown); }
+  .info-card.brown h3 { color: var(--warm-brown); }
+  .info-card.blush-card { border-top-color: var(--blush); }
+  .info-card.blush-card h3 { color: #a07060; }
+
+  /* ── Swatch blocks ── */
+  .swatch-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 14px; margin-bottom: 16px; }
+  .swatch {
+    page-break-inside: avoid;
+  }
+  .swatch-color {
+    width: 100%;
+    height: 64px;
+    border-radius: 6px 6px 0 0;
+    position: relative;
+  }
+  .swatch-color.light-border {
+    box-shadow: inset 0 0 0 1px rgba(0,0,0,.08);
+  }
+  .swatch-info {
+    background: #fff;
+    border: 1px solid var(--cream-dark);
+    border-top: none;
+    border-radius: 0 0 6px 6px;
+    padding: 8px 10px;
+  }
+  .swatch-name {
+    font-size: 8.5pt;
+    font-weight: 700;
+    color: var(--ink);
+    margin-bottom: 2px;
+  }
+  .swatch-hex {
+    font-family: 'Courier New', monospace;
+    font-size: 8pt;
+    color: var(--warm-brown);
+  }
+  .swatch-use {
+    font-size: 7.5pt;
+    color: var(--muted);
+    margin-top: 3px;
+    line-height: 1.4;
+  }
+
+  /* ── Tables ── */
+  table { width: 100%; border-collapse: collapse; margin-bottom: 12px; page-break-inside: avoid; }
+  thead tr { background: var(--fern-dark); color: #fff; }
+  thead th { padding: 8px 12px; text-align: left; font-size: 8pt; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; }
+  tbody tr:nth-child(even) { background: var(--cream-mid); }
+  tbody tr:nth-child(odd) { background: #fff; }
+  tbody td { padding: 7px 12px; font-size: 9pt; vertical-align: top; }
+  tbody tr:last-child td { border-bottom: 2px solid var(--fern-dark); }
+
+  /* ── Note / callout ── */
+  .note {
+    border-left: 4px solid var(--fern);
+    background: var(--sage-light);
+    padding: 10px 14px;
+    border-radius: 0 6px 6px 0;
+    font-size: 9pt;
+    margin: 12px 0;
+    page-break-inside: avoid;
+  }
+  .note strong { color: var(--fern-dark); }
+  .warn {
+    border-left: 4px solid var(--terracotta);
+    background: var(--terra-light);
+    padding: 10px 14px;
+    border-radius: 0 6px 6px 0;
+    font-size: 9pt;
+    margin: 12px 0;
+    page-break-inside: avoid;
+  }
+  .warn strong { color: var(--terracotta); }
+
+  /* ── Do / Don't grid ── */
+  .do-dont { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin: 12px 0; }
+  .do-box, .dont-box {
+    padding: 14px 16px;
+    border-radius: 6px;
+    font-size: 9pt;
+    page-break-inside: avoid;
+  }
+  .do-box {
+    background: var(--sage-light);
+    border: 1px solid var(--fern-light);
+  }
+  .do-box .do-label {
+    font-size: 8pt;
+    font-weight: 700;
+    letter-spacing: .12em;
+    text-transform: uppercase;
+    color: var(--fern-dark);
+    margin-bottom: 8px;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+  }
+  .dont-box {
+    background: var(--terra-light);
+    border: 1px solid #e8c8b0;
+  }
+  .dont-box .do-label {
+    font-size: 8pt;
+    font-weight: 700;
+    letter-spacing: .12em;
+    text-transform: uppercase;
+    color: var(--terracotta);
+    margin-bottom: 8px;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+  }
+  .do-box ul, .dont-box ul { list-style: none; padding: 0; margin: 0; }
+  .do-box li, .dont-box li { padding: 3px 0; font-size: 9pt; color: var(--ink); display: flex; gap: 6px; align-items: flex-start; }
+  .do-box li::before { content: '✓'; color: var(--fern-dark); font-weight: 700; }
+  .dont-box li::before { content: '✗'; color: var(--terracotta); font-weight: 700; }
+
+  /* ── Font specimen ── */
+  .font-specimen {
+    background: #fff;
+    border: 1px solid var(--cream-dark);
+    border-radius: 8px;
+    padding: 20px 24px;
+    margin-bottom: 14px;
+    page-break-inside: avoid;
+  }
+  .font-specimen .fs-name {
+    font-size: 8pt;
+    font-weight: 700;
+    letter-spacing: .12em;
+    text-transform: uppercase;
+    color: var(--fern-dark);
+    margin-bottom: 10px;
+  }
+  .font-specimen .fs-sample {
+    margin-bottom: 8px;
+    color: var(--ink);
+  }
+  .font-specimen .fs-meta {
+    font-size: 8pt;
+    color: var(--muted);
+    line-height: 1.6;
+  }
+
+  /* ── Pillar cards ── */
+  .pillar-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; margin: 12px 0; }
+  .pillar {
+    text-align: center;
+    background: #fff;
+    border: 1px solid var(--cream-dark);
+    border-radius: 8px;
+    padding: 18px 12px 14px;
+    page-break-inside: avoid;
+  }
+  .pillar-icon {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background: var(--fern-light);
+    margin: 0 auto 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 16pt;
+  }
+  .pillar h4 {
+    font-family: 'Playfair Display', Georgia, serif;
+    font-size: 11pt;
+    font-weight: 700;
+    color: var(--fern-dark);
+    margin-bottom: 4px;
+  }
+  .pillar p { font-size: 8pt; color: var(--muted); line-height: 1.5; }
+
+  /* ── Contrast pair ── */
+  .contrast-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; margin: 12px 0; }
+  .contrast-pair {
+    border-radius: 6px;
+    overflow: hidden;
+    border: 1px solid var(--cream-dark);
+    page-break-inside: avoid;
+  }
+  .contrast-sample {
+    padding: 12px 14px;
+    font-size: 10pt;
+    font-weight: 600;
+  }
+  .contrast-meta {
+    background: #fff;
+    padding: 6px 10px;
+    font-size: 7.5pt;
+    color: var(--muted);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  .contrast-badge {
+    font-size: 7pt;
+    font-weight: 700;
+    letter-spacing: .06em;
+    padding: 2px 6px;
+    border-radius: 3px;
+  }
+  .badge-aaa { background: var(--fern-light); color: var(--fern-dark); }
+  .badge-aa { background: #d8f0cc; color: #3a6a20; }
+  .badge-fail { background: var(--terra-light); color: var(--terracotta); }
+
+  /* ── Motif list ── */
+  .motif-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px; margin: 12px 0; }
+  .motif-item {
+    background: #fff;
+    border: 1px solid var(--cream-dark);
+    border-radius: 6px;
+    padding: 12px;
+    text-align: center;
+    page-break-inside: avoid;
+  }
+  .motif-icon { font-size: 22pt; margin-bottom: 4px; }
+  .motif-name { font-size: 8.5pt; font-weight: 700; color: var(--ink); }
+  .motif-desc { font-size: 7.5pt; color: var(--muted); margin-top: 2px; }
+
+  /* ── Accessibility checklist ── */
+  .a11y-list { list-style: none; padding: 0; margin: 0; }
+  .a11y-list li {
+    display: flex; gap: 10px; padding: 7px 0;
+    border-bottom: 1px dotted var(--cream-dark);
+    font-size: 9pt; align-items: flex-start;
+  }
+  .a11y-list li:last-child { border-bottom: none; }
+  .a11y-icon { font-size: 11pt; flex-shrink: 0; margin-top: -1px; }
+
+  /* ── Footer ── */
+  .footer {
+    padding: 18px 48px;
+    font-size: 7.5pt;
+    color: var(--muted);
+    display: flex;
+    justify-content: space-between;
+    border-top: 2px solid var(--fern);
+  }
+
+  .spacer { height: 14px; }
+  code { font-family: 'Courier New', monospace; font-size: 8.5pt; background: var(--cream-mid); padding: 1px 4px; border-radius: 3px; }
+
+  /* ── Typography scale demo ── */
+  .type-scale { margin: 12px 0; }
+  .type-row {
+    display: flex;
+    align-items: baseline;
+    gap: 16px;
+    padding: 6px 0;
+    border-bottom: 1px dotted var(--cream-dark);
+  }
+  .type-row:last-child { border-bottom: none; }
+  .type-label {
+    font-size: 7.5pt;
+    font-weight: 600;
+    color: var(--muted);
+    min-width: 80px;
+    text-transform: uppercase;
+    letter-spacing: .06em;
+  }
+  .type-sample { flex: 1; }
+
+  /* ─────────────── PRINT ─────────────── */
+  @page { size: letter portrait; margin: 13mm 12mm 13mm 12mm; }
+  @media print {
+    body { background: #fff; font-size: 9pt; }
+    .cover, thead tr, .note, .warn, .do-box, .dont-box,
+    .info-card, .pillar, .swatch-color, .contrast-sample,
+    .motif-item, .font-specimen {
+      -webkit-print-color-adjust: exact;
+      print-color-adjust: exact;
+    }
+    .section { page-break-inside: avoid; }
+    h2, h3 { page-break-after: avoid; }
+    tr { page-break-inside: avoid; }
+  }
+</style>
+</head>
+<body>
+<div class="page">
+
+  <!-- ═══════════════ COVER ═══════════════ -->
+  <div class="cover">
+    <div class="cover-eyebrow">Internal Reference · v1.0 · February 2026</div>
+    <h1>Brand<br><span>Guidelines</span></h1>
+    <div class="cover-sub">The definitive identity guide for Mama Fern — grounded family apparel in organic cotton and skin-friendly fabrics.</div>
+    <div class="cover-meta">
+      <span class="cover-pill">Identity</span>
+      <span class="cover-pill">Color</span>
+      <span class="cover-pill">Typography</span>
+      <span class="cover-pill">Voice &amp; Tone</span>
+      <span class="cover-pill">Photography</span>
+      <span class="cover-pill">Accessibility</span>
+    </div>
+    <div class="cover-tagline">"Grounded family apparel for crunchy, cozy homes."</div>
+  </div>
+
+  <!-- ═══════════════ 1. BRAND STORY ═══════════════ -->
+  <div class="section">
+    <div class="section-head">
+      <h2>Brand Story &amp; Mission</h2>
+      <div class="rule"></div>
+    </div>
+    <p class="lead">Mama Fern is a family apparel brand rooted in simplicity, nature, and intentional living. We make clothes for the parents who choose organic cotton, who prefer a walk in the woods over a day at the mall, and who believe what touches their family's skin matters just as much as what's on the table.</p>
+
+    <div class="two-col">
+      <div class="info-card">
+        <h3>Who We Are</h3>
+        <p>A direct-to-consumer family clothing brand built on organic cotton and natural fabrics. We design minimal, botanical-inspired apparel for moms, dads, kids, and babies — with matching family sets as our core differentiator.</p>
+      </div>
+      <div class="info-card terra">
+        <h3>Who We Serve</h3>
+        <p>Millennial and Gen-Z "crunchy" parents — the ones who read ingredient labels, choose wooden toys, and gravitate toward earth tones. Gift buyers (grandparents, friends) are our secondary audience, especially around Mother's Day.</p>
+      </div>
+    </div>
+
+    <h3 class="sub-head">Brand Pillars</h3>
+    <div class="pillar-grid">
+      <div class="pillar">
+        <div class="pillar-icon">🌿</div>
+        <h4>Rooted</h4>
+        <p>Grounded in nature, organic materials, and environmental intention.</p>
+      </div>
+      <div class="pillar">
+        <div class="pillar-icon">👨‍👩‍👧‍👦</div>
+        <h4>Community</h4>
+        <p>Family-first. Matching sets. Shared moments over shared apparel.</p>
+      </div>
+      <div class="pillar">
+        <div class="pillar-icon">🪡</div>
+        <h4>Considered</h4>
+        <p>Every design choice is intentional — minimal, restrained, meaningful.</p>
+      </div>
+      <div class="pillar">
+        <div class="pillar-icon">🤲</div>
+        <h4>Accessible</h4>
+        <p>Premium quality at reachable price points. Not luxury; not fast fashion.</p>
+      </div>
+    </div>
+
+    <div class="note">
+      <strong>Brand Promise:</strong> Every Mama Fern product feels like it was chosen with care — because it was designed that way.
+    </div>
+  </div>
+
+  <!-- ═══════════════ 2. LOGO ═══════════════ -->
+  <div class="section">
+    <div class="section-head">
+      <h2>Logo &amp; Wordmark</h2>
+      <div class="rule"></div>
+    </div>
+    <p class="lead">The Mama Fern logo is the brand name set in Playfair Display — a classic, editorial serif that conveys warmth and craft. No icon lockup; the type is the logo.</p>
+
+    <div class="two-col">
+      <div class="font-specimen" style="text-align:center; background:var(--cream);">
+        <div class="fs-name">Primary — Dark on Light</div>
+        <div class="fs-sample" style="font-family:'Playfair Display',Georgia,serif; font-size:32pt; font-weight:900; color:#355c40; letter-spacing:-.01em;">Mama Fern</div>
+        <div class="fs-meta">Playfair Display 900 · Fern-dark #355C40 on Cream #FAF6EF</div>
+      </div>
+      <div class="font-specimen" style="text-align:center; background:#355c40;">
+        <div class="fs-name" style="color:#c8e6c2;">Reversed — Light on Dark</div>
+        <div class="fs-sample" style="font-family:'Playfair Display',Georgia,serif; font-size:32pt; font-weight:900; color:#faf6ef; letter-spacing:-.01em;">Mama Fern</div>
+        <div class="fs-meta" style="color:#a0c8a0;">Playfair Display 900 · Cream #FAF6EF on Fern-dark #355C40</div>
+      </div>
+    </div>
+
+    <h3 class="sub-head">Usage Rules</h3>
+    <div class="do-dont">
+      <div class="do-box">
+        <div class="do-label">✓ DO</div>
+        <ul>
+          <li>Use Playfair Display 900 for all wordmark applications</li>
+          <li>Maintain minimum 24px clear space around the wordmark</li>
+          <li>Use only approved color combinations (dark-on-light or light-on-dark)</li>
+          <li>Minimum reproduction size: 80px wide (digital) / 20mm (print)</li>
+          <li>Use on cream, white, or fern-dark backgrounds</li>
+        </ul>
+      </div>
+      <div class="dont-box">
+        <div class="do-label">✗ DON'T</div>
+        <ul>
+          <li>Replace Playfair Display with another font</li>
+          <li>Add drop shadows, outlines, or effects to the type</li>
+          <li>Stretch, compress, or rotate the wordmark</li>
+          <li>Place on busy backgrounds or photographs without contrast overlay</li>
+          <li>Use fern on terracotta or other low-contrast pairings</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="note">
+      <strong>Garment Text:</strong> "mama fern" on products uses a custom <em>handwritten script</em> style (generated via Nano Banana Pro), <em>not</em> the Playfair Display wordmark. The display wordmark is for web, print, packaging, and marketing materials only.
+    </div>
+  </div>
+
+  <!-- ═══════════════ 3. COLOR PALETTE ═══════════════ -->
+  <div class="section">
+    <div class="section-head">
+      <h2>Color Palette</h2>
+      <div class="rule"></div>
+    </div>
+    <p class="lead">Earthy, warm, and rooted — our palette draws from the forest floor. Cream dominates, fern anchors, and terracotta accents. Every color has a job.</p>
+
+    <h3 class="sub-head">Primary Colors</h3>
+    <div class="swatch-grid">
+      <div class="swatch">
+        <div class="swatch-color light-border" style="background:#FAF7F2;"></div>
+        <div class="swatch-info">
+          <div class="swatch-name">Cream</div>
+          <div class="swatch-hex">#FAF7F2</div>
+          <div class="swatch-use">Base background. The foundation. Used everywhere.</div>
+        </div>
+      </div>
+      <div class="swatch">
+        <div class="swatch-color" style="background:#4A6741;"></div>
+        <div class="swatch-info">
+          <div class="swatch-name">Fern</div>
+          <div class="swatch-hex">#4A6741</div>
+          <div class="swatch-use">Primary brand color. Buttons, headers, links.</div>
+        </div>
+      </div>
+      <div class="swatch">
+        <div class="swatch-color" style="background:#C4704B;"></div>
+        <div class="swatch-info">
+          <div class="swatch-name">Terracotta</div>
+          <div class="swatch-hex">#C4704B</div>
+          <div class="swatch-use">Warm accent. CTAs, sale badges, highlights.</div>
+        </div>
+      </div>
+      <div class="swatch">
+        <div class="swatch-color" style="background:#2C2C2C;"></div>
+        <div class="swatch-info">
+          <div class="swatch-name">Charcoal</div>
+          <div class="swatch-hex">#2C2C2C</div>
+          <div class="swatch-use">Primary text. Headlines, body copy.</div>
+        </div>
+      </div>
+    </div>
+
+    <h3 class="sub-head">Secondary &amp; Accent Colors</h3>
+    <div class="swatch-grid">
+      <div class="swatch">
+        <div class="swatch-color light-border" style="background:#F0EBE3;"></div>
+        <div class="swatch-info">
+          <div class="swatch-name">Oat</div>
+          <div class="swatch-hex">#F0EBE3</div>
+          <div class="swatch-use">Secondary background. Cards, alt sections.</div>
+        </div>
+      </div>
+      <div class="swatch">
+        <div class="swatch-color" style="background:#A3B18A;"></div>
+        <div class="swatch-info">
+          <div class="swatch-name">Sage</div>
+          <div class="swatch-hex">#A3B18A</div>
+          <div class="swatch-use">Muted green. Tags, borders, soft accents.</div>
+        </div>
+      </div>
+      <div class="swatch">
+        <div class="swatch-color light-border" style="background:#E8C4B8;"></div>
+        <div class="swatch-info">
+          <div class="swatch-name">Blush</div>
+          <div class="swatch-hex">#E8C4B8</div>
+          <div class="swatch-use">Soft accent. Hover states, dividers.</div>
+        </div>
+      </div>
+      <div class="swatch">
+        <div class="swatch-color" style="background:#6B4D3E;"></div>
+        <div class="swatch-info">
+          <div class="swatch-name">Warm Brown</div>
+          <div class="swatch-hex">#6B4D3E</div>
+          <div class="swatch-use">Detail color. Screen print ink, sub-text.</div>
+        </div>
+      </div>
+    </div>
+
+    <h3 class="sub-head">Extended Variants</h3>
+    <table>
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Hex</th>
+          <th>Tailwind Class</th>
+          <th>Usage</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr><td>Fern Light</td><td><code>#6B8F63</code></td><td><code>text-fern-light</code></td><td>Lighter green variant, hover states</td></tr>
+        <tr><td>Fern Dark</td><td><code>#35522E</code></td><td><code>text-fern-dark</code></td><td>Dark green, strong emphasis</td></tr>
+        <tr><td>Terracotta Light</td><td><code>#D4926E</code></td><td><code>text-terracotta-light</code></td><td>De-emphasized warm accent</td></tr>
+        <tr><td>Charcoal Light</td><td><code>#444444</code></td><td><code>text-charcoal-light</code></td><td>Secondary text, less prominent</td></tr>
+        <tr><td>Warm Brown Readable</td><td><code>#5A3F32</code></td><td><code>text-warm-brown-readable</code></td><td>Darker brown for WCAG AA compliance</td></tr>
+      </tbody>
+    </table>
+
+    <div class="note">
+      <strong>Screen Print Inks:</strong> Forest Green <code>#4A6741</code> (Pantone ~7743 C) and Warm Brown <code>#6B4D3E</code> (Pantone ~7526 C) are the two ink colors used across all garment printing. Cream <code>#FAF7F2</code> is used for prints on dark blanks.
+    </div>
+  </div>
+
+  <!-- ═══════════════ 4. TYPOGRAPHY ═══════════════ -->
+  <div class="section">
+    <div class="section-head">
+      <h2>Typography</h2>
+      <div class="rule"></div>
+    </div>
+    <p class="lead">Two fonts. One serif for presence, one sans-serif for clarity. The pairing signals "crafted but approachable."</p>
+
+    <div class="two-col">
+      <div class="font-specimen">
+        <div class="fs-name">Display / Headings — Playfair Display</div>
+        <div class="fs-sample" style="font-family:'Playfair Display',Georgia,serif; font-size:28pt; font-weight:900; color:var(--fern-dark); line-height:1.15;">
+          Rooted in Nature
+        </div>
+        <div class="fs-sample" style="font-family:'Playfair Display',Georgia,serif; font-size:16pt; font-weight:700; color:var(--ink); line-height:1.3;">
+          Every fern starts as a tiny fiddlehead.
+        </div>
+        <div class="fs-meta">Weights: 700 (Bold), 900 (Black) · Use for: headers, hero text, pull quotes, cover titles, product collection names</div>
+      </div>
+      <div class="font-specimen">
+        <div class="fs-name">Body / UI — DM Sans (Web) / Inter (Print)</div>
+        <div class="fs-sample" style="font-family:'Inter',system-ui,sans-serif; font-size:11pt; font-weight:400; color:var(--ink); line-height:1.7;">
+          Our organic cotton is GOTS-certified and grown without synthetic pesticides. Each garment is made to be soft enough for a newborn, durable enough for everyday adventures.
+        </div>
+        <div class="fs-meta">Weights: 400 (Regular), 500 (Medium), 600 (Semi-Bold), 700 (Bold) · Use for: body text, buttons, navigation, forms, product details</div>
+      </div>
+    </div>
+
+    <h3 class="sub-head">Type Scale</h3>
+    <div class="type-scale">
+      <div class="type-row">
+        <div class="type-label">Hero</div>
+        <div class="type-sample" style="font-family:'Playfair Display',Georgia,serif; font-size:38pt; font-weight:900; color:var(--fern-dark); line-height:1.05;">Mama Fern</div>
+      </div>
+      <div class="type-row">
+        <div class="type-label">H1</div>
+        <div class="type-sample" style="font-family:'Playfair Display',Georgia,serif; font-size:28pt; font-weight:900; color:var(--ink);">Collection Title</div>
+      </div>
+      <div class="type-row">
+        <div class="type-label">H2</div>
+        <div class="type-sample" style="font-family:'Playfair Display',Georgia,serif; font-size:20pt; font-weight:700; color:var(--ink);">Section Heading</div>
+      </div>
+      <div class="type-row">
+        <div class="type-label">H3</div>
+        <div class="type-sample" style="font-family:'Inter',sans-serif; font-size:13pt; font-weight:700; color:var(--fern-dark);">Sub-Section Title</div>
+      </div>
+      <div class="type-row">
+        <div class="type-label">Body</div>
+        <div class="type-sample" style="font-family:'Inter',sans-serif; font-size:10.5pt; font-weight:400; color:var(--ink);">GOTS-certified organic cotton, designed with love for your family.</div>
+      </div>
+      <div class="type-row">
+        <div class="type-label">Caption</div>
+        <div class="type-sample" style="font-family:'Inter',sans-serif; font-size:8.5pt; font-weight:500; color:var(--muted);">100% ORGANIC COTTON · MACHINE WASHABLE</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ═══════════════ 5. VOICE & TONE ═══════════════ -->
+  <div class="section">
+    <div class="section-head">
+      <h2>Voice &amp; Tone</h2>
+      <div class="rule"></div>
+    </div>
+    <p class="lead">Mama Fern sounds like the friend who recommends the best farmers market — warm, knowledgeable, never preachy. We speak to parents as equals, not consumers.</p>
+
+    <h3 class="sub-head">Personality Traits</h3>
+    <div class="four-col">
+      <div class="info-card">
+        <h3>Warm</h3>
+        <p>Like a handwritten note, not a corporate memo. Personal, human, genuine.</p>
+      </div>
+      <div class="info-card sage-card">
+        <h3>Grounded</h3>
+        <p>Factual about materials and craft. No greenwashing or vague "eco" claims.</p>
+      </div>
+      <div class="info-card terra">
+        <h3>Playful</h3>
+        <p>Light and fun when talking about family life. We get the chaos and love it.</p>
+      </div>
+      <div class="info-card brown">
+        <h3>Calm</h3>
+        <p>Never urgent, never pushy. No "LAST CHANCE!" or countdown timers.</p>
+      </div>
+    </div>
+
+    <h3 class="sub-head">Writing Examples</h3>
+    <div class="do-dont">
+      <div class="do-box">
+        <div class="do-label">✓ SOUNDS LIKE US</div>
+        <ul>
+          <li>"Soft enough for nap time, sturdy enough for puddle-jumping."</li>
+          <li>"Made for mamas who know the best things come from the earth."</li>
+          <li>"Our organic cotton is GOTS-certified — because labels matter (the fabric kind and the ingredient kind)."</li>
+          <li>"Matching family sets for mornings at the farmers market."</li>
+        </ul>
+      </div>
+      <div class="dont-box">
+        <div class="do-label">✗ DOESN'T SOUND LIKE US</div>
+        <ul>
+          <li>"LIMITED DROP! Only 50 left! Grab yours NOW!!"</li>
+          <li>"Elevate your wardrobe with our curated essentials."</li>
+          <li>"We're saving the planet, one organic tee at a time."</li>
+          <li>"Shop our sustainable fashion-forward collection."</li>
+        </ul>
+      </div>
+    </div>
+
+    <h3 class="sub-head">Tone by Channel</h3>
+    <table>
+      <thead>
+        <tr>
+          <th>Channel</th>
+          <th>Tone</th>
+          <th>Example</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr><td>Product Description</td><td>Descriptive, tactile, specific</td><td>"140gsm organic cotton jersey. Relaxed fit. Pre-washed for softness."</td></tr>
+        <tr><td>Instagram</td><td>Casual, warm, community-driven</td><td>"Saturday morning uniform: matching fern tees + messy pancakes 🥞🌿"</td></tr>
+        <tr><td>Email</td><td>personal, friendly, newsletter-ish</td><td>"Hey! We made something we think your family is going to love."</td></tr>
+        <tr><td>Website Copy</td><td>Clean, minimal, confident</td><td>"Organic cotton. Family matched. Intentionally simple."</td></tr>
+        <tr><td>Customer Service</td><td>Empathetic, helpful, human</td><td>"Oh no! Let me sort that out for you — we'll get you the right size."</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- ═══════════════ 6. PHOTOGRAPHY & IMAGERY ═══════════════ -->
+  <div class="section">
+    <div class="section-head">
+      <h2>Photography &amp; Imagery</h2>
+      <div class="rule"></div>
+    </div>
+    <p class="lead">Our visual world lives at the intersection of nature journal and family scrapbook. Warm light, natural settings, real moments.</p>
+
+    <h3 class="sub-head">Photography Direction</h3>
+    <div class="do-dont">
+      <div class="do-box">
+        <div class="do-label">✓ AIM FOR</div>
+        <ul>
+          <li>Golden hour natural light — warm, soft, directional</li>
+          <li>Natural outdoor settings: meadows, forests, gardens, farm stands</li>
+          <li>Authentic family moments: holding hands, laughing, exploring</li>
+          <li>Cream/oat should always be the hero colorway in first photos</li>
+          <li>Lifestyle shots showing full family matching sets together</li>
+          <li>Flat-lay product shots on natural textures (linen, wood, stone)</li>
+        </ul>
+      </div>
+      <div class="dont-box">
+        <div class="do-label">✗ AVOID</div>
+        <ul>
+          <li>Harsh studio lighting or pure white backgrounds</li>
+          <li>Overly posed or stiff model shots</li>
+          <li>Neon, fluorescent, or cool-toned color grading</li>
+          <li>Stock photography "family in white t-shirts" aesthetic</li>
+          <li>Cluttered backgrounds or urban settings</li>
+          <li>Heavy filters or over-saturated editing</li>
+        </ul>
+      </div>
+    </div>
+
+    <h3 class="sub-head">Botanical Motifs</h3>
+    <p class="lead">These are the visual icons of Mama Fern. All artwork should feel like it was sketched in a nature journal — organic, imperfect, hand-drawn.</p>
+    <div class="motif-grid">
+      <div class="motif-item">
+        <div class="motif-icon">🌿</div>
+        <div class="motif-name">Fern Fronds</div>
+        <div class="motif-desc">Core icon. Own this.</div>
+      </div>
+      <div class="motif-item">
+        <div class="motif-icon">🌸</div>
+        <div class="motif-name">Wildflowers</div>
+        <div class="motif-desc">Lavender, daisies, Queen Anne's lace</div>
+      </div>
+      <div class="motif-item">
+        <div class="motif-icon">🍄</div>
+        <div class="motif-name">Mushrooms</div>
+        <div class="motif-desc">Cottagecore crossover</div>
+      </div>
+      <div class="motif-item">
+        <div class="motif-icon">🌰</div>
+        <div class="motif-name">Acorns &amp; Oak</div>
+        <div class="motif-desc">"Rooted" metaphor</div>
+      </div>
+      <div class="motif-item">
+        <div class="motif-icon">🐌</div>
+        <div class="motif-name">Snails</div>
+        <div class="motif-desc">Gentle nature, kids love them</div>
+      </div>
+      <div class="motif-item">
+        <div class="motif-icon">🦋</div>
+        <div class="motif-name">Butterflies</div>
+        <div class="motif-desc">Whimsy, transformation</div>
+      </div>
+      <div class="motif-item">
+        <div class="motif-icon">🌱</div>
+        <div class="motif-name">Root Systems</div>
+        <div class="motif-desc">Family, growth, foundation</div>
+      </div>
+      <div class="motif-item">
+        <div class="motif-icon">🌀</div>
+        <div class="motif-name">Fiddleheads</div>
+        <div class="motif-desc">New beginnings, babies</div>
+      </div>
+    </div>
+
+    <div class="warn">
+      <strong>Design Aesthetic:</strong> All artwork should look like "a nature journal sketch" — hand-drawn line art with imperfect, warm, organic line work. Not digitally perfect vectors. Not polished clipart. Think fine-tip pen on textured paper.
+    </div>
+  </div>
+
+  <!-- ═══════════════ 7. COLOR CONTRAST / A11Y ═══════════════ -->
+  <div class="section">
+    <div class="section-head">
+      <h2>Accessibility &amp; Contrast</h2>
+      <div class="rule"></div>
+    </div>
+    <p class="lead">WCAG AA compliance is non-negotiable — it's a legal requirement for e-commerce. Every color pairing used for text must pass contrast requirements.</p>
+
+    <h3 class="sub-head">Approved Color Combinations</h3>
+    <div class="contrast-grid">
+      <div class="contrast-pair">
+        <div class="contrast-sample" style="background:#FAF7F2; color:#2C2C2C;">Charcoal on Cream</div>
+        <div class="contrast-meta"><span>13.9:1</span><span class="contrast-badge badge-aaa">AAA</span></div>
+      </div>
+      <div class="contrast-pair">
+        <div class="contrast-sample" style="background:#FAF7F2; color:#355c40;">Fern Dark on Cream</div>
+        <div class="contrast-meta"><span>7.3:1</span><span class="contrast-badge badge-aaa">AAA</span></div>
+      </div>
+      <div class="contrast-pair">
+        <div class="contrast-sample" style="background:#FAF7F2; color:#4A6741;">Fern on Cream</div>
+        <div class="contrast-meta"><span>5.7:1</span><span class="contrast-badge badge-aa">AA</span></div>
+      </div>
+      <div class="contrast-pair">
+        <div class="contrast-sample" style="background:#355c40; color:#FAF7F2;">Cream on Fern Dark</div>
+        <div class="contrast-meta"><span>7.3:1</span><span class="contrast-badge badge-aaa">AAA</span></div>
+      </div>
+      <div class="contrast-pair">
+        <div class="contrast-sample" style="background:#FAF7F2; color:#5A3F32;">Warm Brown Readable on Cream</div>
+        <div class="contrast-meta"><span>8.1:1</span><span class="contrast-badge badge-aaa">AAA</span></div>
+      </div>
+      <div class="contrast-pair">
+        <div class="contrast-sample" style="background:#FAF7F2; color:#C4704B;">Terracotta on Cream</div>
+        <div class="contrast-meta"><span>3.8:1</span><span class="contrast-badge badge-aa">AA (Large)</span></div>
+      </div>
+    </div>
+
+    <div class="warn">
+      <strong>Caution:</strong> Terracotta <code>#C4704B</code> on Cream passes AA only for large text (18pt+ or 14pt bold). For body text on cream, use Charcoal, Fern Dark, or Warm Brown Readable instead.
+    </div>
+
+    <h3 class="sub-head">Accessibility Checklist</h3>
+    <ul class="a11y-list">
+      <li><span class="a11y-icon">🏷️</span><strong>Semantic HTML</strong> — Use proper heading hierarchy, landmarks, and list elements. Never use divs for interactive elements.</li>
+      <li><span class="a11y-icon">⌨️</span><strong>Keyboard Navigation</strong> — All interactive elements must be reachable and operable via keyboard. Visible focus states required.</li>
+      <li><span class="a11y-icon">🔊</span><strong>Screen Readers</strong> — ARIA labels on icon buttons, decorative images marked <code>aria-hidden</code>, meaningful alt text on product images.</li>
+      <li><span class="a11y-icon">🎨</span><strong>Color Contrast</strong> — Minimum 4.5:1 for normal text, 3:1 for large text. All pairings tested above.</li>
+      <li><span class="a11y-icon">📝</span><strong>Form Labels</strong> — Every input has a visible, associated label. Error messages are linked to inputs via <code>aria-describedby</code>.</li>
+      <li><span class="a11y-icon">🖼️</span><strong>Images</strong> — All product images have descriptive alt text. Decorative botanical patterns use <code>alt=""</code>.</li>
+      <li><span class="a11y-icon">📱</span><strong>Touch Targets</strong> — Minimum 44×44px touch targets on mobile. Adequate spacing between interactive elements.</li>
+    </ul>
+  </div>
+
+  <!-- ═══════════════ 8. QUICK REFERENCE ═══════════════ -->
+  <div class="section">
+    <div class="section-head">
+      <h2>Quick Reference</h2>
+      <div class="rule"></div>
+    </div>
+
+    <div class="two-col">
+      <div class="info-card">
+        <h3>Brand at a Glance</h3>
+        <table>
+          <tbody>
+            <tr><td><strong>Brand Name</strong></td><td>Mama Fern</td></tr>
+            <tr><td><strong>Tagline</strong></td><td>Grounded family apparel for crunchy, cozy homes.</td></tr>
+            <tr><td><strong>Display Font</strong></td><td>Playfair Display (700, 900)</td></tr>
+            <tr><td><strong>Body Font</strong></td><td>DM Sans (web) / Inter (print)</td></tr>
+            <tr><td><strong>Primary Color</strong></td><td>Fern #4A6741</td></tr>
+            <tr><td><strong>Accent Color</strong></td><td>Terracotta #C4704B</td></tr>
+            <tr><td><strong>Background</strong></td><td>Cream #FAF7F2</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="info-card terra">
+        <h3>Key Links</h3>
+        <table>
+          <tbody>
+            <tr><td><strong>Website</strong></td><td>mamafern.com</td></tr>
+            <tr><td><strong>Shopify</strong></td><td>mama-fern.myshopify.com</td></tr>
+            <tr><td><strong>Instagram</strong></td><td>@mamafern</td></tr>
+            <tr><td><strong>Email</strong></td><td>hello@mamafern.com</td></tr>
+            <tr><td><strong>Deployment</strong></td><td>Hostinger VPS + PM2</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+
+  <!-- ═══════════════ FOOTER ═══════════════ -->
+  <div class="footer">
+    <span>Mama Fern · Brand Guidelines v1.0</span>
+    <span>February 2026 · Internal Use Only</span>
+  </div>
+
+</div>
+</body>
+</html>

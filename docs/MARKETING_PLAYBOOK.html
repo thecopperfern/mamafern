@@ -1,0 +1,686 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Mama Fern — Marketing Playbook 2026</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --cream:       #faf6ef;
+    --cream-mid:   #f0e9dc;
+    --cream-dark:  #ddd0bc;
+    --fern:        #4a7c59;
+    --fern-dark:   #355c40;
+    --fern-light:  #d1e8d8;
+    --sage:        #7aad8a;
+    --sage-light:  #e3f0e7;
+    --terracotta:  #b9602a;
+    --terra-light: #f5e0d0;
+    --ink:         #2a2217;
+    --muted:       #6b5e4e;
+    --rule:        #c9baa5;
+    --warm-brown:  #6b4d3e;
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    font-family: 'Inter', system-ui, sans-serif;
+    background: var(--cream);
+    color: var(--ink);
+    font-size: 10.5pt;
+    line-height: 1.6;
+  }
+
+  .page { max-width: 820px; margin: 0 auto; }
+
+  /* ── Cover ── */
+  .cover {
+    background: linear-gradient(135deg, var(--fern-dark) 0%, #1a4028 100%);
+    color: #fff;
+    padding: 56px 48px 48px;
+    position: relative;
+    page-break-after: always;
+  }
+  .cover::after {
+    content: '';
+    display: block;
+    height: 6px;
+    background: linear-gradient(90deg, var(--terracotta), var(--sage), var(--fern));
+    position: absolute;
+    bottom: 0; left: 0; right: 0;
+  }
+  .cover-eyebrow {
+    font-size: 8.5pt; font-weight: 700; letter-spacing: .22em; text-transform: uppercase; opacity: .65; margin-bottom: 14px;
+  }
+  .cover h1 {
+    font-family: 'Playfair Display', Georgia, serif; font-size: 38pt; font-weight: 900;
+    line-height: 1.08; letter-spacing: -.02em; margin-bottom: 10px;
+  }
+  .cover h1 span { color: #c8e6c2; }
+  .cover-sub {
+    font-size: 12.5pt; opacity: .88; font-weight: 500; margin-bottom: 28px;
+  }
+  .cover-stats {
+    display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px;
+    margin-top: 28px; padding-top: 24px; border-top: 1px solid rgba(255,255,255,.2);
+  }
+  .stat-box {
+    background: rgba(255,255,255,.12); border: 1px solid rgba(255,255,255,.2);
+    border-radius: 8px; padding: 14px 12px; text-align: center;
+  }
+  .stat-box .s-val { font-family: 'Playfair Display', serif; font-size: 18pt; font-weight: 900; line-height: 1; margin-bottom: 4px; }
+  .stat-box .s-lbl { font-size: 7.5pt; opacity: .75; letter-spacing: .06em; text-transform: uppercase; }
+  .cover-idea {
+    margin-top: 28px; background: rgba(255,255,255,.1); border: 1px solid rgba(255,255,255,.25);
+    border-radius: 8px; padding: 14px 18px; font-family: 'Playfair Display', Georgia, serif;
+    font-size: 12pt; font-style: italic; color: #c8e6c2;
+  }
+
+  /* ── Sections ── */
+  .section { padding: 32px 48px; border-bottom: 1px solid var(--cream-dark); }
+  .section-head { display: flex; align-items: baseline; gap: 12px; margin-bottom: 18px; }
+  .section-head h2 { font-family: 'Playfair Display', Georgia, serif; font-size: 17pt; font-weight: 700; color: var(--fern-dark); white-space: nowrap; }
+  .section-head .rule { flex: 1; height: 1px; background: var(--rule); align-self: center; margin-top: 4px; }
+
+  h3.sub-head {
+    font-size: 9pt; font-weight: 700; letter-spacing: .1em; text-transform: uppercase;
+    color: var(--fern-dark); margin: 18px 0 10px; padding-bottom: 4px; border-bottom: 2px solid var(--fern-light);
+  }
+
+  p.lead { font-size: 9.5pt; color: var(--muted); margin-bottom: 12px; line-height: 1.7; }
+
+  /* ── Grids ── */
+  .two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-bottom: 14px; }
+  .three-col { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 14px; margin-bottom: 14px; }
+  .four-col { display: grid; grid-template-columns: 1fr 1fr 1fr 1fr; gap: 12px; margin-bottom: 14px; }
+
+  /* ── Info cards ── */
+  .info-card {
+    background: #fff; border: 1px solid var(--cream-dark); border-top: 3px solid var(--fern);
+    border-radius: 6px; padding: 14px 16px; page-break-inside: avoid;
+  }
+  .info-card h3 { font-size: 8.5pt; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; color: var(--fern-dark); margin-bottom: 8px; }
+  .info-card p { font-size: 9pt; color: var(--muted); line-height: 1.6; }
+  .info-card.terra { border-top-color: var(--terracotta); }
+  .info-card.terra h3 { color: var(--terracotta); }
+  .info-card.sage-card { border-top-color: var(--sage); }
+  .info-card.sage-card h3 { color: #5a8a6a; }
+  .info-card.brown { border-top-color: var(--warm-brown); }
+  .info-card.brown h3 { color: var(--warm-brown); }
+  .info-card.blue { border-top-color: #3b6fa0; }
+  .info-card.blue h3 { color: #3b6fa0; }
+
+  /* ── Tables ── */
+  table { width: 100%; border-collapse: collapse; margin-bottom: 10px; page-break-inside: avoid; }
+  thead tr { background: var(--fern-dark); color: #fff; }
+  thead th { padding: 8px 12px; text-align: left; font-size: 8pt; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; }
+  tbody tr:nth-child(even) { background: var(--cream-mid); }
+  tbody tr:nth-child(odd) { background: #fff; }
+  tbody td { padding: 7px 12px; font-size: 9pt; vertical-align: top; }
+  tbody tr:last-child td { border-bottom: 2px solid var(--fern-dark); }
+
+  /* ── Persona cards ── */
+  .persona-grid { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 14px; margin: 12px 0; }
+  .persona-card {
+    background: #fff; border: 1px solid var(--cream-dark); border-radius: 8px;
+    overflow: hidden; page-break-inside: avoid;
+  }
+  .persona-avatar {
+    height: 44px; display: flex; align-items: center; justify-content: center; gap: 10px;
+    color: #fff; font-size: 18pt; padding: 0 14px;
+  }
+  .persona-avatar.p1 { background: var(--fern); }
+  .persona-avatar.p2 { background: var(--fern-dark); }
+  .persona-avatar.p3 { background: var(--terracotta); }
+  .persona-avatar .pa-label {
+    font-size: 8pt; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; opacity: .85;
+  }
+  .persona-body { padding: 12px 14px; }
+  .persona-body h4 { font-family: 'Playfair Display', serif; font-size: 11pt; font-weight: 700; color: var(--ink); margin-bottom: 4px; }
+  .persona-body p { font-size: 8.5pt; color: var(--muted); line-height: 1.5; margin-bottom: 4px; }
+  .persona-body .persona-traits { font-size: 8pt; color: var(--fern-dark); font-weight: 600; }
+
+  /* ── Phase cards ── */
+  .phase-header {
+    background: var(--fern-dark); color: #fff; padding: 12px 18px; border-radius: 6px;
+    margin-bottom: 14px; display: flex; align-items: center; gap: 14px; page-break-inside: avoid;
+  }
+  .phase-header.ph2 { background: #3b6fa0; }
+  .phase-header.ph3 { background: #1a6b3c; }
+  .phase-header.ph4 { background: var(--terracotta); }
+  .ph-num { font-family: 'Playfair Display', serif; font-size: 20pt; font-weight: 900; opacity: .5; line-height: 1; }
+  .ph-info { flex: 1; }
+  .ph-info .ph-name { font-family: 'Playfair Display', serif; font-size: 13pt; font-weight: 700; }
+  .ph-info .ph-dates { font-size: 8pt; opacity: .75; letter-spacing: .04em; }
+  .ph-badge {
+    background: rgba(255,255,255,.18); border: 1px solid rgba(255,255,255,.25);
+    border-radius: 20px; padding: 4px 12px; font-size: 8pt; font-weight: 600;
+  }
+
+  /* ── Hashtag grid ── */
+  .hashtag-grid { display: flex; flex-wrap: wrap; gap: 6px; margin: 8px 0; }
+  .hashtag {
+    background: var(--fern-light); color: var(--fern-dark);
+    font-size: 8pt; font-weight: 600; padding: 3px 10px; border-radius: 20px;
+    font-family: 'Inter', monospace;
+  }
+  .hashtag.terra { background: var(--terra-light); color: var(--terracotta); }
+
+  /* ── Content pillar cards ── */
+  .pillar-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; margin: 12px 0; }
+  .pillar {
+    text-align: center; background: #fff; border: 1px solid var(--cream-dark);
+    border-radius: 8px; padding: 16px 10px 12px; page-break-inside: avoid;
+  }
+  .pillar-icon { font-size: 22pt; margin-bottom: 6px; }
+  .pillar h4 { font-family: 'Playfair Display', Georgia, serif; font-size: 10pt; font-weight: 700; color: var(--fern-dark); margin-bottom: 4px; }
+  .pillar p { font-size: 7.5pt; color: var(--muted); line-height: 1.5; }
+
+  /* ── KPI rows ── */
+  .kpi-group { margin-bottom: 14px; }
+  .kpi-group h3 {
+    font-size: 9pt; font-weight: 700; letter-spacing: .08em; text-transform: uppercase;
+    color: var(--fern-dark); border-bottom: 2px solid var(--fern-light); padding-bottom: 4px; margin-bottom: 8px;
+  }
+  .kpi-row {
+    display: flex; justify-content: space-between; align-items: center;
+    padding: 5px 0; border-bottom: 1px dotted var(--cream-dark); font-size: 9pt;
+  }
+  .kpi-row:last-child { border-bottom: none; }
+  .kpi-val { font-weight: 700; color: var(--fern-dark); }
+
+  /* ── Budget rows ── */
+  .budget-row {
+    display: flex; justify-content: space-between; align-items: center;
+    padding: 6px 0; border-bottom: 1px dotted var(--cream-dark); font-size: 9pt;
+  }
+  .budget-amount { font-weight: 700; color: var(--terracotta); white-space: nowrap; }
+
+  /* ── Strategy list ── */
+  .strategy-list { list-style: none; padding: 0; counter-reset: strat; margin-bottom: 12px; }
+  .strategy-list li {
+    display: flex; gap: 12px; padding: 8px 0; border-bottom: 1px dotted var(--cream-dark);
+    font-size: 9pt; align-items: flex-start;
+  }
+  .strategy-list li:last-child { border-bottom: none; }
+  .strategy-list li::before {
+    content: counter(strat); counter-increment: strat;
+    min-width: 22px; height: 22px; background: var(--terracotta); color: #fff;
+    font-size: 8pt; font-weight: 700; border-radius: 50%;
+    display: flex; align-items: center; justify-content: center; flex-shrink: 0; margin-top: 1px;
+  }
+
+  /* ── Note / callout ── */
+  .note { border-left: 4px solid var(--fern); background: var(--sage-light); padding: 10px 14px; border-radius: 0 6px 6px 0; font-size: 9pt; margin: 10px 0; page-break-inside: avoid; }
+  .note strong { color: var(--fern-dark); }
+  .warn { border-left: 4px solid var(--terracotta); background: var(--terra-light); padding: 10px 14px; border-radius: 0 6px 6px 0; font-size: 9pt; margin: 10px 0; page-break-inside: avoid; }
+  .warn strong { color: var(--terracotta); }
+
+  code { font-family: 'Courier New', monospace; font-size: 8.5pt; background: var(--cream-mid); padding: 1px 4px; border-radius: 3px; }
+
+  /* ── Footer ── */
+  .footer {
+    padding: 18px 48px; font-size: 7.5pt; color: var(--muted);
+    display: flex; justify-content: space-between; border-top: 2px solid var(--fern);
+  }
+
+  .spacer { height: 12px; }
+
+  /* ─────────────── PRINT ─────────────── */
+  @page { size: letter portrait; margin: 13mm 12mm 13mm 12mm; }
+  @media print {
+    body { background: #fff; font-size: 9pt; }
+    .cover, .phase-header, .persona-avatar, thead tr, .hashtag,
+    .note, .warn, .info-card, .pillar, .strategy-list li::before, .stat-box {
+      -webkit-print-color-adjust: exact; print-color-adjust: exact;
+    }
+    .section { page-break-inside: avoid; }
+    h2, h3 { page-break-after: avoid; }
+    tr { page-break-inside: avoid; }
+  }
+</style>
+</head>
+<body>
+<div class="page">
+
+  <!-- ═══════════════ COVER ═══════════════ -->
+  <div class="cover">
+    <div class="cover-eyebrow">Marketing Strategy · 2026</div>
+    <h1>Marketing<br><span>Playbook</span></h1>
+    <div class="cover-sub">Mama Fern · Audience, Channels, Campaigns &amp; Metrics</div>
+    <div class="cover-stats">
+      <div class="stat-box"><div class="s-val">$15k</div><div class="s-lbl">Revenue Target</div></div>
+      <div class="stat-box"><div class="s-val">$70+</div><div class="s-lbl">AOV Goal</div></div>
+      <div class="stat-box"><div class="s-val">1,000</div><div class="s-lbl">Email List Goal</div></div>
+      <div class="stat-box"><div class="s-val">May 10</div><div class="s-lbl">Mother's Day</div></div>
+    </div>
+    <div class="cover-idea">"Made for every kind of mama."</div>
+  </div>
+
+  <!-- ═══════════════ BRAND POSITIONING ═══════════════ -->
+  <div class="section">
+    <div class="section-head">
+      <h2>Brand Positioning</h2>
+      <div class="rule"></div>
+    </div>
+    <p class="lead">Mama Fern sits in the sweet spot between fast fashion and luxury — premium organic family apparel at reachable price points, designed for parents who value natural materials and intentional living.</p>
+
+    <h3 class="sub-head">Target Personas</h3>
+    <div class="persona-grid">
+      <div class="persona-card">
+        <div class="persona-avatar p1">
+          <span>🌿</span>
+          <span class="pa-label">Primary Buyer</span>
+        </div>
+        <div class="persona-body">
+          <h4>The Crunchy Mama</h4>
+          <p>Millennial/Gen-Z mom, 26–38. Reads ingredient labels, chooses organic, gravitates toward earth tones. Values comfort and intention over trends.</p>
+          <div class="persona-traits">Self-purchase · Family sets · Repeat buyer</div>
+        </div>
+      </div>
+      <div class="persona-card">
+        <div class="persona-avatar p2">
+          <span>🌲</span>
+          <span class="pa-label">Secondary Buyer</span>
+        </div>
+        <div class="persona-body">
+          <h4>The Supportive Partner</h4>
+          <p>Dad/partner who wants to match the family look. Buys for himself AND as gifts. Appreciates simple, unisex designs that aren't too "cute."</p>
+          <div class="persona-traits">Gift buyer · Family set completer · Higher AOV</div>
+        </div>
+      </div>
+      <div class="persona-card">
+        <div class="persona-avatar p3">
+          <span>🎁</span>
+          <span class="pa-label">Gift Buyer</span>
+        </div>
+        <div class="persona-body">
+          <h4>The Thoughtful Gifter</h4>
+          <p>Grandparent, friend, or coworker looking for a meaningful Mother's Day or baby shower gift. Wants something that feels "chosen with care."</p>
+          <div class="persona-traits">One-time buyer · Bundles · Gift wrap · Discovery</div>
+        </div>
+      </div>
+    </div>
+
+    <h3 class="sub-head">Competitive Positioning</h3>
+    <div class="two-col">
+      <div class="info-card">
+        <h3>What Sets Us Apart</h3>
+        <p><strong>Family matching</strong> — Mama, Papa, Little, Seedling. Coordinated designs across all family members.<br><br>
+        <strong>Organic cotton standard</strong> — GOTS-certified, not just "contains organic." Full supply chain verification.<br><br>
+        <strong>Design restraint</strong> — Small, intentional designs vs. loud graphics. Identity badges, not billboards.</p>
+      </div>
+      <div class="info-card terra">
+        <h3>Price Positioning</h3>
+        <p><strong>Below luxury</strong> — Not $60+ basic tees. Accessible to the target demographic.<br><br>
+        <strong>Above fast fashion</strong> — Premium quality justifies the step-up from $12 Walmart tees.<br><br>
+        <strong>The sweet spot:</strong> $20–$52 per product, $55–$100 AOV with bundles.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- ═══════════════ CONTENT PILLARS ═══════════════ -->
+  <div class="section">
+    <div class="section-head">
+      <h2>Content Pillars</h2>
+      <div class="rule"></div>
+    </div>
+    <p class="lead">Four content themes that rotate across all channels. Every piece of content should fit one of these pillars.</p>
+
+    <div class="pillar-grid">
+      <div class="pillar">
+        <div class="pillar-icon">🏡</div>
+        <h4>Behind the Brand</h4>
+        <p>How it's made, why organic, fabric close-ups, design process, founder story.</p>
+      </div>
+      <div class="pillar">
+        <div class="pillar-icon">👨‍👩‍👧‍👦</div>
+        <h4>Family Moments</h4>
+        <p>Matching family scenes, mornings, outdoors, messy kitchens, real life.</p>
+      </div>
+      <div class="pillar">
+        <div class="pillar-icon">🧵</div>
+        <h4>Fabric &amp; Quality</h4>
+        <p>GOTS certification, material education, care tips, sustainability details.</p>
+      </div>
+      <div class="pillar">
+        <div class="pillar-icon">🤝</div>
+        <h4>Community</h4>
+        <p>Customer photos, family spotlights, UGC reposts, polls, questions.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- ═══════════════ MOTHER'S DAY CAMPAIGN ═══════════════ -->
+  <div class="section">
+    <div class="section-head">
+      <h2>Mother's Day Campaign</h2>
+      <div class="rule"></div>
+    </div>
+    <p class="lead">8-week campaign: March 16 – May 10, 2026. Mother's Day IS the launch vehicle — "Mama" is in the name.</p>
+
+    <div class="phase-header">
+      <div class="ph-num">01</div>
+      <div class="ph-info">
+        <div class="ph-name">Build Anticipation</div>
+        <div class="ph-dates">March 16 – April 5 · Weeks 1–3 · Store NOT open</div>
+      </div>
+      <div class="ph-badge">Audience Building</div>
+    </div>
+    <div class="two-col" style="margin-bottom:10px;">
+      <div class="info-card">
+        <h3>Activities</h3>
+        <p>Launch Instagram with 3 posts/week. Start TikTok with behind-the-scenes content. Build waitlist landing page with <code>FIRSTFERN</code> 15% off incentive. Begin SEO blog content. Identify micro-influencers.</p>
+      </div>
+      <div class="info-card sage-card">
+        <h3>Targets</h3>
+        <p>100+ email subscribers by Week 1. 300+ by Week 3. First 5 influencer DMs sent. Blog content indexed for long-tail keywords.</p>
+      </div>
+    </div>
+
+    <div class="phase-header ph2">
+      <div class="ph-num">02</div>
+      <div class="ph-info">
+        <div class="ph-name">Pre-Launch Hype</div>
+        <div class="ph-dates">April 6–19 · Weeks 4–5 · Product seeding</div>
+      </div>
+      <div class="ph-badge">Product Seeding</div>
+    </div>
+    <div class="two-col" style="margin-bottom:10px;">
+      <div class="info-card">
+        <h3>Activities</h3>
+        <p>Ship product to 15+ micro-influencers ($375–$800 in product, no cash). Ramp social to 4–5 posts/week. Product reveal content. Email sequence to waitlist. Countdown-style content.</p>
+      </div>
+      <div class="info-card sage-card">
+        <h3>Targets</h3>
+        <p>600+ email subscribers. Influencer unboxing content live. Product photography complete. Social engagement rate 3%+.</p>
+      </div>
+    </div>
+
+    <div class="phase-header ph3">
+      <div class="ph-num">03</div>
+      <div class="ph-info">
+        <div class="ph-name">Launch Week</div>
+        <div class="ph-dates">April 20–26 · Week 6 · Store opens</div>
+      </div>
+      <div class="ph-badge">Public Launch</div>
+    </div>
+    <div class="two-col" style="margin-bottom:10px;">
+      <div class="info-card">
+        <h3>Activities</h3>
+        <p>Waitlist early access (Day 1, <code>FIRSTFERN</code>). Public launch (Day 2). Launch email blast + social blitz. Daily posting. UGC reposting begins. Press outreach.</p>
+      </div>
+      <div class="info-card sage-card">
+        <h3>Targets</h3>
+        <p>First 50 orders. $2,000+ revenue in launch week. 1,000+ email subscribers. Social follower growth 20%+.</p>
+      </div>
+    </div>
+
+    <div class="phase-header ph4">
+      <div class="ph-num">04</div>
+      <div class="ph-info">
+        <div class="ph-name">Revenue Sprint</div>
+        <div class="ph-dates">April 27 – May 10 · Weeks 7–8 · Mother's Day push</div>
+      </div>
+      <div class="ph-badge">Peak Revenue</div>
+    </div>
+    <div class="two-col" style="margin-bottom:10px;">
+      <div class="info-card">
+        <h3>Activities</h3>
+        <p>Gift guide content. "Last chance for Mother's Day delivery" urgency. <code>MAMAFERN10</code> public code. Optional paid ads ($250–$500). Bundle promotion push. Final email sends.</p>
+      </div>
+      <div class="info-card terra">
+        <h3>Targets</h3>
+        <p>$5,000–$15,000 total revenue. AOV $70–$100. Highest volume days: May 3–8. Gift bundles represent 30%+ of orders.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- ═══════════════ SOCIAL MEDIA ═══════════════ -->
+  <div class="section">
+    <div class="section-head">
+      <h2>Social Media Strategy</h2>
+      <div class="rule"></div>
+    </div>
+
+    <div class="two-col">
+      <div class="info-card">
+        <h3>Platform Priority</h3>
+        <table>
+          <tbody>
+            <tr><td><strong>Instagram</strong></td><td>Primary · Visual storefront. Grid aesthetic. Stories for BTS. Reels for reach.</td></tr>
+            <tr><td><strong>TikTok</strong></td><td>Secondary · Organic reach engine. BTS, unboxings, family matching reveals.</td></tr>
+            <tr><td><strong>Pinterest</strong></td><td>Tertiary · Long-tail discovery. Product pins, outfit inspo, nursery aesthetic.</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="info-card terra">
+        <h3>Posting Cadence</h3>
+        <table>
+          <tbody>
+            <tr><td><strong>Pre-launch</strong></td><td>IG 3x/week · TikTok 2x/week · Stories daily</td></tr>
+            <tr><td><strong>Ramp-up</strong></td><td>IG 4–5x/week · TikTok 3x/week · Stories daily</td></tr>
+            <tr><td><strong>Launch+</strong></td><td>IG daily · TikTok 4x/week · Stories 2x/daily</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <h3 class="sub-head">Content Mix</h3>
+    <table>
+      <thead>
+        <tr><th>Type</th><th>%</th><th>Examples</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>Lifestyle/Family</td><td>35%</td><td>Matching family photos, morning routines, outdoor adventures</td></tr>
+        <tr><td>Product/Detail</td><td>25%</td><td>Fabric close-ups, flat lays, product features, print details</td></tr>
+        <tr><td>Behind the Scenes</td><td>20%</td><td>Design process, packing orders, founder story, studio life</td></tr>
+        <tr><td>Community/UGC</td><td>15%</td><td>Customer reposts, polls, Q&A, family spotlights</td></tr>
+        <tr><td>Educational</td><td>5%</td><td>GOTS certification, organic cotton facts, care tips</td></tr>
+      </tbody>
+    </table>
+
+    <h3 class="sub-head">Hashtag Strategy</h3>
+    <div class="hashtag-grid">
+      <span class="hashtag">#MamaFern</span>
+      <span class="hashtag">#PapaFern</span>
+      <span class="hashtag">#LittleFern</span>
+      <span class="hashtag">#WildlyRooted</span>
+      <span class="hashtag">#FernFamily</span>
+      <span class="hashtag terra">#CrunchyMom</span>
+      <span class="hashtag terra">#CrunchyMama</span>
+      <span class="hashtag terra">#OrganicBaby</span>
+      <span class="hashtag terra">#CottagecoreFamily</span>
+      <span class="hashtag terra">#NaturalParenting</span>
+      <span class="hashtag">#MatchingFamily</span>
+      <span class="hashtag">#OrganicCotton</span>
+      <span class="hashtag">#FamilyApparel</span>
+      <span class="hashtag terra">#MomLife</span>
+      <span class="hashtag terra">#EarthyKids</span>
+    </div>
+    <div class="note" style="margin-top:10px;">
+      <strong>Hashtag Rule:</strong> Green badges = brand hashtags (always include). Terracotta = niche/community hashtags (rotate 5–8 per post for reach).
+    </div>
+  </div>
+
+  <!-- ═══════════════ EMAIL MARKETING ═══════════════ -->
+  <div class="section">
+    <div class="section-head">
+      <h2>Email Marketing</h2>
+      <div class="rule"></div>
+    </div>
+
+    <div class="two-col">
+      <div class="info-card">
+        <h3>Waitlist Strategy</h3>
+        <p><strong>Incentive:</strong> <code>FIRSTFERN</code> = 15% off first order, exclusive to waitlist subscribers.<br><br>
+        <strong>Platform:</strong> Brevo (API integrated with Next.js site).<br><br>
+        <strong>Landing page:</strong> Email capture on mamafern.com with Nano Banana Pro hero imagery.<br><br>
+        <strong>Goal:</strong> 1,000+ subscribers before Mother's Day.</p>
+      </div>
+      <div class="info-card terra">
+        <h3>Launch Email Sequence</h3>
+        <p><strong>Day 0:</strong> Waitlist early access — "You're first. Shop now with FIRSTFERN."<br><br>
+        <strong>Day 1:</strong> Public launch announcement — "We're live!"<br><br>
+        <strong>Day 3:</strong> Product spotlight — Hero products + family sets<br><br>
+        <strong>Day 7:</strong> Social proof — Early reviews + UGC<br><br>
+        <strong>Week 7:</strong> Gift guide — "Still looking for the perfect Mother's Day gift?"<br><br>
+        <strong>Week 8:</strong> Last chance — "Order by [date] for Mother's Day delivery."</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- ═══════════════ INFLUENCER STRATEGY ═══════════════ -->
+  <div class="section">
+    <div class="section-head">
+      <h2>Influencer Strategy</h2>
+      <div class="rule"></div>
+    </div>
+    <p class="lead">Product-seeding approach: no cash payments. Ship free product to targeted micro-influencers and let authentic content speak.</p>
+
+    <div class="two-col">
+      <div class="info-card">
+        <h3>Target Profiles</h3>
+        <p><strong>Micro-influencers:</strong> 5k–50k followers<br>
+        <strong>Niche:</strong> Crunchy mom, cottagecore, natural parenting, organic lifestyle, family matching<br>
+        <strong>Platforms:</strong> Instagram (primary), TikTok (secondary)<br>
+        <strong>Qty:</strong> 15+ influencers seeded in Weeks 2–5<br>
+        <strong>Ask:</strong> Post + tag, no formal contract. Authenticity over polish.</p>
+      </div>
+      <div class="info-card terra">
+        <h3>Budget</h3>
+        <div class="budget-row"><span>Product seeding (15+ packages)</span><span class="budget-amount">$375–$800</span></div>
+        <div class="budget-row"><span>Shipping costs</span><span class="budget-amount">$100–$200</span></div>
+        <div class="budget-row"><span>Gift wrap / packaging</span><span class="budget-amount">$50–$75</span></div>
+        <div class="budget-row" style="border-bottom:none; padding-top:8px;"><span><strong>Total Influencer Budget</strong></span><span class="budget-amount">$525–$1,075</span></div>
+      </div>
+    </div>
+
+    <div class="note">
+      <strong>Seeding Package:</strong> Send 1 hero product (Mama Fern Classic Tee or Wildflower Tee) + 1 accessory (Tote or Beanie) in branded packaging. Include a handwritten note and <code>MAMAFERN10</code> code for their audience.
+    </div>
+  </div>
+
+  <!-- ═══════════════ SEO & AI VISIBILITY ═══════════════ -->
+  <div class="section">
+    <div class="section-head">
+      <h2>SEO &amp; AI Visibility</h2>
+      <div class="rule"></div>
+    </div>
+    <p class="lead">Organic search + AI-powered discovery (GEO). Position Mama Fern in both traditional search results and AI-generated recommendations.</p>
+
+    <div class="two-col">
+      <div class="info-card">
+        <h3>Blog Content (5 Posts)</h3>
+        <table>
+          <tbody>
+            <tr><td>Best Natural Fabric Kids Clothes</td></tr>
+            <tr><td>Cottagecore Family Outfits Guide</td></tr>
+            <tr><td>Earthy Baby Clothing Guide</td></tr>
+            <tr><td>Matching Family Outfits for Outdoors</td></tr>
+            <tr><td>What Is Crunchy Mom Style?</td></tr>
+          </tbody>
+        </table>
+        <p style="margin-top:6px;font-size:8pt;color:var(--muted);">MDX blog engine with RSS feed at /blog/feed.xml</p>
+      </div>
+      <div class="info-card blue">
+        <h3>AI / GEO Endpoints</h3>
+        <table>
+          <tbody>
+            <tr><td><code>/llms.txt</code></td><td>AI-readable brand summary</td></tr>
+            <tr><td><code>/llms-full.txt</code></td><td>Full product catalog for AI</td></tr>
+            <tr><td><code>/api/brand-context</code></td><td>Structured brand data</td></tr>
+            <tr><td><code>/api/products-feed</code></td><td>JSON product feed</td></tr>
+            <tr><td><code>/sitemap.xml</code></td><td>Dynamic, ISR cached (5 min)</td></tr>
+          </tbody>
+        </table>
+        <p style="margin-top:6px;font-size:8pt;color:var(--muted);">robots.txt allows GPTBot, ClaudeBot, PerplexityBot</p>
+      </div>
+    </div>
+
+    <div class="note">
+      <strong>SEO Strategy:</strong> JSON-LD structured data on all product pages (Product schema). OpenGraph images auto-generated. Dynamic metadata via <code>generateMetadata</code>. All pages indexed and crawlable.
+    </div>
+  </div>
+
+  <!-- ═══════════════ METRICS & KPIs ═══════════════ -->
+  <div class="section">
+    <div class="section-head">
+      <h2>Metrics &amp; KPIs</h2>
+      <div class="rule"></div>
+    </div>
+
+    <div class="two-col">
+      <div>
+        <div class="kpi-group">
+          <h3>Revenue Targets</h3>
+          <div class="kpi-row"><span>Conservative</span><span class="kpi-val">$5,000</span></div>
+          <div class="kpi-row"><span>Target</span><span class="kpi-val">$10,000</span></div>
+          <div class="kpi-row"><span>Stretch</span><span class="kpi-val">$15,000</span></div>
+        </div>
+        <div class="kpi-group">
+          <h3>Conversion Benchmarks</h3>
+          <div class="kpi-row"><span>Site Conversion Rate</span><span class="kpi-val">2–3%</span></div>
+          <div class="kpi-row"><span>Average Order Value</span><span class="kpi-val">$70–$100</span></div>
+          <div class="kpi-row"><span>Cart Abandonment (target)</span><span class="kpi-val">&lt; 70%</span></div>
+          <div class="kpi-row"><span>Email Open Rate</span><span class="kpi-val">30%+</span></div>
+          <div class="kpi-row"><span>Email Click Rate</span><span class="kpi-val">5%+</span></div>
+        </div>
+      </div>
+      <div>
+        <div class="kpi-group">
+          <h3>Audience Growth</h3>
+          <div class="kpi-row"><span>Email Subscribers (launch)</span><span class="kpi-val">600+</span></div>
+          <div class="kpi-row"><span>Email Subscribers (Mother's Day)</span><span class="kpi-val">1,000+</span></div>
+          <div class="kpi-row"><span>Instagram Followers</span><span class="kpi-val">2,000+</span></div>
+          <div class="kpi-row"><span>Social Engagement Rate</span><span class="kpi-val">3%+</span></div>
+        </div>
+        <div class="kpi-group">
+          <h3>Week-over-Week Revenue Goals</h3>
+          <div class="kpi-row"><span>Weeks 1–5 (Pre-launch)</span><span class="kpi-val">$0</span></div>
+          <div class="kpi-row"><span>Week 6 (Launch)</span><span class="kpi-val">$2,000+</span></div>
+          <div class="kpi-row"><span>Week 7</span><span class="kpi-val">$3,000+</span></div>
+          <div class="kpi-row"><span>Week 8 (Mother's Day)</span><span class="kpi-val">$5,000+</span></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="warn">
+      <strong>Optional Paid Ads:</strong> $250–$500 budget for Week 7 only (Meta/Instagram). Only if organic isn't hitting revenue targets. Focus on retargeting site visitors and lookalike audiences from email list.
+    </div>
+  </div>
+
+  <!-- ═══════════════ DISCOUNT CODES ═══════════════ -->
+  <div class="section">
+    <div class="section-head">
+      <h2>Discount Codes &amp; Promotions</h2>
+      <div class="rule"></div>
+    </div>
+
+    <table>
+      <thead>
+        <tr><th>Code</th><th>Discount</th><th>Audience</th><th>Window</th><th>Notes</th></tr>
+      </thead>
+      <tbody>
+        <tr><td><code>FIRSTFERN</code></td><td>15% off</td><td>Waitlist subscribers only</td><td>Launch week (early access Day 1)</td><td>Primary incentive to join waitlist. Creates exclusivity.</td></tr>
+        <tr><td><code>MAMAFERN10</code></td><td>10% off</td><td>Public (influencer audiences)</td><td>Weeks 6–8</td><td>Shared by influencers. Trackable per-influencer if needed.</td></tr>
+      </tbody>
+    </table>
+
+    <div class="note">
+      <strong>Discounting Philosophy:</strong> No permanent discounts. No "SALE" branding. Protect brand value. These codes are strategic tools, not bargain signals. After Mother's Day, codes expire.
+    </div>
+  </div>
+
+  <!-- ═══════════════ FOOTER ═══════════════ -->
+  <div class="footer">
+    <span>Mama Fern · Marketing Playbook v1.0</span>
+    <span>February 2026 · Internal Use Only</span>
+  </div>
+
+</div>
+</body>
+</html>

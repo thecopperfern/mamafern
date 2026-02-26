@@ -1,0 +1,1061 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Mama Fern — Product Catalog · Spring 2026</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --cream:       #faf6ef;
+    --cream-mid:   #f0e9dc;
+    --cream-dark:  #ddd0bc;
+    --fern:        #4a7c59;
+    --fern-dark:   #355c40;
+    --fern-light:  #d1e8d8;
+    --sage:        #7aad8a;
+    --sage-light:  #e3f0e7;
+    --terracotta:  #b9602a;
+    --terra-light: #f5e0d0;
+    --ink:         #2a2217;
+    --muted:       #6b5e4e;
+    --rule:        #c9baa5;
+    --warm-brown:  #6b4d3e;
+    --blush:       #e8c4b8;
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    font-family: 'Inter', system-ui, sans-serif;
+    background: var(--cream);
+    color: var(--ink);
+    font-size: 10.5pt;
+    line-height: 1.6;
+  }
+
+  .page { max-width: 820px; margin: 0 auto; }
+
+  /* ── Cover ── */
+  .cover {
+    background: linear-gradient(135deg, var(--terracotta) 0%, #8a3918 100%);
+    color: #fff;
+    padding: 56px 48px 48px;
+    position: relative;
+    page-break-after: always;
+  }
+  .cover::after {
+    content: '';
+    display: block;
+    height: 6px;
+    background: linear-gradient(90deg, var(--fern), var(--sage), #c8e6c2);
+    position: absolute;
+    bottom: 0; left: 0; right: 0;
+  }
+  .cover-eyebrow {
+    font-size: 8.5pt;
+    font-weight: 700;
+    letter-spacing: .2em;
+    text-transform: uppercase;
+    opacity: .7;
+    margin-bottom: 12px;
+  }
+  .cover h1 {
+    font-family: 'Playfair Display', Georgia, serif;
+    font-size: 38pt;
+    font-weight: 900;
+    line-height: 1.08;
+    letter-spacing: -.02em;
+    margin-bottom: 10px;
+  }
+  .cover h1 span { color: #ffd6b8; }
+  .cover-sub {
+    font-size: 12.5pt;
+    opacity: .9;
+    font-weight: 500;
+    margin-bottom: 28px;
+  }
+  .cover-stats {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 12px;
+    margin-top: 32px;
+    padding-top: 24px;
+    border-top: 1px solid rgba(255,255,255,.2);
+  }
+  .stat-box {
+    background: rgba(255,255,255,.12);
+    border: 1px solid rgba(255,255,255,.2);
+    border-radius: 8px;
+    padding: 14px 12px;
+    text-align: center;
+  }
+  .stat-box .s-val {
+    font-family: 'Playfair Display', serif;
+    font-size: 18pt;
+    font-weight: 900;
+    line-height: 1;
+    margin-bottom: 4px;
+  }
+  .stat-box .s-lbl { font-size: 7.5pt; opacity: .75; letter-spacing: .06em; text-transform: uppercase; }
+
+  /* ── Sections ── */
+  .section { padding: 32px 48px; border-bottom: 1px solid var(--cream-dark); }
+
+  .section-head {
+    display: flex;
+    align-items: baseline;
+    gap: 12px;
+    margin-bottom: 18px;
+  }
+  .section-head h2 {
+    font-family: 'Playfair Display', Georgia, serif;
+    font-size: 17pt;
+    font-weight: 700;
+    color: var(--fern-dark);
+    white-space: nowrap;
+  }
+  .section-head .rule { flex: 1; height: 1px; background: var(--rule); align-self: center; margin-top: 4px; }
+
+  h3.sub-head {
+    font-size: 9pt;
+    font-weight: 700;
+    letter-spacing: .1em;
+    text-transform: uppercase;
+    color: var(--fern-dark);
+    margin: 18px 0 10px;
+    padding-bottom: 4px;
+    border-bottom: 2px solid var(--fern-light);
+  }
+
+  p.lead { font-size: 9.5pt; color: var(--muted); margin-bottom: 12px; line-height: 1.7; }
+
+  /* ── Tables ── */
+  table { width: 100%; border-collapse: collapse; margin-bottom: 10px; page-break-inside: avoid; }
+  thead tr { background: var(--fern-dark); color: #fff; }
+  thead th { padding: 8px 12px; text-align: left; font-size: 8pt; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; }
+  tbody tr:nth-child(even) { background: var(--cream-mid); }
+  tbody tr:nth-child(odd) { background: #fff; }
+  tbody td { padding: 7px 12px; font-size: 9pt; vertical-align: top; }
+  tbody tr:last-child td { border-bottom: 2px solid var(--fern-dark); }
+
+  /* ── Product Cards ── */
+  .product-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin-bottom: 16px; }
+  .product-card {
+    background: #fff;
+    border: 1px solid var(--cream-dark);
+    border-radius: 8px;
+    overflow: hidden;
+    page-break-inside: avoid;
+  }
+  .product-card-header {
+    padding: 10px 14px;
+    color: #fff;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+  .pch-women { background: var(--fern); }
+  .pch-men { background: var(--fern-dark); }
+  .pch-kids { background: var(--terracotta); }
+  .pch-acc { background: var(--warm-brown); }
+  .product-card-header .pc-num {
+    font-family: 'Playfair Display', serif;
+    font-size: 16pt;
+    font-weight: 900;
+    opacity: .4;
+  }
+  .product-card-header .pc-name {
+    font-family: 'Playfair Display', serif;
+    font-size: 11pt;
+    font-weight: 700;
+    flex: 1;
+    margin-left: 10px;
+  }
+  .product-card-header .pc-price {
+    font-size: 12pt;
+    font-weight: 700;
+  }
+  .product-card-body { padding: 12px 14px; }
+  .product-card-body .pc-type {
+    font-size: 8pt;
+    font-weight: 600;
+    color: var(--muted);
+    letter-spacing: .08em;
+    text-transform: uppercase;
+    margin-bottom: 6px;
+  }
+  .pc-specs {
+    display: grid;
+    grid-template-columns: auto 1fr;
+    gap: 3px 10px;
+    font-size: 8.5pt;
+  }
+  .pc-specs dt { font-weight: 600; color: var(--fern-dark); }
+  .pc-specs dd { color: var(--ink); margin: 0; }
+
+  /* ── Technique badges ── */
+  .tech-badge {
+    display: inline-flex;
+    align-items: center;
+    font-size: 7.5pt;
+    font-weight: 700;
+    padding: 2px 8px;
+    border-radius: 20px;
+    letter-spacing: .04em;
+    white-space: nowrap;
+  }
+  .tech-1c { background: var(--fern-light); color: var(--fern-dark); }
+  .tech-2c { background: #e0d4f5; color: #5a3d7a; }
+  .tech-em { background: var(--terra-light); color: var(--terracotta); }
+
+  /* ── Color dots ── */
+  .ink-dot {
+    display: inline-block;
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    vertical-align: middle;
+    margin-right: 3px;
+    border: 1px solid rgba(0,0,0,.1);
+  }
+
+  /* ── Blank-color pills ── */
+  .blank-pills { display: flex; gap: 4px; flex-wrap: wrap; margin-top: 4px; }
+  .blank-pill {
+    font-size: 7pt;
+    font-weight: 600;
+    padding: 1px 6px;
+    border-radius: 10px;
+    background: var(--cream-mid);
+    color: var(--muted);
+    border: 1px solid var(--cream-dark);
+  }
+
+  /* ── Collection cards ── */
+  .coll-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; margin-bottom: 14px; }
+  .coll-card {
+    background: #fff;
+    border: 1px solid var(--cream-dark);
+    border-top: 3px solid var(--fern);
+    border-radius: 6px;
+    padding: 12px 14px;
+    page-break-inside: avoid;
+  }
+  .coll-card h4 {
+    font-family: 'Playfair Display', serif;
+    font-size: 11pt;
+    font-weight: 700;
+    color: var(--fern-dark);
+    margin-bottom: 4px;
+  }
+  .coll-card .coll-handle {
+    font-family: 'Courier New', monospace;
+    font-size: 7.5pt;
+    color: var(--muted);
+    margin-bottom: 6px;
+  }
+  .coll-card ul { list-style: none; padding: 0; margin: 0; }
+  .coll-card li { font-size: 8.5pt; padding: 2px 0; color: var(--ink); border-bottom: 1px dotted var(--cream-dark); }
+  .coll-card li:last-child { border-bottom: none; }
+  .coll-card.terra { border-top-color: var(--terracotta); }
+  .coll-card.terra h4 { color: var(--terracotta); }
+  .coll-card.sage-c { border-top-color: var(--sage); }
+  .coll-card.sage-c h4 { color: #5a8a6a; }
+  .coll-card.brown { border-top-color: var(--warm-brown); }
+  .coll-card.brown h4 { color: var(--warm-brown); }
+
+  /* ── Bundle cards ── */
+  .bundle-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin-bottom: 14px; }
+  .bundle-card {
+    background: #fff;
+    border: 1px solid var(--cream-dark);
+    border-radius: 8px;
+    overflow: hidden;
+    page-break-inside: avoid;
+  }
+  .bundle-head {
+    background: var(--sage-light);
+    padding: 10px 14px;
+    border-bottom: 1px solid var(--fern-light);
+  }
+  .bundle-head h4 {
+    font-family: 'Playfair Display', serif;
+    font-size: 11pt;
+    font-weight: 700;
+    color: var(--fern-dark);
+  }
+  .bundle-head .bundle-price {
+    font-size: 14pt;
+    font-weight: 700;
+    color: var(--fern);
+  }
+  .bundle-body { padding: 10px 14px; }
+  .bundle-body ul { list-style: none; padding: 0; }
+  .bundle-body li { font-size: 8.5pt; padding: 3px 0; border-bottom: 1px dotted var(--cream-dark); }
+  .bundle-body li:last-child { border-bottom: none; }
+  .bundle-save {
+    display: inline-block;
+    font-size: 7.5pt;
+    font-weight: 700;
+    background: var(--terra-light);
+    color: var(--terracotta);
+    padding: 1px 6px;
+    border-radius: 10px;
+    margin-left: 4px;
+  }
+
+  /* ── Info cards ── */
+  .two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-bottom: 14px; }
+  .three-col { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 14px; margin-bottom: 14px; }
+  .info-card {
+    background: #fff;
+    border: 1px solid var(--cream-dark);
+    border-top: 3px solid var(--fern);
+    border-radius: 6px;
+    padding: 14px 16px;
+    page-break-inside: avoid;
+  }
+  .info-card h3 {
+    font-size: 8.5pt;
+    font-weight: 700;
+    letter-spacing: .1em;
+    text-transform: uppercase;
+    color: var(--fern-dark);
+    margin-bottom: 8px;
+  }
+  .info-card p { font-size: 9pt; color: var(--muted); line-height: 1.6; }
+  .info-card.terra { border-top-color: var(--terracotta); }
+  .info-card.terra h3 { color: var(--terracotta); }
+
+  /* ── Note / callout ── */
+  .note {
+    border-left: 4px solid var(--fern);
+    background: var(--sage-light);
+    padding: 10px 14px;
+    border-radius: 0 6px 6px 0;
+    font-size: 9pt;
+    margin: 10px 0;
+    page-break-inside: avoid;
+  }
+  .note strong { color: var(--fern-dark); }
+  .warn {
+    border-left: 4px solid var(--terracotta);
+    background: var(--terra-light);
+    padding: 10px 14px;
+    border-radius: 0 6px 6px 0;
+    font-size: 9pt;
+    margin: 10px 0;
+    page-break-inside: avoid;
+  }
+  .warn strong { color: var(--terracotta); }
+
+  code { font-family: 'Courier New', monospace; font-size: 8.5pt; background: var(--cream-mid); padding: 1px 4px; border-radius: 3px; }
+
+  /* ── Footer ── */
+  .footer {
+    padding: 18px 48px;
+    font-size: 7.5pt;
+    color: var(--muted);
+    display: flex;
+    justify-content: space-between;
+    border-top: 2px solid var(--terracotta);
+    background: var(--cream-mid);
+  }
+
+  .spacer { height: 12px; }
+
+  /* ─────────────── PRINT ─────────────── */
+  @page { size: letter portrait; margin: 13mm 12mm 13mm 12mm; }
+  @media print {
+    body { background: #fff; font-size: 9pt; }
+    .cover, .product-card-header, .bundle-head, .coll-card,
+    thead tr, .tech-badge, .note, .warn, .info-card, .blank-pill {
+      -webkit-print-color-adjust: exact;
+      print-color-adjust: exact;
+    }
+    .product-card { page-break-inside: avoid; }
+    h2, h3 { page-break-after: avoid; }
+    tr { page-break-inside: avoid; }
+  }
+</style>
+</head>
+<body>
+<div class="page">
+
+  <!-- ═══════════════ COVER ═══════════════ -->
+  <div class="cover">
+    <div class="cover-eyebrow">Lookbook &amp; Specifications · Spring 2026</div>
+    <h1>Product<br><span>Catalog</span></h1>
+    <div class="cover-sub">Mama Fern · 10 Launch Products · Organic Cotton Family Apparel</div>
+    <div class="cover-stats">
+      <div class="stat-box"><div class="s-val">10</div><div class="s-lbl">Products</div></div>
+      <div class="stat-box"><div class="s-val">6</div><div class="s-lbl">Collections</div></div>
+      <div class="stat-box"><div class="s-val">$20–52</div><div class="s-lbl">Price Range</div></div>
+      <div class="stat-box"><div class="s-val">100%</div><div class="s-lbl">Organic Cotton</div></div>
+    </div>
+  </div>
+
+  <!-- ═══════════════ OVERVIEW ═══════════════ -->
+  <div class="section">
+    <div class="section-head">
+      <h2>Product Overview</h2>
+      <div class="rule"></div>
+    </div>
+    <p class="lead">All 10 launch products at a glance. Every garment uses GOTS-certified organic cotton. Average price: $31.20. Target AOV with bundles: $55–$100.</p>
+
+    <table>
+      <thead>
+        <tr>
+          <th>#</th>
+          <th>Product</th>
+          <th>Type</th>
+          <th>Price</th>
+          <th>Print</th>
+          <th>Ink Colors</th>
+          <th>Placement</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>1</td>
+          <td>Mama Fern Classic Tee</td>
+          <td>Women's Fitted Tee</td>
+          <td>$32</td>
+          <td><span class="tech-badge tech-1c">1-Color</span></td>
+          <td><span class="ink-dot" style="background:#6B4D3E;"></span>Warm Brown</td>
+          <td>Left chest 3"×3.5"</td>
+        </tr>
+        <tr>
+          <td>2</td>
+          <td>Mama Fern Rooted Crewneck</td>
+          <td>Women's Crewneck</td>
+          <td>$52</td>
+          <td><span class="tech-badge tech-2c">2-Color</span></td>
+          <td><span class="ink-dot" style="background:#4A6741;"></span><span class="ink-dot" style="background:#6B4D3E;"></span>Green + Brown</td>
+          <td>Center chest 10"×8"</td>
+        </tr>
+        <tr>
+          <td>3</td>
+          <td>Papa Fern Classic Tee</td>
+          <td>Men's / Unisex Tee</td>
+          <td>$32</td>
+          <td><span class="tech-badge tech-1c">1-Color</span></td>
+          <td><span class="ink-dot" style="background:#6B4D3E;"></span>Warm Brown</td>
+          <td>Left chest 3"×3.5"</td>
+        </tr>
+        <tr>
+          <td>4</td>
+          <td>Papa Fern Rooted Crewneck</td>
+          <td>Men's / Unisex Crewneck</td>
+          <td>$52</td>
+          <td><span class="tech-badge tech-2c">2-Color</span></td>
+          <td><span class="ink-dot" style="background:#4A6741;"></span><span class="ink-dot" style="background:#6B4D3E;"></span>Green + Brown</td>
+          <td>Center chest 10"×8"</td>
+        </tr>
+        <tr>
+          <td>5</td>
+          <td>Little Fern Sprout Tee</td>
+          <td>Kids Tee</td>
+          <td>$22</td>
+          <td><span class="tech-badge tech-1c">1-Color</span></td>
+          <td><span class="ink-dot" style="background:#6B4D3E;"></span>Warm Brown</td>
+          <td>Center chest 3.5"×4"</td>
+        </tr>
+        <tr>
+          <td>6</td>
+          <td>Little Fern Seedling Onesie</td>
+          <td>Baby Bodysuit</td>
+          <td>$24</td>
+          <td><span class="tech-badge tech-1c">1-Color</span></td>
+          <td><span class="ink-dot" style="background:#6B4D3E;"></span>Warm Brown</td>
+          <td>Center chest 2.5"×3"</td>
+        </tr>
+        <tr>
+          <td>7</td>
+          <td>Mama Fern Canvas Tote</td>
+          <td>Tote Bag</td>
+          <td>$22</td>
+          <td><span class="tech-badge tech-1c">1-Color</span></td>
+          <td><span class="ink-dot" style="background:#4A6741;"></span>Forest Green</td>
+          <td>Center front 10"×10"</td>
+        </tr>
+        <tr>
+          <td>8</td>
+          <td>Mama Fern Cozy Beanie</td>
+          <td>Beanie / Knit Cap</td>
+          <td>$20</td>
+          <td><span class="tech-badge tech-em">Embroidery</span></td>
+          <td>Matching thread</td>
+          <td>Fold-up cuff 1.5"×1.5"</td>
+        </tr>
+        <tr>
+          <td>9</td>
+          <td>Mama Fern Wildflower Tee</td>
+          <td>Women's Fitted Tee</td>
+          <td>$34</td>
+          <td><span class="tech-badge tech-2c">2-Color</span></td>
+          <td><span class="ink-dot" style="background:#4A6741;"></span><span class="ink-dot" style="background:#6B4D3E;"></span>Green + Brown</td>
+          <td>Center chest 5"×6"</td>
+        </tr>
+        <tr>
+          <td>10</td>
+          <td>Little Fern Explorer Tee</td>
+          <td>Kids Tee</td>
+          <td>$22</td>
+          <td><span class="tech-badge tech-2c">2-Color</span></td>
+          <td><span class="ink-dot" style="background:#4A6741;"></span><span class="ink-dot" style="background:#6B4D3E;"></span>Green + Brown</td>
+          <td>Center chest 5"×5"</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <div class="note">
+      <strong>Print Ratio:</strong> 5 one-color (50%) · 4 two-color (40%) · 1 embroidery (10%) — keeps production costs manageable while offering visual variety.
+    </div>
+  </div>
+
+  <!-- ═══════════════ INDIVIDUAL PRODUCTS ═══════════════ -->
+  <div class="section">
+    <div class="section-head">
+      <h2>Product Details</h2>
+      <div class="rule"></div>
+    </div>
+
+    <!-- Products 1 & 2 -->
+    <div class="product-grid">
+      <div class="product-card">
+        <div class="product-card-header pch-women">
+          <span class="pc-num">01</span>
+          <span class="pc-name">Mama Fern Classic Tee</span>
+          <span class="pc-price">$32</span>
+        </div>
+        <div class="product-card-body">
+          <div class="pc-type">Women's Fitted Tee · <span class="tech-badge tech-1c">1-Color</span></div>
+          <dl class="pc-specs">
+            <dt>Fabric</dt><dd>140–160 gsm organic cotton jersey, GOTS-certified</dd>
+            <dt>Print</dt><dd><span class="ink-dot" style="background:#6B4D3E;"></span>Warm Brown #6B4D3E on light blanks · Cream on dark blanks</dd>
+            <dt>Placement</dt><dd>Left chest, 3" × 3.5"</dd>
+            <dt>Design</dt><dd>Single fern frond + "mama fern" handwritten script</dd>
+            <dt>Sizes</dt><dd>XS – 2XL</dd>
+            <dt>Garment Text</dt><dd>"mama fern"</dd>
+          </dl>
+          <div class="blank-pills">
+            <span class="blank-pill">Natural Cream</span>
+            <span class="blank-pill">Sage Green</span>
+            <span class="blank-pill">Oatmeal Heather</span>
+            <span class="blank-pill">Dusty Rose</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="product-card">
+        <div class="product-card-header pch-women">
+          <span class="pc-num">02</span>
+          <span class="pc-name">Mama Fern Rooted Crewneck</span>
+          <span class="pc-price">$52</span>
+        </div>
+        <div class="product-card-body">
+          <div class="pc-type">Women's Crewneck Sweatshirt · <span class="tech-badge tech-2c">2-Color</span></div>
+          <dl class="pc-specs">
+            <dt>Fabric</dt><dd>280 gsm French terry (80% organic cotton / 20% recycled polyester)</dd>
+            <dt>Print</dt><dd><span class="ink-dot" style="background:#4A6741;"></span>Forest Green lettering + <span class="ink-dot" style="background:#6B4D3E;"></span>Warm Brown roots</dd>
+            <dt>Placement</dt><dd>Center chest, 10" × 8"</dd>
+            <dt>Design</dt><dd>Hand-lettered "rooted" with root system growing from letters</dd>
+            <dt>Sizes</dt><dd>XS – 2XL</dd>
+            <dt>Garment Text</dt><dd>"rooted"</dd>
+          </dl>
+          <div class="blank-pills">
+            <span class="blank-pill">Natural Cream</span>
+            <span class="blank-pill">Oatmeal Heather</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Products 3 & 4 -->
+    <div class="product-grid">
+      <div class="product-card">
+        <div class="product-card-header pch-men">
+          <span class="pc-num">03</span>
+          <span class="pc-name">Papa Fern Classic Tee</span>
+          <span class="pc-price">$32</span>
+        </div>
+        <div class="product-card-body">
+          <div class="pc-type">Men's / Unisex Tee · <span class="tech-badge tech-1c">1-Color</span></div>
+          <dl class="pc-specs">
+            <dt>Fabric</dt><dd>140–160 gsm organic cotton jersey, GOTS-certified</dd>
+            <dt>Print</dt><dd><span class="ink-dot" style="background:#6B4D3E;"></span>Warm Brown #6B4D3E on light blanks · Cream on dark blanks</dd>
+            <dt>Placement</dt><dd>Left chest, 3" × 3.5"</dd>
+            <dt>Design</dt><dd>Single fern frond + "papa fern" handwritten script (slightly bolder line weight)</dd>
+            <dt>Sizes</dt><dd>S – 3XL</dd>
+            <dt>Garment Text</dt><dd>"papa fern"</dd>
+          </dl>
+          <div class="blank-pills">
+            <span class="blank-pill">Natural Cream</span>
+            <span class="blank-pill">Sage Green</span>
+            <span class="blank-pill">Oatmeal Heather</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="product-card">
+        <div class="product-card-header pch-men">
+          <span class="pc-num">04</span>
+          <span class="pc-name">Papa Fern Rooted Crewneck</span>
+          <span class="pc-price">$52</span>
+        </div>
+        <div class="product-card-body">
+          <div class="pc-type">Men's / Unisex Crewneck Sweatshirt · <span class="tech-badge tech-2c">2-Color</span></div>
+          <dl class="pc-specs">
+            <dt>Fabric</dt><dd>280 gsm French terry (80% organic cotton / 20% recycled polyester)</dd>
+            <dt>Print</dt><dd><span class="ink-dot" style="background:#4A6741;"></span>Forest Green lettering + <span class="ink-dot" style="background:#6B4D3E;"></span>Warm Brown roots</dd>
+            <dt>Placement</dt><dd>Center chest, 10" × 8"</dd>
+            <dt>Design</dt><dd>Identical artwork to #02 — same "rooted" + root system. Only garment cut changes.</dd>
+            <dt>Sizes</dt><dd>S – 3XL</dd>
+            <dt>Garment Text</dt><dd>"rooted"</dd>
+          </dl>
+          <div class="blank-pills">
+            <span class="blank-pill">Natural Cream</span>
+            <span class="blank-pill">Oatmeal Heather</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Products 5 & 6 -->
+    <div class="product-grid">
+      <div class="product-card">
+        <div class="product-card-header pch-kids">
+          <span class="pc-num">05</span>
+          <span class="pc-name">Little Fern Sprout Tee</span>
+          <span class="pc-price">$22</span>
+        </div>
+        <div class="product-card-body">
+          <div class="pc-type">Kids Tee · <span class="tech-badge tech-1c">1-Color</span></div>
+          <dl class="pc-specs">
+            <dt>Fabric</dt><dd>140 gsm organic cotton jersey, GOTS-certified</dd>
+            <dt>Print</dt><dd><span class="ink-dot" style="background:#6B4D3E;"></span>Warm Brown on cream · Cream on sage</dd>
+            <dt>Placement</dt><dd>Center chest, 3.5" × 4" (scaled for kids)</dd>
+            <dt>Design</dt><dd>Baby fern sprout emerging from soil + "little fern" in playful hand-lettering</dd>
+            <dt>Sizes</dt><dd>2T – 8Y</dd>
+            <dt>Garment Text</dt><dd>"little fern"</dd>
+          </dl>
+          <div class="blank-pills">
+            <span class="blank-pill">Natural Cream</span>
+            <span class="blank-pill">Sage Green</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="product-card">
+        <div class="product-card-header pch-kids">
+          <span class="pc-num">06</span>
+          <span class="pc-name">Little Fern Seedling Onesie</span>
+          <span class="pc-price">$24</span>
+        </div>
+        <div class="product-card-body">
+          <div class="pc-type">Baby Bodysuit · <span class="tech-badge tech-1c">1-Color</span></div>
+          <dl class="pc-specs">
+            <dt>Fabric</dt><dd>140 gsm organic cotton jersey, GOTS-certified</dd>
+            <dt>Print</dt><dd><span class="ink-dot" style="background:#6B4D3E;"></span>Warm Brown on cream · Cream on sage</dd>
+            <dt>Placement</dt><dd>Center chest, 2.5" × 3" (baby scale)</dd>
+            <dt>Design</dt><dd>Tiny cluster of 3 fern leaves + "seedling" in delicate hand-lettering</dd>
+            <dt>Sizes</dt><dd>0–3M, 3–6M, 6–12M, 12–18M</dd>
+            <dt>Garment Text</dt><dd>"seedling"</dd>
+          </dl>
+          <div class="blank-pills">
+            <span class="blank-pill">Natural Cream</span>
+            <span class="blank-pill">Sage Green</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Products 7 & 8 -->
+    <div class="product-grid">
+      <div class="product-card">
+        <div class="product-card-header pch-acc">
+          <span class="pc-num">07</span>
+          <span class="pc-name">Mama Fern Canvas Tote</span>
+          <span class="pc-price">$22</span>
+        </div>
+        <div class="product-card-body">
+          <div class="pc-type">Tote Bag · <span class="tech-badge tech-1c">1-Color</span></div>
+          <dl class="pc-specs">
+            <dt>Fabric</dt><dd>12 oz organic canvas, GOTS-certified</dd>
+            <dt>Print</dt><dd><span class="ink-dot" style="background:#4A6741;"></span>Forest Green #4A6741 on natural canvas</dd>
+            <dt>Placement</dt><dd>Center front, 10" × 10"</dd>
+            <dt>Design</dt><dd>Circular fern frond wreath with "mama fern" script centered inside</dd>
+            <dt>Size</dt><dd>Standard market tote</dd>
+            <dt>Garment Text</dt><dd>"mama fern"</dd>
+          </dl>
+          <div class="blank-pills">
+            <span class="blank-pill">Natural Canvas</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="product-card">
+        <div class="product-card-header pch-acc">
+          <span class="pc-num">08</span>
+          <span class="pc-name">Mama Fern Cozy Beanie</span>
+          <span class="pc-price">$20</span>
+        </div>
+        <div class="product-card-body">
+          <div class="pc-type">Beanie / Knit Cap · <span class="tech-badge tech-em">Embroidery</span></div>
+          <dl class="pc-specs">
+            <dt>Fabric</dt><dd>Organic cotton rib knit</dd>
+            <dt>Technique</dt><dd>Chain-stitch embroidery, thread color matches blank variant</dd>
+            <dt>Placement</dt><dd>Fold-up cuff, 1.5" × 1.5"</dd>
+            <dt>Design</dt><dd>Single fern frond silhouette — no text. The premium accent piece.</dd>
+            <dt>Size</dt><dd>One size fits most</dd>
+            <dt>Stitch Files</dt><dd>.DST, .PES, or .EXP required</dd>
+          </dl>
+          <div class="blank-pills">
+            <span class="blank-pill">Oatmeal</span>
+            <span class="blank-pill">Sage Green</span>
+            <span class="blank-pill">Dusty Rose</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Products 9 & 10 -->
+    <div class="product-grid">
+      <div class="product-card">
+        <div class="product-card-header pch-women">
+          <span class="pc-num">09</span>
+          <span class="pc-name">Mama Fern Wildflower Tee</span>
+          <span class="pc-price">$34</span>
+        </div>
+        <div class="product-card-body">
+          <div class="pc-type">Women's Fitted Tee · <span class="tech-badge tech-2c">2-Color</span></div>
+          <dl class="pc-specs">
+            <dt>Fabric</dt><dd>140–160 gsm organic cotton jersey, GOTS-certified</dd>
+            <dt>Print</dt><dd><span class="ink-dot" style="background:#4A6741;"></span>Forest Green stems/leaves + <span class="ink-dot" style="background:#6B4D3E;"></span>Warm Brown flowers/text</dd>
+            <dt>Placement</dt><dd>Center chest, 5" × 6"</dd>
+            <dt>Design</dt><dd>Wildflower bouquet (fern + daisies + lavender) with "wildly rooted" script below</dd>
+            <dt>Sizes</dt><dd>XS – 2XL</dd>
+            <dt>Garment Text</dt><dd>"wildly rooted"</dd>
+          </dl>
+          <div class="blank-pills">
+            <span class="blank-pill">Natural Cream</span>
+            <span class="blank-pill">Dusty Rose</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="product-card">
+        <div class="product-card-header pch-kids">
+          <span class="pc-num">10</span>
+          <span class="pc-name">Little Fern Explorer Tee</span>
+          <span class="pc-price">$22</span>
+        </div>
+        <div class="product-card-body">
+          <div class="pc-type">Kids Tee · <span class="tech-badge tech-2c">2-Color</span></div>
+          <dl class="pc-specs">
+            <dt>Fabric</dt><dd>140 gsm organic cotton jersey, GOTS-certified</dd>
+            <dt>Print</dt><dd><span class="ink-dot" style="background:#4A6741;"></span><span class="ink-dot" style="background:#6B4D3E;"></span>Alternating green + brown icons</dd>
+            <dt>Placement</dt><dd>Center chest, 5" × 5" (scaled for kids)</dd>
+            <dt>Design</dt><dd>3×2 grid of nature icons (mushroom, acorn, fern, snail, butterfly, pine cone) + "nature explorer" block letters above</dd>
+            <dt>Sizes</dt><dd>2T – 8Y</dd>
+            <dt>Garment Text</dt><dd>"nature explorer"</dd>
+          </dl>
+          <div class="blank-pills">
+            <span class="blank-pill">Natural Cream</span>
+            <span class="blank-pill">Sage Green</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="warn">
+      <strong>Family Matching:</strong> Products #1 + #3 + #5 + #6 form the core family set (Mama + Papa + Little + Seedling). Coordinated designs drive 2.5–3× AOV. Always photograph and merchandise these together.
+    </div>
+  </div>
+
+  <!-- ═══════════════ COLLECTIONS ═══════════════ -->
+  <div class="section">
+    <div class="section-head">
+      <h2>Collections</h2>
+      <div class="rule"></div>
+    </div>
+    <p class="lead">Six collections organize the catalog. Products can appear in multiple collections. "New Arrivals" contains all 10 launch products.</p>
+
+    <div class="coll-grid">
+      <div class="coll-card">
+        <h4>For Moms</h4>
+        <div class="coll-handle">/collections/moms</div>
+        <ul>
+          <li>#1 Mama Fern Classic Tee</li>
+          <li>#2 Mama Fern Rooted Crewneck</li>
+          <li>#9 Mama Fern Wildflower Tee</li>
+        </ul>
+      </div>
+      <div class="coll-card sage-c">
+        <h4>For Dads</h4>
+        <div class="coll-handle">/collections/dads</div>
+        <ul>
+          <li>#3 Papa Fern Classic Tee</li>
+          <li>#4 Papa Fern Rooted Crewneck</li>
+        </ul>
+      </div>
+      <div class="coll-card terra">
+        <h4>For Kids</h4>
+        <div class="coll-handle">/collections/kids</div>
+        <ul>
+          <li>#5 Little Fern Sprout Tee</li>
+          <li>#6 Little Fern Seedling Onesie</li>
+          <li>#10 Little Fern Explorer Tee</li>
+        </ul>
+      </div>
+      <div class="coll-card brown">
+        <h4>Accessories</h4>
+        <div class="coll-handle">/collections/accessories</div>
+        <ul>
+          <li>#7 Mama Fern Canvas Tote</li>
+          <li>#8 Mama Fern Cozy Beanie</li>
+        </ul>
+      </div>
+      <div class="coll-card">
+        <h4>New Arrivals</h4>
+        <div class="coll-handle">/collections/new-arrivals</div>
+        <ul>
+          <li>All 10 products</li>
+        </ul>
+      </div>
+      <div class="coll-card terra">
+        <h4>Mother's Day Gifts</h4>
+        <div class="coll-handle">/collections/mothers-day</div>
+        <ul>
+          <li>#1 Mama Fern Classic Tee</li>
+          <li>#2 Mama Fern Rooted Crewneck</li>
+          <li>#6 Little Fern Seedling Onesie</li>
+          <li>#7 Mama Fern Canvas Tote</li>
+          <li>#9 Mama Fern Wildflower Tee</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <!-- ═══════════════ GIFT BUNDLES ═══════════════ -->
+  <div class="section">
+    <div class="section-head">
+      <h2>Gift Bundles</h2>
+      <div class="rule"></div>
+    </div>
+    <p class="lead">Pre-configured bundles designed to increase AOV. Each bundle tells a story and makes gifting effortless.</p>
+
+    <div class="bundle-grid">
+      <div class="bundle-card">
+        <div class="bundle-head">
+          <h4>The Mama Bundle</h4>
+          <span class="bundle-price">$52</span> <span class="bundle-save">Save ~$2</span>
+        </div>
+        <div class="bundle-body">
+          <ul>
+            <li>Mama Fern Classic Tee ($32)</li>
+            <li>Mama Fern Canvas Tote ($22)</li>
+          </ul>
+        </div>
+      </div>
+      <div class="bundle-card">
+        <div class="bundle-head">
+          <h4>The Family Set</h4>
+          <span class="bundle-price">$98</span> <span class="bundle-save">Save ~$10</span>
+        </div>
+        <div class="bundle-body">
+          <ul>
+            <li>Mama Fern Classic Tee ($32)</li>
+            <li>Papa Fern Classic Tee ($32)</li>
+            <li>Little Fern Seedling Onesie ($24)</li>
+          </ul>
+        </div>
+      </div>
+      <div class="bundle-card">
+        <div class="bundle-head">
+          <h4>The New Mama Gift</h4>
+          <span class="bundle-price">$54</span> <span class="bundle-save">Save ~$2 + Free Gift Wrap</span>
+        </div>
+        <div class="bundle-body">
+          <ul>
+            <li>Mama Fern Classic Tee ($32)</li>
+            <li>Little Fern Seedling Onesie ($24)</li>
+            <li>Free gift wrapping included</li>
+          </ul>
+        </div>
+      </div>
+      <div class="bundle-card">
+        <div class="bundle-head">
+          <h4>The Mini Match</h4>
+          <span class="bundle-price">$52</span> <span class="bundle-save">Save ~$2</span>
+        </div>
+        <div class="bundle-body">
+          <ul>
+            <li>Mama Fern Classic Tee ($32)</li>
+            <li>Little Fern Sprout Tee ($22)</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ═══════════════ FABRIC & MATERIALS ═══════════════ -->
+  <div class="section">
+    <div class="section-head">
+      <h2>Fabric &amp; Materials</h2>
+      <div class="rule"></div>
+    </div>
+
+    <div class="two-col">
+      <div class="info-card">
+        <h3>Organic Cotton Standard</h3>
+        <p>All Mama Fern garments use <strong>GOTS-certified organic cotton</strong> — grown without synthetic pesticides, processed without harmful chemicals, and independently audited from field to finished garment. This is our non-negotiable quality standard.</p>
+      </div>
+      <div class="info-card terra">
+        <h3>Why It Matters</h3>
+        <p>Our customers choose organic because what touches their family's skin matters. GOTS certification is the gold standard — it's not a marketing label. Every batch is traceable, every mill is audited, and every garment is tested for harmful residues.</p>
+      </div>
+    </div>
+
+    <h3 class="sub-head">Fabric Specifications</h3>
+    <table>
+      <thead>
+        <tr>
+          <th>Material</th>
+          <th>Composition</th>
+          <th>Weight</th>
+          <th>Products</th>
+          <th>Feel</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Organic Cotton Jersey</td>
+          <td>100% GOTS organic cotton</td>
+          <td>140–160 gsm</td>
+          <td>#1, #3, #5, #6, #9, #10</td>
+          <td>Soft, breathable, pre-washed</td>
+        </tr>
+        <tr>
+          <td>French Terry</td>
+          <td>80% organic cotton / 20% recycled polyester</td>
+          <td>280 gsm</td>
+          <td>#2, #4</td>
+          <td>Plush, mid-weight, cozy</td>
+        </tr>
+        <tr>
+          <td>Organic Canvas</td>
+          <td>100% GOTS organic cotton</td>
+          <td>12 oz</td>
+          <td>#7</td>
+          <td>Sturdy, structured, durable</td>
+        </tr>
+        <tr>
+          <td>Organic Rib Knit</td>
+          <td>100% GOTS organic cotton</td>
+          <td>—</td>
+          <td>#8</td>
+          <td>Stretchy, warm, close-fitting</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <h3 class="sub-head">Garment Blank Colors</h3>
+    <table>
+      <thead>
+        <tr>
+          <th>Blank Color</th>
+          <th>Approximate Hex</th>
+          <th>Available On</th>
+          <th>Ink Color Used</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><span class="ink-dot" style="background:#FAF7F2;border:1px solid #ccc;"></span> Natural Cream</td>
+          <td><code>#FAF7F2</code></td>
+          <td>All products</td>
+          <td>Warm Brown or Forest Green</td>
+        </tr>
+        <tr>
+          <td><span class="ink-dot" style="background:#A3B18A;"></span> Sage Green</td>
+          <td><code>#A3B18A</code></td>
+          <td>#1, #3, #5, #8</td>
+          <td>Cream (reversed)</td>
+        </tr>
+        <tr>
+          <td><span class="ink-dot" style="background:#D5CFC5;"></span> Oatmeal Heather</td>
+          <td><code>#D5CFC5</code></td>
+          <td>#1, #2, #3, #4, #8</td>
+          <td>Warm Brown</td>
+        </tr>
+        <tr>
+          <td><span class="ink-dot" style="background:#D4A5A5;"></span> Dusty Rose</td>
+          <td><code>~#D4A5A5</code></td>
+          <td>#1, #8, #9</td>
+          <td>Warm Brown</td>
+        </tr>
+        <tr>
+          <td><span class="ink-dot" style="background:#E8DCC8;"></span> Natural Canvas</td>
+          <td><code>—</code></td>
+          <td>#7 (Tote only)</td>
+          <td>Forest Green</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <div class="note">
+      <strong>Hero Colorway:</strong> Cream/Natural outsells colored blanks roughly 2:1 in the crunchy/natural niche. Always photograph cream first — it's the hero color for every product.
+    </div>
+  </div>
+
+  <!-- ═══════════════ PRICING STRATEGY ═══════════════ -->
+  <div class="section">
+    <div class="section-head">
+      <h2>Pricing Strategy</h2>
+      <div class="rule"></div>
+    </div>
+
+    <div class="two-col">
+      <div class="info-card">
+        <h3>Price Architecture</h3>
+        <table>
+          <tbody>
+            <tr><td><strong>Entry Point</strong></td><td>$20 (Beanie)</td></tr>
+            <tr><td><strong>Core Tees</strong></td><td>$22–$34</td></tr>
+            <tr><td><strong>Premium</strong></td><td>$52 (Crewnecks)</td></tr>
+            <tr><td><strong>Average</strong></td><td>$31.20</td></tr>
+            <tr><td><strong>Target AOV</strong></td><td>$55–$100 (with bundles)</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="info-card terra">
+        <h3>Future Premium Tier</h3>
+        <p>Once the beanie validates embroidery demand, expand with:</p>
+        <table>
+          <tbody>
+            <tr><td>Embroidered Classic Tee</td><td><strong>$42</strong></td></tr>
+            <tr><td>Embroidered Crewneck</td><td><strong>$62</strong></td></tr>
+          </tbody>
+        </table>
+        <p style="margin-top:6px;">Screen print = entry point. Embroidery = upgrade tier.</p>
+      </div>
+    </div>
+
+    <div class="note">
+      <strong>Discount Codes:</strong> <code>FIRSTFERN</code> (15% off, waitlist subscribers) · <code>MAMAFERN10</code> (10% off, public). No permanent discounting — protect brand value.
+    </div>
+  </div>
+
+  <!-- ═══════════════ FOOTER ═══════════════ -->
+  <div class="footer">
+    <span>Mama Fern · Product Catalog v1.0</span>
+    <span>February 2026 · Internal Use Only</span>
+  </div>
+
+</div>
+</body>
+</html>
