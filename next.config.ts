@@ -1,6 +1,17 @@
 import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
+  // Inline critical env vars at build time so they're ALWAYS available,
+  // even if Hostinger's runtime process doesn't have them in process.env.
+  // persist-env.js writes these to .env.local before `next build` runs,
+  // and next.config.ts reads them here during build.
+  // This is the permanent fix for "Couldn't load collection" on Hostinger.
+  env: {
+    SHOPIFY_STORE_API_URL: process.env.SHOPIFY_STORE_API_URL || "",
+    SHOPIFY_STOREFRONT_ACCESS_TOKEN:
+      process.env.SHOPIFY_STOREFRONT_ACCESS_TOKEN || "",
+  },
+
   // Transpile CVA to fix ESM/CJS interop issue in server builds
   transpilePackages: ["class-variance-authority"],
 
