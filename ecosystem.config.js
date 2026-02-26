@@ -3,7 +3,6 @@ module.exports = {
     {
       name: "mamafern",
       script: "server.js",
-      cwd: "/home/u-your-username/domains/mamafern.com/public_html",
       instances: 1,
       exec_mode: "fork",
       env: {
@@ -12,6 +11,11 @@ module.exports = {
       },
       // Restart if memory exceeds 512MB
       max_memory_restart: "512M",
+      // Auto-restart when a new build lands
+      watch: [".next/BUILD_ID"],
+      watch_delay: 3000,
+      // Don't count watch-triggered restarts as crashes
+      autorestart: true,
       // Log configuration
       error_file: "./logs/err.log",
       out_file: "./logs/out.log",

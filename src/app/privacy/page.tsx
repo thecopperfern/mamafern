@@ -1,3 +1,5 @@
+export const dynamic = "force-dynamic";
+
 import PageHero from "@/components/view/PageHero";
 import { fetchGraphQL } from "@/shopify/client";
 import { gql } from "graphql-tag";
