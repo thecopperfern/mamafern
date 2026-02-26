@@ -24,7 +24,7 @@ export default async function AllCollections() {
               />
             ) : (
               <div className="w-full h-full bg-oat flex items-center justify-center">
-                <span className="text-warm-brown/50 text-lg">
+                <span className="text-warm-brown/70 text-lg">
                   {collection.title}
                 </span>
               </div>

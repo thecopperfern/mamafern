@@ -15,24 +15,40 @@ and crafted with care for real families living real life.
 
 ## Product Categories
 
-### Family Matching Sets
-Coordinating (not identical) family outfits in complementary earth tones. Available 
-across baby, kids, mom, and dad sizes. Designed so each family member gets a piece 
-that fits their style while creating a beautiful unified look.
+### For Moms (Mama Fern)
+Organic cotton tees and cozy crewnecks for the mama who keeps it grounded.
+- Mama Fern Classic Tee — $32, organic cotton, relaxed fit, sizes XS-2XL, in Cream/Sage/Rose
+- Mama Fern Rooted Crewneck — $52, organic cotton/recycled poly French terry, sizes XS-2XL, in Cream/Oatmeal
+- Mama Fern Wildflower Tee — $34, botanical wildflower print, sizes XS-2XL, in Cream/Rose
 
-### Kids Clothing
-Toddler, infant, and youth sizes in organic cotton and bamboo blends. Prioritizes 
-comfort, mobility, and skin safety. All fabrics meet OEKO-TEX Standard 100 Class I — 
-the strictest level, designed for baby products.
+### For Dads (Papa Fern)
+Comfortable organic cotton gear for the dad who values quality and nature.
+- Papa Fern Classic Tee — $32, organic cotton, classic unisex fit, sizes S-3XL, in Cream/Sage/Oatmeal
+- Papa Fern Rooted Crewneck — $52, French terry sweatshirt, sizes S-3XL, in Cream/Oatmeal
 
-### Mom Apparel
-Comfortable, nature-inspired designs in natural fabrics. From linen midi dresses to 
-organic cotton tees in sage, cream, and warm brown. Designed for real life — playground 
-visits, farmers markets, and everything in between.
+### For Kids (Little Fern)
+Soft, playful pieces for the littlest adventurers — baby to big kid.
+- Little Fern Sprout Tee — $22, kids tee, sizes 2T-8Y, in Cream/Sage
+- Little Fern Seedling Onesie — $24, baby bodysuit, sizes 0-3M to 12-18M, in Cream/Sage
+- Little Fern Nature Explorer Tee — $22, kids tee with nature icons, sizes 2T-8Y, in Cream/Oatmeal
 
-### Dad Apparel
-Outdoor-ready, earthy style. Henley shirts, cotton knit pullovers, and comfortable 
-basics in forest green, warm brown, and oatmeal. Think "handsome farmer who reads poetry."
+### Accessories
+- Mama Fern Canvas Tote — $22, 12oz organic cotton canvas, botanical fern wreath design
+- Mama Fern Cozy Beanie — $20, organic cotton rib knit, embroidered fern leaf, in Oatmeal/Sage/Rose
+
+### Gift Bundles (Mother's Day 2026)
+- The Mama Bundle — Mom tee + tote ($52, save ~$2)
+- The Family Set — Mom tee + dad tee + baby onesie ($98, save ~$10)
+- The New Mama Gift — Mom tee + baby onesie + eco gift wrap ($54, save ~$2)
+- The Mini Match — Mom tee + kids tee ($52, save ~$2)
+
+### Collections
+- For Moms: /collections/moms
+- For Dads: /collections/dads
+- For Kids: /collections/kids
+- Accessories: /collections/accessories
+- New Arrivals: /collections/new-arrivals
+- Mother's Day Gifts: /collections/mothers-day
 
 ## Frequently Asked Questions
 
@@ -83,12 +99,18 @@ Standard shipping within the United States takes 5-7 business days. Expedited sh
 ## Website Structure
 - https://mamafern.com — Homepage
 - https://mamafern.com/shop — Full product catalog
+- https://mamafern.com/mothers-day — Mother's Day 2026 Gift Guide
 - https://mamafern.com/blog — Journal with style guides and parenting tips
 - https://mamafern.com/about — Brand story and mission
-- https://mamafern.com/faq — Frequently asked questions (12 topics)
+- https://mamafern.com/faq — Frequently asked questions (14 topics)
 - https://mamafern.com/community — Community hub
 - https://mamafern.com/contact — Customer support contact form
 - https://mamafern.com/returns — Return and exchange policy
+- https://mamafern.com/collections/moms — For Moms collection
+- https://mamafern.com/collections/dads — For Dads collection
+- https://mamafern.com/collections/kids — For Kids collection
+- https://mamafern.com/collections/accessories — Accessories
+- https://mamafern.com/collections/mothers-day — Mother's Day Gifts
 - https://mamafern.com/collections/[handle] — Individual collection pages
 - https://mamafern.com/product/[handle] — Individual product pages
 

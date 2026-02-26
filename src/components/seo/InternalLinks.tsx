@@ -49,7 +49,7 @@ export default function InternalLinks({ context }: InternalLinksProps) {
             <span className="text-sm font-medium text-charcoal group-hover:text-fern transition-colors">
               {link.label}
             </span>
-            <span className="block text-xs text-warm-brown/50 mt-0.5">
+            <span className="block text-xs text-warm-brown/70 mt-0.5">
               {link.desc}
             </span>
           </Link>

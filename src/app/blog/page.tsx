@@ -32,7 +32,7 @@ export default function BlogIndex() {
 
       <div className="mx-auto max-w-4xl px-4 py-14">
         {posts.length === 0 ? (
-          <p className="text-warm-brown/60 text-center py-8">
+          <p className="text-warm-brown/70 text-center py-8">
             Posts are on the way — check back soon!
           </p>
         ) : (
@@ -62,7 +62,7 @@ export default function BlogIndex() {
                 <div className="flex items-center justify-between">
                   <time
                     dateTime={post.date}
-                    className="text-xs text-warm-brown/40"
+                    className="text-xs text-warm-brown/70"
                   >
                     {new Date(post.date).toLocaleDateString("en-US", {
                       year: "numeric",

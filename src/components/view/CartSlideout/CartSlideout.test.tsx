@@ -52,7 +52,7 @@ describe("CartSlideout", () => {
   it("shows cart items when cart has lines", () => {
     currentCart = mockCart;
     render(<CartSlideout open={true} onClose={vi.fn()} />);
-    expect(screen.getByText("Organic Cotton Onesie")).toBeInTheDocument();
+    expect(screen.getByText("Little Fern Seedling Onesie")).toBeInTheDocument();
   });
 
   it("shows Checkout button when cart has items", () => {

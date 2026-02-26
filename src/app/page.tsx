@@ -1,4 +1,4 @@
-export const revalidate = 60;
+export const dynamic = "force-dynamic";
 
 import Hero from "@/components/view/Hero";
 import CategoryCards from "@/components/view/CategoryCards";

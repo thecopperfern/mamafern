@@ -31,6 +31,7 @@
     "class-variance-authority": "^0.7.1",
     "clsx": "^2.1.1",
     "embla-carousel-react": "^8.5.2",
+    "framer-motion": "^12.34.3",
     "graphql": "^16.10.0",
     "graphql-request": "^7.1.2",
     "graphql-tag": "^2.12.6",

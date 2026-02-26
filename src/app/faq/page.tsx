@@ -76,6 +76,16 @@ const FAQS = [
     answer:
       "We process orders quickly to get them to you fast. If you need to cancel or modify your order, contact us within 2 hours of placing it and we'll do our best to accommodate your request. After that window, the order may already be in fulfillment.",
   },
+  {
+    question: "Do you have a Mother's Day gift guide?",
+    answer:
+      "Yes! Visit our Mother's Day Gift Guide for curated gift bundles and ideas — from The Mama Bundle (tee + tote) to The Family Set (matching pieces for the whole crew). All gifts come with optional eco-friendly gift wrapping in recycled kraft paper with a hand-stamped Mama Fern seal.",
+  },
+  {
+    question: "What family matching options do you have?",
+    answer:
+      "Our Classic line features coordinating pieces across baby (Seedling Onesie), kids (Sprout Tee), moms (Mama Fern Classic Tee), and dads (Papa Fern Classic Tee) — all in the same earthy color palette. They coordinate beautifully without being identical, so each family member gets their own style.",
+  },
 ];
 
 const faqSchema = {
@@ -131,7 +141,7 @@ export default function FAQPage() {
           <h3 className="font-display font-bold text-charcoal text-xl mb-3">
             Still have questions?
           </h3>
-          <p className="text-warm-brown/60 text-sm mb-6 max-w-xs mx-auto">
+          <p className="text-warm-brown/70 text-sm mb-6 max-w-xs mx-auto">
             We&apos;re always happy to help. Reach out and we&apos;ll get back to you soon.
           </p>
           <Link

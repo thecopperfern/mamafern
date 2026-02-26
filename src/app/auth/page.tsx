@@ -29,7 +29,7 @@ export default function AuthPage() {
       <h1 className="font-heading text-3xl text-center mb-2">
         {showRegister ? "Create Account" : "Welcome Back"}
       </h1>
-      <p className="text-center text-warm-brown/60 mb-6">
+      <p className="text-center text-warm-brown/70 mb-6">
         {showRegister
           ? "Join the Mama Fern family"
           : "Log in to your Mama Fern account"}

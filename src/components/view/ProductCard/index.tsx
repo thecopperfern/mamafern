@@ -8,6 +8,7 @@ import { useRouter } from "next/navigation";
 import WishlistButton from "../WishlistButton";
 import { useCartActions } from "@/lib/atoms/cart";
 import { toast } from "sonner";
+import { motion, cardHover } from "@/lib/motion";
 
 const ProductCard = ({ product }: { product: CommerceProduct }) => {
   const router = useRouter();
@@ -35,10 +36,12 @@ const ProductCard = ({ product }: { product: CommerceProduct }) => {
   };
 
   return (
-    <div
+    <motion.div
       role="button"
       className="group flex flex-col gap-2"
       onClick={handleCardClick}
+      whileHover={cardHover.whileHover}
+      transition={cardHover.transition}
     >
       <div className="relative w-full h-[300px] rounded-lg overflow-hidden border border-oat">
         <WishlistButton
@@ -55,7 +58,7 @@ const ProductCard = ({ product }: { product: CommerceProduct }) => {
             className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105"
           />
         ) : (
-          <div className="w-full h-full bg-oat flex items-center justify-center text-warm-brown/50">
+          <div className="w-full h-full bg-oat flex items-center justify-center text-warm-brown/70">
             No image
           </div>
         )}
@@ -68,7 +71,7 @@ const ProductCard = ({ product }: { product: CommerceProduct }) => {
       >
         {isSingleVariant ? "Add to Cart" : "View Options"}
       </Button>
-    </div>
+    </motion.div>
   );
 };
 

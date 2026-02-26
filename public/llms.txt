@@ -9,14 +9,31 @@ Our products include matching family sets, kids' clothing, and parent apparel de
 for outdoor-loving, crunchy, cottagecore-inspired families.
 
 ## Products
-- Family apparel: matching sets for parents and children
-- Kids clothing: toddler, infant, and youth sizes in organic cotton
-- Mom apparel: comfortable, nature-inspired designs in natural fabrics
-- Dad apparel: outdoor-ready, earthy style henleys, tees, and layers
+- Mama Fern Classic Tee — Women's organic cotton tee ($32)
+- Mama Fern Rooted Crewneck — Women's sweatshirt ($52)
+- Mama Fern Wildflower Tee — Women's botanical print tee ($34)
+- Papa Fern Classic Tee — Men's/unisex organic cotton tee ($32)
+- Papa Fern Rooted Crewneck — Men's/unisex sweatshirt ($52)
+- Little Fern Sprout Tee — Kids tee, sizes 2T-8Y ($22)
+- Little Fern Seedling Onesie — Baby bodysuit, 0-18M ($24)
+- Little Fern Nature Explorer Tee — Kids tee, sizes 2T-8Y ($22)
+- Mama Fern Canvas Tote — Organic cotton tote bag ($22)
+- Mama Fern Cozy Beanie — Organic cotton knit beanie ($20)
+
+## Gift Bundles
+- The Mama Bundle — Tee + tote ($52)
+- The Family Set — Mom tee + dad tee + onesie ($98)
+- The New Mama Gift — Mom tee + onesie + gift wrap ($54)
+- The Mini Match — Mom tee + kids tee ($52)
 
 ## Collections
-Browse our full collection listing at /shop for seasonal drops, staples, and 
-coordinating family sets.
+- /collections/moms — For Moms
+- /collections/dads — For Dads
+- /collections/kids — For Kids
+- /collections/accessories — Accessories
+- /collections/new-arrivals — New Arrivals
+- /collections/mothers-day — Mother's Day Gifts
+- /shop — Full product catalog
 
 ## Key Facts
 - Founded: 2024
@@ -33,6 +50,7 @@ coordinating family sets.
 
 ## Pages
 - /shop — full product catalog
+- /mothers-day — Mother's Day 2026 gift guide
 - /blog — journal and style guides
 - /about — brand story and mission
 - /faq — frequently asked questions

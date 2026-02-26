@@ -1,5 +1,7 @@
 # MamaFern — Headless Shopify AI Strategy
 
+> **STATUS: DEFERRED — Post-launch.** Decision made Feb 25, 2026 to launch without AI chat agent. Focus is on core shopping experience, Mother's Day campaign (Mar 16 – May 10), and product catalog buildout. Revisit after store launch and initial sales data.
+
 > Full review, research, and implementation roadmap for building out the headless Shopify storefront with AI-powered features.
 
 ---

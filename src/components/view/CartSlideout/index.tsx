@@ -83,8 +83,8 @@ export default function CartSlideout({ open, onClose }: Props) {
 
         {cart.lines.length === 0 ? (
           <div className="flex-1 flex flex-col items-center justify-center gap-4 p-8">
-            <ShoppingBag className="h-12 w-12 text-warm-brown/30" />
-            <p className="text-warm-brown/60">Your cart is empty</p>
+            <ShoppingBag className="h-12 w-12 text-warm-brown/70" />
+            <p className="text-warm-brown/70">Your cart is empty</p>
             <Button
               onClick={onClose}
               className="bg-fern hover:bg-fern-dark text-white"
@@ -120,7 +120,7 @@ export default function CartSlideout({ open, onClose }: Props) {
                       {line.productTitle}
                     </Link>
                     {line.variantTitle && line.variantTitle !== "Default Title" && (
-                      <p className="text-xs text-warm-brown/60 mt-0.5">
+                      <p className="text-xs text-warm-brown/70 mt-0.5">
                         {line.variantTitle}
                       </p>
                     )}
@@ -157,7 +157,7 @@ export default function CartSlideout({ open, onClose }: Props) {
                       <Button
                         size="icon"
                         variant="ghost"
-                        className="h-8 w-8 ml-auto text-warm-brown/40 hover:text-terracotta touch-manipulation"
+                        className="h-8 w-8 ml-auto text-warm-brown/70 hover:text-terracotta touch-manipulation"
                         onClick={() => {
                           removeItem(line.id);
                           toast.success(`${line.productTitle} removed from cart`);
@@ -252,7 +252,7 @@ export default function CartSlideout({ open, onClose }: Props) {
                       </span>
                       <button
                         onClick={() => removeDiscount(dc.code)}
-                        className="text-warm-brown/40 hover:text-terracotta"
+                        className="text-warm-brown/70 hover:text-terracotta"
                       >
                         <X className="h-3.5 w-3.5" />
                       </button>
@@ -267,7 +267,7 @@ export default function CartSlideout({ open, onClose }: Props) {
                   {formatPrice(cart.subtotal.amount, cart.subtotal.currencyCode)}
                 </span>
               </div>
-              <p className="text-xs text-warm-brown/50">
+              <p className="text-xs text-warm-brown/70">
                 Shipping and taxes calculated at checkout
               </p>
               <Button

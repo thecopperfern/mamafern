@@ -39,7 +39,7 @@ export default function WishlistButton({
       size="icon"
       variant="ghost"
       onClick={handleClick}
-      className={cn("text-warm-brown/40 hover:text-terracotta", className)}
+      className={cn("text-warm-brown/70 hover:text-terracotta", className)}
       aria-label={wishlisted ? "Remove from wishlist" : "Add to wishlist"}
     >
       <Heart

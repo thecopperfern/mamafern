@@ -174,7 +174,7 @@ export default function AboutPage() {
               <div className="text-2xl shrink-0 mt-0.5" aria-hidden="true">{v.emoji}</div>
               <div>
                 <h3 className="font-semibold text-charcoal mb-1.5">{v.title}</h3>
-                <p className="text-warm-brown/60 text-sm leading-relaxed">{v.desc}</p>
+                <p className="text-warm-brown/70 text-sm leading-relaxed">{v.desc}</p>
               </div>
             </div>
           ))}

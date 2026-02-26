@@ -23,12 +23,12 @@ vi.mock("../WishlistButton", () => ({
 describe("ProductCard", () => {
   it("renders product title", () => {
     render(<ProductCard product={mockProduct} />);
-    expect(screen.getByText("Organic Cotton Onesie")).toBeInTheDocument();
+    expect(screen.getByText("Little Fern Seedling Onesie")).toBeInTheDocument();
   });
 
   it("renders product image", () => {
     render(<ProductCard product={mockProduct} />);
-    const img = screen.getByAltText("Front view");
+    const img = screen.getByAltText("Little Fern Seedling Onesie front view in natural cream");
     expect(img).toBeInTheDocument();
   });
 
@@ -45,7 +45,7 @@ describe("ProductCard", () => {
     // Click the card container (first element with role button)
     const buttons = screen.getAllByRole("button");
     await user.click(buttons[0]);
-    expect(mockPush).toHaveBeenCalledWith("/product/organic-onesie");
+    expect(mockPush).toHaveBeenCalledWith("/product/little-fern-seedling-onesie");
   });
 
   it("renders action button", () => {

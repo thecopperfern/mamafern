@@ -92,7 +92,7 @@ export default function FabricSpecs({ specs }: Props) {
         </span>
         <ChevronDown
           className={cn(
-            "h-4 w-4 text-warm-brown/60 transition-transform",
+            "h-4 w-4 text-warm-brown/70 transition-transform",
             isOpen && "rotate-180"
           )}
         />
@@ -117,7 +117,7 @@ export default function FabricSpecs({ specs }: Props) {
           ))}
 
           <div className="pt-2 mt-3 border-t border-oat">
-            <p className="text-xs text-warm-brown/50">
+            <p className="text-xs text-warm-brown/70">
               Made with care for sensitive skin and the planet
             </p>
           </div>

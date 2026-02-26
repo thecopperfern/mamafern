@@ -145,9 +145,9 @@ export default function OrderHistoryPage() {
         </div>
       ) : orders.length === 0 ? (
         <div className="text-center py-16">
-          <Package className="h-12 w-12 text-warm-brown/30 mx-auto mb-4" />
+          <Package className="h-12 w-12 text-warm-brown/70 mx-auto mb-4" />
           <h2 className="text-lg font-medium mb-2">No orders yet</h2>
-          <p className="text-warm-brown/60 mb-6">
+          <p className="text-warm-brown/70 mb-6">
             When you place an order, it will appear here.
           </p>
           <Link href="/shop">
@@ -170,7 +170,7 @@ export default function OrderHistoryPage() {
                     <h3 className="font-medium text-sm">
                       Order {order.name}
                     </h3>
-                    <p className="text-xs text-warm-brown/50 mt-0.5">
+                    <p className="text-xs text-warm-brown/70 mt-0.5">
                       {new Date(order.processedAt).toLocaleDateString(undefined, {
                         year: "numeric",
                         month: "long",
@@ -211,7 +211,7 @@ export default function OrderHistoryPage() {
                               />
                             ) : (
                               <div className="h-full w-full bg-oat/50 flex items-center justify-center">
-                                <Package className="h-4 w-4 text-warm-brown/30" />
+                                <Package className="h-4 w-4 text-warm-brown/70" />
                               </div>
                             )}
                           </div>
@@ -228,7 +228,7 @@ export default function OrderHistoryPage() {
                             />
                           ) : (
                             <div className="h-full w-full bg-oat/50 flex items-center justify-center">
-                              <Package className="h-4 w-4 text-warm-brown/30" />
+                              <Package className="h-4 w-4 text-warm-brown/70" />
                             </div>
                           )}
                         </div>
@@ -247,7 +247,7 @@ export default function OrderHistoryPage() {
                     </div>
                   ))}
                   {order.lineItems.nodes.length > 5 && (
-                    <div className="h-16 w-16 rounded border border-oat flex items-center justify-center text-xs text-warm-brown/50">
+                    <div className="h-16 w-16 rounded border border-oat flex items-center justify-center text-xs text-warm-brown/70">
                       +{order.lineItems.nodes.length - 5} more
                     </div>
                   )}
@@ -255,7 +255,7 @@ export default function OrderHistoryPage() {
 
                 {/* Order Total */}
                 <div className="flex justify-between items-center pt-3 border-t border-oat/60">
-                  <span className="text-sm text-warm-brown/50">
+                  <span className="text-sm text-warm-brown/70">
                     {order.lineItems.nodes.reduce(
                       (sum, li) => sum + li.currentQuantity,
                       0

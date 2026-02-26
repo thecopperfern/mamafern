@@ -5,9 +5,10 @@ import CollectionContent from "@/components/view/CollectionContent";
 import Breadcrumbs from "@/components/view/Breadcrumbs";
 import InternalLinks from "@/components/seo/InternalLinks";
 import JsonLd from "@/components/seo/JsonLd";
+import PageTransition from "@/components/PageTransition";
 import { buildCollectionMetadata, SITE_CONFIG } from "@/lib/seo";
 
-export const revalidate = 3600;
+export const dynamic = "force-dynamic";
 
 type Props = {
   params: Promise<{ handle: string }>;
@@ -58,31 +59,33 @@ export default async function CollectionPage({
   };
 
   return (
-    <div className="my-10 flex flex-col gap-y-6 px-4">
-      <JsonLd data={collectionSchema} />
-      <Breadcrumbs
-        items={[
-          { label: "Shop", href: "/shop" },
-          { label: result.collection.title },
-        ]}
-      />
-      <div className="flex items-center justify-between">
-        <h1 className="text-3xl font-bold font-display text-charcoal">
-          {result.collection.title}
-        </h1>
+    <PageTransition>
+      <div className="my-10 flex flex-col gap-y-6 px-4">
+        <JsonLd data={collectionSchema} />
+        <Breadcrumbs
+          items={[
+            { label: "Shop", href: "/shop" },
+            { label: result.collection.title },
+          ]}
+        />
+        <div className="flex items-center justify-between">
+          <h1 className="text-3xl font-bold font-display text-charcoal">
+            {result.collection.title}
+          </h1>
+        </div>
+        {result.collection.description && (
+          <p className="text-warm-brown/70 max-w-2xl">
+            {result.collection.description}
+          </p>
+        )}
+        <CollectionContent
+          products={result.products}
+          pageInfo={result.pageInfo}
+          handle={handle}
+          currentSort={sort ?? "default"}
+        />
+        <InternalLinks context="collection" />
       </div>
-      {result.collection.description && (
-        <p className="text-warm-brown/70 max-w-2xl">
-          {result.collection.description}
-        </p>
-      )}
-      <CollectionContent
-        products={result.products}
-        pageInfo={result.pageInfo}
-        handle={handle}
-        currentSort={sort ?? "default"}
-      />
-      <InternalLinks context="collection" />
-    </div>
+    </PageTransition>
   );
 }

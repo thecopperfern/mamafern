@@ -9,6 +9,11 @@
     --radius: 0.5rem;
     /* 65% cream wash over linen — adjust to taste */
     --linen-wash: rgba(250, 247, 242, 0.65);
+
+    /* Framer Motion spring physics presets */
+    --spring-stiff: 500;
+    --spring-damp: 30;
+    --spring-gentle: 300;
   }
 
   body {
@@ -66,6 +71,13 @@
 }
 
 @layer utilities {
+  /* Motion-safe animations (only apply when user hasn't requested reduced motion) */
+  .motion-safe-animate {
+    @media (prefers-reduced-motion: no-preference) {
+      /* Animations are enabled */
+    }
+  }
+
   .animate-fade-in-up {
     animation: fade-in-up 0.55s ease-out both;
   }

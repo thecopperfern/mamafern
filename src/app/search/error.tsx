@@ -12,7 +12,7 @@ export default function SearchError({
       <h1 className="text-3xl font-display font-bold text-terracotta mb-4">
         Search failed
       </h1>
-      <p className="text-warm-brown/60 mb-8 max-w-md">
+      <p className="text-warm-brown/70 mb-8 max-w-md">
         {error.message || "We couldn't complete your search. Please try again."}
       </p>
       <button

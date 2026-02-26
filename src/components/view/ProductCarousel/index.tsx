@@ -7,6 +7,7 @@ import { cn } from "@/lib/utils";
 import { Button } from "@/components/ui/button";
 import Image from "next/image";
 import type { CommerceImage } from "@/lib/commerce";
+import { motion, thumbnailHover } from "@/lib/motion";
 
 export default function ProductCarousel({
   images,
@@ -80,7 +81,7 @@ export default function ProductCarousel({
       <div className="hidden overflow-hidden lg:block" ref={thumbCarouselRef}>
         <div className="grid grid-flow-row gap-y-2">
           {images.map((image, index) => (
-            <button
+            <motion.button
               key={index}
               onClick={() => onThumbClick(index)}
               className={cn(
@@ -89,6 +90,9 @@ export default function ProductCarousel({
                   ? "border-fern"
                   : "border-oat"
               )}
+              whileHover={thumbnailHover.whileHover}
+              whileTap={thumbnailHover.whileTap}
+              transition={thumbnailHover.transition}
             >
               <Image
                 width={96}
@@ -99,7 +103,7 @@ export default function ProductCarousel({
                 className="h-full w-full object-cover"
                 style={{ objectFit: "cover" }}
               />
-            </button>
+            </motion.button>
           ))}
         </div>
       </div>
@@ -109,7 +113,13 @@ export default function ProductCarousel({
         <div className="overflow-hidden" ref={mainCarouselRef}>
           <div className="grid auto-cols-[100%] grid-flow-col">
             {images.map((image, index) => (
-              <div className="relative min-w-0" key={index}>
+              <motion.div
+                className="relative min-w-0"
+                key={index}
+                initial={{ opacity: 0.8 }}
+                animate={{ opacity: selectedIndex === index ? 1 : 0.8 }}
+                transition={{ duration: 0.3 }}
+              >
                 <Image
                   width={1000}
                   height={400}
@@ -118,7 +128,7 @@ export default function ProductCarousel({
                   sizes="(max-width: 768px) 100vw, 50vw"
                   className="h-full max-h-[650px] w-full object-contain"
                 />
-              </div>
+              </motion.div>
             ))}
           </div>
         </div>

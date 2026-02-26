@@ -13,9 +13,10 @@ describe("ProductOptions", () => {
 
   it("renders size option values as buttons", () => {
     render(<ProductOptions options={mockProduct.options} />);
-    expect(screen.getByText("S")).toBeInTheDocument();
-    expect(screen.getByText("M")).toBeInTheDocument();
-    expect(screen.getByText("L")).toBeInTheDocument();
+    expect(screen.getByText("0-3M")).toBeInTheDocument();
+    expect(screen.getByText("3-6M")).toBeInTheDocument();
+    expect(screen.getByText("6-12M")).toBeInTheDocument();
+    expect(screen.getByText("12-18M")).toBeInTheDocument();
   });
 
   it("calls setSelectedOptions when a size is clicked", async () => {
@@ -27,9 +28,9 @@ describe("ProductOptions", () => {
       />
     );
     const user = userEvent.setup();
-    await user.click(screen.getByText("M"));
+    await user.click(screen.getByText("3-6M"));
     expect(setSelectedOptions).toHaveBeenCalledWith(
-      expect.objectContaining({ Size: "M" })
+      expect.objectContaining({ Size: "3-6M" })
     );
   });
 
@@ -37,19 +38,19 @@ describe("ProductOptions", () => {
     render(
       <ProductOptions
         options={mockProduct.options}
-        selectedOptions={{ Size: "S", Color: "Sage" }}
+        selectedOptions={{ Size: "0-3M", Color: "Sage Green" }}
       />
     );
-    // The selected S button should have the default variant styling
-    const sButton = screen.getByText("S");
+    // The selected 0-3M button should have the default variant styling
+    const sButton = screen.getByText("0-3M");
     expect(sButton).toBeInTheDocument();
   });
 
   it("renders color swatches as circular buttons", () => {
     render(<ProductOptions options={mockProduct.options} />);
-    // Color option has 2 values (Sage, Cream) — rendered as styled buttons
+    // Color option has 2 values (Sage Green, Natural Cream) — rendered as styled buttons
     const buttons = screen.getAllByRole("button");
-    // Should have 3 size buttons + 2 color swatch buttons = 5
-    expect(buttons.length).toBe(5);
+    // Should have 4 size buttons + 2 color swatch buttons = 6
+    expect(buttons.length).toBe(6);
   });
 });

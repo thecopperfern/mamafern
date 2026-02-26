@@ -34,8 +34,8 @@ describe("CollectionContent", () => {
         currentSort="default"
       />
     );
-    expect(screen.getByText("Organic Cotton Onesie")).toBeInTheDocument();
-    expect(screen.getByText("Fern Print Tee")).toBeInTheDocument();
+    expect(screen.getByText("Little Fern Seedling Onesie")).toBeInTheDocument();
+    expect(screen.getByText("Mama Fern Classic Tee")).toBeInTheDocument();
   });
 
   it("renders sort dropdown", () => {
@@ -94,7 +94,7 @@ describe("CollectionContent", () => {
   it("filters products by price", async () => {
     render(
       <CollectionContent
-        products={[mockProduct]} // price is 24.99
+        products={[mockProduct]} // price is 24.00
         pageInfo={defaultPageInfo}
         handle="kids"
         currentSort="default"

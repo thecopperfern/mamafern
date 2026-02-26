@@ -14,7 +14,7 @@ export default function ProductError({
       <h1 className="text-3xl font-display font-bold text-terracotta mb-4">
         Couldn&apos;t load product
       </h1>
-      <p className="text-warm-brown/60 mb-8 max-w-md">
+      <p className="text-warm-brown/70 mb-8 max-w-md">
         {error.message || "We had trouble loading this product. Please try again."}
       </p>
       <div className="flex gap-4">

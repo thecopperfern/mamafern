@@ -245,7 +245,7 @@ export default function NaturalFabricGuidePage() {
           <p className="font-display font-bold text-lg text-charcoal mb-2">
             Shop natural-fabric family clothing
           </p>
-          <p className="text-warm-brown/60 text-sm mb-4">
+          <p className="text-warm-brown/70 text-sm mb-4">
             Every Mama Fern piece is made from OEKO-TEX certified natural fabrics.
           </p>
           <Link

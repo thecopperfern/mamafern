@@ -35,14 +35,14 @@ describe("ProductDetail", () => {
   it("renders product title", () => {
     render(<ProductDetail product={mockProduct} />);
     // Title may appear multiple times (main heading + sticky ATC bar)
-    const titles = screen.getAllByText("Organic Cotton Onesie");
+    const titles = screen.getAllByText("Little Fern Seedling Onesie");
     expect(titles.length).toBeGreaterThanOrEqual(1);
   });
 
   it("renders product description", () => {
     render(<ProductDetail product={mockProduct} />);
     expect(
-      screen.getByText("Soft organic cotton onesie for your little one.")
+      screen.getByText(/The softest organic cotton onesie for your littlest fern/)
     ).toBeInTheDocument();
   });
 

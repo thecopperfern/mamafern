@@ -1,8 +1,9 @@
 import AllCollections from "@/components/view/AllCollections";
 import PageHero from "@/components/view/PageHero";
+import PageTransition from "@/components/PageTransition";
 import { buildMetadata } from "@/lib/seo";
 
-export const revalidate = 300;
+export const dynamic = "force-dynamic";
 
 export const metadata = buildMetadata({
   title: "Shop All",
@@ -14,15 +15,17 @@ export const metadata = buildMetadata({
 
 export default function ShopPage() {
   return (
-    <div>
-      <PageHero
-        eyebrow="All Collections"
-        title="Shop All"
-        subtitle="Family apparel in skin-friendly fabrics for every stage of growing together."
-      />
-      <div className="mx-auto max-w-6xl px-4">
-        <AllCollections />
+    <PageTransition>
+      <div>
+        <PageHero
+          eyebrow="All Collections"
+          title="Shop All"
+          subtitle="Family apparel in skin-friendly fabrics for every stage of growing together."
+        />
+        <div className="mx-auto max-w-6xl px-4">
+          <AllCollections />
+        </div>
       </div>
-    </div>
+    </PageTransition>
   );
 }

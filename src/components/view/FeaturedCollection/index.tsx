@@ -44,7 +44,7 @@ export default async function FeaturedCollection({
             {title}
           </h2>
           {subtitle && (
-            <p className="text-warm-brown/60 mt-1">{subtitle}</p>
+            <p className="text-warm-brown/70 mt-1">{subtitle}</p>
           )}
         </div>
         <Link
@@ -73,7 +73,7 @@ export default async function FeaturedCollection({
                   className="object-cover transition-transform duration-300 group-hover:scale-105"
                 />
               ) : (
-                <div className="w-full h-full bg-oat flex items-center justify-center text-warm-brown/40">
+                <div className="w-full h-full bg-oat flex items-center justify-center text-warm-brown/70">
                   {product.title}
                 </div>
               )}

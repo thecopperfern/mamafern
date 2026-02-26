@@ -42,7 +42,7 @@ export default async function SearchPage({ searchParams }: Props) {
       </p>
 
       {products.length === 0 ? (
-        <p className="text-warm-brown/60">
+        <p className="text-warm-brown/70">
           No products matched your search. Try a different term.
         </p>
       ) : (

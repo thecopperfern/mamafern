@@ -4,11 +4,12 @@ import Breadcrumbs from "@/components/view/Breadcrumbs";
 import RelatedProducts from "@/components/view/RelatedProducts";
 import InternalLinks from "@/components/seo/InternalLinks";
 import JsonLd from "@/components/seo/JsonLd";
+import PageTransition from "@/components/PageTransition";
 import { notFound } from "next/navigation";
 import type { Metadata } from "next";
 import { buildProductMetadata, stripHtml, SITE_CONFIG } from "@/lib/seo";
 
-export const revalidate = 3600;
+export const dynamic = "force-dynamic";
 
 type Props = {
   params: Promise<{ handle: string }>;
@@ -54,22 +55,24 @@ export default async function ProductPage({ params }: Props) {
   };
 
   return (
-    <div className="px-4 mt-6">
-      <JsonLd data={productSchema} />
-      <Breadcrumbs
-        items={[
-          { label: "Shop", href: "/shop" },
-          { label: product.title },
-        ]}
-      />
-      <ProductDetail product={product} />
-      {recommendations.length > 0 && (
-        <RelatedProducts
-          products={recommendations}
-          title="Complete the Family Look"
+    <PageTransition>
+      <div className="px-4 mt-6">
+        <JsonLd data={productSchema} />
+        <Breadcrumbs
+          items={[
+            { label: "Shop", href: "/shop" },
+            { label: product.title },
+          ]}
         />
-      )}
-      <InternalLinks context="product" />
-    </div>
+        <ProductDetail product={product} />
+        {recommendations.length > 0 && (
+          <RelatedProducts
+            products={recommendations}
+            title="Complete the Family Look"
+          />
+        )}
+        <InternalLinks context="product" />
+      </div>
+    </PageTransition>
   );
 }

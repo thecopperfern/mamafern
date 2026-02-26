@@ -50,7 +50,7 @@ export default function StickyATC({
         <div className="flex-1 min-w-0">
           <p className="text-sm font-medium text-charcoal truncate">{title}</p>
           {variantTitle && variantTitle !== "Default Title" && (
-            <p className="text-xs text-warm-brown/60 truncate">{variantTitle}</p>
+            <p className="text-xs text-warm-brown/70 truncate">{variantTitle}</p>
           )}
         </div>
         <span className="text-sm font-semibold text-charcoal shrink-0">

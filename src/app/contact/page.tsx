@@ -68,7 +68,7 @@ export default function ContactPage() {
                   <span className="text-xl mt-0.5">{item.emoji}</span>
                   <div>
                     <p className="font-medium text-charcoal text-sm">{item.title}</p>
-                    <p className="text-warm-brown/60 text-sm">{item.desc}</p>
+                    <p className="text-warm-brown/70 text-sm">{item.desc}</p>
                   </div>
                 </div>
               ))}
@@ -110,7 +110,7 @@ export default function ContactPage() {
                   id="name"
                   name="name"
                   required
-                  className="w-full border border-oat rounded-lg px-4 py-2.5 bg-cream/60 text-charcoal placeholder:text-warm-brown/30 focus:outline-none focus:ring-2 focus:ring-fern/30 focus:border-fern transition-colors text-sm"
+                  className="w-full border border-oat rounded-lg px-4 py-2.5 bg-cream/60 text-charcoal placeholder:text-warm-brown/70 focus:outline-none focus:ring-2 focus:ring-fern/30 focus:border-fern transition-colors text-sm"
                   placeholder="Your name"
                 />
               </div>
@@ -127,7 +127,7 @@ export default function ContactPage() {
                   id="email"
                   name="email"
                   required
-                  className="w-full border border-oat rounded-lg px-4 py-2.5 bg-cream/60 text-charcoal placeholder:text-warm-brown/30 focus:outline-none focus:ring-2 focus:ring-fern/30 focus:border-fern transition-colors text-sm"
+                  className="w-full border border-oat rounded-lg px-4 py-2.5 bg-cream/60 text-charcoal placeholder:text-warm-brown/70 focus:outline-none focus:ring-2 focus:ring-fern/30 focus:border-fern transition-colors text-sm"
                   placeholder="you@example.com"
                 />
               </div>
@@ -144,7 +144,7 @@ export default function ContactPage() {
                   name="message"
                   rows={5}
                   required
-                  className="w-full border border-oat rounded-lg px-4 py-2.5 bg-cream/60 text-charcoal placeholder:text-warm-brown/30 focus:outline-none focus:ring-2 focus:ring-fern/30 focus:border-fern resize-none transition-colors text-sm"
+                  className="w-full border border-oat rounded-lg px-4 py-2.5 bg-cream/60 text-charcoal placeholder:text-warm-brown/70 focus:outline-none focus:ring-2 focus:ring-fern/30 focus:border-fern resize-none transition-colors text-sm"
                   placeholder="What's on your mind?"
                 />
               </div>

@@ -57,7 +57,7 @@ export default function CommunityPage() {
             our design process, and stories from the families who wear Mama Fern.
           </p>
           <div className="relative h-px bg-oat mb-4" />
-          <p className="relative text-xs text-warm-brown/40 italic">
+          <p className="relative text-xs text-warm-brown/70 italic">
             Posted by the Mama Fern team &mdash; Feb 2026
           </p>
         </article>
@@ -77,7 +77,7 @@ export default function CommunityPage() {
               >
                 <div className="text-3xl mb-3">{v.emoji}</div>
                 <h3 className="font-display font-bold text-charcoal mb-2">{v.title}</h3>
-                <p className="text-warm-brown/60 text-sm leading-relaxed">{v.desc}</p>
+                <p className="text-warm-brown/70 text-sm leading-relaxed">{v.desc}</p>
               </div>
             ))}
           </div>
@@ -93,7 +93,7 @@ export default function CommunityPage() {
           <h3 className="font-display font-bold text-charcoal text-2xl md:text-3xl mb-4 leading-snug">
             More stories coming soon
           </h3>
-          <p className="text-warm-brown/60 text-sm mb-8 max-w-sm mx-auto leading-relaxed">
+          <p className="text-warm-brown/70 text-sm mb-8 max-w-sm mx-auto leading-relaxed">
             We&apos;re building something special here. Follow along for new posts, seasonal
             drops, and behind-the-scenes moments.
           </p>

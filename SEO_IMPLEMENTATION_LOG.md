@@ -45,7 +45,7 @@ Implemented a 6-phase master plan focused on technical SEO, semantic content, st
 ## Phase 5: Performance & Core Web Vitals
 **Goal:** Maximize speed and perceived performance (direct ranking signals).
 
-- **ISR Caching**: Converted the Homepage and Shop from `force-dynamic` to ISR (60s and 300s respectively), drastically reducing Time to First Byte (TTFB).
+- **~~ISR Caching~~**: ~~Converted the Homepage and Shop from `force-dynamic` to ISR (60s and 300s respectively)~~ **REVERTED** - ISR breaks Shopify connection on Hostinger. All Shopify pages must use `force-dynamic`.
 - **Resource Hints**: Added `preconnect` and `dns-prefetch` for `cdn.shopify.com` to speed up initial image loading.
 - **Image Optimization**: Configured AVIF support and a 30-day cache TTL in `next.config.ts`.
 - **Loading Skeletons**: Built custom skeleton UI for Blog, Account, and Product pages to improve Cumulative Layout Shift (CLS).

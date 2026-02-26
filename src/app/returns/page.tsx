@@ -47,7 +47,7 @@ export default async function ReturnsPage() {
             dangerouslySetInnerHTML={{ __html: policy.body }}
           />
         ) : (
-          <p className="text-warm-brown/60 text-center py-8">
+          <p className="text-warm-brown/70 text-center py-8">
             Our returns policy is being finalized. Please check back soon.
           </p>
         )}

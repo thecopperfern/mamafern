@@ -104,7 +104,7 @@ export default function EmailCaptureModal() {
         >
           <button
             onClick={handleClose}
-            className="absolute top-4 right-4 text-warm-brown/40 hover:text-charcoal transition-colors"
+            className="absolute top-4 right-4 text-warm-brown/70 hover:text-charcoal transition-colors"
             aria-label="Close"
           >
             <X className="h-5 w-5" />
@@ -144,7 +144,7 @@ export default function EmailCaptureModal() {
             </Button>
           </form>
 
-          <p className="text-xs text-warm-brown/50 text-center mt-4">
+          <p className="text-xs text-warm-brown/70 text-center mt-4">
             By subscribing, you agree to receive marketing emails. Unsubscribe anytime.
           </p>
         </div>

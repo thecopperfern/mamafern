@@ -107,7 +107,7 @@ export default function ProductReviews({
               type="text"
               value={newName}
               onChange={(e) => setNewName(e.target.value)}
-              className="w-full border border-oat rounded-md px-3 py-2 text-sm bg-white text-charcoal placeholder:text-warm-brown/30 focus:outline-none focus:ring-2 focus:ring-fern/30 focus:border-fern"
+              className="w-full border border-oat rounded-md px-3 py-2 text-sm bg-white text-charcoal placeholder:text-warm-brown/70 focus:outline-none focus:ring-2 focus:ring-fern/30 focus:border-fern"
               placeholder="Your name"
             />
           </div>
@@ -119,7 +119,7 @@ export default function ProductReviews({
               value={newBody}
               onChange={(e) => setNewBody(e.target.value)}
               rows={3}
-              className="w-full border border-oat rounded-md px-3 py-2 text-sm bg-white text-charcoal placeholder:text-warm-brown/30 focus:outline-none focus:ring-2 focus:ring-fern/30 focus:border-fern resize-none"
+              className="w-full border border-oat rounded-md px-3 py-2 text-sm bg-white text-charcoal placeholder:text-warm-brown/70 focus:outline-none focus:ring-2 focus:ring-fern/30 focus:border-fern resize-none"
               placeholder="Share your thoughts..."
             />
           </div>
@@ -130,7 +130,7 @@ export default function ProductReviews({
       )}
 
       {reviews.length === 0 ? (
-        <p className="text-warm-brown/60 text-sm py-4">
+        <p className="text-warm-brown/70 text-sm py-4">
           No reviews yet. Be the first to review this product!
         </p>
       ) : (
@@ -147,7 +147,7 @@ export default function ProductReviews({
                     {review.author}
                   </span>
                 </div>
-                <span className="text-xs text-warm-brown/50">
+                <span className="text-xs text-warm-brown/70">
                   {review.date}
                 </span>
               </div>

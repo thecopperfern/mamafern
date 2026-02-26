@@ -49,7 +49,7 @@ export default function ShareButtons({
 
   return (
     <div className="flex items-center gap-2">
-      <span className="text-xs text-warm-brown/60">Share:</span>
+      <span className="text-xs text-warm-brown/70">Share:</span>
       <Button
         size="sm"
         variant="outline"
