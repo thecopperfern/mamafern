@@ -8,6 +8,12 @@
 
 process.env.NODE_ENV = "production";
 
+// Load .env.local FIRST — persist-env.js writes Shopify credentials here
+// during build. This ensures env vars survive Hostinger's process restarts
+// even if hPanel doesn't inject them into the runtime environment.
+const path = require("path");
+require("dotenv").config({ path: path.join(__dirname, ".env.local") });
+
 const next = require("next");
 const { createServer } = require("http");
 

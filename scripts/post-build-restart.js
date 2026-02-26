@@ -3,50 +3,50 @@
  *
  * Problem: Hostinger's auto-deploy runs `npm run build` after a push,
  * but does NOT restart the running Node.js process. The old server
- * keeps running with stale code (or crashes), making the site inaccessible.
+ * keeps running with stale code and stale env vars.
  *
- * Solution: After `next build` completes, this script restarts the app
- * using PM2 (if available) or kills the old process so Hostinger's
- * process manager can respawn it.
- *
- * This runs at the END of every build, so every push = fresh server.
+ * Solution: Try multiple restart strategies in order of preference.
+ * At least one should work on Hostinger's Node.js hosting.
  */
 
 const { execSync } = require("child_process");
+const fs = require("fs");
+const path = require("path");
 
-function tryRestart() {
-  // Strategy 1: PM2 restart (preferred)
-  try {
-    execSync("pm2 restart mamafern --update-env", { stdio: "inherit" });
-    console.log("✅ post-build: PM2 restarted mamafern");
-    return true;
-  } catch {
-    // PM2 not available or app not registered
-  }
+let restarted = false;
 
-  // Strategy 2: PM2 start if not yet registered
-  try {
-    execSync("pm2 start ecosystem.config.js --update-env", { stdio: "inherit" });
-    console.log("✅ post-build: PM2 started mamafern via ecosystem.config.js");
-    return true;
-  } catch {
-    // PM2 not installed
-  }
-
-  // Strategy 3: Kill any existing node server.js process so the
-  // hosting panel's process manager respawns it
-  try {
-    // Find and kill the old server.js process (Linux only)
-    execSync("pkill -f 'node server.js' || true", { stdio: "inherit" });
-    console.log("✅ post-build: killed old server.js process (will be respawned)");
-    return true;
-  } catch {
-    // Not on Linux or no matching process
-  }
-
-  console.log("⚠️ post-build: could not restart server automatically");
-  console.log("   You may need to manually restart the Node.js app in Hostinger hPanel.");
-  return false;
+// Strategy 1: Phusion Passenger restart (Hostinger uses this)
+// Touching tmp/restart.txt signals Passenger to gracefully restart
+try {
+  const tmpDir = path.join(__dirname, "..", "tmp");
+  if (!fs.existsSync(tmpDir)) fs.mkdirSync(tmpDir, { recursive: true });
+  const restartFile = path.join(tmpDir, "restart.txt");
+  fs.writeFileSync(restartFile, Date.now().toString());
+  console.log("✅ post-build: touched tmp/restart.txt (Passenger restart)");
+  restarted = true;
+} catch (err) {
+  console.log("   Passenger restart skipped:", err.message);
 }
 
-tryRestart();
+// Strategy 2: Kill running server.js process so it gets respawned
+try {
+  const output = execSync(
+    "pgrep -f 'node server\\.js' || true",
+    { encoding: "utf-8" }
+  ).trim();
+
+  if (output) {
+    const pids = output.split("\n").filter(Boolean);
+    console.log(`✅ post-build: found server process(es): ${pids.join(", ")}`);
+    execSync(`kill ${pids.join(" ")} || true`, { stdio: "inherit" });
+    console.log("✅ post-build: killed old server — will be respawned");
+    restarted = true;
+  }
+} catch (err) {
+  console.log("   Process kill skipped:", err.message);
+}
+
+if (!restarted) {
+  console.log("⚠️ post-build: no restart method succeeded");
+  console.log("   Site should still work if Hostinger auto-restarts the app.");
+}
