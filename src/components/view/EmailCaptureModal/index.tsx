@@ -114,7 +114,7 @@ export default function EmailCaptureModal() {
             <h2 className="text-2xl font-display font-bold text-charcoal mb-2">
               Welcome to Mama Fern
             </h2>
-            <p className="text-sm text-warm-brown/70">
+            <p className="text-sm text-charcoal/85">
               Join our community and get <span className="font-semibold text-fern">10% off</span> your first order
             </p>
           </div>
@@ -144,7 +144,7 @@ export default function EmailCaptureModal() {
             </Button>
           </form>
 
-          <p className="text-xs text-warm-brown/70 text-center mt-4">
+          <p className="text-xs text-charcoal/75 text-center mt-4">
             By subscribing, you agree to receive marketing emails. Unsubscribe anytime.
           </p>
         </div>

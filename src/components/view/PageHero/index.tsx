@@ -113,7 +113,7 @@ export default function PageHero({ title, subtitle, eyebrow }: PageHeroProps) {
           {title}
         </h1>
         {subtitle && (
-          <p className="mt-4 text-warm-brown/70 text-lg max-w-xl mx-auto leading-relaxed">
+          <p className="mt-4 text-charcoal/80 text-lg max-w-xl mx-auto leading-relaxed">
             {subtitle}
           </p>
         )}

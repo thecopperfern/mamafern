@@ -125,7 +125,7 @@ export default function FAQPage() {
                     +
                   </span>
                 </summary>
-                <div className="px-6 pb-5 pt-1 text-warm-brown/70 leading-relaxed text-[14px] border-t border-oat/60">
+                <div className="px-6 pb-5 pt-1 text-charcoal/90 leading-relaxed text-[15px] border-t border-oat/60">
                   <p>{faq.answer}</p>
                 </div>
               </details>
@@ -141,7 +141,7 @@ export default function FAQPage() {
           <h3 className="font-display font-bold text-charcoal text-xl mb-3">
             Still have questions?
           </h3>
-          <p className="text-warm-brown/70 text-sm mb-6 max-w-xs mx-auto">
+          <p className="text-charcoal/80 text-sm mb-6 max-w-xs mx-auto">
             We&apos;re always happy to help. Reach out and we&apos;ll get back to you soon.
           </p>
           <Link

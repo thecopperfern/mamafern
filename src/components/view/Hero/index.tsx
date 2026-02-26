@@ -20,7 +20,7 @@ export default function Hero() {
           <br />
           <span className="text-fern">growing together</span>
         </h1>
-        <p className="mt-4 text-lg text-warm-brown/70 max-w-xl mx-auto">
+        <p className="mt-4 text-lg text-charcoal/80 max-w-xl mx-auto">
           Grounded family apparel in skin-friendlier fabrics. Cute patterns and
           cozy sayings for moms, dads, and kids.
         </p>

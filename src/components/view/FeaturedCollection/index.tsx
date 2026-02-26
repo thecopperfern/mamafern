@@ -44,7 +44,7 @@ export default async function FeaturedCollection({
             {title}
           </h2>
           {subtitle && (
-            <p className="text-warm-brown/70 mt-1">{subtitle}</p>
+            <p className="text-charcoal/80 mt-1">{subtitle}</p>
           )}
         </div>
         <Link
@@ -81,7 +81,7 @@ export default async function FeaturedCollection({
             <h3 className="mt-2 text-sm font-medium text-charcoal group-hover:text-fern transition-colors">
               {product.title}
             </h3>
-            <p className="text-sm text-warm-brown/70">
+            <p className="text-sm text-charcoal/85">
               {formatPrice(
                 product.priceRange.minVariantPrice.amount,
                 product.priceRange.minVariantPrice.currencyCode

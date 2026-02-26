@@ -1,10 +1,10 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect, useRef } from "react";
 import { useCartActions } from "@/lib/atoms/cart";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-import { Minus, Plus, X, ShoppingBag, Tag, ChevronDown, Trash2 } from "lucide-react";
+import { Minus, Plus, X, ShoppingBag, Tag, ChevronDown, Trash2, PartyPopper } from "lucide-react";
 import { toast } from "sonner";
 import Image from "next/image";
 import Link from "next/link";
@@ -23,6 +23,47 @@ export default function CartSlideout({ open, onClose }: Props) {
   const [promoCode, setPromoCode] = useState("");
   const [promoLoading, setPromoLoading] = useState(false);
   const [promoError, setPromoError] = useState("");
+
+  // Track free shipping achievement
+  const previousSubtotal = useRef<number>(0);
+  const hasShownFreeShippingToast = useRef<boolean>(false);
+
+  // Check for free shipping milestone
+  useEffect(() => {
+    const FREE_SHIPPING_THRESHOLD = Number(process.env.NEXT_PUBLIC_FREE_SHIPPING_THRESHOLD ?? 70);
+    const currentSubtotal = parseFloat(cart.subtotal.amount);
+
+    // Only show toast when crossing threshold (not on initial load)
+    if (
+      previousSubtotal.current < FREE_SHIPPING_THRESHOLD &&
+      currentSubtotal >= FREE_SHIPPING_THRESHOLD &&
+      !hasShownFreeShippingToast.current &&
+      open
+    ) {
+      // Show CELEBRATORY toast! 🎉
+      toast.success(
+        <div className="flex items-center gap-3">
+          <PartyPopper className="h-6 w-6 text-fern animate-bounce" />
+          <div>
+            <p className="font-bold text-base">FREE SHIPPING UNLOCKED! 🎉</p>
+            <p className="text-sm text-warm-brown/70">You just saved on shipping!</p>
+          </div>
+        </div>,
+        {
+          duration: 5000,
+          className: "text-lg p-4",
+        }
+      );
+      hasShownFreeShippingToast.current = true;
+    }
+
+    // Reset flag when going back below threshold
+    if (currentSubtotal < FREE_SHIPPING_THRESHOLD) {
+      hasShownFreeShippingToast.current = false;
+    }
+
+    previousSubtotal.current = currentSubtotal;
+  }, [cart.subtotal.amount, open]);
 
   if (!open) return null;
 
@@ -50,33 +91,76 @@ export default function CartSlideout({ open, onClose }: Props) {
           </Button>
         </div>
 
-        {/* Free shipping progress bar */}
+        {/* Free shipping progress bar - PROMINENT */}
         {(() => {
           const FREE_SHIPPING_THRESHOLD = Number(process.env.NEXT_PUBLIC_FREE_SHIPPING_THRESHOLD ?? 70);
           const subtotal = parseFloat(cart.subtotal.amount);
           const remaining = Math.max(FREE_SHIPPING_THRESHOLD - subtotal, 0);
           const progress = Math.min((subtotal / FREE_SHIPPING_THRESHOLD) * 100, 100);
+          const isClose = remaining > 0 && remaining <= 10; // Within $10 of free shipping
+          const isFree = remaining === 0;
+
           return (
-            <div className="px-4 pt-3 pb-3 bg-fern/5 border-b border-oat">
+            <div className={`px-4 pt-4 pb-4 border-b-2 transition-colors ${
+              isFree
+                ? "bg-fern/10 border-fern"
+                : isClose
+                ? "bg-terracotta/5 border-terracotta/30"
+                : "bg-fern/5 border-oat"
+            }`}>
               {remaining > 0 ? (
-                <p className="text-xs text-warm-brown/70 mb-1.5">
-                  Add{" "}
-                  <span className="font-semibold text-fern">
-                    ${remaining.toFixed(2)}
-                  </span>{" "}
-                  more for free shipping
-                </p>
+                <div className="space-y-2">
+                  <div className="flex items-center justify-between">
+                    <p className="text-sm font-medium text-charcoal">
+                      {isClose ? (
+                        <span className="text-terracotta animate-pulse">
+                          🔥 So close to FREE SHIPPING!
+                        </span>
+                      ) : (
+                        "Get FREE Shipping"
+                      )}
+                    </p>
+                    <p className="text-sm font-bold text-fern">
+                      ${remaining.toFixed(2)} away
+                    </p>
+                  </div>
+                  <p className="text-xs text-charcoal/70">
+                    {isClose
+                      ? "Just add a little more to unlock free shipping! 🎁"
+                      : `Add $${remaining.toFixed(2)} more to qualify for free delivery`
+                    }
+                  </p>
+                </div>
               ) : (
-                <p className="text-xs text-fern font-medium mb-1.5">
-                  🌿 You&apos;ve unlocked free shipping!
-                </p>
+                <div className="flex items-center justify-between">
+                  <p className="text-sm font-bold text-fern flex items-center gap-2">
+                    <PartyPopper className="h-5 w-5" />
+                    FREE SHIPPING UNLOCKED!
+                  </p>
+                  <p className="text-xs font-medium text-fern bg-fern/20 px-2 py-1 rounded">
+                    $0.00 shipping
+                  </p>
+                </div>
               )}
-              <div className="w-full bg-oat rounded-full h-1.5">
+
+              {/* Progress bar - BIGGER */}
+              <div className="w-full bg-oat rounded-full h-3 mt-2.5 overflow-hidden shadow-inner">
                 <div
-                  className="bg-fern h-1.5 rounded-full transition-all duration-500"
+                  className={`h-3 rounded-full transition-all duration-700 ease-out ${
+                    isFree
+                      ? "bg-gradient-to-r from-fern to-sage"
+                      : isClose
+                      ? "bg-gradient-to-r from-terracotta to-fern"
+                      : "bg-fern"
+                  }`}
                   style={{ width: `${progress}%` }}
                 />
               </div>
+
+              {/* Percentage indicator */}
+              <p className="text-xs text-charcoal/60 text-right mt-1">
+                {progress.toFixed(0)}% to free shipping
+              </p>
             </div>
           );
         })()}

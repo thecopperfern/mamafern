@@ -70,7 +70,7 @@ export default function ProductDetail({
             </h1>
             <WishlistButton handle={product.handle} title={product.title} />
           </div>
-          <p className="text-sm text-warm-brown/70">{product.description}</p>
+          <p className="text-sm text-charcoal/85">{product.description}</p>
           <ProductOptions
             selectedOptions={selectedOptions}
             setSelectedOptions={handleSelectOptions}

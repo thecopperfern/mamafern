@@ -69,7 +69,7 @@ Set this to whatever your actual free shipping threshold is, or expose it as
 
 | Variable | Value |
 |---|---|
-| `SHOPIFY_API_KEY` | `73ffb226cd593c5dd453de5f1dcb7e1a` (already set in `.env.example`) |
+| `SHOPIFY_API_KEY` | *(get from Shopify Partners → Apps → mama-fern → API credentials)* |
 | `SHOPIFY_API_SECRET` | Generate in the same app under **API credentials** |
 
 ---

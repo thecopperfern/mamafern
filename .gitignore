@@ -34,6 +34,12 @@ yarn-error.log*
 .env*
 !.env.example
 .mcp.json
+.mcp.json.*
+
+# files containing credentials — NEVER commit
+ENV_VARS_UPDATED.md
+MCP_SETUP_GUIDE.md
+dev-server.log
 
 # vercel
 .vercel

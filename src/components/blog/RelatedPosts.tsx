@@ -29,7 +29,7 @@ export default function RelatedPosts({ posts }: RelatedPostsProps) {
           >
             <time
               dateTime={post.date}
-              className="text-xs text-warm-brown/70"
+              className="text-xs text-charcoal/75"
             >
               {new Date(post.date).toLocaleDateString("en-US", {
                 month: "short",
@@ -40,7 +40,7 @@ export default function RelatedPosts({ posts }: RelatedPostsProps) {
             <h3 className="font-semibold text-charcoal mt-1 mb-1 group-hover:text-fern transition-colors text-sm leading-snug">
               {post.title}
             </h3>
-            <p className="text-warm-brown/70 text-xs leading-relaxed line-clamp-2">
+            <p className="text-charcoal/80 text-xs leading-relaxed line-clamp-2">
               {post.description}
             </p>
           </Link>
