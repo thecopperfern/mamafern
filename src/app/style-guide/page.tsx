@@ -62,7 +62,7 @@ export default function StyleGuidesPage() {
               <h2 className="font-display font-bold text-lg text-charcoal mb-2 group-hover:text-fern transition-colors">
                 {g.title}
               </h2>
-              <p className="text-warm-brown/70 text-sm leading-relaxed">
+              <p className="text-warm-brown text-sm leading-relaxed">
                 {g.description}
               </p>
             </Link>

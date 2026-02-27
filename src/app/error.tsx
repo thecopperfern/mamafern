@@ -12,7 +12,7 @@ export default function ErrorPage({
       <h1 className="text-4xl font-display font-bold text-terracotta mb-4">
         Something went wrong
       </h1>
-      <p className="text-warm-brown/70 mb-8 max-w-md">
+      <p className="text-warm-brown mb-8 max-w-md">
         {error.message || "An unexpected error occurred. Please try again."}
       </p>
       <button

@@ -35,7 +35,7 @@ export default function SeosBreadcrumbs({ crumbs }: BreadcrumbsProps) {
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
       />
-      <nav aria-label="Breadcrumb" className="text-sm text-warm-brown/70 mb-4">
+      <nav aria-label="Breadcrumb" className="text-sm text-warm-brown mb-4">
         <ol className="flex flex-wrap items-center gap-1">
           {items.map((item, i) => (
             <li key={i} className="flex items-center gap-1">

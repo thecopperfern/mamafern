@@ -55,7 +55,7 @@ export default function CrunchyMomStyleGuidePage() {
         <h2 className="font-display font-bold text-2xl md:text-3xl text-charcoal mb-6">
           What Is Crunchy Mom Style?
         </h2>
-        <div className="space-y-5 text-warm-brown/80 leading-relaxed text-[15px]">
+        <div className="space-y-5 text-warm-brown leading-relaxed text-[15px]">
           <p>
             &ldquo;Crunchy mom&rdquo; is a term for mothers who lean into natural, eco-conscious
             living — cloth diapers, organic food, babywearing, gentle parenting, and a deep
@@ -119,7 +119,7 @@ export default function CrunchyMomStyleGuidePage() {
             ].map((c) => (
               <div key={c.name} className="flex items-center gap-2">
                 <div className={`w-6 h-6 rounded-full ${c.color} border border-oat`} />
-                <span className="text-xs text-warm-brown/70">{c.name}</span>
+                <span className="text-xs text-warm-brown">{c.name}</span>
               </div>
             ))}
           </div>
@@ -185,7 +185,7 @@ export default function CrunchyMomStyleGuidePage() {
           <p className="font-display font-bold text-lg text-charcoal mb-2">
             Ready to build your crunchy mom wardrobe?
           </p>
-          <p className="text-warm-brown/70 text-sm mb-4">
+          <p className="text-warm-brown text-sm mb-4">
             Shop natural-fabric pieces designed for real crunchy mom life.
           </p>
           <Link

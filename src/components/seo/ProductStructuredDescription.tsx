@@ -27,7 +27,7 @@ export default function ProductStructuredDescription({
       {/* Visible description */}
       {product.description && (
         <div
-          className="prose prose-stone max-w-none text-sm text-warm-brown/80 leading-relaxed"
+          className="prose prose-stone max-w-none text-sm text-warm-brown leading-relaxed"
           dangerouslySetInnerHTML={{ __html: product.description }}
         />
       )}

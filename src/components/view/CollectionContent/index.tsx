@@ -94,7 +94,7 @@ export default function CollectionContent({
     <>
       <div className="flex items-center gap-4 flex-wrap">
         <div className="flex items-center gap-2">
-          <span className="text-sm text-warm-brown/70">Sort by:</span>
+          <span className="text-sm text-warm-brown">Sort by:</span>
           <select
             value={currentSort}
             onChange={(e) => router.push(buildUrl({ sort: e.target.value }))}
@@ -126,7 +126,7 @@ export default function CollectionContent({
         {hasActiveFilters && (
           <button
             onClick={clearFilters}
-            className="text-sm text-warm-brown/70 hover:text-fern flex items-center gap-1"
+            className="text-sm text-warm-brown hover:text-fern flex items-center gap-1"
           >
             <X className="h-3.5 w-3.5" />
             Clear filters
@@ -193,7 +193,7 @@ export default function CollectionContent({
       </div>
 
       {filteredProducts.length === 0 && (
-        <p className="text-center text-warm-brown/70 py-12">
+        <p className="text-center text-warm-brown py-12">
           {hasActiveFilters
             ? "No products match your filters."
             : "No products found in this collection."}

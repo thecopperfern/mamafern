@@ -50,7 +50,7 @@ export default async function PrivacyPage() {
             dangerouslySetInnerHTML={{ __html: policy.body }}
           />
         ) : (
-          <p className="text-warm-brown/70 text-center py-8">
+          <p className="text-warm-brown text-center py-8">
             Our privacy policy is being finalized. Please check back soon.
           </p>
         )}

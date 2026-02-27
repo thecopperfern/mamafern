@@ -49,7 +49,7 @@ export default function ContactPage() {
           <h1 className="font-display font-bold text-4xl md:text-5xl text-charcoal">
             Get in Touch
           </h1>
-          <p className="mt-4 text-warm-brown/70 text-lg">
+          <p className="mt-4 text-warm-brown text-lg">
             Have a question or feedback? We&apos;d love to hear from you.
           </p>
         </div>
@@ -68,7 +68,7 @@ export default function ContactPage() {
                   <span className="text-xl mt-0.5">{item.emoji}</span>
                   <div>
                     <p className="font-medium text-charcoal text-sm">{item.title}</p>
-                    <p className="text-warm-brown/70 text-sm">{item.desc}</p>
+                    <p className="text-warm-brown text-sm">{item.desc}</p>
                   </div>
                 </div>
               ))}
@@ -78,7 +78,7 @@ export default function ContactPage() {
               <p className="text-xs font-medium text-fern uppercase tracking-[0.18em] mb-1.5">
                 Response Time
               </p>
-              <p className="text-warm-brown/70 text-sm">
+              <p className="text-warm-brown text-sm">
                 We typically respond within 1&ndash;2 business days.
               </p>
             </div>
@@ -110,7 +110,7 @@ export default function ContactPage() {
                   id="name"
                   name="name"
                   required
-                  className="w-full border border-oat rounded-lg px-4 py-2.5 bg-cream/60 text-charcoal placeholder:text-warm-brown/70 focus:outline-none focus:ring-2 focus:ring-fern/30 focus:border-fern transition-colors text-sm"
+                  className="w-full border border-oat rounded-lg px-4 py-2.5 bg-cream/60 text-charcoal placeholder:text-warm-brown focus:outline-none focus:ring-2 focus:ring-fern/30 focus:border-fern transition-colors text-sm"
                   placeholder="Your name"
                 />
               </div>
@@ -127,7 +127,7 @@ export default function ContactPage() {
                   id="email"
                   name="email"
                   required
-                  className="w-full border border-oat rounded-lg px-4 py-2.5 bg-cream/60 text-charcoal placeholder:text-warm-brown/70 focus:outline-none focus:ring-2 focus:ring-fern/30 focus:border-fern transition-colors text-sm"
+                  className="w-full border border-oat rounded-lg px-4 py-2.5 bg-cream/60 text-charcoal placeholder:text-warm-brown focus:outline-none focus:ring-2 focus:ring-fern/30 focus:border-fern transition-colors text-sm"
                   placeholder="you@example.com"
                 />
               </div>
@@ -144,7 +144,7 @@ export default function ContactPage() {
                   name="message"
                   rows={5}
                   required
-                  className="w-full border border-oat rounded-lg px-4 py-2.5 bg-cream/60 text-charcoal placeholder:text-warm-brown/70 focus:outline-none focus:ring-2 focus:ring-fern/30 focus:border-fern resize-none transition-colors text-sm"
+                  className="w-full border border-oat rounded-lg px-4 py-2.5 bg-cream/60 text-charcoal placeholder:text-warm-brown focus:outline-none focus:ring-2 focus:ring-fern/30 focus:border-fern resize-none transition-colors text-sm"
                   placeholder="What's on your mind?"
                 />
               </div>

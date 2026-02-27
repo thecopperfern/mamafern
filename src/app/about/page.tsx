@@ -98,7 +98,7 @@ export default function AboutPage() {
         <h2 id="brand-story-heading" className="font-display font-bold text-2xl md:text-3xl text-charcoal mb-6">
           What Is Mama Fern?
         </h2>
-        <div className="space-y-5 text-warm-brown/80 leading-relaxed text-[15px]">
+        <div className="space-y-5 text-warm-brown leading-relaxed text-[15px]">
           <p>
             <strong>Mama Fern is a family apparel brand</strong> based in the United States,
             specializing in natural-fabric clothing for families who value comfort, sustainability,
@@ -150,7 +150,7 @@ export default function AboutPage() {
           <h2 id="mission-heading" className="font-display font-bold text-2xl md:text-3xl text-charcoal mb-5">
             Our Mission
           </h2>
-          <p className="text-warm-brown/70 leading-relaxed text-[15px]">
+          <p className="text-warm-brown leading-relaxed text-[15px]">
             We believe family moments deserve to be comfortable. That&apos;s why we use organic
             cotton and other natural materials in every piece, paired with earthy patterns and
             thoughtful designs that celebrate the grounded, cozy life. Our goal is to make
@@ -174,7 +174,7 @@ export default function AboutPage() {
               <div className="text-2xl shrink-0 mt-0.5" aria-hidden="true">{v.emoji}</div>
               <div>
                 <h3 className="font-semibold text-charcoal mb-1.5">{v.title}</h3>
-                <p className="text-warm-brown/70 text-sm leading-relaxed">{v.desc}</p>
+                <p className="text-warm-brown text-sm leading-relaxed">{v.desc}</p>
               </div>
             </div>
           ))}
@@ -190,7 +190,7 @@ export default function AboutPage() {
           {BRAND_FAQS.map((faq, i) => (
             <div key={i}>
               <h3 className="font-semibold text-charcoal mb-2">{faq.question}</h3>
-              <p className="text-warm-brown/70 text-[15px] leading-relaxed">{faq.answer}</p>
+              <p className="text-warm-brown text-[15px] leading-relaxed">{faq.answer}</p>
             </div>
           ))}
         </div>
@@ -205,7 +205,7 @@ export default function AboutPage() {
           <h2 id="family-cta-heading" className="font-display font-bold text-2xl md:text-3xl text-charcoal mb-5">
             Made for Your Family
           </h2>
-          <p className="text-warm-brown/70 leading-relaxed text-[15px] mb-8 max-w-xl">
+          <p className="text-warm-brown leading-relaxed text-[15px] mb-8 max-w-xl">
             From tees and sweatshirts for mom and dad to onesies and kid-sized versions of our
             best designs, Mama Fern is here to dress your whole crew in comfort and style.
           </p>

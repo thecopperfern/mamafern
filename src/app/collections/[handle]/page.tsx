@@ -74,7 +74,7 @@ export default async function CollectionPage({
           </h1>
         </div>
         {result.collection.description && (
-          <p className="text-warm-brown/70 max-w-2xl">
+          <p className="text-warm-brown max-w-2xl">
             {result.collection.description}
           </p>
         )}

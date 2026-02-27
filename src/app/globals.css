@@ -114,11 +114,14 @@
   }
 
   /* Solid linen for sections that want a slightly warmer tone */
+  /* Cream wash overlay reduces texture noise for better text readability */
   .bg-texture-linen {
     background-color: #F0EBE3;
-    background-image: url('/linen.jpeg');
-    background-repeat: repeat;
-    background-size: 800px auto;
+    background-image:
+      linear-gradient(rgba(250, 247, 242, 0.35), rgba(250, 247, 242, 0.35)),
+      url('/linen.jpeg');
+    background-repeat: no-repeat, repeat;
+    background-size: auto, 800px auto;
   }
 
   /* Footer: dark charcoal blended through linen weave */

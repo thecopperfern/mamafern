@@ -38,6 +38,7 @@ yarn-error.log*
 
 # files containing credentials — NEVER commit
 ENV_VARS_UPDATED.md
+/screenshots/
 MCP_SETUP_GUIDE.md
 dev-server.log
 

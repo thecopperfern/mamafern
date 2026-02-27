@@ -55,7 +55,7 @@ export default function CottagecoreFamilyGuidePage() {
         <h2 className="font-display font-bold text-2xl md:text-3xl text-charcoal mb-6">
           What Is Cottagecore Family Fashion?
         </h2>
-        <div className="space-y-5 text-warm-brown/80 leading-relaxed text-[15px]">
+        <div className="space-y-5 text-warm-brown leading-relaxed text-[15px]">
           <p>
             Cottagecore is a lifestyle and aesthetic movement that celebrates rural simplicity —
             wildflower gardens, homemade bread, slow mornings, and a deep connection with nature.
@@ -88,7 +88,7 @@ export default function CottagecoreFamilyGuidePage() {
             ].map((c) => (
               <div key={c.name} className="flex items-center gap-2">
                 <div className={`w-6 h-6 rounded-full ${c.color} border border-oat`} />
-                <span className="text-xs text-warm-brown/70">{c.name}</span>
+                <span className="text-xs text-warm-brown">{c.name}</span>
               </div>
             ))}
           </div>
@@ -172,7 +172,7 @@ export default function CottagecoreFamilyGuidePage() {
           <p className="font-display font-bold text-lg text-charcoal mb-2">
             Dress your crew in cottagecore
           </p>
-          <p className="text-warm-brown/70 text-sm mb-4">
+          <p className="text-warm-brown text-sm mb-4">
             Shop coordinating family pieces in natural fabrics and earthy tones.
           </p>
           <Link

@@ -14,7 +14,7 @@ export default function CollectionError({
       <h1 className="text-3xl font-display font-bold text-terracotta mb-4">
         Couldn&apos;t load collection
       </h1>
-      <p className="text-warm-brown/70 mb-8 max-w-md">
+      <p className="text-warm-brown mb-8 max-w-md">
         {error.message || "We had trouble loading this collection. Please try again."}
       </p>
       <div className="flex gap-4">

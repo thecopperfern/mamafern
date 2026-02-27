@@ -21,18 +21,24 @@ export const useCartActions = () => {
   const [cart, setCart] = useAtom(cartAtom);
   const [, setCartOpen] = useAtom(isCartOpenAtom);
 
-  const addItem = async (merchandiseId: string, quantity: number) => {
+  const addItem = async (
+    merchandiseId: string,
+    quantity: number,
+    opts?: { skipOpen?: boolean }
+  ) => {
     try {
       const updatedCart = await commerceClient.addToCart(cart.id, [
         { merchandiseId, quantity },
       ]);
       setCart(updatedCart);
-      setCartOpen(true);
+      if (!opts?.skipOpen) setCartOpen(true);
     } catch (error) {
       console.error("Error adding to cart:", error);
       throw error; // Re-throw so caller can handle (e.g., show toast)
     }
   };
+
+  const openCart = () => setCartOpen(true);
 
   const updateItem = async (lineItemId: string, quantity: number) => {
     try {
@@ -134,6 +140,7 @@ export const useCartActions = () => {
   return {
     cart,
     addItem,
+    openCart,
     updateItem,
     removeItem,
     initializeCart,

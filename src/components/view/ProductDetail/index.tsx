@@ -15,13 +15,15 @@ import ProductReviews from "@/components/view/ProductReviews";
 import StickyATC from "@/components/view/StickyATC";
 import NotifyMe from "@/components/view/NotifyMe";
 import FabricSpecs from "@/components/view/FabricSpecs";
+import { useFlyToCart } from "@/components/animations/FlyToCart";
 
 export default function ProductDetail({
   product,
 }: {
   product: CommerceProduct;
 }) {
-  const { addItem } = useCartActions();
+  const { addItem, openCart } = useCartActions();
+  const { flyToCart, FlyingItems } = useFlyToCart();
   const [selectedOptions, setSelectedOptions] = useState<
     Record<string, string>
   >({});
@@ -40,12 +42,22 @@ export default function ProductDetail({
     setSelectedOptions(options);
   };
 
-  const handleAddToCart = () => {
-    if (selectedVariant) {
-      addItem(selectedVariant.id, 1);
-      toast.success(`${product.title} added to cart`);
-      trackEvent("add_to_cart", "ecommerce", product.title);
+  const handleAddToCart = (triggerElement?: HTMLElement) => {
+    if (!selectedVariant) return;
+
+    // Fire fly animation if we have a trigger element
+    if (triggerElement) {
+      const imageUrl = product.images[0]?.url;
+      flyToCart(triggerElement, imageUrl);
     }
+
+    // Add to cart without auto-opening the slideout
+    addItem(selectedVariant.id, 1, { skipOpen: true });
+    toast.success(`${product.title} added to cart`);
+    trackEvent("add_to_cart", "ecommerce", product.title);
+
+    // Open cart slideout after fly animation completes (600ms flight + 100ms buffer)
+    setTimeout(() => openCart(), 700);
   };
 
   const isOOS = !!selectedVariant && !selectedVariant.availableForSale;
@@ -61,6 +73,7 @@ export default function ProductDetail({
 
   return (
     <>
+      <FlyingItems />
       <div className="grid grid-cols-1 md:grid-cols-3 gap-8 my-10">
         <ProductCarousel images={product.images} />
         <div className="flex flex-col gap-y-4">
@@ -89,7 +102,7 @@ export default function ProductDetail({
             <Button
               ref={atcButtonRef}
               disabled={atcDisabled}
-              onClick={handleAddToCart}
+              onClick={(e) => handleAddToCart(e.currentTarget)}
               className="bg-fern hover:bg-fern-dark text-white"
             >
               {selectedVariant ? "Add to Cart" : "Select Options"}
@@ -110,7 +123,7 @@ export default function ProductDetail({
         price={stickyPrice}
         currencyCode={stickyCurrency}
         disabled={atcDisabled}
-        onAddToCart={handleAddToCart}
+        onAddToCart={() => handleAddToCart()}
         observeRef={atcButtonRef}
       />
     </>

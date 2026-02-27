@@ -58,7 +58,7 @@ const ProductCard = ({ product }: { product: CommerceProduct }) => {
             className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105"
           />
         ) : (
-          <div className="w-full h-full bg-oat flex items-center justify-center text-warm-brown/70">
+          <div className="w-full h-full bg-oat flex items-center justify-center text-warm-brown">
             No image
           </div>
         )}

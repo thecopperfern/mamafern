@@ -1,5 +1,8 @@
+"use client";
+
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
+import { motion, staggerContainer, fadeInUp } from "@/lib/motion";
 
 export default function Hero() {
   return (
@@ -14,17 +17,31 @@ export default function Hero() {
       {/* Colour wash over the texture */}
       <div className="absolute inset-0 bg-gradient-to-br from-sage/30 via-cream/60 to-blush/30" />
 
-      <div className="relative z-10 mx-auto max-w-6xl text-center">
-        <h1 className="text-4xl md:text-6xl font-display font-bold text-charcoal leading-tight">
+      <motion.div
+        className="relative z-10 mx-auto max-w-6xl text-center"
+        variants={staggerContainer}
+        initial="hidden"
+        animate="visible"
+      >
+        <motion.h1
+          className="text-4xl md:text-6xl font-display font-bold text-charcoal leading-tight"
+          variants={fadeInUp}
+        >
           For every stage of
           <br />
           <span className="text-fern">growing together</span>
-        </h1>
-        <p className="mt-4 text-lg text-charcoal/80 max-w-xl mx-auto">
+        </motion.h1>
+        <motion.p
+          className="mt-4 text-lg text-charcoal/80 max-w-xl mx-auto"
+          variants={fadeInUp}
+        >
           Grounded family apparel in skin-friendlier fabrics. Cute patterns and
           cozy sayings for moms, dads, and kids.
-        </p>
-        <div className="mt-8 flex gap-4 justify-center">
+        </motion.p>
+        <motion.div
+          className="mt-8 flex gap-4 justify-center"
+          variants={fadeInUp}
+        >
           <Link href="/shop">
             <Button
               size="lg"
@@ -42,8 +59,8 @@ export default function Hero() {
               Shop Kids
             </Button>
           </Link>
-        </div>
-      </div>
+        </motion.div>
+      </motion.div>
     </section>
   );
 }

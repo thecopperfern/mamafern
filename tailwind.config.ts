@@ -24,7 +24,6 @@ export default {
         },
         blush: "#E8C4B8",
         "warm-brown": "#6B4D3E",
-        "warm-brown-readable": "#5A3F32", // Darker warm-brown for better contrast
         charcoal: "#2C2C2C",
         "charcoal-light": "#444444", // For less prominent text
         background: "var(--background)",

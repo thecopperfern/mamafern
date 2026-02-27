@@ -43,13 +43,13 @@ export default async function BlogTagPage({ params }: Props) {
         <h1 className="font-display font-bold text-3xl text-charcoal">
           Articles tagged &ldquo;{decoded}&rdquo;
         </h1>
-        <p className="text-warm-brown/70 mt-2">
+        <p className="text-warm-brown mt-2">
           {taggedPosts.length} {taggedPosts.length === 1 ? "article" : "articles"} found
         </p>
       </div>
 
       {taggedPosts.length === 0 ? (
-        <p className="text-warm-brown/70 text-center py-8">
+        <p className="text-warm-brown text-center py-8">
           No articles with this tag yet.
         </p>
       ) : (
@@ -62,13 +62,13 @@ export default async function BlogTagPage({ params }: Props) {
               <h2 className="font-display font-bold text-xl text-charcoal mb-2 group-hover:text-fern transition-colors">
                 <Link href={`/blog/${post.slug}`}>{post.title}</Link>
               </h2>
-              <p className="text-warm-brown/70 text-sm leading-relaxed mb-3">
+              <p className="text-warm-brown text-sm leading-relaxed mb-3">
                 {post.description}
               </p>
               <div className="flex items-center justify-between">
                 <time
                   dateTime={post.date}
-                  className="text-xs text-warm-brown/70"
+                  className="text-xs text-warm-brown"
                 >
                   {new Date(post.date).toLocaleDateString("en-US", {
                     year: "numeric",

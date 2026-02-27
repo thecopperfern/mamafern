@@ -140,13 +140,13 @@ export default function MothersDayPage() {
         >
           Thoughtful Gifts for Every Kind of Mama
         </h2>
-        <p className="text-warm-brown/80 leading-relaxed text-[15px] mb-4">
+        <p className="text-warm-brown leading-relaxed text-[15px] mb-4">
           This Mother&apos;s Day, skip the generic and give something that
           actually feels like her — soft organic cotton, earthy tones, and
           designs that celebrate the grounded, cozy life she&apos;s built for
           her family.
         </p>
-        <p className="text-warm-brown/80 leading-relaxed text-[15px]">
+        <p className="text-warm-brown leading-relaxed text-[15px]">
           Every piece is made from GOTS-certified organic cotton and natural
           fabrics. No polyester, no fast fashion — just clothes that feel good
           and do good. Free eco-friendly gift wrapping available at checkout.
@@ -192,10 +192,10 @@ export default function MothersDayPage() {
                         {bundle.savings}
                       </span>
                     </p>
-                    <p className="text-warm-brown/70 text-sm leading-relaxed mb-3">
+                    <p className="text-warm-brown text-sm leading-relaxed mb-3">
                       {bundle.description}
                     </p>
-                    <ul className="text-warm-brown/70 text-xs space-y-0.5">
+                    <ul className="text-warm-brown text-xs space-y-0.5">
                       {bundle.items.map((item) => (
                         <li key={item}>• {item}</li>
                       ))}
@@ -232,7 +232,7 @@ export default function MothersDayPage() {
               <h3 className="font-semibold text-charcoal mb-2 group-hover:text-fern transition-colors">
                 {idea.title}
               </h3>
-              <p className="text-warm-brown/70 text-sm leading-relaxed mb-3">
+              <p className="text-warm-brown text-sm leading-relaxed mb-3">
                 {idea.description}
               </p>
               <p className="text-fern font-medium text-sm">
@@ -263,7 +263,7 @@ export default function MothersDayPage() {
               <h3 className="font-semibold text-charcoal text-sm mb-1">
                 Free Shipping Over $70
               </h3>
-              <p className="text-warm-brown/70 text-xs">
+              <p className="text-warm-brown text-xs">
                 Standard shipping 5–7 business days. Expedited available.
               </p>
             </div>
@@ -274,7 +274,7 @@ export default function MothersDayPage() {
               <h3 className="font-semibold text-charcoal text-sm mb-1">
                 Eco-Friendly Gift Wrap
               </h3>
-              <p className="text-warm-brown/70 text-xs">
+              <p className="text-warm-brown text-xs">
                 Recycled kraft paper with a hand-stamped Mama Fern seal. Add at
                 checkout.
               </p>
@@ -286,7 +286,7 @@ export default function MothersDayPage() {
               <h3 className="font-semibold text-charcoal text-sm mb-1">
                 Gift Note Included
               </h3>
-              <p className="text-warm-brown/70 text-xs">
+              <p className="text-warm-brown text-xs">
                 Every gift-wrapped order includes a blank note card for your
                 message.
               </p>
@@ -300,7 +300,7 @@ export default function MothersDayPage() {
         <h2 className="font-display font-bold text-2xl md:text-3xl text-charcoal mb-4">
           Ready to Shop?
         </h2>
-        <p className="text-warm-brown/70 text-[15px] mb-8 max-w-lg mx-auto">
+        <p className="text-warm-brown text-[15px] mb-8 max-w-lg mx-auto">
           Browse the full Mother&apos;s Day collection — every piece is organic,
           cozy, and made with the kind of care she puts into everything.
         </p>

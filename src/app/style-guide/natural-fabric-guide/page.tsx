@@ -123,7 +123,7 @@ export default function NaturalFabricGuidePage() {
         <h2 className="font-display font-bold text-2xl md:text-3xl text-charcoal mb-6">
           Why Natural Fabrics Matter for Families
         </h2>
-        <div className="space-y-5 text-warm-brown/80 leading-relaxed text-[15px]">
+        <div className="space-y-5 text-warm-brown leading-relaxed text-[15px]">
           <p>
             Children&apos;s skin is up to 5 times thinner than adult skin, making it far more
             susceptible to irritation from synthetic dyes, chemical finishes, and petroleum-based
@@ -183,7 +183,7 @@ export default function NaturalFabricGuidePage() {
                 <span className="text-2xl" aria-hidden="true">{fabric.icon}</span>
                 <h3 className="font-display font-bold text-lg text-charcoal">{fabric.name}</h3>
               </div>
-              <div className="space-y-4 text-warm-brown/80 text-[15px] leading-relaxed">
+              <div className="space-y-4 text-warm-brown text-[15px] leading-relaxed">
                 <div>
                   <h4 className="font-semibold text-charcoal text-sm mb-1">Pros</h4>
                   <ul className="list-disc ml-5 space-y-1">
@@ -212,7 +212,7 @@ export default function NaturalFabricGuidePage() {
           Quick Comparison
         </h3>
         <div className="overflow-x-auto">
-          <table className="w-full text-sm text-warm-brown/80 border border-oat rounded-lg">
+          <table className="w-full text-sm text-warm-brown border border-oat rounded-lg">
             <thead>
               <tr className="bg-texture-linen text-charcoal">
                 <th className="text-left p-3 font-semibold">Fabric</th>
@@ -245,7 +245,7 @@ export default function NaturalFabricGuidePage() {
           <p className="font-display font-bold text-lg text-charcoal mb-2">
             Shop natural-fabric family clothing
           </p>
-          <p className="text-warm-brown/70 text-sm mb-4">
+          <p className="text-warm-brown text-sm mb-4">
             Every Mama Fern piece is made from OEKO-TEX certified natural fabrics.
           </p>
           <Link

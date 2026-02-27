@@ -52,7 +52,7 @@ export default function NotifyMe({ productTitle, variantTitle }: Props) {
   return (
     <div className="space-y-2">
       <p className="text-sm font-medium text-terracotta">Out of stock</p>
-      <p className="text-xs text-warm-brown/70">
+      <p className="text-xs text-warm-brown">
         Enter your email and we&apos;ll notify you when it&apos;s available.
       </p>
       <form onSubmit={handleSubmit} className="flex gap-2">

@@ -137,7 +137,7 @@ export default function AccountPage() {
   return (
     <main className="mx-auto max-w-3xl px-4 py-12">
       <h1 className="font-display text-3xl mb-2">My Account</h1>
-      <p className="text-warm-brown/70 mb-8">
+      <p className="text-warm-brown mb-8">
         Manage your profile and view past orders.
       </p>
 
@@ -150,7 +150,7 @@ export default function AccountPage() {
           <Package className="h-5 w-5 text-fern" />
           <div>
             <div className="text-sm font-medium">Order History</div>
-            <div className="text-xs text-warm-brown/70">View past orders</div>
+            <div className="text-xs text-warm-brown">View past orders</div>
           </div>
         </Link>
         <Link
@@ -160,7 +160,7 @@ export default function AccountPage() {
           <Heart className="h-5 w-5 text-fern" />
           <div>
             <div className="text-sm font-medium">Wishlist</div>
-            <div className="text-xs text-warm-brown/70">Saved items</div>
+            <div className="text-xs text-warm-brown">Saved items</div>
           </div>
         </Link>
         <button
@@ -170,7 +170,7 @@ export default function AccountPage() {
           <LogOut className="h-5 w-5 text-terracotta" />
           <div>
             <div className="text-sm font-medium">Log Out</div>
-            <div className="text-xs text-warm-brown/70">Sign out of your account</div>
+            <div className="text-xs text-warm-brown">Sign out of your account</div>
           </div>
         </button>
       </div>
@@ -285,18 +285,18 @@ export default function AccountPage() {
         ) : (
           <dl className="space-y-3 text-sm">
             <div className="flex gap-2">
-              <dt className="text-warm-brown/70 w-24">Name</dt>
+              <dt className="text-warm-brown w-24">Name</dt>
               <dd className="font-medium">
                 {customer?.firstName} {customer?.lastName}
               </dd>
             </div>
             <div className="flex gap-2">
-              <dt className="text-warm-brown/70 w-24">Email</dt>
+              <dt className="text-warm-brown w-24">Email</dt>
               <dd className="font-medium">{customer?.email}</dd>
             </div>
             {customer?.phone && (
               <div className="flex gap-2">
-                <dt className="text-warm-brown/70 w-24">Phone</dt>
+                <dt className="text-warm-brown w-24">Phone</dt>
                 <dd className="font-medium">{customer.phone}</dd>
               </div>
             )}

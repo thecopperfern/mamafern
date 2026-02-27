@@ -29,7 +29,7 @@ export default function RelatedPosts({ posts }: RelatedPostsProps) {
           >
             <time
               dateTime={post.date}
-              className="text-xs text-charcoal/75"
+              className="text-xs text-charcoal/80"
             >
               {new Date(post.date).toLocaleDateString("en-US", {
                 month: "short",

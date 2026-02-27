@@ -25,7 +25,7 @@ export default async function SearchPage({ searchParams }: Props) {
         <h1 className="text-3xl font-display font-bold text-charcoal mb-4">
           Search
         </h1>
-        <p className="text-warm-brown/70">Enter a search term to find products.</p>
+        <p className="text-warm-brown">Enter a search term to find products.</p>
       </div>
     );
   }
@@ -37,12 +37,12 @@ export default async function SearchPage({ searchParams }: Props) {
       <h1 className="text-3xl font-display font-bold text-charcoal mb-2">
         Results for &ldquo;{q}&rdquo;
       </h1>
-      <p className="text-warm-brown/70 mb-8">
+      <p className="text-warm-brown mb-8">
         {products.length} {products.length === 1 ? "product" : "products"} found
       </p>
 
       {products.length === 0 ? (
-        <p className="text-warm-brown/70">
+        <p className="text-warm-brown">
           No products matched your search. Try a different term.
         </p>
       ) : (

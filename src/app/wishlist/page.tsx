@@ -45,7 +45,7 @@ export default function WishlistPage() {
           <h1 className="font-display font-bold text-4xl md:text-5xl text-charcoal">
             My Wishlist
           </h1>
-          <p className="mt-4 text-warm-brown/70 text-lg">
+          <p className="mt-4 text-warm-brown text-lg">
             Products you&apos;ve saved for later.
           </p>
         </div>
@@ -65,11 +65,11 @@ export default function WishlistPage() {
         ) : products.length === 0 ? (
           <div className="text-center py-16">
             <div className="bg-texture-linen rounded-2xl border border-oat p-12 max-w-sm mx-auto">
-              <Heart className="h-10 w-10 text-warm-brown/70 mx-auto mb-4" />
+              <Heart className="h-10 w-10 text-warm-brown mx-auto mb-4" />
               <p className="font-display font-bold text-charcoal text-lg mb-2">
                 Nothing saved yet
               </p>
-              <p className="text-warm-brown/70 text-sm mb-6">
+              <p className="text-warm-brown text-sm mb-6">
                 Save your favourite items while you browse.
               </p>
               <Link

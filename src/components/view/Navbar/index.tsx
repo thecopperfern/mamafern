@@ -294,7 +294,7 @@ const Navbar = ({ collectionLinks }: NavbarProps) => {
                 placeholder="Search products..."
                 autoFocus
                 aria-label="Search products"
-                className="flex-1 border border-oat rounded-md px-3 py-1.5 text-sm bg-white text-charcoal placeholder:text-warm-brown/70 focus:outline-none focus:ring-2 focus:ring-fern/30 focus:border-fern"
+                className="flex-1 border border-oat rounded-md px-3 py-1.5 text-sm bg-white text-charcoal placeholder:text-warm-brown focus:outline-none focus:ring-2 focus:ring-fern/30 focus:border-fern"
               />
               <Button type="submit" size="sm" className="bg-fern hover:bg-fern-dark text-white">
                 Search
