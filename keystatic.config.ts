@@ -1,15 +1,7 @@
 import { config, fields, collection } from '@keystatic/core';
 
 export default config({
-  storage: process.env.NODE_ENV === 'development' 
-    ? { kind: 'local' }
-    : {
-        kind: 'github',
-        repo: {
-          owner: 'YOUR_GITHUB_USERNAME',
-          name: 'YOUR_REPO_NAME',
-        },
-      },
+  storage: { kind: 'local' },
   collections: {
     posts: collection({
       label: 'Blog Posts',
