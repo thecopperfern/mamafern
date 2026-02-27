@@ -1,4 +1,7 @@
-export const revalidate = 3600;
+// force-dynamic: Keystatic writes blog files to disk at runtime.
+// ISR would cache stale content for up to 1 hour after a CMS edit.
+// force-dynamic ensures Keystatic changes are immediately visible.
+export const dynamic = "force-dynamic";
 
 import Link from "next/link";
 import { getAllPosts } from "@/lib/blog";
