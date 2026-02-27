@@ -120,9 +120,9 @@ export default async function RootLayout({
         <body
           className={`${dmSans.variable} ${playfair.variable} font-sans antialiased`}
         >
-          <SkipNav />
           <Analytics />
           <Toaster />
+          <SkipNav />
           <EmailCaptureModal />
           <Navbar collectionLinks={collectionLinks} />
           <main id="main-content" className="min-h-screen" role="main" tabIndex={-1}>
