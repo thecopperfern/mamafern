@@ -1,5 +1,5 @@
 /**
- * Persist server-only environment variables to .env.local so they survive
+ * Persist runtime environment variables to .env.local so they survive
  * across Hostinger's build → start process boundary.
  *
  * Hostinger injects panel env vars during `npm run build` but may start
@@ -28,6 +28,7 @@ const SERVER_VARS = [
   "KEYSTATIC_GITHUB_CLIENT_SECRET",
   "KEYSTATIC_SECRET",
   "KEYSTATIC_PASSWORD",
+  "NEXT_PUBLIC_KEYSTATIC_GITHUB_APP_SLUG",
   "SITE_PASSWORD",
 ];
 
