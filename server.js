@@ -27,12 +27,18 @@ const port = parseInt(process.env.PORT || "3000", 10);
 // Write PID file so post-build-restart.js can kill this process after a new build.
 // This is the reliable restart mechanism for Hostinger's auto-deploy.
 const pidFile = path.join(__dirname, ".server.pid");
-fs.writeFileSync(pidFile, process.pid.toString());
+let pidFileWritten = false;
+try {
+  fs.writeFileSync(pidFile, process.pid.toString());
+  pidFileWritten = true;
+} catch (error) {
+  console.warn(`⚠️ Could not write .server.pid: ${error.message}`);
+}
 
 // Log env var availability for diagnostics
 console.log(`> NODE_ENV=${process.env.NODE_ENV}`);
 console.log(`> PORT=${port}`);
-console.log(`> PID=${process.pid} (written to .server.pid)`);
+console.log(`> PID=${process.pid}${pidFileWritten ? " (written to .server.pid)" : " (pid file unavailable)"}`);
 console.log(`> SHOPIFY_STORE_API_URL=${process.env.SHOPIFY_STORE_API_URL ? "set" : "MISSING"}`);
 console.log(`> SHOPIFY_STOREFRONT_ACCESS_TOKEN=${process.env.SHOPIFY_STOREFRONT_ACCESS_TOKEN ? "set" : "MISSING"}`);
 
