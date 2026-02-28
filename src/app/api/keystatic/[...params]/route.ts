@@ -27,19 +27,54 @@ function ensureKeystaticEnv(): void {
   }
 }
 
-function ensureAbsoluteUrl(request: Request): Request {
+const INTERNAL_HOSTS = new Set(['0.0.0.0', '127.0.0.1', 'localhost']);
+
+function firstHeaderValue(value: string | null): string | undefined {
+  if (!value) return undefined;
+  const first = value.split(',')[0]?.trim();
+  return first || undefined;
+}
+
+function getConfiguredSiteHost(): string | undefined {
+  const siteUrl = process.env.NEXT_PUBLIC_SITE_URL;
+  if (!siteUrl) return undefined;
   try {
-    new URL(request.url);
-    return request;
+    return new URL(siteUrl).host;
   } catch {
-    const protocol = request.headers.get('x-forwarded-proto') ?? 'https';
-    const host =
-      request.headers.get('x-forwarded-host') ??
-      request.headers.get('host') ??
-      '127.0.0.1';
-    const pathname = request.url.startsWith('/') ? request.url : `/${request.url}`;
-    return new Request(`${protocol}://${host}${pathname}`, request);
+    return undefined;
   }
+}
+
+function ensureAbsoluteUrl(request: Request): Request {
+  let parsed: URL;
+  try {
+    parsed = new URL(request.url);
+  } catch {
+    const pathname = request.url.startsWith('/') ? request.url : `/${request.url}`;
+    parsed = new URL(pathname, 'https://127.0.0.1');
+  }
+
+  const forwardedProto = firstHeaderValue(request.headers.get('x-forwarded-proto'));
+  const forwardedHost = firstHeaderValue(request.headers.get('x-forwarded-host'));
+  const hostHeader = firstHeaderValue(request.headers.get('host'));
+  const parsedProtocol = parsed.protocol.replace(':', '');
+  const parsedHost = parsed.host;
+  const parsedHostname = parsed.hostname.toLowerCase();
+
+  const desiredProtocol = forwardedProto || parsedProtocol || 'https';
+  const desiredHost =
+    forwardedHost ||
+    (!INTERNAL_HOSTS.has(parsedHostname) ? parsedHost : undefined) ||
+    hostHeader ||
+    getConfiguredSiteHost() ||
+    parsedHost;
+
+  if (desiredProtocol === parsedProtocol && desiredHost === parsedHost) {
+    return request;
+  }
+
+  const rewrittenUrl = `${desiredProtocol}://${desiredHost}${parsed.pathname}${parsed.search}`;
+  return new Request(rewrittenUrl, request);
 }
 
 ensureKeystaticEnv();
