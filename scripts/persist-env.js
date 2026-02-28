@@ -24,6 +24,10 @@ const SERVER_VARS = [
   "BREVO_SENDER_EMAIL",
   "CONTACT_TO_EMAIL",
   "PORT",
+  "KEYSTATIC_GITHUB_CLIENT_ID",
+  "KEYSTATIC_GITHUB_CLIENT_SECRET",
+  "KEYSTATIC_SECRET",
+  "KEYSTATIC_PASSWORD",
 ];
 
 const envPath = path.join(__dirname, "..", ".env.local");

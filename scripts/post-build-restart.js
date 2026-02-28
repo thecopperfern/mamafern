@@ -7,6 +7,10 @@
  *
  * Fix: kill the old server using its PID file. Hostinger's process manager
  * respawns it, loading the fresh build.
+ *
+ * ⚠️  We intentionally avoid `pkill` / broad process kills — on Hostinger's
+ *     deploy pipeline those can kill the deploy runner or process manager
+ *     itself, leaving the site down with a 503.
  */
 
 const fs = require("fs");
@@ -15,14 +19,13 @@ const { execSync } = require("child_process");
 
 const pidFile = path.join(__dirname, "..", ".server.pid");
 
-// Strategy 1: Kill via PID file (most reliable)
+// Strategy 1: Kill via PID file (targeted — only kills OUR server)
 if (fs.existsSync(pidFile)) {
   const pid = fs.readFileSync(pidFile, "utf-8").trim();
   console.log(`✅ post-build: found server PID ${pid} — killing old process`);
   try {
     execSync(`kill ${pid}`, { stdio: "inherit" });
     console.log(`✅ post-build: killed PID ${pid} — Hostinger will respawn`);
-    // Clean up PID file so a stale PID doesn't cause issues
     fs.unlinkSync(pidFile);
   } catch (err) {
     console.log(`   kill failed (process may already be dead): ${err.message}`);
@@ -31,20 +34,12 @@ if (fs.existsSync(pidFile)) {
   console.log("ℹ️ post-build: no .server.pid found — server may not be running");
 }
 
-// Strategy 2: Also touch tmp/restart.txt for Passenger (belt and suspenders)
+// Strategy 2: Touch tmp/restart.txt for Passenger-style process managers
 try {
   const tmpDir = path.join(__dirname, "..", "tmp");
   if (!fs.existsSync(tmpDir)) fs.mkdirSync(tmpDir, { recursive: true });
   fs.writeFileSync(path.join(tmpDir, "restart.txt"), Date.now().toString());
   console.log("✅ post-build: touched tmp/restart.txt");
-} catch {
-  // ignore
-}
-
-// Strategy 3: Broad process kill as last resort
-try {
-  execSync("pkill -f 'node.*server\\.js' || true", { stdio: "inherit" });
-  console.log("✅ post-build: pkill cleanup done");
 } catch {
   // ignore
 }
