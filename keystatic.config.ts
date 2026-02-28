@@ -3,33 +3,27 @@ import { config, fields, collection } from '@keystatic/core';
 /**
  * Keystatic CMS Configuration
  *
- * Storage strategy:
- * - Development: local storage — reads/writes files directly on disk, no GitHub auth needed
- * - Production:  GitHub storage — saves are committed directly to the thecopperfern/mamafern
- *                repo, so content is version-controlled and survives server restarts/redeploys
+ * Storage strategy: local — reads/writes MDX files directly on the server disk.
+ * No GitHub OAuth required. Access is protected by a shared password via
+ * Next.js middleware (see src/middleware.ts).
  *
- * Production workflow after saving a post in Keystatic:
- *   1. Keystatic commits the new .mdx file to GitHub (main branch)
- *   2. SSH into Hostinger and run: git pull
- *   3. Post appears immediately — no rebuild needed (blog pages use force-dynamic)
+ * Required env vars:
+ *   KEYSTATIC_PASSWORD — the shared password for /keystatic (set in Hostinger hPanel)
+ *   KEYSTATIC_SECRET   — random string used to sign the auth cookie: openssl rand -hex 32
  *
- * Required env vars (production only):
- *   KEYSTATIC_GITHUB_CLIENT_ID     — from your GitHub OAuth App
- *   KEYSTATIC_GITHUB_CLIENT_SECRET — from your GitHub OAuth App
- *   KEYSTATIC_SECRET               — random string: openssl rand -hex 32
+ * Workflow for marketing team:
+ *   1. Go to https://mamafern.com/keystatic
+ *   2. Enter the shared password
+ *   3. Create/edit blog posts — they save immediately to the server
+ *
+ * Note: content lives in content/blog/ on the server filesystem. Periodically
+ * commit new posts back to git to keep them version-controlled:
+ *   git add content/blog/ && git commit -m "content: add new posts" && git push
  *
  * See .env.example for setup instructions.
  */
 export default config({
-  storage: process.env.NODE_ENV === 'production'
-    ? {
-        kind: 'github',
-        repo: {
-          owner: 'thecopperfern',
-          name: 'mamafern',
-        },
-      }
-    : { kind: 'local' },
+  storage: { kind: 'local' },
   collections: {
     posts: collection({
       label: 'Blog Posts',
