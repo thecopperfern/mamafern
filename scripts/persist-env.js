@@ -28,6 +28,7 @@ const SERVER_VARS = [
   "KEYSTATIC_GITHUB_CLIENT_SECRET",
   "KEYSTATIC_SECRET",
   "KEYSTATIC_PASSWORD",
+  "SITE_PASSWORD",
 ];
 
 const envPath = path.join(__dirname, "..", ".env.local");
