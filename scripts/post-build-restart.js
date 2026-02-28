@@ -1,47 +1,101 @@
 /**
- * Post-build restart for Hostinger git auto-deploy.
+ * Post-build recovery for Hostinger git auto-deploy.
  *
- * After `next build` overwrites .next/ with new chunks, the old server
- * process still has the old build manifest in memory. Clients get HTML
- * referencing new chunk hashes, but the old server can't serve them → 404s.
+ * Problem solved:
+ * - On some Hostinger plans, deploys can leave the Node runtime stopped (503),
+ *   and users may not have a panel restart button.
  *
- * Fix: kill the old server using its PID file. Hostinger's process manager
- * respawns it, loading the fresh build.
+ * Safe behavior:
+ * 1) Touch tmp/restart.txt (for Passenger-style managers)
+ * 2) If no live .server.pid process exists, start server.js in detached mode
  *
- * ⚠️  We intentionally avoid `pkill` / broad process kills — on Hostinger's
- *     deploy pipeline those can kill the deploy runner or process manager
- *     itself, leaving the site down with a 503.
+ * Important:
+ * - Never kill processes here (no pkill, no broad kill patterns)
+ * - Run auto-start only in Hostinger's git deploy workspace
  */
 
 const fs = require("fs");
 const path = require("path");
-const { execSync } = require("child_process");
+const { spawn } = require("child_process");
 
-const pidFile = path.join(__dirname, "..", ".server.pid");
+const projectRoot = path.join(__dirname, "..");
+const tmpDir = path.join(projectRoot, "tmp");
+const pidFile = path.join(projectRoot, ".server.pid");
+const outLog = path.join(tmpDir, "server.out.log");
+const errLog = path.join(tmpDir, "server.err.log");
 
-// Strategy 1: Kill via PID file (targeted — only kills OUR server)
-if (fs.existsSync(pidFile)) {
-  const pid = fs.readFileSync(pidFile, "utf-8").trim();
-  console.log(`✅ post-build: found server PID ${pid} — killing old process`);
+const hostingerBuildPath = `${path.sep}.builds${path.sep}source${path.sep}repository`;
+const isHostingerGitDeploy =
+  process.cwd().includes(hostingerBuildPath) ||
+  projectRoot.includes(hostingerBuildPath);
+
+function isProcessRunning(pid) {
+  if (!Number.isInteger(pid) || pid <= 0) return false;
   try {
-    execSync(`kill ${pid}`, { stdio: "inherit" });
-    console.log(`✅ post-build: killed PID ${pid} — Hostinger will respawn`);
-    fs.unlinkSync(pidFile);
-  } catch (err) {
-    console.log(`   kill failed (process may already be dead): ${err.message}`);
+    process.kill(pid, 0);
+    return true;
+  } catch {
+    return false;
   }
-} else {
-  console.log("ℹ️ post-build: no .server.pid found — server may not be running");
 }
 
-// Strategy 2: Touch tmp/restart.txt for Passenger-style process managers
+function ensureTmpDir() {
+  if (!fs.existsSync(tmpDir)) {
+    fs.mkdirSync(tmpDir, { recursive: true });
+  }
+}
+
+if (!isHostingerGitDeploy) {
+  console.log("ℹ️ post-build: non-Hostinger environment detected, skipping auto-start");
+  process.exit(0);
+}
+
+// Write restart marker for Passenger-style managers on Hostinger.
 try {
-  const tmpDir = path.join(__dirname, "..", "tmp");
-  if (!fs.existsSync(tmpDir)) fs.mkdirSync(tmpDir, { recursive: true });
+  ensureTmpDir();
   fs.writeFileSync(path.join(tmpDir, "restart.txt"), Date.now().toString());
   console.log("✅ post-build: touched tmp/restart.txt");
-} catch {
-  // ignore
+} catch (error) {
+  console.log(`ℹ️ post-build: could not write restart.txt: ${error.message}`);
 }
 
-console.log("✅ post-build: restart complete — new build will be served");
+let hasLiveServer = false;
+if (fs.existsSync(pidFile)) {
+  const pidRaw = fs.readFileSync(pidFile, "utf-8").trim();
+  const pid = Number.parseInt(pidRaw, 10);
+  if (isProcessRunning(pid)) {
+    hasLiveServer = true;
+    console.log(`✅ post-build: server already running with PID ${pid}`);
+  } else {
+    console.log(`ℹ️ post-build: stale PID file (${pidRaw}), removing`);
+    try {
+      fs.unlinkSync(pidFile);
+    } catch {
+      // ignore stale cleanup errors
+    }
+  }
+} else {
+  console.log("ℹ️ post-build: no .server.pid found");
+}
+
+if (hasLiveServer) {
+  console.log("✅ post-build: startup recovery not needed");
+  process.exit(0);
+}
+
+try {
+  ensureTmpDir();
+  const outFd = fs.openSync(outLog, "a");
+  const errFd = fs.openSync(errLog, "a");
+  const child = spawn(process.execPath, ["server.js"], {
+    cwd: projectRoot,
+    env: { ...process.env, NODE_ENV: "production" },
+    detached: true,
+    stdio: ["ignore", outFd, errFd],
+  });
+  child.unref();
+  console.log(`✅ post-build: started recovery server process PID ${child.pid}`);
+} catch (error) {
+  console.error(`❌ post-build: failed to start recovery server: ${error.message}`);
+  process.exitCode = 1;
+}
