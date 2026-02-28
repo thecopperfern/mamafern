@@ -56,7 +56,11 @@ export async function middleware(request: NextRequest) {
   }
 
   // --- Gate 2: Keystatic CMS password (cookie-based) ---
-  const isKeystatic = pathname.startsWith('/keystatic') || pathname.startsWith('/api/keystatic');
+  const isKeystatic =
+    pathname === '/keystatic' ||
+    pathname.startsWith('/keystatic/') ||
+    pathname === '/api/keystatic' ||
+    pathname.startsWith('/api/keystatic/');
   if (isKeystatic) {
     const ksPassword = process.env.KEYSTATIC_PASSWORD;
     const secret = process.env.KEYSTATIC_SECRET ?? '';
