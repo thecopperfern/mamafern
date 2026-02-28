@@ -1,23 +1,21 @@
 import { notFound } from "next/navigation";
 import Link from "next/link";
 import type { Metadata } from "next";
-import { getPostBySlug, getRelatedPosts, getAllPosts, markdownToHtml } from "@/lib/blog";
+import { getPostBySlug, getRelatedPosts, markdownToHtml } from "@/lib/blog";
 import { buildMetadata, SITE_CONFIG } from "@/lib/seo";
 import Breadcrumbs from "@/components/view/Breadcrumbs";
 import JsonLd from "@/components/seo/JsonLd";
 
 import RelatedPosts from "@/components/blog/RelatedPosts";
 
-export const revalidate = 3600;
+// force-dynamic: Keystatic writes blog files to disk at runtime.
+// ISR would serve stale content for up to 1 hour after a CMS edit.
+// force-dynamic ensures Keystatic changes appear immediately on save.
+export const dynamic = "force-dynamic";
 
 type Props = {
   params: Promise<{ slug: string }>;
 };
-
-export async function generateStaticParams() {
-  const posts = getAllPosts();
-  return posts.map((post) => ({ slug: post.slug }));
-}
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { slug } = await params;
