@@ -62,7 +62,7 @@ export const metadata: Metadata = {
     url: "https://mamafern.com",
     images: [
       {
-        url: "/og-image.svg",
+        url: "/og-image.png",
         width: 1200,
         height: 630,
         alt: "Mama Fern – Grounded Family Apparel",
@@ -73,7 +73,7 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     site: "@mamafern",
     creator: "@mamafern",
-    images: ["/og-image.svg"],
+    images: ["/og-image.png"],
   },
   alternates: {
     canonical: "https://mamafern.com",
@@ -82,7 +82,7 @@ export const metadata: Metadata = {
     },
   },
   verification: {
-    google: "REPLACE_WITH_GOOGLE_VERIFICATION_CODE",
+    google: process.env.NEXT_PUBLIC_GSC_VERIFICATION || undefined,
   },
   category: "fashion",
   other: {

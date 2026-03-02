@@ -5,11 +5,9 @@ import { makeRouteHandler } from '@keystatic/next/route-handler';
 import config from '../../../../../keystatic.config';
 
 function ensureKeystaticEnv(): void {
-  const required = [
-    'KEYSTATIC_GITHUB_CLIENT_ID',
-    'KEYSTATIC_GITHUB_CLIENT_SECRET',
-    'KEYSTATIC_SECRET',
-  ];
+  // GitHub App auth only needs KEYSTATIC_SECRET (the app slug is NEXT_PUBLIC_
+  // and automatically inlined by Next.js). Try loading from .env files if missing.
+  const required = ['KEYSTATIC_SECRET'];
 
   if (required.every((key) => Boolean(process.env[key]))) {
     return;

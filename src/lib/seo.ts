@@ -8,7 +8,7 @@ export const SITE_CONFIG = {
   tagline: "Grounded Family Apparel",
   baseUrl: "https://mamafern.com",
   twitterHandle: "@mamafern",
-  defaultOgImage: "/og-image.svg",
+  defaultOgImage: "/og-image.png",
   defaultDescription:
     "Grounded family apparel for crunchy, cozy homes. Natural fabrics, earthy patterns, and family-forward designs for moms, dads, and kids who love the outdoors.",
   defaultKeywords: [

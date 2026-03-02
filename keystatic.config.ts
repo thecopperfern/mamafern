@@ -16,21 +16,22 @@ import { config, fields, collection } from '@keystatic/core';
  * authenticate through the OAuth App which has repo access.
  *
  * Required env vars (production):
- *   KEYSTATIC_GITHUB_CLIENT_ID     — from your GitHub OAuth App
- *   KEYSTATIC_GITHUB_CLIENT_SECRET — from your GitHub OAuth App
+ *   NEXT_PUBLIC_KEYSTATIC_GITHUB_APP_SLUG — GitHub App slug (e.g. "mama-fern-cms")
  *   KEYSTATIC_SECRET               — random string: openssl rand -hex 32
  *   KEYSTATIC_PASSWORD             — shared password for the /keystatic route
  *
  * Production workflow:
  *   1. Visit https://mamafern.com/keystatic → enter shared password
- *   2. Sign in with GitHub (one-time per browser)
+ *   2. Sign in with GitHub App (one-time per browser)
  *   3. Create/edit posts → Keystatic commits the MDX file to GitHub automatically
  *   4. On Hostinger, run: git pull → post appears immediately (force-dynamic)
  *
  * See .env.example for full setup instructions.
  */
 export default config({
-  storage: process.env.NODE_ENV === 'production'
+  // Use GitHub storage when the app slug is configured (production).
+  // Falls back to local storage for dev or when env vars aren't set (build time).
+  storage: process.env.NEXT_PUBLIC_KEYSTATIC_GITHUB_APP_SLUG
     ? {
         kind: 'github',
         repo: {

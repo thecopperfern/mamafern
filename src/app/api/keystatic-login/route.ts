@@ -1,5 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server';
 import crypto from 'crypto';
+import { checkRateLimit } from '@/lib/rate-limit';
 
 /**
  * POST /api/keystatic-login
@@ -13,6 +14,9 @@ import crypto from 'crypto';
  * invalidates all existing sessions (old cookies no longer match).
  */
 export async function POST(request: NextRequest) {
+  const rateLimited = await checkRateLimit(request, "keystatic-login");
+  if (rateLimited) return rateLimited;
+
   let body: { password?: string };
 
   try {
@@ -23,7 +27,12 @@ export async function POST(request: NextRequest) {
 
   const { password } = body;
   const correctPassword = process.env.KEYSTATIC_PASSWORD;
-  const secret = process.env.KEYSTATIC_SECRET ?? '';
+  const secret = process.env.KEYSTATIC_SECRET;
+
+  if (!secret && correctPassword) {
+    console.error('[Keystatic Login] KEYSTATIC_SECRET env var is not set');
+    return NextResponse.json({ error: 'CMS configuration error' }, { status: 500 });
+  }
 
   if (!correctPassword) {
     // No password configured — allow through (mirrors middleware behaviour)

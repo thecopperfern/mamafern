@@ -55,6 +55,7 @@ export const useCartActions = () => {
       setCart(updatedCart);
     } catch (error) {
       console.error("Error updating cart:", error);
+      throw error;
     }
   };
 
@@ -66,6 +67,7 @@ export const useCartActions = () => {
       setCart(updatedCart);
     } catch (error) {
       console.error("Error removing from cart:", error);
+      throw error;
     }
   };
 

@@ -140,8 +140,8 @@ check("Collection page has JSON-LD", fileExists(collectionPage) && fileContains(
 // 6. Performance checks
 console.log("\n⚡ Performance");
 check("Layout has preconnect for Shopify CDN", fileContains(path.join(APP, "layout.tsx"), "preconnect"));
-check("Homepage uses ISR (not force-dynamic)", !fileContains(path.join(APP, "page.tsx"), "force-dynamic"));
-check("Shop page uses ISR (not force-dynamic)", !fileContains(path.join(APP, "shop", "page.tsx"), "force-dynamic"));
+check("Homepage uses force-dynamic (required for Shopify)", fileContains(path.join(APP, "page.tsx"), "force-dynamic"));
+check("Shop page uses force-dynamic (required for Shopify)", fileContains(path.join(APP, "shop", "page.tsx"), "force-dynamic"));
 check("RSS feed exists", fileExists(path.join(APP, "blog", "feed.xml", "route.ts")));
 
 // Summary

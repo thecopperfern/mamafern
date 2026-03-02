@@ -63,11 +63,17 @@ export async function middleware(request: NextRequest) {
     pathname.startsWith('/api/keystatic/');
   if (isKeystatic) {
     const ksPassword = process.env.KEYSTATIC_PASSWORD;
-    const secret = process.env.KEYSTATIC_SECRET ?? '';
+    const secret = process.env.KEYSTATIC_SECRET;
 
     // If no password is configured, allow through (local dev fallback)
     if (!ksPassword) {
       return NextResponse.next();
+    }
+
+    // Fail-secure: if KEYSTATIC_SECRET is not set, block access in production
+    if (!secret) {
+      console.error('[Middleware] KEYSTATIC_SECRET env var is not set — blocking Keystatic access');
+      return new NextResponse('CMS configuration error', { status: 500 });
     }
 
     const expectedCookie = await sha256(`${ksPassword}:${secret}`);

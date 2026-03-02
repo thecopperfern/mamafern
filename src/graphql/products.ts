@@ -170,10 +170,28 @@ export const GET_PRODUCT_BY_HANDLE_QUERY = gql`
   query GetProductByHandle($handle: String!) {
     product(handle: $handle) {
       id
+      handle
       title
       description
       productType
+      vendor
+      featuredImage {
+        url
+        altText
+        width
+        height
+      }
       priceRange {
+        minVariantPrice {
+          amount
+          currencyCode
+        }
+        maxVariantPrice {
+          amount
+          currencyCode
+        }
+      }
+      compareAtPriceRange {
         minVariantPrice {
           amount
           currencyCode

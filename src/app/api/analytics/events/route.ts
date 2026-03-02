@@ -3,6 +3,15 @@ import getDb from '@/lib/db';
 import { AnalyticsEvent } from '@/types/analytics';
 
 export async function POST(req: NextRequest) {
+  // Authenticate: require ANALYTICS_API_KEY
+  const apiKey = process.env.ANALYTICS_API_KEY;
+  if (apiKey) {
+    const authHeader = req.headers.get('authorization');
+    if (authHeader !== `Bearer ${apiKey}`) {
+      return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
+    }
+  }
+
   try {
     const db = getDb();
     if (!db) {

@@ -76,6 +76,31 @@ export async function POST(req: NextRequest) {
 
     const body = await req.json();
 
+    // Allowlist: only permit known Storefront API operations
+    const ALLOWED_OPERATIONS = new Set([
+      "SearchProducts",
+      "GetProductByHandle",
+      "GetProductRecommendations",
+      "GetCollections",
+      "GetCollectionByHandle",
+      "CreateCart",
+      "GetCart",
+      "AddToCart",
+      "UpdateCartItems",
+      "RemoveFromCart",
+      "ApplyDiscountCode",
+      "RemoveDiscountCode",
+      "AssociateBuyer",
+    ]);
+
+    const operationName = body?.operationName;
+    if (!operationName || !ALLOWED_OPERATIONS.has(operationName)) {
+      return NextResponse.json(
+        { errors: [{ message: "Operation not allowed" }] },
+        { status: 403 }
+      );
+    }
+
     const response = await fetch(shopifyUrl, {
       method: "POST",
       headers: {

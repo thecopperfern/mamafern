@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect, useRef } from "react";
+import { useState, useEffect, useRef, useCallback } from "react";
 import { useCartActions } from "@/lib/atoms/cart";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -24,6 +24,45 @@ export default function CartSlideout({ open, onClose }: Props) {
   const [promoCode, setPromoCode] = useState("");
   const [promoLoading, setPromoLoading] = useState(false);
   const [promoError, setPromoError] = useState("");
+
+  const panelRef = useRef<HTMLDivElement>(null);
+  const closeButtonRef = useRef<HTMLButtonElement>(null);
+
+  // Focus trap: keep Tab within the slideout when open
+  useEffect(() => {
+    if (!open) return;
+    // Focus the close button when opened
+    closeButtonRef.current?.focus();
+
+    function handleKeyDown(e: KeyboardEvent) {
+      if (e.key === "Escape") {
+        onClose();
+        return;
+      }
+      if (e.key !== "Tab" || !panelRef.current) return;
+      const focusable = panelRef.current.querySelectorAll<HTMLElement>(
+        'a[href], button:not([disabled]), input:not([disabled]), [tabindex]:not([tabindex="-1"])'
+      );
+      if (focusable.length === 0) return;
+      const first = focusable[0];
+      const last = focusable[focusable.length - 1];
+      if (e.shiftKey && document.activeElement === first) {
+        e.preventDefault();
+        last.focus();
+      } else if (!e.shiftKey && document.activeElement === last) {
+        e.preventDefault();
+        first.focus();
+      }
+    }
+
+    document.addEventListener("keydown", handleKeyDown);
+    // Prevent body scrolling while cart is open
+    document.body.style.overflow = "hidden";
+    return () => {
+      document.removeEventListener("keydown", handleKeyDown);
+      document.body.style.overflow = "";
+    };
+  }, [open, onClose]);
 
   // Track free shipping achievement
   const previousSubtotal = useRef<number>(0);
@@ -78,10 +117,15 @@ export default function CartSlideout({ open, onClose }: Props) {
             exit={{ opacity: 0 }}
             transition={{ duration: 0.2 }}
             onClick={onClose}
+            aria-hidden="true"
           />
 
           {/* Slideout panel */}
           <motion.div
+            ref={panelRef}
+            role="dialog"
+            aria-modal="true"
+            aria-label="Shopping cart"
             className="fixed right-0 top-0 h-full w-full max-w-md bg-cream z-50 shadow-xl flex flex-col"
             variants={slideInRight}
             initial="hidden"
@@ -93,12 +137,14 @@ export default function CartSlideout({ open, onClose }: Props) {
                 Your Cart
               </h2>
               <Button
+                ref={closeButtonRef}
                 size="icon"
                 variant="ghost"
                 onClick={onClose}
                 className="text-charcoal"
+                aria-label="Close cart"
               >
-                <X className="h-5 w-5" />
+                <X className="h-5 w-5" aria-hidden="true" />
               </Button>
             </div>
 
@@ -230,35 +276,41 @@ export default function CartSlideout({ open, onClose }: Props) {
                             size="icon"
                             variant="outline"
                             className="h-8 w-8 touch-manipulation"
+                            aria-label={`Decrease quantity of ${line.productTitle}`}
                             onClick={() =>
-                              updateItem(line.id, line.quantity - 1)
+                              updateItem(line.id, line.quantity - 1).catch(() =>
+                                toast.error("Failed to update quantity"))
                             }
                           >
-                            <Minus className="h-3.5 w-3.5" />
+                            <Minus className="h-3.5 w-3.5" aria-hidden="true" />
                           </Button>
-                          <span className="text-sm w-8 text-center font-medium">
+                          <span className="text-sm w-8 text-center font-medium" aria-label={`Quantity: ${line.quantity}`}>
                             {line.quantity}
                           </span>
                           <Button
                             size="icon"
                             variant="outline"
                             className="h-8 w-8 touch-manipulation"
+                            aria-label={`Increase quantity of ${line.productTitle}`}
                             onClick={() =>
-                              updateItem(line.id, line.quantity + 1)
+                              updateItem(line.id, line.quantity + 1).catch(() =>
+                                toast.error("Failed to update quantity"))
                             }
                           >
-                            <Plus className="h-3.5 w-3.5" />
+                            <Plus className="h-3.5 w-3.5" aria-hidden="true" />
                           </Button>
                           <Button
                             size="icon"
                             variant="ghost"
                             className="h-8 w-8 ml-auto text-warm-brown hover:text-terracotta touch-manipulation"
+                            aria-label={`Remove ${line.productTitle} from cart`}
                             onClick={() => {
-                              removeItem(line.id);
-                              toast.success(`${line.productTitle} removed from cart`);
+                              removeItem(line.id)
+                                .then(() => toast.success(`${line.productTitle} removed from cart`))
+                                .catch(() => toast.error("Failed to remove item"));
                             }}
                           >
-                            <Trash2 className="h-3.5 w-3.5" />
+                            <Trash2 className="h-3.5 w-3.5" aria-hidden="true" />
                           </Button>
                         </div>
                       </div>

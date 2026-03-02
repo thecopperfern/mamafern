@@ -1,4 +1,5 @@
-import { NextResponse } from "next/server";
+import { NextRequest, NextResponse } from "next/server";
+import { checkRateLimit } from "@/lib/rate-limit";
 
 const BREVO_API_KEY = process.env.BREVO_API_KEY;
 const BREVO_LIST_ID = process.env.BREVO_LIST_ID;
@@ -8,7 +9,10 @@ const BREVO_SENDER_EMAIL =
 // Template ID 1 = "Newsletter Welcome — Mama Fern" created in Brevo
 const WELCOME_TEMPLATE_ID = 1;
 
-export async function POST(request: Request) {
+export async function POST(request: NextRequest) {
+  const rateLimited = await checkRateLimit(request, "newsletter");
+  if (rateLimited) return rateLimited;
+
   try {
     const body = await request.json();
     const {

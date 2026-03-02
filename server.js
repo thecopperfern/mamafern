@@ -46,10 +46,29 @@ const app = next({ dev: false, dir: __dirname, hostname: "0.0.0.0", port });
 const handle = app.getRequestHandler();
 
 app.prepare().then(() => {
-  createServer((req, res) => handle(req, res))
+  const server = createServer((req, res) => handle(req, res))
     .listen(port, "0.0.0.0", () => {
       console.log(`> Mama Fern ready on http://0.0.0.0:${port}`);
     });
+
+  // Graceful shutdown — let in-flight requests finish before exiting
+  function shutdown(signal) {
+    console.log(`> ${signal} received — shutting down gracefully...`);
+    server.close(() => {
+      console.log("> Server closed. Exiting.");
+      // Clean up PID file
+      try { fs.unlinkSync(pidFile); } catch {}
+      process.exit(0);
+    });
+    // Force exit after 10s if connections are hanging
+    setTimeout(() => {
+      console.error("> Forced exit after 10s timeout");
+      process.exit(1);
+    }, 10_000);
+  }
+
+  process.on("SIGTERM", () => shutdown("SIGTERM"));
+  process.on("SIGINT", () => shutdown("SIGINT"));
 }).catch((err) => {
   console.error("❌ Failed to start server:", err);
   process.exit(1);
