@@ -120,18 +120,10 @@ export default async function RootLayout({
           async
           src="http://72.61.12.97:48435/js/pa-Sh7STIEagH-sll0zVYBcb.js"
           strategy="afterInteractive"
-          onLoad={() => {
-            window.plausible =
-              window.plausible ||
-              function () {
-                (plausible.q = plausible.q || []).push(arguments);
-              };
-            window.plausible.init = window.plausible.init || function (i) {
-              plausible.o = i || {};
-            };
-            window.plausible.init();
-          }}
         />
+        <Script strategy="afterInteractive">
+          {`window.plausible=window.plausible||function(){(plausible.q=plausible.q||[]).push(arguments)},plausible.init=plausible.init||function(i){plausible.o=i||{}};plausible.init()`}
+        </Script>
       </head>
       <Providers>
         <body
