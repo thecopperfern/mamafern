@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Script from "next/script";
 import { DM_Sans, Playfair_Display } from "next/font/google";
 import "./globals.css";
 import Navbar from "@/components/view/Navbar";
@@ -115,6 +116,22 @@ export default async function RootLayout({
       <head>
         <link rel="preconnect" href="https://cdn.shopify.com" />
         <link rel="dns-prefetch" href="https://cdn.shopify.com" />
+        <Script
+          async
+          src="http://72.61.12.97:48435/js/pa-Sh7STIEagH-sll0zVYBcb.js"
+          strategy="afterInteractive"
+          onLoad={() => {
+            window.plausible =
+              window.plausible ||
+              function () {
+                (plausible.q = plausible.q || []).push(arguments);
+              };
+            window.plausible.init = window.plausible.init || function (i) {
+              plausible.o = i || {};
+            };
+            window.plausible.init();
+          }}
+        />
       </head>
       <Providers>
         <body
