@@ -10,19 +10,38 @@ type AdminLoginProps = {
 export default function AdminLogin({ onAuthenticated }: AdminLoginProps) {
   const [passphrase, setPassphrase] = useState("");
   const [error, setError] = useState("");
+  const [loading, setLoading] = useState(false);
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setError("");
+    setLoading(true);
 
-    // NEXT_PUBLIC_ env var so the client can compare directly.
-    // This is a simple admin gate, not a high-security auth flow.
-    const expected = process.env.NEXT_PUBLIC_LOOK_ADMIN_PASS;
-    if (passphrase === expected) {
-      sessionStorage.setItem("lookadmin_auth", "true");
-      onAuthenticated();
-    } else {
-      setError("Incorrect passphrase");
+    try {
+      // POST to server-side API route so the password is never in the client bundle.
+      // LOOK_ADMIN_PASS is a server-only env var — changes take effect without a rebuild.
+      const res = await fetch("/lookadmin/auth", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ passphrase }),
+      });
+
+      if (res.ok) {
+        // Store both an auth flag and the passphrase so AdminContent can use
+        // it as a Bearer token for subsequent API calls — without ever
+        // putting NEXT_PUBLIC_LOOK_ADMIN_PASS in the client bundle.
+        sessionStorage.setItem("lookadmin_auth", "true");
+        sessionStorage.setItem("lookadmin_pass", passphrase);
+        onAuthenticated();
+      } else {
+        const data = await res.json();
+        setError(data.error ?? "Incorrect passphrase");
+      }
+    } catch (err) {
+      console.error("[AdminLogin] Auth request failed:", err);
+      setError("Network error — please try again");
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -70,9 +89,10 @@ export default function AdminLogin({ onAuthenticated }: AdminLoginProps) {
 
           <button
             type="submit"
-            className="w-full rounded-full bg-fern text-white text-sm font-medium py-2.5 hover:bg-fern-dark transition-colors"
+            disabled={loading}
+            className="w-full rounded-full bg-fern text-white text-sm font-medium py-2.5 hover:bg-fern-dark transition-colors disabled:opacity-60 disabled:cursor-not-allowed"
           >
-            Sign In
+            {loading ? "Checking…" : "Sign In"}
           </button>
         </form>
       </div>

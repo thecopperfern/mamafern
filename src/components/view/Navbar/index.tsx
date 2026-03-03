@@ -4,7 +4,7 @@ import React, { useEffect, useState } from "react";
 import Logo from "../Logo";
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
-import { ShoppingCart, Menu, X, User, LogOut, Search, Heart, Info, HelpCircle, Users, Mail } from "lucide-react";
+import { ShoppingCart, Menu, X, User, LogOut, Search, Heart, Info, HelpCircle, Users, Mail, BookOpen } from "lucide-react";
 import { useRouter } from "next/navigation";
 import { useCartActions, isCartOpenAtom } from "@/lib/atoms/cart";
 import { useAtom } from "jotai";
@@ -31,6 +31,7 @@ const INFO_LINKS = [
   { label: "FAQ", href: "/faq", icon: HelpCircle },
   { label: "Community", href: "/community", icon: Users },
   { label: "Contact", href: "/contact", icon: Mail },
+  { label: "Journal", href: "/blog", icon: BookOpen },
 ];
 
 const DEFAULT_LINKS = [

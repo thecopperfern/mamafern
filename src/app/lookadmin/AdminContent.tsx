@@ -44,7 +44,13 @@ export default function AdminContent() {
     }
   }, [activeTab, activeLook]);
 
-  const adminPass = process.env.NEXT_PUBLIC_LOOK_ADMIN_PASS || "";
+  // Read the passphrase that was verified server-side at login and stored in
+  // sessionStorage. This avoids baking NEXT_PUBLIC_LOOK_ADMIN_PASS into the
+  // client bundle — changing the password on the server takes effect immediately.
+  const adminPass =
+    typeof window !== "undefined"
+      ? sessionStorage.getItem("lookadmin_pass") ?? ""
+      : "";
 
   const loadShopifyProducts = useCallback(async () => {
     setLoadingProducts(true);
