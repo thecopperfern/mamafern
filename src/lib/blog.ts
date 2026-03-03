@@ -1,5 +1,9 @@
 import fs from "fs";
 import path from "path";
+import { marked } from "marked";
+
+// Configure marked for GFM (GitHub Flavored Markdown)
+marked.setOptions({ gfm: true, breaks: false });
 
 // ─── Types ───────────────────────────────────────────────────────────────────
 
@@ -10,6 +14,8 @@ export interface BlogPostMeta {
   slug: string;
   tags: string[];
   featuredImage: string;
+  author: string;
+  readTime: number;
 }
 
 export interface BlogPost extends BlogPostMeta {
@@ -96,6 +102,8 @@ export function getAllPosts(): BlogPost[] {
       slug: (meta.slug as string) || slug,
       tags: (Array.isArray(meta.tags) ? meta.tags : []) as string[],
       featuredImage: (meta.featuredImage as string) || "/og-image.svg",
+      author: (meta.author as string) || "Mama Fern Team",
+      readTime: estimateReadTime(content),
       content,
     };
   });
@@ -118,6 +126,8 @@ export function getPostBySlug(slug: string): BlogPost | null {
     slug: (meta.slug as string) || slug,
     tags: (Array.isArray(meta.tags) ? meta.tags : []) as string[],
     featuredImage: (meta.featuredImage as string) || "/og-image.svg",
+    author: (meta.author as string) || "Mama Fern Team",
+    readTime: estimateReadTime(content),
     content,
   };
 }
@@ -136,48 +146,26 @@ export function getAllTags(): string[] {
   return Array.from(tagSet).sort();
 }
 
-// ─── Markdown to HTML (simple) ───────────────────────────────────────────────
+// ─── Read Time Estimate ─────────────────────────────────────────────────────
 
+/**
+ * Estimates reading time based on ~200 words per minute.
+ * Returns time in minutes (minimum 1).
+ */
+export function estimateReadTime(content: string): number {
+  const words = content.trim().split(/\s+/).length;
+  return Math.max(1, Math.round(words / 200));
+}
+
+// ─── Markdown to HTML ───────────────────────────────────────────────────────
+
+/**
+ * Converts markdown content to HTML using `marked` with GFM support.
+ * Handles headings, bold, italic, links, images, blockquotes, code blocks,
+ * tables, strikethrough, horizontal rules, and all standard markdown features.
+ *
+ * Pair with Tailwind's `prose` class (@tailwindcss/typography) for styling.
+ */
 export function markdownToHtml(md: string): string {
-  let html = md;
-
-  // Headers
-  html = html.replace(/^### (.+)$/gm, "<h3>$1</h3>");
-  html = html.replace(/^## (.+)$/gm, "<h2>$1</h2>");
-  html = html.replace(/^# (.+)$/gm, "<h1>$1</h1>");
-
-  // Bold and italic
-  html = html.replace(/\*\*(.+?)\*\*/g, "<strong>$1</strong>");
-  html = html.replace(/\*(.+?)\*/g, "<em>$1</em>");
-
-  // Links
-  html = html.replace(/\[([^\]]+)\]\(([^)]+)\)/g, '<a href="$2">$1</a>');
-
-  // Ordered lists (1. item, 2. item)
-  html = html.replace(/^\d+\.\s+(.+)$/gm, "<oli>$1</oli>");
-  html = html.replace(/(<oli>.*<\/oli>\n?)+/g, (match) =>
-    `<ol>${match.replace(/<\/?oli>/g, (t) => t.replace("oli", "li"))}</ol>`
-  );
-
-  // Unordered lists
-  html = html.replace(/^- (.+)$/gm, "<li>$1</li>");
-  html = html.replace(/(<li>.*<\/li>\n?)+/g, (match) => `<ul>${match}</ul>`);
-
-  // Paragraphs (lines that aren't already wrapped)
-  html = html
-    .split("\n\n")
-    .map((block) => {
-      const trimmed = block.trim();
-      if (!trimmed) return "";
-      if (
-        trimmed.startsWith("<h") ||
-        trimmed.startsWith("<ul") ||
-        trimmed.startsWith("<ol")
-      )
-        return trimmed;
-      return `<p>${trimmed}</p>`;
-    })
-    .join("\n");
-
-  return html;
+  return marked.parse(md, { async: false }) as string;
 }

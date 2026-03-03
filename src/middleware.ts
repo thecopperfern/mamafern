@@ -48,6 +48,11 @@ function checkSitePassword(request: NextRequest, sitePassword: string): NextResp
 export async function middleware(request: NextRequest) {
   const { pathname } = request.nextUrl;
 
+  // --- Bypass: GitHub webhook endpoint (uses its own HMAC auth) ---
+  if (pathname === '/api/webhook/github') {
+    return NextResponse.next();
+  }
+
   // --- Gate 1: Site-wide password (pre-launch) ---
   const sitePassword = process.env.SITE_PASSWORD;
   if (sitePassword) {

@@ -1,16 +1,20 @@
 import Link from "next/link";
-import { getAllPosts, getAllTags } from "@/lib/blog";
+import Image from "next/image";
+import { getAllPosts } from "@/lib/blog";
 import { buildMetadata } from "@/lib/seo";
 import type { Metadata } from "next";
+import Pagination from "@/components/blog/Pagination";
+
+// force-dynamic: Tag pages filter blog posts read from disk at runtime.
+// generateStaticParams would require a build for new tags to appear.
+export const dynamic = "force-dynamic";
+
+const POSTS_PER_PAGE = 6;
 
 type Props = {
   params: Promise<{ tag: string }>;
+  searchParams: Promise<{ page?: string }>;
 };
-
-export async function generateStaticParams() {
-  const tags = getAllTags();
-  return tags.map((tag) => ({ tag: encodeURIComponent(tag) }));
-}
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { tag } = await params;
@@ -23,12 +27,20 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   });
 }
 
-export default async function BlogTagPage({ params }: Props) {
+export default async function BlogTagPage({ params, searchParams }: Props) {
   const { tag } = await params;
+  const { page } = await searchParams;
   const decoded = decodeURIComponent(tag);
   const allPosts = getAllPosts();
   const taggedPosts = allPosts.filter((p) =>
     p.tags.some((t) => t.toLowerCase() === decoded.toLowerCase())
+  );
+
+  const currentPage = Math.max(1, parseInt(page || "1", 10) || 1);
+  const totalPages = Math.ceil(taggedPosts.length / POSTS_PER_PAGE);
+  const paginatedPosts = taggedPosts.slice(
+    (currentPage - 1) * POSTS_PER_PAGE,
+    currentPage * POSTS_PER_PAGE
   );
 
   return (
@@ -38,7 +50,7 @@ export default async function BlogTagPage({ params }: Props) {
           href="/blog"
           className="text-sm text-fern hover:text-fern-dark mb-4 inline-block"
         >
-          ← Back to Journal
+          <span aria-hidden="true">&larr;</span> Back to Journal
         </Link>
         <h1 className="font-display font-bold text-3xl text-charcoal">
           Articles tagged &ldquo;{decoded}&rdquo;
@@ -53,39 +65,69 @@ export default async function BlogTagPage({ params }: Props) {
           No articles with this tag yet.
         </p>
       ) : (
-        <div className="grid gap-6">
-          {taggedPosts.map((post) => (
-            <article
-              key={post.slug}
-              className="group bg-texture-linen rounded-2xl border border-oat p-6 hover:border-fern/30 transition-colors"
-            >
-              <h2 className="font-display font-bold text-xl text-charcoal mb-2 group-hover:text-fern transition-colors">
-                <Link href={`/blog/${post.slug}`}>{post.title}</Link>
-              </h2>
-              <p className="text-warm-brown text-sm leading-relaxed mb-3">
-                {post.description}
-              </p>
-              <div className="flex items-center justify-between">
-                <time
-                  dateTime={post.date}
-                  className="text-xs text-warm-brown"
-                >
-                  {new Date(post.date).toLocaleDateString("en-US", {
-                    year: "numeric",
-                    month: "long",
-                    day: "numeric",
-                  })}
-                </time>
-                <Link
-                  href={`/blog/${post.slug}`}
-                  className="text-sm font-medium text-fern hover:text-fern-dark transition-colors"
-                >
-                  Read more →
-                </Link>
-              </div>
-            </article>
-          ))}
-        </div>
+        <>
+          <section aria-label="Blog posts">
+            <div className="grid gap-6">
+              {paginatedPosts.map((post) => {
+                const hasFeaturedImage =
+                  post.featuredImage && post.featuredImage !== "/og-image.svg";
+
+                return (
+                  <article
+                    key={post.slug}
+                    className="group bg-texture-linen rounded-2xl border border-oat overflow-hidden hover:border-fern/30 transition-colors"
+                  >
+                    {hasFeaturedImage && (
+                      <div className="aspect-[3/1] relative">
+                        <Image
+                          src={post.featuredImage}
+                          alt={post.title}
+                          fill
+                          className="object-cover"
+                          sizes="(max-width: 768px) 100vw, 896px"
+                        />
+                      </div>
+                    )}
+                    <div className="p-6">
+                      <h2 className="font-display font-bold text-xl text-charcoal mb-2 group-hover:text-fern transition-colors">
+                        <Link href={`/blog/${post.slug}`}>{post.title}</Link>
+                      </h2>
+                      <p className="text-warm-brown text-sm leading-relaxed mb-3">
+                        {post.description}
+                      </p>
+                      <div className="flex items-center justify-between">
+                        <span className="text-xs text-warm-brown">
+                          <time dateTime={post.date}>
+                            {new Date(post.date).toLocaleDateString("en-US", {
+                              year: "numeric",
+                              month: "long",
+                              day: "numeric",
+                            })}
+                          </time>
+                          {" · "}
+                          {post.readTime} min read
+                        </span>
+                        <Link
+                          href={`/blog/${post.slug}`}
+                          aria-label={`Read full article: ${post.title}`}
+                          className="text-sm font-medium text-fern hover:text-fern-dark transition-colors"
+                        >
+                          Read more <span aria-hidden="true">&rarr;</span>
+                        </Link>
+                      </div>
+                    </div>
+                  </article>
+                );
+              })}
+            </div>
+          </section>
+
+          <Pagination
+            currentPage={currentPage}
+            totalPages={totalPages}
+            basePath={`/blog/tag/${tag}`}
+          />
+        </>
       )}
     </div>
   );

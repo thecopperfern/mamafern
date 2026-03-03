@@ -37,7 +37,8 @@ export function LoginForm() {
         setError("Incorrect password. Try again.");
         setPassword("");
       }
-    } catch {
+    } catch (err) {
+      console.error("[Keystatic Login]", err);
       setError("Something went wrong. Please try again.");
     } finally {
       setLoading(false);

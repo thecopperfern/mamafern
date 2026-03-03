@@ -38,6 +38,7 @@ export default config({
           owner: 'thecopperfern',
           name: 'mamafern',
         },
+        branchPrefix: 'Blog',
       }
     : { kind: 'local' },
   collections: {
@@ -58,6 +59,10 @@ export default config({
           fields.text({ label: 'Tag' }),
           { label: 'Tags', itemLabel: props => props.value }
         ),
+        author: fields.text({
+          label: 'Author',
+          description: 'Author name. Defaults to "Mama Fern Team" if left blank.',
+        }),
         featuredImage: fields.image({
           label: 'Featured Image',
           directory: 'public/images/blog',

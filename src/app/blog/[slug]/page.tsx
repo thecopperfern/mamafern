@@ -1,5 +1,6 @@
 import { notFound } from "next/navigation";
 import Link from "next/link";
+import Image from "next/image";
 import type { Metadata } from "next";
 import { getPostBySlug, getRelatedPosts, markdownToHtml } from "@/lib/blog";
 import { buildMetadata, SITE_CONFIG } from "@/lib/seo";
@@ -22,12 +23,21 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const post = getPostBySlug(slug);
   if (!post) return { title: "Post Not Found" };
 
+  // Pass featured image to OG/Twitter metadata (Fix 6)
+  const imageUrl =
+    post.featuredImage && post.featuredImage !== "/og-image.svg"
+      ? post.featuredImage.startsWith("/")
+        ? `${SITE_CONFIG.baseUrl}${post.featuredImage}`
+        : post.featuredImage
+      : undefined;
+
   return buildMetadata({
     title: post.title,
     description: post.description,
     path: `/blog/${post.slug}`,
     type: "article",
     keywords: post.tags,
+    imageUrl,
   });
 }
 
@@ -39,6 +49,9 @@ export default async function BlogPostPage({ params }: Props) {
   const relatedPosts = getRelatedPosts(post.slug, post.tags);
   const htmlContent = markdownToHtml(post.content);
 
+  const hasFeaturedImage =
+    post.featuredImage && post.featuredImage !== "/og-image.svg";
+
   const articleSchema = {
     "@context": "https://schema.org",
     "@type": "Article",
@@ -48,7 +61,7 @@ export default async function BlogPostPage({ params }: Props) {
     dateModified: post.date,
     author: {
       "@type": "Organization",
-      name: "Mama Fern",
+      name: post.author,
       url: SITE_CONFIG.baseUrl,
     },
     publisher: {
@@ -60,9 +73,11 @@ export default async function BlogPostPage({ params }: Props) {
       },
     },
     mainEntityOfPage: `${SITE_CONFIG.baseUrl}/blog/${post.slug}`,
-    image: post.featuredImage.startsWith("/")
-      ? `${SITE_CONFIG.baseUrl}${post.featuredImage}`
-      : post.featuredImage,
+    image: hasFeaturedImage
+      ? post.featuredImage.startsWith("/")
+        ? `${SITE_CONFIG.baseUrl}${post.featuredImage}`
+        : post.featuredImage
+      : `${SITE_CONFIG.baseUrl}/og-image.png`,
   };
 
   return (
@@ -74,6 +89,20 @@ export default async function BlogPostPage({ params }: Props) {
           { label: post.title },
         ]}
       />
+
+      {/* Featured Image */}
+      {hasFeaturedImage && (
+        <div className="mt-6 rounded-2xl overflow-hidden aspect-[2/1] relative">
+          <Image
+            src={post.featuredImage}
+            alt={post.title}
+            fill
+            className="object-cover"
+            sizes="(max-width: 768px) 100vw, 768px"
+            priority
+          />
+        </div>
+      )}
 
       <article className="mt-6">
         <header className="mb-8">
@@ -99,7 +128,10 @@ export default async function BlogPostPage({ params }: Props) {
                 day: "numeric",
               })}
             </time>
-            {" · "}Mama Fern Team
+            {" · "}
+            {post.readTime} min read
+            {" · "}
+            {post.author}
           </p>
         </header>
 
