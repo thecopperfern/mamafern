@@ -2,12 +2,15 @@ import { commerceClient } from "@/lib/commerce";
 import ProductDetail from "@/components/view/ProductDetail";
 import Breadcrumbs from "@/components/view/Breadcrumbs";
 import RelatedProducts from "@/components/view/RelatedProducts";
+import ProductLookBanner from "@/components/shop-the-look/ProductLookBanner";
 import InternalLinks from "@/components/seo/InternalLinks";
 import JsonLd from "@/components/seo/JsonLd";
 import PageTransition from "@/components/PageTransition";
 import { notFound } from "next/navigation";
 import type { Metadata } from "next";
 import { buildProductMetadata, stripHtml, SITE_CONFIG } from "@/lib/seo";
+import type { Look } from "@/types/looks";
+import { migrateLooksData, isLookPublished } from "@/lib/looks-migration";
 
 export const dynamic = "force-dynamic";
 
@@ -32,6 +35,27 @@ export default async function ProductPage({ params }: Props) {
     recommendations = await commerceClient.getProductRecommendations(product.id);
   } catch {
     // Recommendations are non-critical
+  }
+
+  // Find looks containing this product (by handle or product ID)
+  let matchingLooks: Look[] = [];
+  try {
+    const fs = await import("fs");
+    const path = await import("path");
+    const looksPath = path.join(process.cwd(), "data", "looks.json");
+    const raw = fs.readFileSync(looksPath, "utf-8");
+    const data = migrateLooksData(JSON.parse(raw));
+    matchingLooks = data.looks.filter(
+      (look) =>
+        isLookPublished(look) &&
+        look.products.some(
+          (p) =>
+            p.shopifyHandle === handle ||
+            p.shopifyProductId === product.id
+        )
+    );
+  } catch {
+    // Non-critical — continue without look banners
   }
 
   const productSchema = {
@@ -65,6 +89,9 @@ export default async function ProductPage({ params }: Props) {
           ]}
         />
         <ProductDetail product={product} />
+        {matchingLooks.length > 0 && (
+          <ProductLookBanner looks={matchingLooks} />
+        )}
         {recommendations.length > 0 && (
           <RelatedProducts
             products={recommendations}

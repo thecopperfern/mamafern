@@ -2,14 +2,26 @@
 
 import Image from "next/image";
 import FernSvg from "./FernSvg";
+import LookHotspot from "./LookHotspot";
+import type { LookHotspot as HotspotType, LookProduct } from "@/types/looks";
 
 interface LookHeroProps {
   heroImage: string;
   heroImageAlt: string;
   title: string;
+  description?: string;
+  hotspots?: HotspotType[];
+  products?: LookProduct[];
 }
 
-export default function LookHero({ heroImage, heroImageAlt, title }: LookHeroProps) {
+export default function LookHero({
+  heroImage,
+  heroImageAlt,
+  title,
+  description,
+  hotspots,
+  products,
+}: LookHeroProps) {
   if (!heroImage) {
     return (
       <div
@@ -41,13 +53,34 @@ export default function LookHero({ heroImage, heroImageAlt, title }: LookHeroPro
           unoptimized
           data-testid="look-hero-image"
         />
+
+        {/* Hotspots */}
+        {hotspots?.map((hs) => {
+          const product = products?.find((p) => p.id === hs.productId);
+          if (!product) return null;
+          return (
+            <LookHotspot
+              key={hs.productId}
+              hotspot={hs}
+              product={product}
+            />
+          );
+        })}
+
         <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-black/40 to-transparent h-24 flex items-end p-5">
-          <h3
-            className="text-white font-display text-lg sm:text-xl drop-shadow-sm"
-            data-testid="look-hero-title-overlay"
-          >
-            {title}
-          </h3>
+          <div>
+            <h3
+              className="text-white font-display text-lg sm:text-xl drop-shadow-sm"
+              data-testid="look-hero-title-overlay"
+            >
+              {title}
+            </h3>
+            {description && (
+              <p className="text-white/80 text-sm mt-1 drop-shadow-sm">
+                {description}
+              </p>
+            )}
+          </div>
         </div>
       </div>
     </div>

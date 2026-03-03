@@ -4,6 +4,9 @@ import { useState } from "react";
 import LookTabs from "./LookTabs";
 import LookHero from "./LookHero";
 import ProductSpot from "./ProductSpot";
+import LookDiscount from "./LookDiscount";
+import AddAllToCart from "./AddAllToCart";
+import ShareLook from "./ShareLook";
 import type { Look } from "@/types/looks";
 
 interface ShopTheLookProps {
@@ -11,10 +14,20 @@ interface ShopTheLookProps {
 }
 
 export default function ShopTheLook({ initialLooks }: ShopTheLookProps) {
-  const [activeTab, setActiveTab] = useState(initialLooks?.[0]?.id || "moms");
+  const [activeTab, setActiveTab] = useState(initialLooks?.[0]?.id || "");
   const looks = initialLooks || [];
 
   if (!looks.length) return null;
+
+  const activeLook = looks.find((l) => l.id === activeTab) || looks[0];
+
+  // Flexible grid columns based on product count
+  const gridCols =
+    activeLook.products.length <= 2
+      ? "grid-cols-1 sm:grid-cols-2"
+      : activeLook.products.length === 3
+        ? "grid-cols-1 sm:grid-cols-3"
+        : "grid-cols-2 sm:grid-cols-4";
 
   return (
     <section
@@ -39,17 +52,33 @@ export default function ShopTheLook({ initialLooks }: ShopTheLookProps) {
               heroImage={look.heroImage}
               heroImageAlt={look.heroImageAlt}
               title={look.title}
+              description={look.description}
+              hotspots={look.hotspots}
+              products={look.products}
             />
 
+            {look.discount?.enabled && (
+              <LookDiscount
+                discount={look.discount}
+                products={look.products}
+              />
+            )}
+
             {look.products.length > 0 ? (
-              <div
-                className="grid grid-cols-1 sm:grid-cols-3 gap-4 sm:gap-6"
-                data-testid={`products-grid-${look.id}`}
-              >
-                {look.products.map((product) => (
-                  <ProductSpot key={product.shopifyProductId} product={product} />
-                ))}
-              </div>
+              <>
+                <div
+                  className={`grid ${gridCols} gap-4 sm:gap-6`}
+                  data-testid={`products-grid-${look.id}`}
+                >
+                  {look.products.map((product) => (
+                    <ProductSpot key={product.id} product={product} />
+                  ))}
+                </div>
+
+                <AddAllToCart products={look.products} />
+
+                <ShareLook lookId={look.id} lookTitle={look.title} />
+              </>
             ) : (
               <div
                 className="text-center py-12 text-warm-brown/50 text-sm"

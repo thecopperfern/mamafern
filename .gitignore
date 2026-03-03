@@ -2,6 +2,10 @@
 
 # dependencies
 /node_modules
+
+# uploaded images (keep the directory, ignore contents)
+/public/uploads/looks/*
+!/public/uploads/looks/.gitkeep
 /.pnp
 .pnp.*
 .yarn/*

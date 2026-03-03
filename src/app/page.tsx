@@ -9,7 +9,7 @@ import { Skeleton } from "@/components/ui/skeleton";
 import JsonLd from "@/components/seo/JsonLd";
 import fs from "fs";
 import path from "path";
-import type { LooksData } from "@/types/looks";
+import { migrateLooksData, isLookPublished } from "@/lib/looks-migration";
 
 const organizationSchema = {
   "@context": "https://schema.org",
@@ -59,11 +59,14 @@ function CollectionSkeleton() {
 
 export default function Home() {
   // Read looks data server-side for zero-latency rendering
-  let looksData: LooksData = { looks: [] };
+  let publishedLooks: import("@/types/looks").Look[] = [];
   try {
     const filePath = path.join(process.cwd(), "data", "looks.json");
     const raw = fs.readFileSync(filePath, "utf-8");
-    looksData = JSON.parse(raw);
+    const data = migrateLooksData(JSON.parse(raw));
+    publishedLooks = data.looks
+      .filter(isLookPublished)
+      .sort((a, b) => a.order - b.order);
   } catch {
     // Fall back to empty looks if file doesn't exist yet
   }
@@ -73,7 +76,7 @@ export default function Home() {
       <JsonLd data={organizationSchema} />
       <JsonLd data={websiteSchema} />
       <Hero />
-      <ShopTheLook initialLooks={looksData.looks} />
+      <ShopTheLook initialLooks={publishedLooks} />
       <CategoryCards />
       <Suspense fallback={<CollectionSkeleton />}>
         <FeaturedCollection
