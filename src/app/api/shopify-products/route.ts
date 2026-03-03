@@ -51,7 +51,8 @@ type ShopifyProductNode = {
 };
 
 export async function GET(request: Request) {
-  const adminPass = process.env.LOOK_ADMIN_PASS;
+  const adminPass =
+    (process.env.LOOK_ADMIN_PASS || process.env.NEXT_PUBLIC_LOOK_ADMIN_PASS)?.trim();
   if (!adminPass) {
     return NextResponse.json(
       { error: "Server not configured" },

@@ -1,4 +1,5 @@
 import { NextResponse } from "next/server";
+import { getAdminPass } from "../get-admin-pass";
 
 /**
  * Proxies Shopify Storefront API product list to the admin panel.
@@ -7,7 +8,7 @@ import { NextResponse } from "next/server";
 export async function GET(req: Request) {
   try {
     const authHeader = req.headers.get("Authorization");
-    const expectedToken = process.env.LOOK_ADMIN_PASS;
+    const expectedToken = getAdminPass();
 
     if (!expectedToken || authHeader !== `Bearer ${expectedToken}`) {
       return NextResponse.json({ error: "Unauthorized" }, { status: 401 });

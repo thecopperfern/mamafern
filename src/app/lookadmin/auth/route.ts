@@ -1,4 +1,5 @@
 import { NextResponse } from "next/server";
+import { getAdminPass } from "../get-admin-pass";
 
 /**
  * POST /lookadmin/auth
@@ -13,17 +14,17 @@ export async function POST(req: Request) {
   try {
     const { passphrase } = await req.json();
 
-    const expected = process.env.LOOK_ADMIN_PASS;
+    const expected = getAdminPass();
 
     if (!expected) {
-      console.error("[LookAdmin Auth] LOOK_ADMIN_PASS env var is not set.");
+      console.error("[LookAdmin Auth] Neither LOOK_ADMIN_PASS nor NEXT_PUBLIC_LOOK_ADMIN_PASS env var is set.");
       return NextResponse.json(
-        { error: "Server misconfiguration" },
+        { error: "Server misconfiguration — password env var not set" },
         { status: 500 }
       );
     }
 
-    if (passphrase !== expected) {
+    if (passphrase.trim() !== expected) {
       return NextResponse.json({ error: "Incorrect passphrase" }, { status: 401 });
     }
 

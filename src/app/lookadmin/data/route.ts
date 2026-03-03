@@ -1,6 +1,7 @@
 import { NextResponse } from "next/server";
 import fs from "fs";
 import path from "path";
+import { getAdminPass } from "../get-admin-pass";
 
 const LOOKS_FILE = path.join(process.cwd(), "data", "looks.json");
 
@@ -17,7 +18,7 @@ export async function GET() {
 export async function POST(req: Request) {
   try {
     const authHeader = req.headers.get("Authorization");
-    const expectedToken = process.env.LOOK_ADMIN_PASS;
+    const expectedToken = getAdminPass();
 
     if (!expectedToken || authHeader !== `Bearer ${expectedToken}`) {
       return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
