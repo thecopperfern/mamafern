@@ -52,3 +52,4 @@ dev-server.log
 *.tsbuildinfo
 next-env.d.ts
 NUL
+.env
