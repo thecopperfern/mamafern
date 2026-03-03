@@ -1,5 +1,4 @@
 import type { Metadata } from "next";
-import Script from "next/script";
 import { DM_Sans, Playfair_Display } from "next/font/google";
 import "./globals.css";
 import Navbar from "@/components/view/Navbar";
@@ -116,14 +115,10 @@ export default async function RootLayout({
       <head>
         <link rel="preconnect" href="https://cdn.shopify.com" />
         <link rel="dns-prefetch" href="https://cdn.shopify.com" />
-        <Script
-          async
-          src="http://72.61.12.97:48435/js/pa-Sh7STIEagH-sll0zVYBcb.js"
-          strategy="afterInteractive"
-        />
-        <Script strategy="afterInteractive">
-          {`window.plausible=window.plausible||function(){(plausible.q=plausible.q||[]).push(arguments)},plausible.init=plausible.init||function(i){plausible.o=i||{}};plausible.init()`}
-        </Script>
+        {/* Privacy-friendly analytics by Plausible */}
+        {/* eslint-disable-next-line @next/next/no-sync-scripts */}
+        <script async src="http://72.61.12.97:48435/js/pa-Sh7STIEagH-sll0zVYBcb.js" />
+        <script dangerouslySetInnerHTML={{ __html: `window.plausible=window.plausible||function(){(plausible.q=plausible.q||[]).push(arguments)},plausible.init=plausible.init||function(i){plausible.o=i||{}};plausible.init()` }} />
       </head>
       <Providers>
         <body
