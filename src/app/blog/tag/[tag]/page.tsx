@@ -1,9 +1,9 @@
 import Link from "next/link";
-import Image from "next/image";
 import { getAllPosts } from "@/lib/blog";
 import { buildMetadata } from "@/lib/seo";
 import type { Metadata } from "next";
 import Pagination from "@/components/blog/Pagination";
+import BlogCard from "@/components/blog/BlogCard";
 
 // force-dynamic: Tag pages filter blog posts read from disk at runtime.
 // generateStaticParams would require a build for new tags to appear.
@@ -68,57 +68,9 @@ export default async function BlogTagPage({ params, searchParams }: Props) {
         <>
           <section aria-label="Blog posts">
             <div className="grid gap-6">
-              {paginatedPosts.map((post) => {
-                const hasFeaturedImage =
-                  post.featuredImage && post.featuredImage !== "/og-image.svg";
-
-                return (
-                  <article
-                    key={post.slug}
-                    className="group bg-texture-linen rounded-2xl border border-oat overflow-hidden hover:border-fern/30 transition-colors"
-                  >
-                    {hasFeaturedImage && (
-                      <div className="aspect-[3/1] relative">
-                        <Image
-                          src={post.featuredImage}
-                          alt={post.title}
-                          fill
-                          className="object-cover"
-                          sizes="(max-width: 768px) 100vw, 896px"
-                        />
-                      </div>
-                    )}
-                    <div className="p-6">
-                      <h2 className="font-display font-bold text-xl text-charcoal mb-2 group-hover:text-fern transition-colors">
-                        <Link href={`/blog/${post.slug}`}>{post.title}</Link>
-                      </h2>
-                      <p className="text-warm-brown text-sm leading-relaxed mb-3">
-                        {post.description}
-                      </p>
-                      <div className="flex items-center justify-between">
-                        <span className="text-xs text-warm-brown">
-                          <time dateTime={post.date}>
-                            {new Date(post.date).toLocaleDateString("en-US", {
-                              year: "numeric",
-                              month: "long",
-                              day: "numeric",
-                            })}
-                          </time>
-                          {" · "}
-                          {post.readTime} min read
-                        </span>
-                        <Link
-                          href={`/blog/${post.slug}`}
-                          aria-label={`Read full article: ${post.title}`}
-                          className="text-sm font-medium text-fern hover:text-fern-dark transition-colors"
-                        >
-                          Read more <span aria-hidden="true">&rarr;</span>
-                        </Link>
-                      </div>
-                    </div>
-                  </article>
-                );
-              })}
+              {paginatedPosts.map((post) => (
+                <BlogCard key={post.slug} post={post} />
+              ))}
             </div>
           </section>
 

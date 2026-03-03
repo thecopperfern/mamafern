@@ -27,6 +27,7 @@ function handleLogout() {
 }
 
 const DEFAULT_LINKS = [
+  { label: "Journal", href: "/blog" },
   { label: "Shop", href: "/shop" },
   { label: "Moms", href: "/collections/moms" },
   { label: "Dads", href: "/collections/dads" },

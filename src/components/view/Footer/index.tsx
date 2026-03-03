@@ -15,6 +15,7 @@ const SHOP_LINKS = [
 
 const INFO_LINKS = [
   { label: "About", href: "/about" },
+  { label: "Journal", href: "/blog" },
   { label: "FAQ", href: "/faq" },
   { label: "Community", href: "/community" },
   { label: "Contact", href: "/contact" },

@@ -1,6 +1,6 @@
 import fs from "fs";
 import path from "path";
-import { marked } from "marked";
+import { marked, Renderer } from "marked";
 
 // Configure marked for GFM (GitHub Flavored Markdown)
 marked.setOptions({ gfm: true, breaks: false });
@@ -146,6 +146,64 @@ export function getAllTags(): string[] {
   return Array.from(tagSet).sort();
 }
 
+/**
+ * Returns the previous and next posts relative to the given slug.
+ * Posts are ordered by date descending (newest first), so "previous"
+ * is the older post and "next" is the newer post.
+ */
+export function getAdjacentPosts(slug: string): { prev: BlogPostMeta | null; next: BlogPostMeta | null } {
+  const all = getAllPosts();
+  const index = all.findIndex((p) => p.slug === slug);
+  if (index === -1) return { prev: null, next: null };
+
+  // Posts are sorted newest-first: index+1 is older (prev), index-1 is newer (next)
+  const prev = index < all.length - 1 ? all[index + 1] : null;
+  const next = index > 0 ? all[index - 1] : null;
+
+  return { prev, next };
+}
+
+/**
+ * Returns all tags with their post counts, sorted by count descending.
+ */
+export function getTagCounts(): { tag: string; count: number }[] {
+  const all = getAllPosts();
+  const counts = new Map<string, number>();
+  all.forEach((p) => p.tags.forEach((t) => {
+    counts.set(t, (counts.get(t) || 0) + 1);
+  }));
+  return Array.from(counts.entries())
+    .map(([tag, count]) => ({ tag, count }))
+    .sort((a, b) => b.count - a.count);
+}
+
+/**
+ * Generates a URL-friendly slug from heading text.
+ * Used for both heading IDs and TOC anchor links.
+ */
+function slugify(text: string): string {
+  return text
+    .toLowerCase()
+    .replace(/[^a-z0-9]+/g, "-")
+    .replace(/(^-|-$)/g, "");
+}
+
+/**
+ * Extracts H2 headings from HTML content for table of contents.
+ * Returns an array of { id, text } where id matches the heading's id attribute.
+ */
+export function extractHeadings(html: string): { id: string; text: string }[] {
+  const headings: { id: string; text: string }[] = [];
+  const regex = /<h2[^>]*id="([^"]*)"[^>]*>(.*?)<\/h2>/gi;
+  let match;
+  while ((match = regex.exec(html)) !== null) {
+    // Strip any inner HTML tags to get plain text
+    const text = match[2].replace(/<[^>]*>/g, "");
+    headings.push({ id: match[1], text });
+  }
+  return headings;
+}
+
 // ─── Read Time Estimate ─────────────────────────────────────────────────────
 
 /**
@@ -164,8 +222,14 @@ export function estimateReadTime(content: string): number {
  * Handles headings, bold, italic, links, images, blockquotes, code blocks,
  * tables, strikethrough, horizontal rules, and all standard markdown features.
  *
+ * Adds id attributes to h2 headings for table of contents anchor links.
  * Pair with Tailwind's `prose` class (@tailwindcss/typography) for styling.
  */
 export function markdownToHtml(md: string): string {
-  return marked.parse(md, { async: false }) as string;
+  const renderer = new Renderer();
+  renderer.heading = ({ text, depth }: { text: string; depth: number }) => {
+    const id = slugify(text);
+    return `<h${depth} id="${id}">${text}</h${depth}>\n`;
+  };
+  return marked.parse(md, { async: false, renderer }) as string;
 }

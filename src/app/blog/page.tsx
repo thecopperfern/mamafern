@@ -3,13 +3,13 @@
 // force-dynamic ensures Keystatic changes are immediately visible.
 export const dynamic = "force-dynamic";
 
-import Link from "next/link";
-import Image from "next/image";
-import { getAllPosts } from "@/lib/blog";
+import { getAllPosts, getTagCounts } from "@/lib/blog";
 import { buildMetadata } from "@/lib/seo";
 import PageHero from "@/components/view/PageHero";
 import Pagination from "@/components/blog/Pagination";
 import BlogSearch from "@/components/blog/BlogSearch";
+import BlogCard from "@/components/blog/BlogCard";
+import TagCloud from "@/components/blog/TagCloud";
 
 const POSTS_PER_PAGE = 6;
 
@@ -35,6 +35,7 @@ export default async function BlogIndex({ searchParams }: Props) {
   const { page } = await searchParams;
   const currentPage = Math.max(1, parseInt(page || "1", 10) || 1);
   const allPosts = getAllPosts();
+  const tagCounts = getTagCounts();
   const totalPages = Math.ceil(allPosts.length / POSTS_PER_PAGE);
   const paginatedPosts = allPosts.slice(
     (currentPage - 1) * POSTS_PER_PAGE,
@@ -53,6 +54,9 @@ export default async function BlogIndex({ searchParams }: Props) {
         {/* Client-side search — filters all posts by title, description, tags */}
         <BlogSearch posts={allPosts} />
 
+        {/* Tag cloud — browse by topic */}
+        <TagCloud tags={tagCounts} />
+
         {allPosts.length === 0 ? (
           <p className="text-warm-brown text-center py-8">
             Posts are on the way — check back soon!
@@ -61,68 +65,9 @@ export default async function BlogIndex({ searchParams }: Props) {
           <>
             <section aria-label="Blog posts">
               <div className="grid gap-8">
-                {paginatedPosts.map((post) => {
-                  const hasFeaturedImage =
-                    post.featuredImage && post.featuredImage !== "/og-image.svg";
-
-                  return (
-                    <article
-                      key={post.slug}
-                      className="group bg-texture-linen rounded-2xl border border-oat overflow-hidden hover:border-fern/30 transition-colors"
-                    >
-                      {hasFeaturedImage && (
-                        <div className="aspect-[3/1] relative">
-                          <Image
-                            src={post.featuredImage}
-                            alt={post.title}
-                            fill
-                            className="object-cover"
-                            sizes="(max-width: 768px) 100vw, 896px"
-                          />
-                        </div>
-                      )}
-                      <div className="p-6 md:p-8">
-                        <div className="flex flex-wrap gap-2 mb-3">
-                          {post.tags.map((tag) => (
-                            <Link
-                              key={tag}
-                              href={`/blog/tag/${encodeURIComponent(tag)}`}
-                              className="text-xs font-medium text-fern bg-fern/10 px-2.5 py-0.5 rounded-full hover:bg-fern/20 transition-colors"
-                            >
-                              {tag}
-                            </Link>
-                          ))}
-                        </div>
-                        <h2 className="font-display font-bold text-xl md:text-2xl text-charcoal mb-2 group-hover:text-fern transition-colors">
-                          <Link href={`/blog/${post.slug}`}>{post.title}</Link>
-                        </h2>
-                        <p className="text-warm-brown text-sm leading-relaxed mb-4">
-                          {post.description}
-                        </p>
-                        <div className="flex items-center justify-between">
-                          <span className="text-xs text-warm-brown">
-                            <time dateTime={post.date}>
-                              {new Date(post.date).toLocaleDateString("en-US", {
-                                year: "numeric",
-                                month: "long",
-                                day: "numeric",
-                              })}
-                            </time>
-                            {" · "}
-                            {post.readTime} min read
-                          </span>
-                          <Link
-                            href={`/blog/${post.slug}`}
-                            aria-label={`Read full article: ${post.title}`}
-                            className="text-sm font-medium text-fern hover:text-fern-dark transition-colors"
-                          >
-                            Read more <span aria-hidden="true">&rarr;</span>
-                          </Link>
-                        </div>
-                      </div>
-                    </article>
-                  );
-                })}
+                {paginatedPosts.map((post) => (
+                  <BlogCard key={post.slug} post={post} />
+                ))}
               </div>
             </section>
 
