@@ -4,7 +4,7 @@ import React, { useEffect, useState } from "react";
 import Logo from "../Logo";
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
-import { ShoppingCart, Menu, X, User, LogOut, Search, Heart } from "lucide-react";
+import { ShoppingCart, Menu, X, User, LogOut, Search, Heart, Info, HelpCircle, Users, Mail } from "lucide-react";
 import { useRouter } from "next/navigation";
 import { useCartActions, isCartOpenAtom } from "@/lib/atoms/cart";
 import { useAtom } from "jotai";
@@ -25,6 +25,13 @@ function handleLogout() {
   localStorage.removeItem("cartId");
   window.location.reload();
 }
+
+const INFO_LINKS = [
+  { label: "About", href: "/about", icon: Info },
+  { label: "FAQ", href: "/faq", icon: HelpCircle },
+  { label: "Community", href: "/community", icon: Users },
+  { label: "Contact", href: "/contact", icon: Mail },
+];
 
 const DEFAULT_LINKS = [
   { label: "Journal", href: "/blog" },
@@ -180,8 +187,19 @@ const Navbar = ({ collectionLinks }: NavbarProps) => {
           {/* Desktop Layout: Logo and actions in single row */}
           <div className="hidden md:block">
             <div className="flex items-center justify-between gap-4">
-              {/* Left spacer */}
-              <div className="flex-1"></div>
+              {/* Left: info links */}
+              <div className="flex-1 flex items-center gap-x-3">
+                {INFO_LINKS.map((link) => (
+                  <Link
+                    key={link.href}
+                    href={link.href}
+                    className="flex items-center gap-1 text-xs text-charcoal/70 hover:text-fern transition-colors"
+                  >
+                    <link.icon className="h-3.5 w-3.5" aria-hidden="true" />
+                    {link.label}
+                  </Link>
+                ))}
+              </div>
 
               {/* Logo centered with padding */}
               <div className="pt-2">
@@ -318,6 +336,18 @@ const Navbar = ({ collectionLinks }: NavbarProps) => {
                 href={link.href}
                 onClick={() => setMobileMenuOpen(false)}
               >
+                {link.label}
+              </Link>
+            ))}
+            <hr className="border-oat/60" />
+            {INFO_LINKS.map((link) => (
+              <Link
+                key={link.href}
+                href={link.href}
+                className="flex items-center gap-2 text-sm text-charcoal/70 hover:text-fern transition-colors"
+                onClick={() => setMobileMenuOpen(false)}
+              >
+                <link.icon className="h-4 w-4" aria-hidden="true" />
                 {link.label}
               </Link>
             ))}
