@@ -194,3 +194,21 @@
     padding-right: env(safe-area-inset-right);
   }
 }
+
+/*
+ * Keystatic portaled overlays (dropdowns, popovers, menus)
+ *
+ * Keystatic (via @keystar/ui / React Aria) renders dropdown menus and
+ * popovers through React portals directly on <body>, outside the
+ * .keystatic-container. Because the container is fixed at z-index: 100,
+ * these portals need a higher z-index to appear above it.
+ */
+[data-overlay-container] > *,
+[data-react-aria-top-layer] > * {
+  z-index: 200 !important;
+}
+
+/* Catch-all: any Radix-based popover portals Keystatic may use */
+[data-radix-popper-content-wrapper] {
+  z-index: 200 !important;
+}
