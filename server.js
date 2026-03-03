@@ -22,6 +22,25 @@ try {
 const next = require("next");
 const { createServer } = require("http");
 
+// MIME type map for static assets — Hostinger nginx sometimes serves as text/plain
+const MIME_TYPES = {
+  ".js": "application/javascript",
+  ".css": "text/css",
+  ".json": "application/json",
+  ".svg": "image/svg+xml",
+  ".png": "image/png",
+  ".jpg": "image/jpeg",
+  ".gif": "image/gif",
+  ".webp": "image/webp",
+  ".woff": "font/woff",
+  ".woff2": "font/woff2",
+};
+
+function getMimeType(filepath) {
+  const ext = path.extname(filepath).toLowerCase();
+  return MIME_TYPES[ext] || "application/octet-stream";
+}
+
 const port = parseInt(process.env.PORT || "3000", 10);
 
 // Write PID file so post-build-restart.js can kill this process after a new build.
@@ -46,7 +65,14 @@ const app = next({ dev: false, dir: __dirname, hostname: "0.0.0.0", port });
 const handle = app.getRequestHandler();
 
 app.prepare().then(() => {
-  const server = createServer((req, res) => handle(req, res))
+  const server = createServer((req, res) => {
+    // Explicitly set Content-Type for static assets to prevent Hostinger nginx
+    // from serving JS files as text/plain (ChunkLoadError / HTTP/2 fix)
+    if (req.url.startsWith("/_next/static/")) {
+      res.setHeader("Content-Type", getMimeType(req.url));
+    }
+    handle(req, res);
+  })
     .listen(port, "0.0.0.0", () => {
       console.log(`> Mama Fern ready on http://0.0.0.0:${port}`);
     });

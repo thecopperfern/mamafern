@@ -53,11 +53,11 @@ const nextConfig: NextConfig = {
             key: "Content-Security-Policy",
             value: [
               "default-src 'self'",
-              "script-src 'self' 'unsafe-inline' 'unsafe-eval' https://www.googletagmanager.com https://www.google-analytics.com",
+              "script-src 'self' 'unsafe-inline' 'unsafe-eval' https://www.googletagmanager.com https://www.google-analytics.com http://72.61.12.97:48435",
               "style-src 'self' 'unsafe-inline' https://fonts.googleapis.com",
               "img-src 'self' data: blob: https://cdn.shopify.com https://www.google-analytics.com",
               "font-src 'self' https://fonts.gstatic.com",
-              "connect-src 'self' https://cdn.shopify.com https://www.google-analytics.com https://api.brevo.com",
+              "connect-src 'self' https://cdn.shopify.com https://www.google-analytics.com https://api.brevo.com http://72.61.12.97:48435",
               "frame-ancestors 'none'",
             ].join("; "),
           },
