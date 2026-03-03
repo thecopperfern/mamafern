@@ -13,9 +13,12 @@
 export default function Layout({ children }: { children: React.ReactNode }) {
   return (
     <>
-      {/* Hide Mama Fern chrome — Keystatic needs the full viewport */}
+      {/* Hide Mama Fern chrome — target only our Navbar/Footer, not Keystatic's own nav */}
       <style>{`
-        header, footer, nav { display: none !important; }
+        [role="banner"],
+        [role="contentinfo"],
+        #email-capture-modal { display: none !important; }
+        #main-content { min-height: 0 !important; }
         body { background-color: #fff !important; background-image: none !important; }
       `}</style>
       <div className="keystatic-container">
