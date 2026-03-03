@@ -134,6 +134,12 @@
   }
 }
 
+@layer components {
+  .admin-input {
+    @apply w-full rounded-lg border border-stone-300 bg-cream px-3 py-2 text-sm text-charcoal placeholder:text-warm-brown/40 focus:border-fern focus:ring-1 focus:ring-fern outline-none;
+  }
+}
+
 /* ===================================================================
    Keystatic CMS — Full-viewport isolation layer
    ===================================================================

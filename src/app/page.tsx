@@ -3,6 +3,7 @@ export const dynamic = "force-dynamic";
 import Hero from "@/components/view/Hero";
 import CategoryCards from "@/components/view/CategoryCards";
 import FeaturedCollection from "@/components/view/FeaturedCollection";
+import ShopTheLook from "@/components/shop-the-look/ShopTheLook";
 import { Suspense } from "react";
 import { Skeleton } from "@/components/ui/skeleton";
 import JsonLd from "@/components/seo/JsonLd";
@@ -59,6 +60,7 @@ export default function Home() {
       <JsonLd data={organizationSchema} />
       <JsonLd data={websiteSchema} />
       <Hero />
+      <ShopTheLook />
       <CategoryCards />
       <Suspense fallback={<CollectionSkeleton />}>
         <FeaturedCollection
