@@ -28,6 +28,7 @@
     "@radix-ui/react-scroll-area": "^1.2.10",
     "@radix-ui/react-separator": "^1.1.8",
     "@radix-ui/react-slot": "^1.1.1",
+    "@tailwindcss/typography": "^0.5.19",
     "@tanstack/react-query": "^5.64.2",
     "@types/better-sqlite3": "^7.6.13",
     "@types/node": "^20",

@@ -23,27 +23,55 @@ const CONTENT_DIR = path.join(process.cwd(), "content", "blog");
 // ─── Frontmatter Parser ─────────────────────────────────────────────────────
 
 function parseFrontmatter(raw: string): { meta: Record<string, string | string[]>; content: string } {
-  const match = raw.match(/^---\n([\s\S]*?)\n---\n([\s\S]*)$/);
-  if (!match) return { meta: {}, content: raw };
+  // Normalize line endings (Keystatic on Windows may write \r\n)
+  const normalized = raw.replace(/\r\n/g, "\n");
+  const match = normalized.match(/^---\n([\s\S]*?)\n---\n([\s\S]*)$/);
+  if (!match) return { meta: {}, content: normalized };
 
   const meta: Record<string, string | string[]> = {};
-  for (const line of match[1].split("\n")) {
+  const lines = match[1].split("\n");
+
+  let i = 0;
+  while (i < lines.length) {
+    const line = lines[i];
     const colonIndex = line.indexOf(":");
-    if (colonIndex === -1) continue;
+    if (colonIndex === -1 || line.startsWith(" ") || line.startsWith("\t")) {
+      i++;
+      continue;
+    }
+
     const key = line.slice(0, colonIndex).trim();
     let value = line.slice(colonIndex + 1).trim();
 
-    // Handle arrays: [tag1, tag2]
+    // Handle inline arrays: [tag1, tag2]
     if (value.startsWith("[") && value.endsWith("]")) {
       meta[key] = value
         .slice(1, -1)
         .split(",")
         .map((s) => s.trim().replace(/^["']|["']$/g, ""));
-    } else {
-      // Strip surrounding quotes
-      value = value.replace(/^["']|["']$/g, "");
-      meta[key] = value;
+      i++;
+      continue;
     }
+
+    // Handle YAML block arrays (Keystatic format):
+    //   tags:
+    //     - tag1
+    //     - tag2
+    if (value === "" && i + 1 < lines.length && lines[i + 1].match(/^\s+-\s/)) {
+      const items: string[] = [];
+      i++;
+      while (i < lines.length && lines[i].match(/^\s+-\s/)) {
+        items.push(lines[i].replace(/^\s+-\s*/, "").replace(/^["']|["']$/g, ""));
+        i++;
+      }
+      meta[key] = items;
+      continue;
+    }
+
+    // Strip surrounding quotes from scalar values
+    value = value.replace(/^["']|["']$/g, "");
+    meta[key] = value;
+    i++;
   }
 
   return { meta, content: match[2].trim() };
@@ -124,6 +152,12 @@ export function markdownToHtml(md: string): string {
 
   // Links
   html = html.replace(/\[([^\]]+)\]\(([^)]+)\)/g, '<a href="$2">$1</a>');
+
+  // Ordered lists (1. item, 2. item)
+  html = html.replace(/^\d+\.\s+(.+)$/gm, "<oli>$1</oli>");
+  html = html.replace(/(<oli>.*<\/oli>\n?)+/g, (match) =>
+    `<ol>${match.replace(/<\/?oli>/g, (t) => t.replace("oli", "li"))}</ol>`
+  );
 
   // Unordered lists
   html = html.replace(/^- (.+)$/gm, "<li>$1</li>");
