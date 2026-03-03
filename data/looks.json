@@ -8,17 +8,17 @@
       "heroImageAlt": "A styled flat lay of the Mom look",
       "products": [
         {
-          "shopifyProductId": "gid://shopify/Product/placeholder-1",
-          "shopifyHandle": "everyday-tee",
-          "title": "Everyday Tee",
+          "shopifyProductId": "gid://shopify/Product/placeholder-001",
+          "shopifyHandle": "everyday-mom-tee",
+          "title": "Everyday Mom Tee",
           "price": "$32.00",
           "productUrl": "/coming-soon",
           "selectedImageUrl": "https://images.unsplash.com/photo-1512436991641-6745cdb1723f?w=600",
-          "selectedImageAlt": "Everyday Tee in sage green",
+          "selectedImageAlt": "Everyday Mom Tee in sage green",
           "comingSoon": true
         },
         {
-          "shopifyProductId": "gid://shopify/Product/placeholder-2",
+          "shopifyProductId": "gid://shopify/Product/placeholder-002",
           "shopifyHandle": "rooted-tote",
           "title": "Rooted Tote Bag",
           "price": "$24.00",
@@ -28,12 +28,12 @@
           "comingSoon": true
         },
         {
-          "shopifyProductId": "gid://shopify/Product/placeholder-3",
+          "shopifyProductId": "gid://shopify/Product/placeholder-003",
           "shopifyHandle": "fern-hoodie",
           "title": "Fern Hoodie",
           "price": "$58.00",
           "productUrl": "/coming-soon",
-          "selectedImageUrl": "https://images.unsplash.com/photo-1591195853828-11db59a44f43?w=600",
+          "selectedImageUrl": "https://images.unsplash.com/photo-1627137727320-4a7c6782102a?w=600",
           "selectedImageAlt": "Fern Hoodie in cream",
           "comingSoon": true
         }

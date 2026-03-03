@@ -201,7 +201,7 @@ export default function AdminContent() {
                     onChange={(e) =>
                       updateLook((l) => ({ ...l, title: e.target.value }))
                     }
-                    className="admin-input"
+                    className="w-full rounded-lg border border-stone-300 bg-cream px-3 py-2 text-sm text-charcoal placeholder:text-warm-brown/40 focus:border-fern focus:ring-1 focus:ring-fern outline-none"
                     placeholder="e.g., The Everyday Mom Look"
                   />
                 </Field>
@@ -213,7 +213,7 @@ export default function AdminContent() {
                     onChange={(e) =>
                       updateLook((l) => ({ ...l, heroImage: e.target.value }))
                     }
-                    className="admin-input"
+                    className="w-full rounded-lg border border-stone-300 bg-cream px-3 py-2 text-sm text-charcoal placeholder:text-warm-brown/40 focus:border-fern focus:ring-1 focus:ring-fern outline-none"
                     placeholder="Paste a Shopify CDN or hosted image URL"
                   />
                 </Field>
@@ -225,7 +225,7 @@ export default function AdminContent() {
                     onChange={(e) =>
                       updateLook((l) => ({ ...l, heroImageAlt: e.target.value }))
                     }
-                    className="admin-input"
+                    className="w-full rounded-lg border border-stone-300 bg-cream px-3 py-2 text-sm text-charcoal placeholder:text-warm-brown/40 focus:border-fern focus:ring-1 focus:ring-fern outline-none"
                     placeholder="Describe the image for accessibility"
                   />
                 </Field>
@@ -427,7 +427,7 @@ function ProductConfig({
           onChange={(e) =>
             onUpdate((p) => ({ ...p, productUrl: e.target.value }))
           }
-          className="admin-input"
+          className="w-full rounded-lg border border-stone-300 bg-cream px-3 py-2 text-sm text-charcoal placeholder:text-warm-brown/40 focus:border-fern focus:ring-1 focus:ring-fern outline-none"
         />
       </Field>
     </div>

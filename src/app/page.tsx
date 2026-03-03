@@ -7,6 +7,9 @@ import ShopTheLook from "@/components/shop-the-look/ShopTheLook";
 import { Suspense } from "react";
 import { Skeleton } from "@/components/ui/skeleton";
 import JsonLd from "@/components/seo/JsonLd";
+import fs from "fs";
+import path from "path";
+import type { LooksData } from "@/types/looks";
 
 const organizationSchema = {
   "@context": "https://schema.org",
@@ -55,12 +58,22 @@ function CollectionSkeleton() {
 }
 
 export default function Home() {
+  // Read looks data server-side for zero-latency rendering
+  let looksData: LooksData = { looks: [] };
+  try {
+    const filePath = path.join(process.cwd(), "data", "looks.json");
+    const raw = fs.readFileSync(filePath, "utf-8");
+    looksData = JSON.parse(raw);
+  } catch {
+    // Fall back to empty looks if file doesn't exist yet
+  }
+
   return (
     <div>
       <JsonLd data={organizationSchema} />
       <JsonLd data={websiteSchema} />
       <Hero />
-      <ShopTheLook />
+      <ShopTheLook initialLooks={looksData.looks} />
       <CategoryCards />
       <Suspense fallback={<CollectionSkeleton />}>
         <FeaturedCollection

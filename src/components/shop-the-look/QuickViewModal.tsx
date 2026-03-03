@@ -8,13 +8,15 @@ import {
   DialogTitle,
   DialogDescription,
 } from "@/components/ui/dialog";
+import { Button } from "@/components/ui/button";
+import { ExternalLink } from "lucide-react";
 import type { LookProduct } from "@/types/looks";
 
-type QuickViewModalProps = {
+interface QuickViewModalProps {
   product: LookProduct | null;
   open: boolean;
   onOpenChange: (open: boolean) => void;
-};
+}
 
 export default function QuickViewModal({
   product,
@@ -25,48 +27,61 @@ export default function QuickViewModal({
 
   return (
     <Dialog open={open} onOpenChange={onOpenChange}>
-      <DialogContent className="sm:max-w-lg bg-cream">
-        <DialogHeader>
-          <DialogTitle className="sr-only">{product.title}</DialogTitle>
-          <DialogDescription className="sr-only">
-            Quick view of {product.title}
-          </DialogDescription>
-        </DialogHeader>
-
-        <div className="flex flex-col sm:flex-row gap-5">
-          <div className="relative aspect-[3/4] w-full sm:w-48 flex-shrink-0 rounded-xl overflow-hidden bg-oat">
+      <DialogContent
+        className="sm:max-w-2xl bg-cream border-stone-200 p-0 overflow-hidden"
+        data-testid="quick-view-modal"
+      >
+        <div className="flex flex-col sm:flex-row">
+          <div className="sm:w-1/2 aspect-[3/4] relative bg-oat">
             <Image
               src={product.selectedImageUrl}
               alt={product.selectedImageAlt || product.title}
               fill
               className="object-cover"
-              sizes="(max-width: 640px) 100vw, 192px"
+              sizes="(max-width: 640px) 100vw, 320px"
               unoptimized
+              data-testid="quick-view-product-image"
             />
           </div>
 
-          <div className="flex flex-col justify-between py-1">
-            {product.comingSoon && (
-              <span className="inline-block w-fit bg-terracotta-light/20 text-terracotta border border-terracotta/20 text-xs font-medium px-3 py-1 rounded-full mb-2">
-                Coming Soon
-              </span>
-            )}
-            <div>
-              <h3 className="font-display text-xl text-charcoal mb-1">
+          <div className="sm:w-1/2 p-6 flex flex-col justify-center gap-4">
+            <DialogHeader className="text-left">
+              {product.comingSoon && (
+                <span
+                  className="inline-flex self-start items-center rounded-full bg-amber-100 border border-amber-200 text-amber-800 text-xs font-medium px-3 py-1 mb-2"
+                  data-testid="quick-view-coming-soon-badge"
+                >
+                  Coming Soon
+                </span>
+              )}
+              <DialogTitle
+                className="text-xl font-display text-charcoal"
+                data-testid="quick-view-product-title"
+              >
                 {product.title}
-              </h3>
-              <p className="text-warm-brown text-base font-medium">
+              </DialogTitle>
+              <DialogDescription
+                className="text-lg font-medium text-warm-brown"
+                data-testid="quick-view-product-price"
+              >
                 {product.price}
-              </p>
-            </div>
+              </DialogDescription>
+            </DialogHeader>
 
             <a
               href={product.productUrl}
               target="_blank"
               rel="noopener noreferrer"
-              className="mt-4 inline-flex items-center justify-center rounded-full bg-fern text-white text-sm font-medium px-5 py-2.5 hover:bg-fern-dark transition-colors"
+              data-testid="quick-view-detail-link"
             >
-              {product.comingSoon ? "Preview Product \u2192" : "View Full Details \u2192"}
+              <Button
+                className="w-full bg-fern hover:bg-fern-dark text-white gap-2"
+                size="lg"
+                data-testid="quick-view-detail-button"
+              >
+                {product.comingSoon ? "Preview Product" : "View Full Details"}
+                <ExternalLink className="h-4 w-4" aria-hidden="true" />
+              </Button>
             </a>
           </div>
         </div>
