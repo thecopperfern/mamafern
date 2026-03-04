@@ -1,4 +1,15 @@
 import { config, fields, collection, singleton } from '@keystatic/core';
+import {
+  navigationSchema,
+  footerSchema,
+  contactPageSchema,
+  shopPageSchema,
+  homepageSectionsSchema,
+  popupSettingsSchema,
+  campaignsSchema,
+  styleGuidesSchema,
+  mediaGuidelinesSchema,
+} from './src/lib/keystatic/schemas';
 
 /**
  * Keystatic CMS Configuration
@@ -38,14 +49,14 @@ export default config({
           owner: 'thecopperfern',
           name: 'mamafern',
         },
-        branchPrefix: 'cms',
       }
     : { kind: 'local' },
   ui: {
     navigation: {
-      'Content': ['posts'],
-      'Pages': ['aboutPage', 'faqPage', 'communityPage', 'homepageHero'],
-      'Settings': ['announcementBar', 'siteSettings'],
+      'Content': ['posts', 'campaigns', 'styleGuides'],
+      'Pages': ['aboutPage', 'faqPage', 'communityPage', 'contactPage', 'homepageHero', 'homepageSections', 'shopPage'],
+      'Layout': ['navigation', 'footer', 'announcementBar', 'popupSettings'],
+      'Settings': ['siteSettings', 'mediaGuidelines'],
     },
   },
   collections: {
@@ -58,6 +69,16 @@ export default config({
         title: fields.slug({ name: { label: 'Title' } }),
         description: fields.text({ label: 'Description', multiline: true }),
         date: fields.date({ label: 'Date', validation: { isRequired: true } }),
+        status: fields.select({
+          label: 'Status',
+          options: [
+            { label: 'Draft', value: 'draft' },
+            { label: 'Published', value: 'published' },
+          ],
+          defaultValue: 'draft',
+        }),
+        publishDate: fields.datetime({ label: 'Publish Date (optional)' }),
+        unpublishDate: fields.datetime({ label: 'Unpublish Date (optional)' }),
         slug: fields.text({
           label: 'Slug (Optional — defaults to filename)',
           description: 'Leave blank to use the filename as the slug.',
@@ -78,6 +99,8 @@ export default config({
         content: fields.mdx({ label: 'Content' }),
       },
     }),
+    campaigns: campaignsSchema,
+    styleGuides: styleGuidesSchema,
   },
   singletons: {
     // ─── Pages ────────────────────────────────────────────────────────────────
@@ -251,7 +274,16 @@ export default config({
       },
     }),
 
-    // ─── Settings ─────────────────────────────────────────────────────────────
+    // ─── New Page Singletons ─────────────────────────────────────────────────
+
+    contactPage: contactPageSchema,
+    homepageSections: homepageSectionsSchema,
+    shopPage: shopPageSchema,
+
+    // ─── Layout ──────────────────────────────────────────────────────────────
+
+    navigation: navigationSchema,
+    footer: footerSchema,
 
     announcementBar: singleton({
       label: 'Announcement Bar',
@@ -272,8 +304,14 @@ export default config({
           ],
           defaultValue: 'fern',
         }),
+        scheduledFrom: fields.datetime({ label: 'Show From (optional)' }),
+        scheduledUntil: fields.datetime({ label: 'Show Until (optional)' }),
       },
     }),
+
+    popupSettings: popupSettingsSchema,
+
+    // ─── Settings ────────────────────────────────────────────────────────────
 
     siteSettings: singleton({
       label: 'Site Settings',
@@ -299,5 +337,7 @@ export default config({
         pinterestUrl: fields.text({ label: 'Pinterest URL', defaultValue: '' }),
       },
     }),
+
+    mediaGuidelines: mediaGuidelinesSchema,
   },
 });

@@ -35,14 +35,17 @@ export default function AnnouncementBar({
   const [dismissed, setDismissed] = useState(true); // Start hidden to avoid flash
 
   useEffect(() => {
-    const wasDismissed = sessionStorage.getItem("announcement-dismissed") === "true";
+    // Key includes a hash of the message so changing the message resets dismiss state
+    const storageKey = `announcement-dismissed-${btoa(message).slice(0, 8)}`;
+    const wasDismissed = sessionStorage.getItem(storageKey) === "true";
     setDismissed(wasDismissed);
-  }, []);
+  }, [message]);
 
   if (dismissed || !message) return null;
 
   const handleDismiss = () => {
-    sessionStorage.setItem("announcement-dismissed", "true");
+    const storageKey = `announcement-dismissed-${btoa(message).slice(0, 8)}`;
+    sessionStorage.setItem(storageKey, "true");
     setDismissed(true);
   };
 

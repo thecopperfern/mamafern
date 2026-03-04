@@ -1,3 +1,5 @@
+import KeystaticPreview from "@/components/view/KeystaticPreview";
+
 /**
  * Keystatic CMS Layout
  *
@@ -5,10 +7,8 @@
  * Keystatic's built-in UI (buttons, dropdowns, editor toolbar) renders
  * correctly without interference.
  *
- * Previous approach used a fixed overlay with overflow:auto, but that clipped
- * portaled dropdown menus (heading picker, link popover, etc.) because
- * overflow:auto creates a clipping context. This approach lets the page
- * scroll naturally so all portals and dropdowns work without z-index hacks.
+ * Includes a floating mobile preview panel (KeystaticPreview) that shows
+ * a 375px-wide iframe of the page being edited.
  */
 export default function Layout({ children }: { children: React.ReactNode }) {
   return (
@@ -24,6 +24,7 @@ export default function Layout({ children }: { children: React.ReactNode }) {
       <div className="keystatic-container">
         {children}
       </div>
+      <KeystaticPreview />
     </>
   );
 }

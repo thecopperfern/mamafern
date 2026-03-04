@@ -7,13 +7,13 @@ import { X } from "lucide-react";
 import { toast } from "sonner";
 import { motion, AnimatePresence, scaleIn } from "@/lib/motion";
 
-const COOKIE_NAME = "email_capture_shown";
-const COOKIE_EXPIRY_DAYS = 30;
-const SHOW_DELAY_MS = 8000; // 8 seconds
+import type { PopupData } from "@/lib/content-types";
 
-function setDismissedCookie() {
+const COOKIE_NAME = "email_capture_shown";
+
+function setDismissedCookie(days: number) {
   const expires = new Date();
-  expires.setDate(expires.getDate() + COOKIE_EXPIRY_DAYS);
+  expires.setDate(expires.getDate() + days);
   document.cookie = `${COOKIE_NAME}=1; expires=${expires.toUTCString()}; path=/`;
 }
 
@@ -23,7 +23,23 @@ function hasDismissedCookie() {
     .some((row) => row.startsWith(`${COOKIE_NAME}=`));
 }
 
-export default function EmailCaptureModal() {
+type EmailCaptureModalProps = {
+  popupSettings?: PopupData;
+};
+
+export default function EmailCaptureModal({ popupSettings }: EmailCaptureModalProps) {
+  // CMS-driven text with hardcoded fallbacks
+  const heading = popupSettings?.heading || "Welcome to Mama Fern";
+  const offerText = popupSettings?.offerText || "Join our community and get 10% off your first order";
+  const buttonText = popupSettings?.buttonText || "Get 10% Off";
+  const disclaimer = popupSettings?.disclaimer || "By subscribing, you agree to receive marketing emails. Unsubscribe anytime.";
+  const exitHeading = popupSettings?.exitIntentHeading || "Your 10% off is about to leaf!";
+  const exitBody = popupSettings?.exitIntentBody || "This offer is only for new friends of the fern family. Sure you want to go?";
+  const exitStayButton = popupSettings?.exitIntentStayButton || "Keep My 10% Off";
+  const exitLeaveText = popupSettings?.exitIntentLeaveText || "No thanks, I'll pay full price";
+  const delayMs = popupSettings?.delayMs ?? 8000;
+  const cookieExpiryDays = popupSettings?.cookieExpiryDays ?? 30;
+  const popupEnabled = popupSettings?.enabled ?? true;
   const [isOpen, setIsOpen] = useState(false);
   const [email, setEmail] = useState("");
   const [isSubmitting, setIsSubmitting] = useState(false);
@@ -42,7 +58,10 @@ export default function EmailCaptureModal() {
     }
 
     // Show after delay
-    const timer = setTimeout(openOnce, SHOW_DELAY_MS);
+    // If popup is disabled via CMS, don't show
+    if (!popupEnabled) return;
+
+    const timer = setTimeout(openOnce, delayMs);
 
     // Exit-intent: mouse leaves the top of the viewport
     function handleMouseLeave(e: MouseEvent) {
@@ -55,7 +74,7 @@ export default function EmailCaptureModal() {
       clearTimeout(timer);
       document.removeEventListener("mouseleave", handleMouseLeave);
     };
-  }, []);
+  }, [popupEnabled, delayMs]);
 
   /** First dismiss attempt — show confirmation instead */
   const handleAttemptClose = () => {
@@ -77,7 +96,7 @@ export default function EmailCaptureModal() {
     dismissedRef.current = true;
     setIsOpen(false);
     setConfirmingClose(false);
-    setDismissedCookie();
+    setDismissedCookie(cookieExpiryDays);
   };
 
   const handleSubmit = async (e: React.FormEvent) => {
@@ -96,7 +115,7 @@ export default function EmailCaptureModal() {
         toast.success("Welcome! Check your email for 10% off");
         dismissedRef.current = true;
         setIsOpen(false);
-        setDismissedCookie();
+        setDismissedCookie(cookieExpiryDays);
       } else {
         const data = await res.json();
         toast.error(data.error || "Failed to subscribe");
@@ -179,12 +198,10 @@ export default function EmailCaptureModal() {
                   >
                     <div className="text-center mb-6">
                       <h2 className="text-2xl font-display font-bold text-charcoal mb-2">
-                        Welcome to Mama Fern
+                        {heading}
                       </h2>
                       <p className="text-sm text-charcoal/85">
-                        Join our community and get{" "}
-                        <span className="font-semibold text-fern">10% off</span>{" "}
-                        your first order
+                        {offerText}
                       </p>
                     </div>
 
@@ -209,13 +226,12 @@ export default function EmailCaptureModal() {
                         disabled={isSubmitting}
                         className="w-full bg-fern hover:bg-fern-dark text-white"
                       >
-                        {isSubmitting ? "Subscribing..." : "Get 10% Off"}
+                        {isSubmitting ? "Subscribing..." : buttonText}
                       </Button>
                     </form>
 
                     <p className="text-xs text-charcoal/80 text-center mt-4">
-                      By subscribing, you agree to receive marketing emails.
-                      Unsubscribe anytime.
+                      {disclaimer}
                     </p>
                   </motion.div>
                 ) : (
@@ -246,11 +262,10 @@ export default function EmailCaptureModal() {
                     </div>
 
                     <h2 className="text-xl font-display font-bold text-charcoal mb-2">
-                      Your 10% off is about to leaf!
+                      {exitHeading}
                     </h2>
                     <p className="text-sm text-charcoal/80 mb-6">
-                      This offer is only for new friends of the fern family.
-                      Sure you want to go?
+                      {exitBody}
                     </p>
 
                     <div className="space-y-3">
@@ -258,13 +273,13 @@ export default function EmailCaptureModal() {
                         onClick={handleStay}
                         className="w-full bg-fern hover:bg-fern-dark text-white"
                       >
-                        Keep My 10% Off
+                        {exitStayButton}
                       </Button>
                       <button
                         onClick={handleDismiss}
                         className="w-full text-sm text-warm-brown hover:text-charcoal transition-colors py-2"
                       >
-                        No thanks, I&apos;ll pay full price
+                        {exitLeaveText}
                       </button>
                     </div>
                   </motion.div>

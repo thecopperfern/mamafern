@@ -16,6 +16,9 @@ export interface BlogPostMeta {
   featuredImage: string;
   author: string;
   readTime: number;
+  status: string;
+  publishDate: string;
+  unpublishDate: string;
 }
 
 export interface BlogPost extends BlogPostMeta {
@@ -85,7 +88,26 @@ function parseFrontmatter(raw: string): { meta: Record<string, string | string[]
 
 // ─── Core Functions ──────────────────────────────────────────────────────────
 
-export function getAllPosts(): BlogPost[] {
+/** Builds a BlogPost from frontmatter + content */
+function buildPost(meta: Record<string, string | string[]>, content: string, fileSlug: string): BlogPost {
+  return {
+    title: (meta.title as string) || fileSlug,
+    description: (meta.description as string) || "",
+    date: (meta.date as string) || "",
+    slug: (meta.slug as string) || fileSlug,
+    tags: (Array.isArray(meta.tags) ? meta.tags : []) as string[],
+    featuredImage: (meta.featuredImage as string) || "/og-image.svg",
+    author: (meta.author as string) || "Mama Fern Team",
+    readTime: estimateReadTime(content),
+    status: (meta.status as string) || "published",
+    publishDate: (meta.publishDate as string) || "",
+    unpublishDate: (meta.unpublishDate as string) || "",
+    content,
+  };
+}
+
+/** Returns ALL posts without draft/schedule filtering. Used by schedule dashboard. */
+export function getAllPostsUnfiltered(): BlogPost[] {
   if (!fs.existsSync(CONTENT_DIR)) return [];
 
   const files = fs.readdirSync(CONTENT_DIR).filter((f) => f.endsWith(".mdx"));
@@ -93,23 +115,22 @@ export function getAllPosts(): BlogPost[] {
   const posts = files.map((file) => {
     const raw = fs.readFileSync(path.join(CONTENT_DIR, file), "utf-8");
     const { meta, content } = parseFrontmatter(raw);
-    const slug = file.replace(".mdx", "");
-
-    return {
-      title: (meta.title as string) || slug,
-      description: (meta.description as string) || "",
-      date: (meta.date as string) || "",
-      slug: (meta.slug as string) || slug,
-      tags: (Array.isArray(meta.tags) ? meta.tags : []) as string[],
-      featuredImage: (meta.featuredImage as string) || "/og-image.svg",
-      author: (meta.author as string) || "Mama Fern Team",
-      readTime: estimateReadTime(content),
-      content,
-    };
+    return buildPost(meta, content, file.replace(".mdx", ""));
   });
 
-  // Sort by date, newest first
   return posts.sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime());
+}
+
+/** Returns published, non-scheduled posts only. */
+export function getAllPosts(): BlogPost[] {
+  const now = new Date();
+  return getAllPostsUnfiltered().filter((post) => {
+    // Existing posts without status field default to 'published'
+    if (post.status === "draft") return false;
+    if (post.publishDate && new Date(post.publishDate) > now) return false;
+    if (post.unpublishDate && new Date(post.unpublishDate) <= now) return false;
+    return true;
+  });
 }
 
 export function getPostBySlug(slug: string): BlogPost | null {
@@ -119,17 +140,7 @@ export function getPostBySlug(slug: string): BlogPost | null {
   const raw = fs.readFileSync(filePath, "utf-8");
   const { meta, content } = parseFrontmatter(raw);
 
-  return {
-    title: (meta.title as string) || slug,
-    description: (meta.description as string) || "",
-    date: (meta.date as string) || "",
-    slug: (meta.slug as string) || slug,
-    tags: (Array.isArray(meta.tags) ? meta.tags : []) as string[],
-    featuredImage: (meta.featuredImage as string) || "/og-image.svg",
-    author: (meta.author as string) || "Mama Fern Team",
-    readTime: estimateReadTime(content),
-    content,
-  };
+  return buildPost(meta, content, slug);
 }
 
 export function getRelatedPosts(currentSlug: string, tags: string[], limit = 3): BlogPost[] {

@@ -1,39 +1,23 @@
 import Link from "next/link";
 import NewsletterSignup from "../NewsletterSignup";
-
-const SHOP_LINKS = [
-  { label: "All Collections", href: "/shop" },
-  { label: "Moms", href: "/collections/moms" },
-  { label: "Dads", href: "/collections/dads" },
-  { label: "Kids", href: "/collections/kids" },
-  { label: "Accessories", href: "/collections/accessories" },
-];
-
-const INFO_LINKS = [
-  { label: "About", href: "/about" },
-  { label: "Journal", href: "/blog" },
-  { label: "FAQ", href: "/faq" },
-  { label: "Community", href: "/community" },
-  { label: "Contact", href: "/contact" },
-];
-
-const LEGAL_LINKS = [
-  { label: "Privacy Policy", href: "/privacy" },
-  { label: "Terms of Service", href: "/terms" },
-  { label: "Returns & Refunds", href: "/returns" },
-];
+import type { FooterData } from "@/lib/content-types";
+import { DEFAULT_FOOTER } from "@/lib/content-types";
 
 type FooterProps = {
   instagramUrl?: string;
   tiktokUrl?: string;
   pinterestUrl?: string;
+  footerData?: FooterData;
 };
 
 export default function Footer({
   instagramUrl,
   tiktokUrl,
   pinterestUrl,
+  footerData,
 }: FooterProps) {
+  const data = footerData || DEFAULT_FOOTER;
+
   // CMS props take priority, fall back to env vars
   const instagram = instagramUrl || process.env.NEXT_PUBLIC_INSTAGRAM_URL;
   const tiktok = tiktokUrl || process.env.NEXT_PUBLIC_TIKTOK_URL;
@@ -49,8 +33,7 @@ export default function Footer({
               Mama Fern
             </h3>
             <p className="text-sm text-white/60 max-w-xs">
-              Grounded family apparel for crunchy, cozy homes. Cute patterns and
-              sayings in skin-friendly fabrics.
+              {data.brandDescription}
             </p>
             {(instagram || tiktok || pinterest) && (
               <div className="flex items-center gap-3 mt-4">
@@ -104,7 +87,7 @@ export default function Footer({
             </h4>
             <nav aria-label="Shop navigation">
               <ul className="space-y-2">
-                {SHOP_LINKS.map((link) => (
+                {data.shopLinks.map((link) => (
                   <li key={link.href}>
                     <Link
                       href={link.href}
@@ -125,7 +108,7 @@ export default function Footer({
             </h4>
             <nav aria-label="Information navigation">
               <ul className="space-y-2">
-                {INFO_LINKS.map((link) => (
+                {data.infoLinks.map((link) => (
                   <li key={link.href}>
                     <Link
                       href={link.href}
@@ -143,7 +126,7 @@ export default function Footer({
             </h4>
             <nav aria-label="Legal navigation">
               <ul className="space-y-2">
-                {LEGAL_LINKS.map((link) => (
+                {data.legalLinks.map((link) => (
                   <li key={link.href}>
                     <Link
                       href={link.href}
@@ -158,7 +141,10 @@ export default function Footer({
           </div>
 
           {/* Newsletter */}
-          <NewsletterSignup />
+          <NewsletterSignup
+            heading={data.newsletterHeading}
+            subtitle={data.newsletterSubtitle}
+          />
         </div>
 
         <div className="border-t border-white/10 mt-10 pt-6 text-center">

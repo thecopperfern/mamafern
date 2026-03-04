@@ -2,6 +2,7 @@ import AllCollections from "@/components/view/AllCollections";
 import PageHero from "@/components/view/PageHero";
 import PageTransition from "@/components/PageTransition";
 import { buildMetadata } from "@/lib/seo";
+import { getShopPage } from "@/lib/content-helpers";
 
 export const dynamic = "force-dynamic";
 
@@ -13,14 +14,16 @@ export const metadata = buildMetadata({
   keywords: ["shop mama fern", "family apparel store", "buy natural kids clothes", "organic family fashion"],
 });
 
-export default function ShopPage() {
+export default async function ShopPage() {
+  const data = await getShopPage();
+
   return (
     <PageTransition>
       <div>
         <PageHero
-          eyebrow="All Collections"
-          title="Shop All"
-          subtitle="Family apparel in skin-friendly fabrics for every stage of growing together."
+          eyebrow={data.heroEyebrow}
+          title={data.heroTitle}
+          subtitle={data.heroSubtitle}
         />
         <div className="mx-auto max-w-6xl px-4">
           <AllCollections />

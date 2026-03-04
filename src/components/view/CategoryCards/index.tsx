@@ -1,36 +1,29 @@
 import Link from "next/link";
 
-const CATEGORIES = [
-  {
-    label: "Moms",
-    href: "/collections/moms",
-    color: "from-blush/40 to-cream",
-  },
-  {
-    label: "Dads",
-    href: "/collections/dads",
-    color: "from-sage/40 to-cream",
-  },
-  {
-    label: "Kids",
-    href: "/collections/kids",
-    color: "from-terracotta-light/30 to-cream",
-  },
-  {
-    label: "Accessories",
-    href: "/collections/accessories",
-    color: "from-oat to-cream",
-  },
+const FALLBACK_CATEGORIES = [
+  { label: "Moms", href: "/collections/moms", color: "from-blush/40 to-cream" },
+  { label: "Dads", href: "/collections/dads", color: "from-sage/40 to-cream" },
+  { label: "Kids", href: "/collections/kids", color: "from-terracotta-light/30 to-cream" },
+  { label: "Accessories", href: "/collections/accessories", color: "from-oat to-cream" },
 ];
 
-export default function CategoryCards() {
+type CategoryCardsProps = {
+  heading?: string;
+  categories?: readonly { label: string; href: string; colorClass: string }[];
+};
+
+export default function CategoryCards({ heading, categories }: CategoryCardsProps) {
+  const cats = categories && categories.length > 0
+    ? categories.map((c) => ({ label: c.label, href: c.href, color: c.colorClass }))
+    : FALLBACK_CATEGORIES;
+
   return (
     <section className="mx-auto max-w-6xl px-4 py-12">
       <h2 className="text-2xl md:text-3xl font-display font-bold text-charcoal mb-8 text-center">
-        Shop by Category
+        {heading || "Shop by Category"}
       </h2>
       <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-        {CATEGORIES.map((cat) => (
+        {cats.map((cat) => (
           <Link
             key={cat.href}
             href={cat.href}

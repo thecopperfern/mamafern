@@ -11,6 +11,7 @@ import fs from "fs";
 import path from "path";
 import { migrateLooksData, isLookPublished } from "@/lib/looks-migration";
 import reader from "@/lib/content";
+import { getHomepageSections } from "@/lib/content-helpers";
 
 const organizationSchema = {
   "@context": "https://schema.org",
@@ -59,13 +60,11 @@ function CollectionSkeleton() {
 }
 
 export default async function Home() {
-  // Read hero content from CMS
-  let heroData: Awaited<ReturnType<typeof reader.singletons.homepageHero.read>> = null;
-  try {
-    heroData = await reader.singletons.homepageHero.read();
-  } catch {
-    // Fall back to defaults in Hero component
-  }
+  // Read hero content and homepage sections from CMS in parallel
+  const [heroData, sections] = await Promise.all([
+    reader.singletons.homepageHero.read().catch(() => null),
+    getHomepageSections(),
+  ]);
 
   // Read looks data server-side for zero-latency rendering
   let publishedLooks: import("@/types/looks").Look[] = [];
@@ -102,21 +101,19 @@ export default async function Home() {
         secondaryButtonHref={heroData?.secondaryButtonHref || undefined}
       />
       <ShopTheLook initialLooks={publishedLooks} />
-      <CategoryCards />
-      <Suspense fallback={<CollectionSkeleton />}>
-        <FeaturedCollection
-          handle="new-arrivals"
-          title="New Arrivals"
-          subtitle="Fresh drops for the whole family"
-        />
-      </Suspense>
-      <Suspense fallback={<CollectionSkeleton />}>
-        <FeaturedCollection
-          handle="staples"
-          title="Evergreen Staples"
-          subtitle="The essentials that never go out of style"
-        />
-      </Suspense>
+      <CategoryCards
+        heading={sections.categoryCardsHeading}
+        categories={sections.categories}
+      />
+      {sections.featuredSections.map((section) => (
+        <Suspense key={section.collectionHandle} fallback={<CollectionSkeleton />}>
+          <FeaturedCollection
+            handle={section.collectionHandle}
+            title={section.title}
+            subtitle={section.subtitle}
+          />
+        </Suspense>
+      ))}
     </div>
   );
 }

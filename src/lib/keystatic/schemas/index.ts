@@ -1,0 +1,9 @@
+export { navigationSchema } from "./navigation";
+export { footerSchema } from "./footer";
+export { contactPageSchema } from "./contact";
+export { shopPageSchema } from "./shop";
+export { homepageSectionsSchema } from "./homepage";
+export { popupSettingsSchema } from "./popup";
+export { campaignsSchema } from "./campaigns";
+export { styleGuidesSchema } from "./style-guides";
+export { mediaGuidelinesSchema } from "./media-guidelines";

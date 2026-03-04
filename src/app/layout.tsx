@@ -10,6 +10,12 @@ import Analytics from "@/components/view/Analytics";
 import SkipNav from "@/components/view/SkipNav";
 import EmailCaptureModal from "@/components/view/EmailCaptureModal";
 import AnnouncementBar from "@/components/view/AnnouncementBar";
+import {
+  getNavigation,
+  getFooterData,
+  getAnnouncementWithSchedule,
+  getPopupSettings,
+} from "@/lib/content-helpers";
 import reader from "@/lib/content";
 
 const dmSans = DM_Sans({
@@ -101,39 +107,35 @@ export default async function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  let collectionLinks: { label: string; href: string }[] = [];
-  try {
-    const collections = await commerceClient.getCollections();
-    collectionLinks = collections.map((c) => ({
-      label: c.title,
-      href: `/collections/${c.handle}`,
-    }));
-  } catch {
-    // Fall back to no dynamic links
-  }
-
-  // Read announcement bar singleton
-  let announcement: { enabled: boolean; message: string; linkText: string; linkHref: string; backgroundColor: "fern" | "sage" | "terracotta" | "charcoal" } | null = null;
-  try {
-    announcement = await reader.singletons.announcementBar.read();
-  } catch {
-    // Continue without announcement bar
-  }
-
-  // Read site settings for social URLs
-  let socialUrls: { instagramUrl?: string; tiktokUrl?: string; pinterestUrl?: string } = {};
-  try {
-    const settings = await reader.singletons.siteSettings.read();
-    if (settings) {
-      socialUrls = {
-        instagramUrl: settings.instagramUrl || undefined,
-        tiktokUrl: settings.tiktokUrl || undefined,
-        pinterestUrl: settings.pinterestUrl || undefined,
-      };
-    }
-  } catch {
-    // Fall back to env vars in Footer
-  }
+  // Read all CMS data in parallel for layout components
+  const [collectionLinks, navigation, footerData, announcement, popupSettings, socialUrls] =
+    await Promise.all([
+      commerceClient
+        .getCollections()
+        .then((collections) =>
+          collections.map((c) => ({
+            label: c.title,
+            href: `/collections/${c.handle}`,
+          }))
+        )
+        .catch(() => [] as { label: string; href: string }[]),
+      getNavigation(),
+      getFooterData(),
+      getAnnouncementWithSchedule(),
+      getPopupSettings(),
+      reader.singletons.siteSettings
+        .read()
+        .then((settings) =>
+          settings
+            ? {
+                instagramUrl: settings.instagramUrl || undefined,
+                tiktokUrl: settings.tiktokUrl || undefined,
+                pinterestUrl: settings.pinterestUrl || undefined,
+              }
+            : {}
+        )
+        .catch(() => ({}) as { instagramUrl?: string; tiktokUrl?: string; pinterestUrl?: string }),
+    ]);
 
   return (
     <html lang="en">
@@ -154,8 +156,8 @@ export default async function RootLayout({
           <Analytics />
           <Toaster />
           <SkipNav />
-          <EmailCaptureModal />
-          {announcement?.enabled && announcement.message && (
+          <EmailCaptureModal popupSettings={popupSettings} />
+          {announcement && (
             <AnnouncementBar
               message={announcement.message}
               linkText={announcement.linkText || undefined}
@@ -163,7 +165,11 @@ export default async function RootLayout({
               backgroundColor={announcement.backgroundColor}
             />
           )}
-          <Navbar collectionLinks={collectionLinks} />
+          <Navbar
+            collectionLinks={collectionLinks}
+            mainLinks={navigation.mainLinks}
+            infoLinks={navigation.infoLinks}
+          />
           <main id="main-content" className="min-h-screen" role="main" tabIndex={-1}>
             {children}
           </main>
@@ -171,6 +177,7 @@ export default async function RootLayout({
             instagramUrl={socialUrls.instagramUrl}
             tiktokUrl={socialUrls.tiktokUrl}
             pinterestUrl={socialUrls.pinterestUrl}
+            footerData={footerData}
           />
         </body>
       </Providers>

@@ -26,15 +26,24 @@ function handleLogout() {
   window.location.reload();
 }
 
-const INFO_LINKS = [
-  { label: "About", href: "/about", icon: Info },
-  { label: "FAQ", href: "/faq", icon: HelpCircle },
-  { label: "Community", href: "/community", icon: Users },
-  { label: "Contact", href: "/contact", icon: Mail },
-  { label: "Journal", href: "/blog", icon: BookOpen },
+/** Icon lookup for info bar links — maps href to a Lucide icon */
+const ICON_MAP: Record<string, React.ComponentType<{ className?: string }>> = {
+  "/about": Info,
+  "/faq": HelpCircle,
+  "/community": Users,
+  "/contact": Mail,
+  "/blog": BookOpen,
+};
+
+const FALLBACK_INFO_LINKS = [
+  { label: "About", href: "/about" },
+  { label: "FAQ", href: "/faq" },
+  { label: "Community", href: "/community" },
+  { label: "Contact", href: "/contact" },
+  { label: "Journal", href: "/blog" },
 ];
 
-const DEFAULT_LINKS = [
+const FALLBACK_MAIN_LINKS = [
   { label: "Journal", href: "/blog" },
   { label: "Shop", href: "/shop" },
   { label: "Moms", href: "/collections/moms" },
@@ -45,13 +54,21 @@ const DEFAULT_LINKS = [
 
 interface NavbarProps {
   collectionLinks?: { label: string; href: string }[];
+  mainLinks?: readonly { label: string; href: string }[];
+  infoLinks?: readonly { label: string; href: string }[];
 }
 
-const Navbar = ({ collectionLinks }: NavbarProps) => {
-  const NAV_LINKS =
-    collectionLinks && collectionLinks.length > 0
+const Navbar = ({ collectionLinks, mainLinks, infoLinks }: NavbarProps) => {
+  // CMS main links take priority, then collection links from Shopify, then fallback
+  const NAV_LINKS = mainLinks && mainLinks.length > 0
+    ? mainLinks
+    : collectionLinks && collectionLinks.length > 0
       ? [{ label: "Shop", href: "/shop" }, ...collectionLinks]
-      : DEFAULT_LINKS;
+      : FALLBACK_MAIN_LINKS;
+
+  const INFO_LINKS = infoLinks && infoLinks.length > 0
+    ? infoLinks
+    : FALLBACK_INFO_LINKS;
   const { cart, initializeCart } = useCartActions();
   const [cartOpen, setCartOpen] = useAtom(isCartOpenAtom);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
@@ -190,16 +207,19 @@ const Navbar = ({ collectionLinks }: NavbarProps) => {
             <div className="flex items-center justify-between gap-4">
               {/* Left: info links */}
               <div className="flex-1 flex items-center gap-x-3">
-                {INFO_LINKS.map((link) => (
-                  <Link
-                    key={link.href}
-                    href={link.href}
-                    className="flex items-center gap-1 text-xs text-charcoal/70 hover:text-fern transition-colors"
-                  >
-                    <link.icon className="h-3.5 w-3.5" aria-hidden="true" />
-                    {link.label}
-                  </Link>
-                ))}
+                {INFO_LINKS.map((link) => {
+                  const Icon = ICON_MAP[link.href] || Info;
+                  return (
+                    <Link
+                      key={link.href}
+                      href={link.href}
+                      className="flex items-center gap-1 text-xs text-charcoal/70 hover:text-fern transition-colors"
+                    >
+                      <Icon className="h-3.5 w-3.5" aria-hidden="true" />
+                      {link.label}
+                    </Link>
+                  );
+                })}
               </div>
 
               {/* Logo centered with padding */}
@@ -341,17 +361,20 @@ const Navbar = ({ collectionLinks }: NavbarProps) => {
               </Link>
             ))}
             <hr className="border-oat/60" />
-            {INFO_LINKS.map((link) => (
-              <Link
-                key={link.href}
-                href={link.href}
-                className="flex items-center gap-2 text-sm text-charcoal/70 hover:text-fern transition-colors"
-                onClick={() => setMobileMenuOpen(false)}
-              >
-                <link.icon className="h-4 w-4" aria-hidden="true" />
-                {link.label}
-              </Link>
-            ))}
+            {INFO_LINKS.map((link) => {
+              const Icon = ICON_MAP[link.href] || Info;
+              return (
+                <Link
+                  key={link.href}
+                  href={link.href}
+                  className="flex items-center gap-2 text-sm text-charcoal/70 hover:text-fern transition-colors"
+                  onClick={() => setMobileMenuOpen(false)}
+                >
+                  <Icon className="h-4 w-4" aria-hidden="true" />
+                  {link.label}
+                </Link>
+              );
+            })}
           </nav>
         )}
       </header>

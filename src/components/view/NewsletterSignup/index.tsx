@@ -5,7 +5,15 @@ import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { toast } from "sonner";
 
-export default function NewsletterSignup() {
+type NewsletterSignupProps = {
+  heading?: string;
+  subtitle?: string;
+};
+
+export default function NewsletterSignup({
+  heading = "Stay in the Loop",
+  subtitle = "Get deals, new arrivals, and family inspo straight to your inbox.",
+}: NewsletterSignupProps) {
   const [email, setEmail] = useState("");
   const [status, setStatus] = useState<
     "idle" | "loading" | "success" | "error"
@@ -44,10 +52,10 @@ export default function NewsletterSignup() {
   return (
     <div>
       <h4 className="text-sm font-semibold text-white mb-3 uppercase tracking-wider">
-        Stay in the Loop
+        {heading}
       </h4>
       <p className="text-sm text-white/60 mb-3">
-        Get deals, new arrivals, and family inspo straight to your inbox.
+        {subtitle}
       </p>
       <form onSubmit={handleSubmit} className="flex gap-2">
         <Input
