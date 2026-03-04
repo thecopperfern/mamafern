@@ -1,43 +1,47 @@
 heroEyebrow: Mama Fern Community
 heroTitle: Welcome to Our Family
-heroSubtitle: Stories, updates, and a little inspiration from the families who wear Mama Fern.
-
+heroSubtitle: >-
+  Stories, updates. and a little inspiration from the families who wear Mama
+  Fern.
 featuredEyebrow: Welcome
 featuredHeading: Hello from Mama Fern
 featuredBody: >-
-  We're so glad you're here. Mama Fern is more than a clothing brand — it's
-  a community of families who value comfort, quality, and a little bit of
-  fun in their everyday wear. Stay tuned for seasonal drop announcements,
-  behind-the-scenes looks at our design process, and stories from the
-  families who wear Mama Fern.
-featuredMeta: Posted by the Mama Fern team — Feb 2026
-
+  We're so glad you're here. Mama Fern is more than a clothing brand — it's a
+  community of like-minded families who value comfort, quality, and a little bit
+  of fun in their everyday wear. Stay tuned for seasonal drop announcements,
+  behind-the-scenes looks at our design process, and stories from the families
+  who wear Mama Fern.
+featuredMeta: Posted by the Mama Fern Team — Feb 2026
 valuesHeading: What Brings Us Together
 values:
-  - emoji: "\U0001F33F"
+  - emoji: 🌿
     title: Natural Living
-    description: Choosing gentler fabrics, cleaner choices, and a mindful pace for your family.
-  - emoji: "\U0001F468\u200D\U0001F469\u200D\U0001F467"
+    description: >-
+      Choosing natural fabrics, low-tox choices, and a mindful pace for your
+      family.
+  - emoji: 👨‍👩‍👧
     title: Family First
-    description: Every design starts with real families in mind — cozy, coordinating, and full of joy.
-  - emoji: "\U0001F49A"
+    description: >-
+      Every design starts with real families in mind — cozy, coordinating, and
+      full of joy.
+  - emoji: 💚
     title: Growing Together
-    description: Your stories and feedback shape everything we make. This brand belongs to all of us.
-
+    description: >-
+      Your stories and feedback shape everything we make. This brand belongs to
+      all of us.
 ctaEyebrow: Stay Connected
 ctaHeading: More stories coming soon
 ctaBody: >-
-  We're building something special here. Follow along for new posts,
-  seasonal drops, and behind-the-scenes moments.
+  We're building something special here. Follow along for new posts, seasonal
+  drops, and behind-the-scenes moments.
 primaryButtonText: Shop the Collection
 primaryButtonHref: /shop
 secondaryButtonText: Share Your Story
 secondaryButtonHref: /contact
-
 seoTitle: Community
 seoDescription: >-
-  Stories, updates, and inspiration from the Mama Fern community. Join
-  families who value natural living, comfort, and grounded family fashion.
+  Stories, updates, and inspiration from the Mama Fern community. Join families
+  who value natural living, comfort, and grounded family fashion.
 seoKeywords:
   - mama fern community
   - crunchy mom community
