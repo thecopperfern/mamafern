@@ -1,5 +1,3 @@
-enabled: false
-message: ''
-linkText: ''
-linkHref: ''
-backgroundColor: fern
+enabled: true
+message: Brand Launch Coming Soon!
+backgroundColor: terracotta
