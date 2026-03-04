@@ -21,6 +21,7 @@ export const metadata = buildMetadata({
   description:
     "Mama Fern returns and refund policy — how to return or exchange items. Easy, hassle-free returns on family apparel.",
   path: "/returns",
+    noIndex: true,
 });
 
 export default async function ReturnsPage() {
