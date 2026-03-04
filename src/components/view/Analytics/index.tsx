@@ -2,7 +2,6 @@
 
 import { useEffect } from "react";
 import Script from "next/script";
-import { init as initPlausible, track } from "@plausible-analytics/tracker";
 
 const GA_ID = process.env.NEXT_PUBLIC_GA_ID;
 
@@ -21,20 +20,26 @@ const GA_ID = process.env.NEXT_PUBLIC_GA_ID;
  *
  * The @plausible-analytics/tracker npm package automatically tracks SPA
  * route changes, so every Next.js page navigation is counted as a pageview.
+ *
+ * IMPORTANT: @plausible-analytics/tracker accesses `location` at module level,
+ * so it MUST be dynamically imported to avoid crashing during SSR/prerendering.
  */
 export default function Analytics() {
   useEffect(() => {
-    // Initialize Plausible tracker once on mount.
-    // - domain: must match exactly what's registered in the Plausible dashboard
-    // - endpoint: our Next.js proxy route → forwarded server-side to the VPS
-    // - outboundLinks: track clicks on external links (e.g. social, affiliate)
-    // - bindToWindow: exposes window.plausible so Plausible's installation
-    //   verification tool can detect the integration automatically
-    initPlausible({
-      domain: "mamafern.com",
-      endpoint: "/stats/api/event",
-      outboundLinks: true,
-      bindToWindow: true,
+    // Dynamically import to avoid `location is not defined` during SSR.
+    import("@plausible-analytics/tracker").then(({ init }) => {
+      // Initialize Plausible tracker once on mount.
+      // - domain: must match exactly what's registered in the Plausible dashboard
+      // - endpoint: our Next.js proxy route → forwarded server-side to the VPS
+      // - outboundLinks: track clicks on external links (e.g. social, affiliate)
+      // - bindToWindow: exposes window.plausible so Plausible's installation
+      //   verification tool can detect the integration automatically
+      init({
+        domain: "mamafern.com",
+        endpoint: "/stats/api/event",
+        outboundLinks: true,
+        bindToWindow: true,
+      });
     });
   }, []);
 
@@ -88,10 +93,11 @@ export function trackEvent(
  * @example
  * trackPlausibleEvent('Add to Cart', { props: { product: 'Forest Romper' } })
  */
-export function trackPlausibleEvent(
+export async function trackPlausibleEvent(
   eventName: string,
-  options?: Parameters<typeof track>[1]
+  options?: Record<string, unknown>
 ) {
   if (typeof window === "undefined") return;
-  track(eventName, options);
+  const { track } = await import("@plausible-analytics/tracker");
+  track(eventName, options ?? {});
 }
