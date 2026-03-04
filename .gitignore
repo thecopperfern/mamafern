@@ -6,6 +6,9 @@
 # uploaded images (keep the directory, ignore contents)
 /public/uploads/looks/*
 !/public/uploads/looks/.gitkeep
+
+# Lookbook runtime data (persisted by deploy script)
+data/looks.json
 /.pnp
 .pnp.*
 .yarn/*

@@ -62,6 +62,14 @@ export default function Home() {
   let publishedLooks: import("@/types/looks").Look[] = [];
   try {
     const filePath = path.join(process.cwd(), "data", "looks.json");
+    // If looks.json doesn't exist, initialize from seed file (first deploy)
+    if (!fs.existsSync(filePath)) {
+      const seedPath = path.join(process.cwd(), "data", "looks.seed.json");
+      if (fs.existsSync(seedPath)) {
+        fs.mkdirSync(path.dirname(filePath), { recursive: true });
+        fs.copyFileSync(seedPath, filePath);
+      }
+    }
     const raw = fs.readFileSync(filePath, "utf-8");
     const data = migrateLooksData(JSON.parse(raw));
     publishedLooks = data.looks

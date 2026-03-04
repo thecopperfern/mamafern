@@ -40,6 +40,31 @@ const nextConfig: NextConfig = {
     minimumCacheTTL: 60 * 60 * 24 * 30,
   },
 
+  // Proxy Plausible analytics through Next.js to avoid mixed-content blocking.
+  // mamafern.com is served over HTTPS; the self-hosted Plausible VPS runs on HTTP.
+  // Browsers block HTTP requests (scripts, XHR) from HTTPS pages, so we route
+  // everything through /stats/* on the same origin. The script and event API are
+  // forwarded to the VPS internally (server → server, no browser restriction).
+  //
+  // Plausible tracker npm package is then configured with endpoint: '/stats/api/event'
+  // so all analytics traffic stays on the same origin.
+  async rewrites() {
+    const plausibleHost =
+      process.env.PLAUSIBLE_HOST || "http://72.61.12.97:48435";
+    return [
+      {
+        // Proxy the Plausible JS bundle (for script-tag approach / bindToWindow)
+        source: "/stats/js/script.js",
+        destination: `${plausibleHost}/js/pa-Sh7STIEagH-sll0zVYBcb.js`,
+      },
+      {
+        // Proxy the Plausible event API — this is what the npm tracker uses
+        source: "/stats/api/event",
+        destination: `${plausibleHost}/api/event`,
+      },
+    ];
+  },
+
   // Security headers
   async headers() {
     return [
@@ -57,11 +82,13 @@ const nextConfig: NextConfig = {
             key: "Content-Security-Policy",
             value: [
               "default-src 'self'",
-              "script-src 'self' 'unsafe-inline' 'unsafe-eval' https://www.googletagmanager.com https://www.google-analytics.com http://72.61.12.97:48435",
+              // Plausible is now proxied through /stats/* (same origin) — no external HTTP needed
+              "script-src 'self' 'unsafe-inline' 'unsafe-eval' https://www.googletagmanager.com https://www.google-analytics.com",
               "style-src 'self' 'unsafe-inline' https://fonts.googleapis.com",
               "img-src 'self' data: blob: https://cdn.shopify.com https://images.unsplash.com https://www.google-analytics.com",
               "font-src 'self' https://fonts.gstatic.com",
-              "connect-src 'self' https://cdn.shopify.com https://www.google-analytics.com https://api.brevo.com http://72.61.12.97:48435",
+              // Plausible events go to /stats/api/event (same origin) — no external HTTP needed
+              "connect-src 'self' https://cdn.shopify.com https://www.google-analytics.com https://api.brevo.com",
               "frame-ancestors 'none'",
             ].join("; "),
           },

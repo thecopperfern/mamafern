@@ -170,3 +170,66 @@ plan_names = ["Free", "Growth", "Pro"]
 ---
 
 **Status**: Phase 1 core infrastructure complete (70%). Ready for testing & deployment prep.
+
+---
+
+## Plausible Analytics — Self-Hosted Setup (2026-03-03)
+
+### Problem
+Plausible dashboard was stuck on "Waiting for first page view" after the npm package was installed.
+
+**Root cause: Mixed content blocking.**
+- `mamafern.com` is served over **HTTPS**
+- The self-hosted Plausible VPS runs on **HTTP** (`http://72.61.12.97:48435`)
+- Browsers silently block all HTTP requests (scripts, XHR/fetch) originating from an HTTPS page
+- The direct `<script src="http://72.61.12.97:48435/js/...">` in layout.tsx was dead on arrival
+- The `dangerouslySetInnerHTML` init shim was also doing nothing useful
+
+### Fix Applied
+Proxied Plausible through Next.js so all traffic is same-origin (HTTPS → HTTPS).
+
+**1. `next.config.ts` — added `rewrites()`:**
+```ts
+async rewrites() {
+  const plausibleHost = process.env.PLAUSIBLE_HOST || "http://72.61.12.97:48435";
+  return [
+    { source: "/stats/js/script.js", destination: `${plausibleHost}/js/pa-Sh7STIEagH-sll0zVYBcb.js` },
+    { source: "/stats/api/event",    destination: `${plausibleHost}/api/event` },
+  ];
+},
+```
+Server-side rewrites bypass mixed content rules — the VPS is called internally, the browser only ever hits `mamafern.com/stats/...`.
+
+Also removed `http://72.61.12.97:48435` from the CSP `script-src` and `connect-src` headers (no longer needed).
+
+**2. `src/components/view/Analytics/index.tsx` — rewrote to use npm package:**
+```ts
+import { init as initPlausible, track } from "@plausible-analytics/tracker";
+
+useEffect(() => {
+  initPlausible({
+    domain: "mamafern.com",
+    endpoint: "/stats/api/event",  // proxied route
+    outboundLinks: true,
+    bindToWindow: true,
+  });
+}, []);
+```
+The npm package (`@plausible-analytics/tracker`) auto-tracks SPA route changes, so every Next.js navigation fires a pageview. GA tracking is unchanged and still co-exists.
+
+Added `trackPlausibleEvent()` export for future goal tracking (Add to Cart, Purchase, etc.).
+
+**3. `src/app/layout.tsx` — removed broken `<head>` script tags:**
+- Removed `<script async src="http://72.61.12.97:48435/...">` (HTTP, blocked)
+- Removed `<script dangerouslySetInnerHTML={...}>` (broken legacy shim)
+
+### Verify it's working
+1. Open the site → DevTools → Network tab → filter for `event`
+2. Should see `POST /stats/api/event` with status `202 Accepted`
+3. Plausible dashboard should show live data
+
+### Optional env var
+Add to `.env.local` if the VPS IP ever changes:
+```
+PLAUSIBLE_HOST=http://72.61.12.97:48435
+```

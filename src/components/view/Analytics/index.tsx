@@ -1,10 +1,44 @@
 "use client";
 
+import { useEffect } from "react";
 import Script from "next/script";
+import { init as initPlausible, track } from "@plausible-analytics/tracker";
 
 const GA_ID = process.env.NEXT_PUBLIC_GA_ID;
 
+/**
+ * Analytics component — loaded in the root layout, client-side only.
+ *
+ * Handles two analytics providers:
+ *
+ * 1. Plausible (primary) — self-hosted at http://72.61.12.97:48435
+ *    Events are sent to /stats/api/event which Next.js proxies to the VPS.
+ *    Using a proxy is REQUIRED because mamafern.com is HTTPS and the VPS is
+ *    HTTP — browsers block HTTP requests from HTTPS pages (mixed content).
+ *    The proxy route is defined in next.config.ts under rewrites().
+ *
+ * 2. Google Analytics (optional) — only active when NEXT_PUBLIC_GA_ID is set.
+ *
+ * The @plausible-analytics/tracker npm package automatically tracks SPA
+ * route changes, so every Next.js page navigation is counted as a pageview.
+ */
 export default function Analytics() {
+  useEffect(() => {
+    // Initialize Plausible tracker once on mount.
+    // - domain: must match exactly what's registered in the Plausible dashboard
+    // - endpoint: our Next.js proxy route → forwarded server-side to the VPS
+    // - outboundLinks: track clicks on external links (e.g. social, affiliate)
+    // - bindToWindow: exposes window.plausible so Plausible's installation
+    //   verification tool can detect the integration automatically
+    initPlausible({
+      domain: "mamafern.com",
+      endpoint: "/stats/api/event",
+      outboundLinks: true,
+      bindToWindow: true,
+    });
+  }, []);
+
+  // Render GA script tags only when GA is configured
   if (!GA_ID) return null;
 
   return (
@@ -25,7 +59,9 @@ export default function Analytics() {
   );
 }
 
-// Helper to track custom events
+// ─── GA custom event helper ──────────────────────────────────────────────────
+
+/** Track a Google Analytics custom event. No-op if GA is not configured. */
 export function trackEvent(
   action: string,
   category: string,
@@ -39,4 +75,23 @@ export function trackEvent(
     event_label: label,
     value,
   });
+}
+
+// ─── Plausible custom event helper ───────────────────────────────────────────
+
+/**
+ * Track a Plausible custom event (goal).
+ *
+ * The event name must match a goal defined in the Plausible dashboard.
+ * Common events: 'Add to Cart', 'Begin Checkout', 'Purchase', 'Newsletter Signup'
+ *
+ * @example
+ * trackPlausibleEvent('Add to Cart', { props: { product: 'Forest Romper' } })
+ */
+export function trackPlausibleEvent(
+  eventName: string,
+  options?: Parameters<typeof track>[1]
+) {
+  if (typeof window === "undefined") return;
+  track(eventName, options);
 }

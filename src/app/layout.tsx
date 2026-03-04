@@ -115,10 +115,12 @@ export default async function RootLayout({
       <head>
         <link rel="preconnect" href="https://cdn.shopify.com" />
         <link rel="dns-prefetch" href="https://cdn.shopify.com" />
-        {/* Privacy-friendly analytics by Plausible */}
-        {/* eslint-disable-next-line @next/next/no-sync-scripts */}
-        <script async src="http://72.61.12.97:48435/js/pa-Sh7STIEagH-sll0zVYBcb.js" />
-        <script dangerouslySetInnerHTML={{ __html: `window.plausible=window.plausible||function(){(plausible.q=plausible.q||[]).push(arguments)},plausible.init=plausible.init||function(i){plausible.o=i||{}};plausible.init()` }} />
+        {/*
+          Plausible analytics is initialized in the <Analytics /> client component
+          using the @plausible-analytics/tracker npm package. Events are sent to
+          /stats/api/event which is proxied to the self-hosted VPS in next.config.ts.
+          No script tag needed here — the npm package handles everything client-side.
+        */}
       </head>
       <Providers>
         <body

@@ -8,6 +8,16 @@ const LOOKS_PATH = path.join(process.cwd(), "data", "looks.json");
 
 export async function GET(request: NextRequest) {
   try {
+    // If looks.json doesn't exist, initialize from seed file (first deploy)
+    if (!fs.existsSync(LOOKS_PATH)) {
+      const seedPath = path.join(process.cwd(), "data", "looks.seed.json");
+      if (fs.existsSync(seedPath)) {
+        fs.mkdirSync(path.dirname(LOOKS_PATH), { recursive: true });
+        fs.copyFileSync(seedPath, LOOKS_PATH);
+        console.log("looks: initialized from seed file");
+      }
+    }
+
     const raw = fs.readFileSync(LOOKS_PATH, "utf-8");
     const parsed = JSON.parse(raw);
     const data = migrateLooksData(parsed);
