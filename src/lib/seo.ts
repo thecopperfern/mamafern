@@ -3,6 +3,10 @@ import type { CommerceProduct, CommerceCollection } from "@/lib/commerce";
 
 // ─── Brand Configuration ─────────────────────────────────────────────────────
 
+/**
+ * Static fallback for SITE_CONFIG. Used synchronously in files that can't be
+ * async. For dynamic CMS-driven values, use getSiteSettings() instead.
+ */
 export const SITE_CONFIG = {
   name: "Mama Fern",
   tagline: "Grounded Family Apparel",
@@ -24,6 +28,33 @@ export const SITE_CONFIG = {
     "organic family clothing",
   ],
 } as const;
+
+/**
+ * Reads site settings from the Keystatic siteSettings singleton, merging with
+ * hardcoded SITE_CONFIG defaults. Use this in async server components/pages
+ * that need CMS-driven brand values.
+ */
+export async function getSiteSettings() {
+  try {
+    const reader = (await import("@/lib/content")).default;
+    const data = await reader.singletons.siteSettings.read();
+    if (!data) return { ...SITE_CONFIG };
+    return {
+      name: data.brandName || SITE_CONFIG.name,
+      tagline: data.tagline || SITE_CONFIG.tagline,
+      baseUrl: data.baseUrl || SITE_CONFIG.baseUrl,
+      twitterHandle: data.twitterHandle || SITE_CONFIG.twitterHandle,
+      defaultOgImage: data.defaultOgImage || SITE_CONFIG.defaultOgImage,
+      defaultDescription: data.defaultDescription || SITE_CONFIG.defaultDescription,
+      defaultKeywords: data.defaultKeywords?.length ? data.defaultKeywords : [...SITE_CONFIG.defaultKeywords],
+      instagramUrl: data.instagramUrl || "",
+      tiktokUrl: data.tiktokUrl || "",
+      pinterestUrl: data.pinterestUrl || "",
+    };
+  } catch {
+    return { ...SITE_CONFIG, instagramUrl: "", tiktokUrl: "", pinterestUrl: "" };
+  }
+}
 
 // ─── Generic Page Metadata Builder ───────────────────────────────────────────
 

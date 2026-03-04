@@ -1,4 +1,4 @@
-import { config, fields, collection } from '@keystatic/core';
+import { config, fields, collection, singleton } from '@keystatic/core';
 
 /**
  * Keystatic CMS Configuration
@@ -38,9 +38,16 @@ export default config({
           owner: 'thecopperfern',
           name: 'mamafern',
         },
-        branchPrefix: 'Blog',
+        branchPrefix: 'cms',
       }
     : { kind: 'local' },
+  ui: {
+    navigation: {
+      'Content': ['posts'],
+      'Pages': ['aboutPage', 'faqPage', 'communityPage', 'homepageHero'],
+      'Settings': ['announcementBar', 'siteSettings'],
+    },
+  },
   collections: {
     posts: collection({
       label: 'Blog Posts',
@@ -69,6 +76,227 @@ export default config({
           publicPath: '/images/blog',
         }),
         content: fields.mdx({ label: 'Content' }),
+      },
+    }),
+  },
+  singletons: {
+    // ─── Pages ────────────────────────────────────────────────────────────────
+
+    aboutPage: singleton({
+      label: 'About Page',
+      path: 'content/pages/about',
+      format: { data: 'yaml' },
+      schema: {
+        // Hero
+        heroEyebrow: fields.text({ label: 'Hero Eyebrow', defaultValue: 'Our Story' }),
+        heroTitle: fields.text({ label: 'Hero Title', defaultValue: 'About Mama Fern' }),
+        heroSubtitle: fields.text({ label: 'Hero Subtitle', defaultValue: 'Grounded family apparel for crunchy, cozy homes.' }),
+
+        // Brand story
+        brandStoryHeading: fields.text({ label: 'Brand Story Heading', defaultValue: 'What Is Mama Fern?' }),
+        brandStoryParagraphs: fields.array(
+          fields.text({ label: 'Paragraph', multiline: true }),
+          { label: 'Brand Story Paragraphs', itemLabel: props => props.value.slice(0, 60) + '...' }
+        ),
+        brandStoryBlockquote: fields.text({
+          label: 'Brand Story Blockquote',
+          defaultValue: 'Clothing that celebrates the grounded, cozy life — for the whole crew.',
+        }),
+
+        // Mission
+        missionEyebrow: fields.text({ label: 'Mission Eyebrow', defaultValue: 'Why We Exist' }),
+        missionHeading: fields.text({ label: 'Mission Heading', defaultValue: 'Our Mission' }),
+        missionBody: fields.text({ label: 'Mission Body', multiline: true }),
+
+        // Values
+        valuesHeading: fields.text({ label: 'Values Section Heading', defaultValue: 'What We Stand For' }),
+        values: fields.array(
+          fields.object({
+            emoji: fields.text({ label: 'Emoji' }),
+            title: fields.text({ label: 'Title' }),
+            description: fields.text({ label: 'Description', multiline: true }),
+          }),
+          { label: 'Values', itemLabel: props => props.fields.title.value }
+        ),
+
+        // Brand FAQs
+        brandFaqHeading: fields.text({ label: 'Brand FAQ Heading', defaultValue: 'Frequently Asked About Mama Fern' }),
+        brandFaqs: fields.array(
+          fields.object({
+            question: fields.text({ label: 'Question' }),
+            answer: fields.text({ label: 'Answer', multiline: true }),
+          }),
+          { label: 'Brand FAQs', itemLabel: props => props.fields.question.value }
+        ),
+
+        // CTA
+        ctaEyebrow: fields.text({ label: 'CTA Eyebrow', defaultValue: 'Dress the Whole Crew' }),
+        ctaHeading: fields.text({ label: 'CTA Heading', defaultValue: 'Made for Your Family' }),
+        ctaBody: fields.text({ label: 'CTA Body', multiline: true }),
+        ctaButtonText: fields.text({ label: 'CTA Button Text', defaultValue: 'Shop All' }),
+        ctaButtonHref: fields.text({ label: 'CTA Button Link', defaultValue: '/shop' }),
+
+        // SEO
+        seoTitle: fields.text({ label: 'SEO Title', defaultValue: 'Our Story' }),
+        seoDescription: fields.text({ label: 'SEO Description', multiline: true }),
+        seoKeywords: fields.array(
+          fields.text({ label: 'Keyword' }),
+          { label: 'SEO Keywords', itemLabel: props => props.value }
+        ),
+
+        // JSON-LD
+        jsonLdDescription: fields.text({ label: 'JSON-LD Organization Description', multiline: true }),
+        jsonLdFoundingDate: fields.text({ label: 'JSON-LD Founding Year', defaultValue: '2024' }),
+      },
+    }),
+
+    faqPage: singleton({
+      label: 'FAQ Page',
+      path: 'content/pages/faq',
+      format: { data: 'yaml' },
+      schema: {
+        // Hero
+        heroEyebrow: fields.text({ label: 'Hero Eyebrow', defaultValue: 'Got Questions?' }),
+        heroTitle: fields.text({ label: 'Hero Title', defaultValue: 'Frequently Asked Questions' }),
+        heroSubtitle: fields.text({ label: 'Hero Subtitle', defaultValue: 'Everything you need to know about orders, materials, and more.' }),
+
+        // FAQs
+        faqs: fields.array(
+          fields.object({
+            question: fields.text({ label: 'Question' }),
+            answer: fields.text({ label: 'Answer', multiline: true }),
+          }),
+          { label: 'FAQs', itemLabel: props => props.fields.question.value }
+        ),
+
+        // CTA
+        ctaEyebrow: fields.text({ label: 'CTA Eyebrow', defaultValue: 'Need More Help?' }),
+        ctaHeading: fields.text({ label: 'CTA Heading', defaultValue: 'Still have questions?' }),
+        ctaBody: fields.text({ label: 'CTA Body', defaultValue: "We're always happy to help. Reach out and we'll get back to you soon." }),
+        ctaButtonText: fields.text({ label: 'CTA Button Text', defaultValue: 'Contact Us' }),
+        ctaButtonHref: fields.text({ label: 'CTA Button Link', defaultValue: '/contact' }),
+
+        // SEO
+        seoTitle: fields.text({ label: 'SEO Title', defaultValue: 'FAQ' }),
+        seoDescription: fields.text({ label: 'SEO Description', multiline: true }),
+        seoKeywords: fields.array(
+          fields.text({ label: 'Keyword' }),
+          { label: 'SEO Keywords', itemLabel: props => props.value }
+        ),
+      },
+    }),
+
+    communityPage: singleton({
+      label: 'Community Page',
+      path: 'content/pages/community',
+      format: { data: 'yaml' },
+      schema: {
+        // Hero
+        heroEyebrow: fields.text({ label: 'Hero Eyebrow', defaultValue: 'Mama Fern Community' }),
+        heroTitle: fields.text({ label: 'Hero Title', defaultValue: 'Welcome to Our Family' }),
+        heroSubtitle: fields.text({ label: 'Hero Subtitle', defaultValue: 'Stories, updates, and a little inspiration from the families who wear Mama Fern.' }),
+
+        // Featured post
+        featuredEyebrow: fields.text({ label: 'Featured Post Eyebrow', defaultValue: 'Welcome' }),
+        featuredHeading: fields.text({ label: 'Featured Post Heading', defaultValue: 'Hello from Mama Fern' }),
+        featuredBody: fields.text({ label: 'Featured Post Body', multiline: true }),
+        featuredMeta: fields.text({ label: 'Featured Post Meta', defaultValue: 'Posted by the Mama Fern team — Feb 2026' }),
+
+        // Values
+        valuesHeading: fields.text({ label: 'Values Section Heading', defaultValue: 'What Brings Us Together' }),
+        values: fields.array(
+          fields.object({
+            emoji: fields.text({ label: 'Emoji' }),
+            title: fields.text({ label: 'Title' }),
+            description: fields.text({ label: 'Description', multiline: true }),
+          }),
+          { label: 'Values', itemLabel: props => props.fields.title.value }
+        ),
+
+        // CTA
+        ctaEyebrow: fields.text({ label: 'CTA Eyebrow', defaultValue: 'Stay Connected' }),
+        ctaHeading: fields.text({ label: 'CTA Heading', defaultValue: 'More stories coming soon' }),
+        ctaBody: fields.text({ label: 'CTA Body', multiline: true }),
+        primaryButtonText: fields.text({ label: 'Primary Button Text', defaultValue: 'Shop the Collection' }),
+        primaryButtonHref: fields.text({ label: 'Primary Button Link', defaultValue: '/shop' }),
+        secondaryButtonText: fields.text({ label: 'Secondary Button Text', defaultValue: 'Share Your Story' }),
+        secondaryButtonHref: fields.text({ label: 'Secondary Button Link', defaultValue: '/contact' }),
+
+        // SEO
+        seoTitle: fields.text({ label: 'SEO Title', defaultValue: 'Community' }),
+        seoDescription: fields.text({ label: 'SEO Description', multiline: true }),
+        seoKeywords: fields.array(
+          fields.text({ label: 'Keyword' }),
+          { label: 'SEO Keywords', itemLabel: props => props.value }
+        ),
+      },
+    }),
+
+    homepageHero: singleton({
+      label: 'Homepage Hero',
+      path: 'content/pages/homepage-hero',
+      format: { data: 'yaml' },
+      schema: {
+        headlineLine1: fields.text({ label: 'Headline Line 1', defaultValue: 'For every stage of' }),
+        headlineHighlight: fields.text({ label: 'Headline Highlighted Text', defaultValue: 'growing together' }),
+        subtitle: fields.text({
+          label: 'Subtitle',
+          multiline: true,
+          defaultValue: 'Grounded family apparel in skin-friendlier fabrics. Cute patterns and cozy sayings for moms, dads, and kids.',
+        }),
+        primaryButtonText: fields.text({ label: 'Primary Button Text', defaultValue: 'Shop All' }),
+        primaryButtonHref: fields.text({ label: 'Primary Button Link', defaultValue: '/shop' }),
+        secondaryButtonText: fields.text({ label: 'Secondary Button Text', defaultValue: 'Shop Kids' }),
+        secondaryButtonHref: fields.text({ label: 'Secondary Button Link', defaultValue: '/collections/kids' }),
+      },
+    }),
+
+    // ─── Settings ─────────────────────────────────────────────────────────────
+
+    announcementBar: singleton({
+      label: 'Announcement Bar',
+      path: 'content/pages/announcement-bar',
+      format: { data: 'yaml' },
+      schema: {
+        enabled: fields.checkbox({ label: 'Enabled', defaultValue: false }),
+        message: fields.text({ label: 'Message', defaultValue: '' }),
+        linkText: fields.text({ label: 'Link Text (optional)', defaultValue: '' }),
+        linkHref: fields.text({ label: 'Link URL (optional)', defaultValue: '' }),
+        backgroundColor: fields.select({
+          label: 'Background Color',
+          options: [
+            { label: 'Fern (Green)', value: 'fern' },
+            { label: 'Sage (Muted Green)', value: 'sage' },
+            { label: 'Terracotta (Warm)', value: 'terracotta' },
+            { label: 'Charcoal (Dark)', value: 'charcoal' },
+          ],
+          defaultValue: 'fern',
+        }),
+      },
+    }),
+
+    siteSettings: singleton({
+      label: 'Site Settings',
+      path: 'content/pages/site-settings',
+      format: { data: 'yaml' },
+      schema: {
+        brandName: fields.text({ label: 'Brand Name', defaultValue: 'Mama Fern' }),
+        tagline: fields.text({ label: 'Tagline', defaultValue: 'Grounded Family Apparel' }),
+        baseUrl: fields.text({ label: 'Base URL', defaultValue: 'https://mamafern.com' }),
+        twitterHandle: fields.text({ label: 'Twitter Handle', defaultValue: '@mamafern' }),
+        defaultOgImage: fields.text({ label: 'Default OG Image Path', defaultValue: '/og-image.png' }),
+        defaultDescription: fields.text({
+          label: 'Default Description',
+          multiline: true,
+          defaultValue: 'Grounded family apparel for crunchy, cozy homes. Natural fabrics, earthy patterns, and family-forward designs for moms, dads, and kids who love the outdoors.',
+        }),
+        defaultKeywords: fields.array(
+          fields.text({ label: 'Keyword' }),
+          { label: 'Default Keywords', itemLabel: props => props.value }
+        ),
+        instagramUrl: fields.text({ label: 'Instagram URL', defaultValue: '' }),
+        tiktokUrl: fields.text({ label: 'TikTok URL', defaultValue: '' }),
+        pinterestUrl: fields.text({ label: 'Pinterest URL', defaultValue: '' }),
       },
     }),
   },

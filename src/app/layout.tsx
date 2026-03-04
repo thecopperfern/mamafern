@@ -9,6 +9,8 @@ import { commerceClient } from "@/lib/commerce";
 import Analytics from "@/components/view/Analytics";
 import SkipNav from "@/components/view/SkipNav";
 import EmailCaptureModal from "@/components/view/EmailCaptureModal";
+import AnnouncementBar from "@/components/view/AnnouncementBar";
+import reader from "@/lib/content";
 
 const dmSans = DM_Sans({
   variable: "--font-dm-sans",
@@ -110,6 +112,29 @@ export default async function RootLayout({
     // Fall back to no dynamic links
   }
 
+  // Read announcement bar singleton
+  let announcement: { enabled: boolean; message: string; linkText: string; linkHref: string; backgroundColor: "fern" | "sage" | "terracotta" | "charcoal" } | null = null;
+  try {
+    announcement = await reader.singletons.announcementBar.read();
+  } catch {
+    // Continue without announcement bar
+  }
+
+  // Read site settings for social URLs
+  let socialUrls: { instagramUrl?: string; tiktokUrl?: string; pinterestUrl?: string } = {};
+  try {
+    const settings = await reader.singletons.siteSettings.read();
+    if (settings) {
+      socialUrls = {
+        instagramUrl: settings.instagramUrl || undefined,
+        tiktokUrl: settings.tiktokUrl || undefined,
+        pinterestUrl: settings.pinterestUrl || undefined,
+      };
+    }
+  } catch {
+    // Fall back to env vars in Footer
+  }
+
   return (
     <html lang="en">
       <head>
@@ -130,11 +155,23 @@ export default async function RootLayout({
           <Toaster />
           <SkipNav />
           <EmailCaptureModal />
+          {announcement?.enabled && announcement.message && (
+            <AnnouncementBar
+              message={announcement.message}
+              linkText={announcement.linkText || undefined}
+              linkHref={announcement.linkHref || undefined}
+              backgroundColor={announcement.backgroundColor}
+            />
+          )}
           <Navbar collectionLinks={collectionLinks} />
           <main id="main-content" className="min-h-screen" role="main" tabIndex={-1}>
             {children}
           </main>
-          <Footer />
+          <Footer
+            instagramUrl={socialUrls.instagramUrl}
+            tiktokUrl={socialUrls.tiktokUrl}
+            pinterestUrl={socialUrls.pinterestUrl}
+          />
         </body>
       </Providers>
     </html>

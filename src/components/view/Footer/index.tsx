@@ -1,10 +1,6 @@
 import Link from "next/link";
 import NewsletterSignup from "../NewsletterSignup";
 
-const instagramUrl = process.env.NEXT_PUBLIC_INSTAGRAM_URL;
-const tiktokUrl = process.env.NEXT_PUBLIC_TIKTOK_URL;
-const pinterestUrl = process.env.NEXT_PUBLIC_PINTEREST_URL;
-
 const SHOP_LINKS = [
   { label: "All Collections", href: "/shop" },
   { label: "Moms", href: "/collections/moms" },
@@ -27,8 +23,22 @@ const LEGAL_LINKS = [
   { label: "Returns & Refunds", href: "/returns" },
 ];
 
+type FooterProps = {
+  instagramUrl?: string;
+  tiktokUrl?: string;
+  pinterestUrl?: string;
+};
 
-export default function Footer() {
+export default function Footer({
+  instagramUrl,
+  tiktokUrl,
+  pinterestUrl,
+}: FooterProps) {
+  // CMS props take priority, fall back to env vars
+  const instagram = instagramUrl || process.env.NEXT_PUBLIC_INSTAGRAM_URL;
+  const tiktok = tiktokUrl || process.env.NEXT_PUBLIC_TIKTOK_URL;
+  const pinterest = pinterestUrl || process.env.NEXT_PUBLIC_PINTEREST_URL;
+
   return (
     <footer className="bg-texture-linen-dark text-white/80 mt-16" role="contentinfo" aria-label="Site footer">
       <div className="mx-auto max-w-6xl px-4 py-12">
@@ -42,11 +52,11 @@ export default function Footer() {
               Grounded family apparel for crunchy, cozy homes. Cute patterns and
               sayings in skin-friendly fabrics.
             </p>
-            {(instagramUrl || tiktokUrl || pinterestUrl) && (
+            {(instagram || tiktok || pinterest) && (
               <div className="flex items-center gap-3 mt-4">
-                {instagramUrl && (
+                {instagram && (
                   <a
-                    href={instagramUrl}
+                    href={instagram}
                     className="text-white/40 hover:text-white transition-colors"
                     aria-label="Follow us on Instagram"
                     rel="noopener noreferrer"
@@ -57,9 +67,9 @@ export default function Footer() {
                     </svg>
                   </a>
                 )}
-                {tiktokUrl && (
+                {tiktok && (
                   <a
-                    href={tiktokUrl}
+                    href={tiktok}
                     className="text-white/40 hover:text-white transition-colors"
                     aria-label="Follow us on TikTok"
                     rel="noopener noreferrer"
@@ -70,9 +80,9 @@ export default function Footer() {
                     </svg>
                   </a>
                 )}
-                {pinterestUrl && (
+                {pinterest && (
                   <a
-                    href={pinterestUrl}
+                    href={pinterest}
                     className="text-white/40 hover:text-white transition-colors"
                     aria-label="Follow us on Pinterest"
                     rel="noopener noreferrer"

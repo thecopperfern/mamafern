@@ -10,6 +10,7 @@ import JsonLd from "@/components/seo/JsonLd";
 import fs from "fs";
 import path from "path";
 import { migrateLooksData, isLookPublished } from "@/lib/looks-migration";
+import reader from "@/lib/content";
 
 const organizationSchema = {
   "@context": "https://schema.org",
@@ -57,7 +58,15 @@ function CollectionSkeleton() {
   );
 }
 
-export default function Home() {
+export default async function Home() {
+  // Read hero content from CMS
+  let heroData: Awaited<ReturnType<typeof reader.singletons.homepageHero.read>> = null;
+  try {
+    heroData = await reader.singletons.homepageHero.read();
+  } catch {
+    // Fall back to defaults in Hero component
+  }
+
   // Read looks data server-side for zero-latency rendering
   let publishedLooks: import("@/types/looks").Look[] = [];
   try {
@@ -83,7 +92,15 @@ export default function Home() {
     <div>
       <JsonLd data={organizationSchema} />
       <JsonLd data={websiteSchema} />
-      <Hero />
+      <Hero
+        headlineLine1={heroData?.headlineLine1 || undefined}
+        headlineHighlight={heroData?.headlineHighlight || undefined}
+        subtitle={heroData?.subtitle || undefined}
+        primaryButtonText={heroData?.primaryButtonText || undefined}
+        primaryButtonHref={heroData?.primaryButtonHref || undefined}
+        secondaryButtonText={heroData?.secondaryButtonText || undefined}
+        secondaryButtonHref={heroData?.secondaryButtonHref || undefined}
+      />
       <ShopTheLook initialLooks={publishedLooks} />
       <CategoryCards />
       <Suspense fallback={<CollectionSkeleton />}>
