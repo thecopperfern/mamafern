@@ -5,51 +5,41 @@
       "id": "moms",
       "label": "Moms",
       "title": "The Everyday Mom Look",
-      "heroImage": "https://images.unsplash.com/photo-1581044777550-4cfa60707c03?w=1200",
-      "heroImageAlt": "A styled flat lay of the Mom look",
+      "heroImage": "https://cdn11.bigcommerce.com/s-sr2gbw/images/stencil/1280x1280/products/3354/19874/2026_MaxiSkirt_turmeric_F__64870.1770917044.jpg?c=2",
+      "heroImageAlt": "The Everyday Mom Look",
       "products": [
         {
-          "id": "seed-mom-001",
-          "source": "shopify",
-          "shopifyProductId": "gid://shopify/Product/placeholder-001",
-          "shopifyHandle": "everyday-mom-tee",
-          "title": "Everyday Mom Tee",
-          "price": "$32.00",
-          "productUrl": "/coming-soon",
-          "selectedImageUrl": "https://images.unsplash.com/photo-1512436991641-6745cdb1723f?w=600",
-          "selectedImageAlt": "Everyday Mom Tee in sage green",
-          "badge": { "text": "Coming Soon", "variant": "default" },
+          "id": "4b67f977-0d9f-466c-ba16-2cca8fdcf1af",
+          "source": "manual",
+          "title": "Maxi Skirt",
+          "price": "$75",
+          "productUrl": null,
+          "selectedImageUrl": "https://cdn11.bigcommerce.com/s-sr2gbw/images/stencil/1280x1280/products/3354/19873/2026_MaxiSkirt_turmeric_S__98838.1770917044.jpg?c=2",
+          "selectedImageAlt": "Maxi Skirt",
+          "badge": {
+            "text": "Coming Soon",
+            "variant": "default"
+          },
           "order": 0
-        },
-        {
-          "id": "seed-mom-002",
-          "source": "shopify",
-          "shopifyProductId": "gid://shopify/Product/placeholder-002",
-          "shopifyHandle": "rooted-tote",
-          "title": "Rooted Tote Bag",
-          "price": "$24.00",
-          "productUrl": "/coming-soon",
-          "selectedImageUrl": "https://images.unsplash.com/photo-1525507119028-ed4c629a60a3?w=600",
-          "selectedImageAlt": "Rooted Tote in natural",
-          "badge": { "text": "Coming Soon", "variant": "default" },
-          "order": 1
-        },
-        {
-          "id": "seed-mom-003",
-          "source": "shopify",
-          "shopifyProductId": "gid://shopify/Product/placeholder-003",
-          "shopifyHandle": "fern-hoodie",
-          "title": "Fern Hoodie",
-          "price": "$58.00",
-          "productUrl": "/coming-soon",
-          "selectedImageUrl": "https://images.unsplash.com/photo-1627137727320-4a7c6782102a?w=600",
-          "selectedImageAlt": "Fern Hoodie in cream",
-          "badge": { "text": "Coming Soon", "variant": "default" },
-          "order": 2
         }
       ],
       "order": 0,
-      "status": "published"
+      "status": "published",
+      "discount": {
+        "enabled": false,
+        "minItems": 2,
+        "type": "percentage",
+        "value": 10,
+        "code": "",
+        "message": ""
+      },
+      "hotspots": [
+        {
+          "productId": "4b67f977-0d9f-466c-ba16-2cca8fdcf1af",
+          "x": 56.47,
+          "y": 79.63
+        }
+      ]
     },
     {
       "id": "dads",
@@ -59,7 +49,7 @@
       "heroImageAlt": "",
       "products": [],
       "order": 1,
-      "status": "published"
+      "status": "draft"
     },
     {
       "id": "family",
@@ -69,7 +59,7 @@
       "heroImageAlt": "",
       "products": [],
       "order": 2,
-      "status": "published"
+      "status": "draft"
     }
   ]
 }
