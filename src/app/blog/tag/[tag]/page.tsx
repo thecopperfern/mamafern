@@ -24,6 +24,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     description: `Browse Mama Fern journal articles tagged "${decoded}" — style guides, tips, and inspiration for grounded families.`,
     path: `/blog/tag/${tag}`,
     keywords: [decoded, "mama fern blog"],
+        noIndex: true,
   });
 }
 
