@@ -2,6 +2,7 @@ import { NextResponse } from "next/server";
 import fs from "fs";
 import path from "path";
 import { getAdminPass } from "../get-admin-pass";
+import { commitToGitHub } from "@/lib/github-commit";
 
 const LOOKS_FILE = path.join(process.cwd(), "data", "looks.json");
 
@@ -31,7 +32,15 @@ export async function POST(req: Request) {
       fs.mkdirSync(dir, { recursive: true });
     }
 
-    fs.writeFileSync(LOOKS_FILE, JSON.stringify(body, null, 2), "utf-8");
+    const jsonContent = JSON.stringify(body, null, 2);
+    fs.writeFileSync(LOOKS_FILE, jsonContent, "utf-8");
+
+    // Commit to GitHub for persistence across deploys (fire-and-forget)
+    commitToGitHub(
+      [{ path: "data/looks.json", content: jsonContent }],
+      "Update lookbook data"
+    ).catch((err) => console.warn("[lookadmin] GitHub commit failed (non-critical):", err));
+
     return NextResponse.json({ success: true });
   } catch (error) {
     console.error("[Looks API] Error writing looks.json:", error);

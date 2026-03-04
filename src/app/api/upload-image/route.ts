@@ -2,6 +2,7 @@ import { NextRequest, NextResponse } from "next/server";
 import fs from "fs";
 import path from "path";
 import { v4 as uuidv4 } from "uuid";
+import { commitToGitHub } from "@/lib/github-commit";
 
 const UPLOAD_DIR = path.join(process.cwd(), "public", "uploads", "looks");
 const MAX_SIZE = 5 * 1024 * 1024; // 5MB
@@ -61,6 +62,12 @@ export async function POST(request: NextRequest) {
     const buffer = Buffer.from(await file.arrayBuffer());
     fs.writeFileSync(filepath, buffer);
 
+    // Commit image to GitHub for persistence across deploys (fire-and-forget)
+    commitToGitHub(
+      [{ path: `public/uploads/looks/${filename}`, content: buffer }],
+      `Upload lookbook image: ${filename}`
+    ).catch((err) => console.warn("[upload] GitHub commit failed (non-critical):", err));
+
     return NextResponse.json({
       url: `/uploads/looks/${filename}`,
       filename,
@@ -94,6 +101,12 @@ export async function DELETE(request: NextRequest) {
     if (fs.existsSync(filepath)) {
       fs.unlinkSync(filepath);
     }
+
+    // Delete image from GitHub too (fire-and-forget)
+    commitToGitHub(
+      [{ path: `public/uploads/looks/${safeName}`, deleted: true }],
+      `Delete lookbook image: ${safeName}`
+    ).catch((err) => console.warn("[upload] GitHub delete commit failed (non-critical):", err));
 
     return NextResponse.json({ success: true });
   } catch {

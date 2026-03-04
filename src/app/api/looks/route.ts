@@ -3,6 +3,7 @@ import fs from "fs";
 import path from "path";
 import type { LooksData } from "@/types/looks";
 import { migrateLooksData, isLookPublished } from "@/lib/looks-migration";
+import { commitToGitHub } from "@/lib/github-commit";
 
 const LOOKS_PATH = path.join(process.cwd(), "data", "looks.json");
 
@@ -74,7 +75,15 @@ export async function POST(request: Request) {
         .map((look, i) => ({ ...look, order: look.order ?? i }))
         .sort((a, b) => a.order - b.order),
     };
-    fs.writeFileSync(LOOKS_PATH, JSON.stringify(sorted, null, 2), "utf-8");
+    const jsonContent = JSON.stringify(sorted, null, 2);
+    fs.writeFileSync(LOOKS_PATH, jsonContent, "utf-8");
+
+    // Commit to GitHub for persistence across deploys (fire-and-forget)
+    commitToGitHub(
+      [{ path: "data/looks.json", content: jsonContent }],
+      "Update lookbook data"
+    ).catch((err) => console.warn("[looks] GitHub commit failed (non-critical):", err));
+
     return NextResponse.json({ success: true });
   } catch {
     return NextResponse.json({ error: "Failed to save" }, { status: 500 });

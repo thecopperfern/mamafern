@@ -1,0 +1,75 @@
+{
+  "version": 2,
+  "looks": [
+    {
+      "id": "moms",
+      "label": "Moms",
+      "title": "The Everyday Mom Look",
+      "heroImage": "https://images.unsplash.com/photo-1581044777550-4cfa60707c03?w=1200",
+      "heroImageAlt": "A styled flat lay of the Mom look",
+      "products": [
+        {
+          "id": "seed-mom-001",
+          "source": "shopify",
+          "shopifyProductId": "gid://shopify/Product/placeholder-001",
+          "shopifyHandle": "everyday-mom-tee",
+          "title": "Everyday Mom Tee",
+          "price": "$32.00",
+          "productUrl": "/coming-soon",
+          "selectedImageUrl": "https://images.unsplash.com/photo-1512436991641-6745cdb1723f?w=600",
+          "selectedImageAlt": "Everyday Mom Tee in sage green",
+          "badge": { "text": "Coming Soon", "variant": "default" },
+          "order": 0
+        },
+        {
+          "id": "seed-mom-002",
+          "source": "shopify",
+          "shopifyProductId": "gid://shopify/Product/placeholder-002",
+          "shopifyHandle": "rooted-tote",
+          "title": "Rooted Tote Bag",
+          "price": "$24.00",
+          "productUrl": "/coming-soon",
+          "selectedImageUrl": "https://images.unsplash.com/photo-1525507119028-ed4c629a60a3?w=600",
+          "selectedImageAlt": "Rooted Tote in natural",
+          "badge": { "text": "Coming Soon", "variant": "default" },
+          "order": 1
+        },
+        {
+          "id": "seed-mom-003",
+          "source": "shopify",
+          "shopifyProductId": "gid://shopify/Product/placeholder-003",
+          "shopifyHandle": "fern-hoodie",
+          "title": "Fern Hoodie",
+          "price": "$58.00",
+          "productUrl": "/coming-soon",
+          "selectedImageUrl": "https://images.unsplash.com/photo-1627137727320-4a7c6782102a?w=600",
+          "selectedImageAlt": "Fern Hoodie in cream",
+          "badge": { "text": "Coming Soon", "variant": "default" },
+          "order": 2
+        }
+      ],
+      "order": 0,
+      "status": "published"
+    },
+    {
+      "id": "dads",
+      "label": "Dads",
+      "title": "The Steady Dad Look",
+      "heroImage": "",
+      "heroImageAlt": "",
+      "products": [],
+      "order": 1,
+      "status": "published"
+    },
+    {
+      "id": "family",
+      "label": "Family",
+      "title": "The Sunday Family Look",
+      "heroImage": "",
+      "heroImageAlt": "",
+      "products": [],
+      "order": 2,
+      "status": "published"
+    }
+  ]
+}
