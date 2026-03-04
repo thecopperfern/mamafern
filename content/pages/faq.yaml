@@ -5,10 +5,10 @@ faqs:
   - question: What materials does Mama Fern use?
     answer: >-
       We prioritize natural, skin-friendly fabrics in every piece we make. Our
-      core materials include organic cotton, cotton-linen blends, and bamboo
-      viscose. All fabrics are selected for breathability, softness, and
-      durability — especially important for babies and kids with sensitive skin.
-      We avoid synthetic materials like polyester wherever possible.
+      core materials include organic cotton, cotton-linen blends, and merino
+      wool. All fabrics are selected for breathability, softness, and durability
+      — especially important for babies and kids with sensitive skin. We avoid
+      synthetic materials like polyester wherever possible.
   - question: How do your sizes run?
     answer: >-
       Our clothing runs true to size with a relaxed, comfortable fit. We design
@@ -24,10 +24,11 @@ faqs:
       creating a beautiful unified look.
   - question: What is your return policy?
     answer: >-
-      We offer hassle-free returns within 30 days of delivery. Items must be
-      unworn, unwashed, and in original condition with tags attached. Visit our
-      Returns & Exchanges page for step-by-step instructions on how to start a
-      return. Exchanges are always free.
+      We offer free returns within 30 days of delivery. Items must be unworn,
+      unwashed, and in original condition with tags attached. 
+
+      Visit our Returns & Exchanges page for step-by-step instructions on how to
+      start a return. 
   - question: How long does shipping take?
     answer: >-
       Standard shipping within the United States takes 5–7 business days.
@@ -46,6 +47,9 @@ faqs:
       the strictest level, designed for baby products. We're committed to
       sustainable practices including minimal-waste packaging and responsible
       sourcing.
+
+      If ever a product does not meet these standards it will be explicitly and
+      boldly stated.
   - question: How should I care for Mama Fern clothing?
     answer: >-
       Machine wash cold on a gentle cycle with like colors. Tumble dry low or
@@ -54,12 +58,14 @@ faqs:
       down natural fibers over time. Iron on low heat if needed.
   - question: Do you offer gift wrapping?
     answer: >-
-      Yes! We offer eco-friendly gift wrapping at checkout. Each gift arrives in
-      recycled kraft paper with a hand-stamped Mama Fern seal and a blank gift
-      note card. Perfect for baby showers, birthdays, and holidays.
+      Yes! We offer reusable gift wrapping add-on at checkout. Each gift arrives
+      neatly packaged in a cotton reusable drawstring bag decorated with the
+      Mama Fern logo seal. Additionally included will be Mama Fern gift note
+      card for your personal touch. Perfect for baby showers, birthdays, and
+      holidays.
   - question: Where are Mama Fern products made?
     answer: >-
-      Our products are designed in the United States and produced in small-batch
+      Our products are designed in the Pennsylvania and produced in small-batch
       runs with ethical manufacturing partners. We personally vet every
       production facility for fair labor practices, safe working conditions, and
       environmental responsibility.
@@ -74,23 +80,14 @@ faqs:
       We process orders quickly to get them to you fast. If you need to cancel
       or modify your order, contact us within 2 hours of placing it and we'll do
       our best to accommodate your request. After that window, the order may
-      already be in fulfillment.
+      already be in fulfillment and changes are not guarenteed.
   - question: Do you have a Mother's Day gift guide?
     answer: >-
       Yes! Visit our Mother's Day Gift Guide for curated gift bundles and ideas
-      — from The Mama Bundle (tee + tote) to The Family Set (matching pieces for
-      the whole crew). All gifts come with optional eco-friendly gift wrapping
-      in recycled kraft paper with a hand-stamped Mama Fern seal.
-  - question: What family matching options do you have?
-    answer: >-
-      Our Classic line features coordinating pieces across baby (Seedling
-      Onesie), kids (Sprout Tee), moms (Mama Fern Classic Tee), and dads (Papa
-      Fern Classic Tee) — all in the same earthy color palette. They coordinate
-      beautifully without being identical, so each family member gets their own
-      style.
-  - question: Test Question
-    answer: test answer
-ctaEyebrow: Need More Help?
+      — from The Mama Bundle (tee + tote) to The Family Set (coordinating pieces
+      for the whole crew). Be sue to add-on the gift wrapping for a premium
+      finishing touch.
+ctaEyebrow: Seeking More?
 ctaHeading: Still have questions?
 ctaBody: We're always happy to help. Reach out and we'll get back to you soon.
 ctaButtonText: Contact Us
