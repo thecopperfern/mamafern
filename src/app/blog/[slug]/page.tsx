@@ -17,6 +17,9 @@ import ShareButtons from "@/components/blog/ShareButtons";
 import PostNavigation from "@/components/blog/PostNavigation";
 import TableOfContents from "@/components/blog/TableOfContents";
 import BlogNewsletterCTA from "@/components/blog/BlogNewsletterCTA";
+import RelatedContentCards from "@/components/blog/RelatedContentCards";
+import LeadMagnetCTA from "@/components/blog/LeadMagnetCTA";
+import reader from "@/lib/content";
 
 // force-dynamic: Keystatic writes blog files to disk at runtime.
 // ISR would serve stale content for up to 1 hour after a CMS edit.
@@ -56,6 +59,39 @@ export default async function BlogPostPage({ params }: Props) {
   if (!post) notFound();
 
   const relatedPosts = getRelatedPosts(post.slug, post.tags);
+
+  // Read structured CMS fields (relatedContent, leadMagnetSlug) from Keystatic
+  let relatedContent: { type: string; handle: string; label: string }[] = [];
+  let leadMagnet: {
+    title: string;
+    description?: string;
+    fileUrl?: string;
+    ctaText?: string;
+    brevoListId?: string;
+    thumbnail?: string;
+  } | null = null;
+  try {
+    const keystatic = await reader.collections.posts.read(slug);
+    if (keystatic?.relatedContent) {
+      relatedContent = keystatic.relatedContent as typeof relatedContent;
+    }
+    const leadMagnetSlug = keystatic?.leadMagnetSlug as string | undefined;
+    if (leadMagnetSlug) {
+      const lm = await reader.collections.leadMagnets.read(leadMagnetSlug);
+      if (lm) {
+        leadMagnet = {
+          title: (lm.title as string) || leadMagnetSlug,
+          description: (lm.description as string) || undefined,
+          fileUrl: (lm.fileUrl as string) || undefined,
+          ctaText: (lm.ctaText as string) || undefined,
+          brevoListId: (lm.brevoListId as string) || undefined,
+          thumbnail: (lm.thumbnail as string) || undefined,
+        };
+      }
+    }
+  } catch {
+    // Non-critical — continue without CMS-enriched content
+  }
   const { prev, next } = getAdjacentPosts(post.slug);
   const htmlContent = markdownToHtml(post.content);
   const headings = extractHeadings(htmlContent);
@@ -186,6 +222,23 @@ export default async function BlogPostPage({ params }: Props) {
 
       {/* Below-article sections */}
       <div className="max-w-3xl mx-auto">
+        {/* Lead magnet CTA (email-gated download) */}
+        {leadMagnet?.fileUrl && (
+          <LeadMagnetCTA
+            title={leadMagnet.title}
+            description={leadMagnet.description}
+            fileUrl={leadMagnet.fileUrl}
+            ctaText={leadMagnet.ctaText}
+            brevoListId={leadMagnet.brevoListId}
+            thumbnail={leadMagnet.thumbnail}
+          />
+        )}
+
+        {/* Related content cards (blog/product/collection links from CMS) */}
+        {relatedContent.length > 0 && (
+          <RelatedContentCards items={relatedContent} />
+        )}
+
         {/* Newsletter CTA */}
         <BlogNewsletterCTA />
 

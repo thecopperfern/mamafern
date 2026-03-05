@@ -9,6 +9,8 @@ import {
   campaignsSchema,
   styleGuidesSchema,
   mediaGuidelinesSchema,
+  quizzesSchema,
+  leadMagnetsSchema,
 } from './src/lib/keystatic/schemas';
 
 /**
@@ -53,7 +55,7 @@ export default config({
     : { kind: 'local' },
   ui: {
     navigation: {
-      'Content': ['posts', 'campaigns', 'styleGuides'],
+      'Content': ['posts', 'campaigns', 'styleGuides', 'quizzes', 'leadMagnets'],
       'Pages': ['aboutPage', 'faqPage', 'communityPage', 'contactPage', 'homepageHero', 'homepageSections', 'shopPage'],
       'Layout': ['navigation', 'footer', 'announcementBar', 'popupSettings'],
       'Settings': ['siteSettings', 'mediaGuidelines'],
@@ -96,11 +98,37 @@ export default config({
           directory: 'public/images/blog',
           publicPath: '/images/blog',
         }),
+        leadMagnetSlug: fields.text({
+          label: 'Lead Magnet Slug (optional)',
+          description: 'Reference a lead magnet to display in this post. Use the slug from the Lead Magnets collection.',
+        }),
+        relatedContent: fields.array(
+          fields.object({
+            type: fields.select({
+              label: 'Type',
+              options: [
+                { label: 'Blog Post', value: 'blog' },
+                { label: 'Product', value: 'product' },
+                { label: 'Collection', value: 'collection' },
+              ],
+              defaultValue: 'blog',
+            }),
+            handle: fields.text({ label: 'Slug / Handle' }),
+            label: fields.text({ label: 'Display Label' }),
+          }),
+          {
+            label: 'Related Content Links',
+            itemLabel: (props) =>
+              `[${props.fields.type.value}] ${props.fields.label.value || props.fields.handle.value}`,
+          }
+        ),
         content: fields.mdx({ label: 'Content' }),
       },
     }),
     campaigns: campaignsSchema,
     styleGuides: styleGuidesSchema,
+    quizzes: quizzesSchema,
+    leadMagnets: leadMagnetsSchema,
   },
   singletons: {
     // ─── Pages ────────────────────────────────────────────────────────────────

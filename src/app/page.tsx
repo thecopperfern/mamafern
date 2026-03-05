@@ -7,6 +7,7 @@ import ShopTheLook from "@/components/shop-the-look/ShopTheLook";
 import { Suspense } from "react";
 import { Skeleton } from "@/components/ui/skeleton";
 import JsonLd from "@/components/seo/JsonLd";
+import { TrustBadges, GuaranteeBanner } from "@/components/view/TrustSignals";
 import fs from "fs";
 import path from "path";
 import { migrateLooksData, isLookPublished } from "@/lib/looks-migration";
@@ -112,6 +113,12 @@ export default async function Home() {
           categories={sections.categories}
         />
       </div>
+      {/* Trust signals — builds credibility before first purchase */}
+      <div className="cv-auto mx-auto max-w-4xl px-4 py-10">
+        <TrustBadges />
+        <GuaranteeBanner className="mt-6" />
+      </div>
+
       {sections.featuredSections.map((section) => (
         <div key={section.collectionHandle} className="cv-auto">
           <Suspense fallback={<CollectionSkeleton />}>

@@ -84,6 +84,64 @@ export const campaignsSchema = collection({
     ctaSecondaryText: fields.text({ label: "CTA Secondary Button Text" }),
     ctaSecondaryHref: fields.text({ label: "CTA Secondary Button Link" }),
 
+    // Funnel components
+    quizSlug: fields.text({
+      label: "Quiz Slug (optional)",
+      description: "Embed a quiz on this campaign page. Use the slug from the Quizzes collection.",
+    }),
+    leadMagnetSlug: fields.text({
+      label: "Lead Magnet Slug (optional)",
+      description: "Show a lead magnet download CTA. Use the slug from the Lead Magnets collection.",
+    }),
+    emailCaptureEnabled: fields.checkbox({
+      label: "Show Email Capture Section",
+      defaultValue: false,
+    }),
+    emailCaptureHeading: fields.text({
+      label: "Email Capture Heading",
+      defaultValue: "Join the Mama Fern Family",
+    }),
+    emailCaptureSubtext: fields.text({
+      label: "Email Capture Subtext",
+      defaultValue: "Get early access to new drops, exclusive deals, and family styling tips.",
+    }),
+    emailCaptureButtonText: fields.text({
+      label: "Email Capture Button Text",
+      defaultValue: "Join",
+    }),
+
+    // Discount code
+    discountMode: fields.select({
+      label: "Discount Code",
+      options: [
+        { label: "None", value: "none" },
+        { label: "Use Existing Shopify Code", value: "existing" },
+        { label: "Create New Code (via Admin API)", value: "create" },
+      ],
+      defaultValue: "none",
+      description: "Reference an existing Shopify discount code or create a new one.",
+    }),
+    discountCode: fields.text({
+      label: "Discount Code",
+      description: "The code customers will enter at checkout (e.g. WELCOME10)",
+    }),
+    discountType: fields.select({
+      label: "Discount Type",
+      options: [
+        { label: "Percentage", value: "percentage" },
+        { label: "Fixed Amount", value: "fixed" },
+      ],
+      defaultValue: "percentage",
+    }),
+    discountValue: fields.text({
+      label: "Discount Value",
+      description: "e.g. 10 for 10% or $10",
+    }),
+    discountDescription: fields.text({
+      label: "Discount Description",
+      description: "Displayed above the code (e.g. 'Get 10% off your first order!')",
+    }),
+
     // Rich content (MDX body for any additional freeform content)
     richContent: fields.mdx({ label: "Additional Content (optional)" }),
 

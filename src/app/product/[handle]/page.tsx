@@ -3,6 +3,7 @@ import ProductDetail from "@/components/view/ProductDetail";
 import Breadcrumbs from "@/components/view/Breadcrumbs";
 import RelatedProducts from "@/components/view/RelatedProducts";
 import ProductLookBanner from "@/components/shop-the-look/ProductLookBanner";
+import ProductReviews from "@/components/view/ProductReviews";
 import InternalLinks from "@/components/seo/InternalLinks";
 import JsonLd from "@/components/seo/JsonLd";
 import PageTransition from "@/components/PageTransition";
@@ -89,6 +90,17 @@ export default async function ProductPage({ params }: Props) {
           ]}
         />
         <ProductDetail product={product} />
+
+        {/* Judge.me preview badge — star rating summary */}
+        {process.env.NEXT_PUBLIC_JUDGEME_SHOP_DOMAIN && (
+          <div className="mt-2 mb-4">
+            <div
+              className="jdgm-prev-badge"
+              data-id={handle}
+            />
+          </div>
+        )}
+
         {matchingLooks.length > 0 && (
           <ProductLookBanner looks={matchingLooks} />
         )}
@@ -98,6 +110,7 @@ export default async function ProductPage({ params }: Props) {
             title="Complete the Family Look"
           />
         )}
+        <ProductReviews productHandle={handle} />
         <InternalLinks context="product" />
       </div>
     </PageTransition>

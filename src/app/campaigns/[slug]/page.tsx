@@ -6,6 +6,10 @@ import GiftBundlesSection from "@/components/view/CampaignSections/GiftBundlesSe
 import GiftIdeasSection from "@/components/view/CampaignSections/GiftIdeasSection";
 import InfoGridSection from "@/components/view/CampaignSections/InfoGridSection";
 import CTASection from "@/components/view/CampaignSections/CTASection";
+import DiscountBanner from "@/components/view/CampaignSections/DiscountBanner";
+import QuizEmbed from "@/components/view/CampaignSections/QuizEmbed";
+import LeadMagnetSection from "@/components/view/CampaignSections/LeadMagnetSection";
+import EmailCaptureSection from "@/components/view/CampaignSections/EmailCaptureSection";
 
 export const dynamic = "force-dynamic";
 
@@ -45,6 +49,14 @@ export default async function CampaignPage({ params }: Props) {
         subtitle={campaign.heroSubtitle || undefined}
       />
 
+      {campaign.discountMode !== "none" && campaign.discountCode && (
+        <DiscountBanner
+          code={campaign.discountCode}
+          description={campaign.discountDescription || undefined}
+          endDate={campaign.endDate || undefined}
+        />
+      )}
+
       {campaign.giftBundles && campaign.giftBundles.length > 0 && (
         <GiftBundlesSection bundles={campaign.giftBundles} />
       )}
@@ -55,6 +67,22 @@ export default async function CampaignPage({ params }: Props) {
 
       {campaign.infoBlocks && campaign.infoBlocks.length > 0 && (
         <InfoGridSection items={campaign.infoBlocks} />
+      )}
+
+      {campaign.quizSlug && (
+        <QuizEmbed slug={campaign.quizSlug} />
+      )}
+
+      {campaign.leadMagnetSlug && (
+        <LeadMagnetSection slug={campaign.leadMagnetSlug} />
+      )}
+
+      {campaign.emailCaptureEnabled && campaign.emailCaptureHeading && (
+        <EmailCaptureSection
+          heading={campaign.emailCaptureHeading}
+          subtext={campaign.emailCaptureSubtext || undefined}
+          buttonText={campaign.emailCaptureButtonText || undefined}
+        />
       )}
 
       {campaign.ctaHeading && (

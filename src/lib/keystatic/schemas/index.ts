@@ -7,3 +7,5 @@ export { popupSettingsSchema } from "./popup";
 export { campaignsSchema } from "./campaigns";
 export { styleGuidesSchema } from "./style-guides";
 export { mediaGuidelinesSchema } from "./media-guidelines";
+export { quizzesSchema } from "./quizzes";
+export { leadMagnetsSchema } from "./lead-magnets";

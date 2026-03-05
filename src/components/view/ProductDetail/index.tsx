@@ -11,11 +11,12 @@ import { toast } from "sonner";
 import ShareButtons from "@/components/view/ShareButtons";
 import WishlistButton from "@/components/view/WishlistButton";
 import { trackEvent } from "@/components/view/Analytics";
-import ProductReviews from "@/components/view/ProductReviews";
+
 import StickyATC from "@/components/view/StickyATC";
 import NotifyMe from "@/components/view/NotifyMe";
 import FabricSpecs from "@/components/view/FabricSpecs";
 import { useFlyToCart } from "@/components/animations/FlyToCart";
+import { TrustBadges } from "@/components/view/TrustSignals";
 
 export default function ProductDetail({
   product,
@@ -109,11 +110,11 @@ export default function ProductDetail({
             </Button>
           )}
 
+          <TrustBadges className="mt-2" />
+
           <ShareButtons title={product.title} handle={product.handle} />
         </div>
-        <div className="md:col-span-3">
-          <ProductReviews productHandle={product.handle} />
-        </div>
+        {/* Reviews section rendered at page level (server component) */}
       </div>
 
       {/* Sticky ATC — mobile only, appears when main button scrolls out of view */}

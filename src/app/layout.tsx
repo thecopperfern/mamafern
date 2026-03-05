@@ -9,6 +9,7 @@ import { commerceClient } from "@/lib/commerce";
 import Analytics from "@/components/view/Analytics";
 import SkipNav from "@/components/view/SkipNav";
 import dynamic from "next/dynamic";
+import Script from "next/script";
 import AnnouncementBar from "@/components/view/AnnouncementBar";
 import {
   getNavigation,
@@ -175,6 +176,13 @@ export default async function RootLayout({
           No script tag needed here — the npm package handles everything client-side.
         */}
       </head>
+      {process.env.NEXT_PUBLIC_JUDGEME_SHOP_DOMAIN && (
+          <Script
+            src={`https://cdn.judge.me/widget_preloader.js`}
+            strategy="afterInteractive"
+            data-shop-domain={process.env.NEXT_PUBLIC_JUDGEME_SHOP_DOMAIN}
+          />
+        )}
       <Providers>
         <body
           className={`${dmSans.variable} ${playfair.variable} font-sans antialiased`}
