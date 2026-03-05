@@ -10,6 +10,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { formatPrice } from "@/lib/currency";
 import { motion, AnimatePresence, slideInRight } from "@/lib/motion";
+import { trackEvent } from "@/components/view/Analytics";
 
 type Props = {
   open: boolean;
@@ -27,6 +28,14 @@ export default function CartSlideout({ open, onClose }: Props) {
 
   const panelRef = useRef<HTMLDivElement>(null);
   const closeButtonRef = useRef<HTMLButtonElement>(null);
+
+  // Track cart view for analytics
+  useEffect(() => {
+    if (open && cart.lines.length > 0) {
+      const total = parseFloat(cart.total.amount);
+      trackEvent("view_cart", "ecommerce", "", total);
+    }
+  }, [open, cart.lines.length]);
 
   // Focus trap: keep Tab within the slideout when open
   useEffect(() => {
@@ -422,6 +431,8 @@ export default function CartSlideout({ open, onClose }: Props) {
                     disabled={checkoutLoading}
                     onClick={async () => {
                       setCheckoutLoading(true);
+                      const total = parseFloat(cart.total.amount);
+                      trackEvent("begin_checkout", "ecommerce", "", total);
                       try {
                         const url = await checkout();
                         window.location.href = url;

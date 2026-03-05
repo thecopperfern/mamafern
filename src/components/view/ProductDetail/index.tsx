@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useRef } from "react";
+import { useState, useRef, useEffect } from "react";
 import type { CommerceProduct, CommerceVariant } from "@/lib/commerce";
 import ProductCarousel from "@/components/view/ProductCarousel";
 import ProductPrice from "@/components/view/ProductCard/ProductPrice";
@@ -30,6 +30,12 @@ export default function ProductDetail({
   >({});
   const [selectedVariant, setSelectedVariant] = useState<CommerceVariant>();
   const atcButtonRef = useRef<HTMLButtonElement | null>(null);
+
+  // Track product view for analytics
+  useEffect(() => {
+    const price = parseFloat(product.priceRange.minVariantPrice.amount);
+    trackEvent("view_item", "ecommerce", product.title, price);
+  }, [product]);
 
   const handleSelectOptions = (options: Record<string, string>) => {
     const variant = product.variants.find((v) => {
