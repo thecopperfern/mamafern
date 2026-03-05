@@ -29,9 +29,9 @@ These must be done *before* the campaign starts. **The store does not need to be
 
 | # | Task | Category | Done? |
 |---|------|----------|-------|
-| 1 | Update logo from "Minimal Store" → "Mama Fern" | 🔧 Build | [ ] |
-| 2 | Update page metadata (title, description, OG image) | 🔧 Build | [ ] |
-| 3 | Apply brand palette to `tailwind.config.ts` (cream, fern green, sage, terracotta) | 🔧 Build | [ ] |
+| 1 | Update logo from "Minimal Store" → "Mama Fern" | 🔧 Build | [x] |
+| 2 | Update page metadata (title, description, OG image) | 🔧 Build | [x] |
+| 3 | Apply brand palette to `tailwind.config.ts` (cream, fern green, sage, terracotta) | 🔧 Build | [x] |
 | 4 | Get products into Shopify admin with photos, variants, prices | 🛍️ Shopify | [ ] |
 | 5 | Create collections: Moms, Kids, Family Sets, Mother's Day 2026 | 🛍️ Shopify | [ ] |
 | 6 | Build a waitlist landing page at mamafern.com (email capture, one hero image) | 🔧 Build | [ ] |

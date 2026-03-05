@@ -19,7 +19,7 @@ type HeroProps = {
  * rendered HTML immediately with zero JS hydration cost, then CSS @keyframes
  * handle the entrance animation.
  *
- * Background uses the compressed linen.webp texture (~130KB vs 11MB original).
+ * Background uses the compressed linen.webp texture (~56KB vs 11MB original).
  * The image is preloaded via <link rel="preload"> in layout.tsx <head>.
  */
 export default function Hero({

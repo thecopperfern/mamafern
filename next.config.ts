@@ -85,6 +85,16 @@ const nextConfig: NextConfig = {
   // Security headers
   async headers() {
     return [
+      // Cache static assets (images, fonts, textures) for 1 year
+      {
+        source: "/:path*.(webp|jpg|jpeg|png|svg|ico|woff|woff2|ttf|eot)",
+        headers: [
+          {
+            key: "Cache-Control",
+            value: "public, max-age=31536000, immutable",
+          },
+        ],
+      },
       {
         source: "/(.*)",
         headers: [

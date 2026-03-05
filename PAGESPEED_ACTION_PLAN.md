@@ -399,19 +399,19 @@ If using GitHub Actions, add a workflow that runs LHCI on PRs to catch performan
 
 ## Priority Execution Order
 
-| Order | Phase | Est. Hours | Impact Score |
-|-------|-------|------------|-------------|
-| 🔴 1st | Phase 0: MIME type fix | 1-2h | CRITICAL — fixes broken JS/CSS in production |
-| 🔴 2nd | Phase 1a: Compress linen/paper textures | 1h | LCP -2,600ms |
-| 🔴 3rd | Phase 2a: Fix Hero initial="hidden" | 1h | LCP -1,200ms |
-| 🔴 4th | Phase 1c: BigCommerce remotePatterns + remove unoptimized | 30min | -250KB page weight |
-| 🟠 5th | Phase 2b: Lazy-load EmailCaptureModal + CartSlideout | 1h | TBT -100ms, defer ~50KB JS |
-| 🟠 6th | Phase 1b: Resize logo | 30min | Fixes aspect ratio, saves preload bandwidth |
-| 🟠 7th | Phase 3a+3b: optimizePackageImports + browserslist | 30min | TBT -50ms, -19KB JS |
-| 🟡 8th | Phase 4a-4c: Console errors + hydration fix | 2h | Best Practices 71→90+ |
-| 🟡 9th | Phase 5a: Cache CMS reads | 1h | TTFB -200ms |
-| 🟡 10th | Phase 3c+4d+4e: CSS cleanup + a11y + cookies | 1h | Polish |
-| ⚪ 11th | Phase 5b+6: deviceSizes + LHCI CI | 1h | Future-proofing |
+| Order | Phase | Est. Hours | Impact Score | Status |
+|-------|-------|------------|-------------|--------|
+| 🔴 1st | Phase 0: MIME type fix | 1-2h | CRITICAL — fixes broken JS/CSS in production | ⏳ Needs Hostinger nginx config |
+| 🔴 2nd | Phase 1a: Compress linen/paper textures | 1h | LCP -2,600ms | ✅ DONE — linen.webp 56KB, paper.webp 3KB |
+| 🔴 3rd | Phase 2a: Fix Hero initial="hidden" | 1h | LCP -1,200ms | ✅ DONE — Server Component with CSS animations |
+| 🔴 4th | Phase 1c: BigCommerce remotePatterns + remove unoptimized | 30min | -250KB page weight | ✅ DONE — remotePatterns added, no unoptimized props found |
+| 🟠 5th | Phase 2b: Lazy-load EmailCaptureModal + CartSlideout | 1h | TBT -100ms, defer ~50KB JS | ✅ DONE — both dynamically imported |
+| 🟠 6th | Phase 1b: Resize logo | 30min | Fixes aspect ratio, saves preload bandwidth | ⏳ TODO |
+| 🟠 7th | Phase 3a+3b: optimizePackageImports + browserslist | 30min | TBT -50ms, -19KB JS | ✅ DONE — framer-motion + lucide-react + radix optimized |
+| 🟡 8th | Phase 4a-4c: Console errors + hydration fix | 2h | Best Practices 71→90+ | ⏳ TODO |
+| 🟡 9th | Phase 5a: Cache CMS reads | 1h | TTFB -200ms | ✅ DONE — unstable_cache in layout.tsx |
+| 🟡 10th | Phase 3c+4d+4e: CSS cleanup + a11y + cookies | 1h | Polish | ⏳ TODO |
+| ⚪ 11th | Phase 5b+6: deviceSizes + LHCI CI | 1h | Future-proofing | ✅ DONE — deviceSizes in next.config.ts |
 
 **Total estimated work: ~11-14 hours**
 
