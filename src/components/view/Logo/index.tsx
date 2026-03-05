@@ -8,8 +8,8 @@ const Logo = ({ className }: { className?: string }) => {
       <Image
         src="/mamafern_logo_transparent.png"
         alt="Mama Fern"
-        width={19333}
-        height={7150}
+        width={800}
+        height={296}
         sizes="200px"
         className={cn("w-auto max-w-full", className)}
         priority

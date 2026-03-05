@@ -61,7 +61,6 @@ export default function LookHotspot({ hotspot, product }: LookHotspotProps) {
                 alt={product.selectedImageAlt || product.title}
                 fill
                 className="object-cover"
-                unoptimized
               />
             </div>
           )}

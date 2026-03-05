@@ -31,7 +31,6 @@ export default function ProductLookBanner({ looks }: ProductLookBannerProps) {
                 alt={look.heroImageAlt || look.title}
                 fill
                 className="object-cover"
-                unoptimized
               />
             </div>
           )}

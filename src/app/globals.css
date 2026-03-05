@@ -9,18 +9,13 @@
     --radius: 0.5rem;
     /* 65% cream wash over linen — adjust to taste */
     --linen-wash: rgba(250, 247, 242, 0.65);
-
-    /* Framer Motion spring physics presets */
-    --spring-stiff: 500;
-    --spring-damp: 30;
-    --spring-gentle: 300;
   }
 
   body {
     background-color: var(--background);
     background-image:
       linear-gradient(var(--linen-wash), var(--linen-wash)),
-      url('/linen.jpeg');
+      url('/linen.webp');
     background-repeat: no-repeat, repeat;
     background-size: auto, 800px auto;
     color: var(--foreground);
@@ -71,13 +66,6 @@
 }
 
 @layer utilities {
-  /* Motion-safe animations (only apply when user hasn't requested reduced motion) */
-  .motion-safe-animate {
-    @media (prefers-reduced-motion: no-preference) {
-      /* Animations are enabled */
-    }
-  }
-
   .animate-fade-in-up {
     animation: fade-in-up 0.55s ease-out both;
   }
@@ -97,7 +85,7 @@
   /* Paper texture — softer, lighter feel */
   .bg-texture-paper {
     background-color: #FAF7F2;
-    background-image: url('/paper.jpeg');
+    background-image: url('/paper.webp');
     background-repeat: repeat;
     background-size: 600px auto;
     background-blend-mode: multiply;
@@ -108,7 +96,7 @@
     background-color: #FAF7F2;
     background-image:
       linear-gradient(var(--linen-wash), var(--linen-wash)),
-      url('/linen.jpeg');
+      url('/linen.webp');
     background-repeat: no-repeat, repeat;
     background-size: auto, 800px auto;
   }
@@ -119,7 +107,7 @@
     background-color: #F0EBE3;
     background-image:
       linear-gradient(rgba(250, 247, 242, 0.35), rgba(250, 247, 242, 0.35)),
-      url('/linen.jpeg');
+      url('/linen.webp');
     background-repeat: no-repeat, repeat;
     background-size: auto, 800px auto;
   }
@@ -127,7 +115,7 @@
   /* Footer: dark charcoal blended through linen weave */
   .bg-texture-linen-dark {
     background-color: #2C2C2C;
-    background-image: url('/linen.jpeg');
+    background-image: url('/linen.webp');
     background-repeat: repeat;
     background-size: 800px auto;
     background-blend-mode: multiply;
@@ -137,6 +125,15 @@
 @layer components {
   .admin-input {
     @apply w-full rounded-lg border border-stone-300 bg-cream px-3 py-2 text-sm text-charcoal placeholder:text-warm-brown/40 focus:border-fern focus:ring-1 focus:ring-fern outline-none;
+  }
+
+  /* Below-the-fold sections can opt-in to content-visibility: auto.
+     The browser skips layout/paint for offscreen content during initial render,
+     reducing main thread work and improving LCP / TBT.
+     contain-intrinsic-size prevents layout shift when sections enter the viewport. */
+  .cv-auto {
+    content-visibility: auto;
+    contain-intrinsic-size: auto 600px;
   }
 }
 

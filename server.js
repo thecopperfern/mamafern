@@ -66,8 +66,35 @@ const handle = app.getRequestHandler();
 
 app.prepare().then(() => {
   const server = createServer((req, res) => {
-    // Explicitly set Content-Type for static assets to prevent Hostinger nginx
-    // from serving JS files as text/plain (ChunkLoadError / HTTP/2 fix)
+    // Serve /_next/static/ files directly from disk with correct MIME types.
+    // This bypasses both Next.js handler and prevents Hostinger's nginx from
+    // serving JS/CSS as text/plain (which causes ChunkLoadError / broken styles).
+    if (req.url.startsWith("/_next/static/")) {
+      const urlPath = req.url.split("?")[0]; // strip query string
+      const filePath = path.join(__dirname, ".next", "static", urlPath.replace("/_next/static/", ""));
+
+      // Security: prevent path traversal
+      const normalizedPath = path.normalize(filePath);
+      const staticDir = path.join(__dirname, ".next", "static");
+      if (!normalizedPath.startsWith(staticDir)) {
+        res.writeHead(403);
+        res.end("Forbidden");
+        return;
+      }
+
+      if (fs.existsSync(normalizedPath)) {
+        const mimeType = getMimeType(normalizedPath);
+        res.setHeader("Content-Type", mimeType);
+        res.setHeader("Cache-Control", "public, max-age=31536000, immutable");
+        res.setHeader("X-Content-Type-Options", "nosniff");
+        const stream = fs.createReadStream(normalizedPath);
+        stream.pipe(res);
+        return;
+      }
+    }
+
+    // For all other requests, let Next.js handle them normally.
+    // Still set Content-Type header as a fallback in case nginx passes through.
     if (req.url.startsWith("/_next/static/")) {
       res.setHeader("Content-Type", getMimeType(req.url));
     }

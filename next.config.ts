@@ -19,6 +19,19 @@ const nextConfig: NextConfig = {
   // Transpile CVA to fix ESM/CJS interop issue in server builds
   transpilePackages: ["class-variance-authority"],
 
+  // Tree-shake barrel files for these packages — reduces parsed JS and TBT
+  experimental: {
+    optimizePackageImports: [
+      "lucide-react",
+      "framer-motion",
+      "recharts",
+      "date-fns",
+      "@radix-ui/react-dialog",
+      "@radix-ui/react-popover",
+      "@radix-ui/react-select",
+    ],
+  },
+
   // Disable Next.js gzip compression — Hostinger's nginx already compresses.
   // Double-compression causes ERR_HTTP2_PROTOCOL_ERROR on large chunks.
   compress: false,
@@ -33,9 +46,13 @@ const nextConfig: NextConfig = {
         protocol: "https",
         hostname: "images.unsplash.com",
       },
+      {
+        protocol: "https",
+        hostname: "cdn11.bigcommerce.com",
+      },
     ],
     formats: ["image/avif", "image/webp"],
-    deviceSizes: [640, 750, 828, 1080, 1200],
+    deviceSizes: [640, 750, 828, 1080, 1200, 1920],
     imageSizes: [16, 32, 48, 64, 96, 128, 256],
     minimumCacheTTL: 60 * 60 * 24 * 30,
   },
@@ -85,7 +102,7 @@ const nextConfig: NextConfig = {
               // Plausible is now proxied through /stats/* (same origin) — no external HTTP needed
               "script-src 'self' 'unsafe-inline' 'unsafe-eval' https://www.googletagmanager.com https://www.google-analytics.com",
               "style-src 'self' 'unsafe-inline' https://fonts.googleapis.com",
-              "img-src 'self' data: blob: https://cdn.shopify.com https://images.unsplash.com https://www.google-analytics.com",
+              "img-src 'self' data: blob: https://cdn.shopify.com https://images.unsplash.com https://cdn11.bigcommerce.com https://www.google-analytics.com",
               "font-src 'self' https://fonts.gstatic.com",
               // Plausible events go to /stats/api/event (same origin) — no external HTTP needed
               "connect-src 'self' https://cdn.shopify.com https://www.google-analytics.com https://api.brevo.com",

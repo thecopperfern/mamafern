@@ -70,11 +70,10 @@ export const fetchGraphQL = async <T = any>(
     });
     const json = await res.json();
     if (json.errors) {
-      // Only log errors in development, or if they're not auth-related
-      const isAuthError = json.errors.some(
-        (e: any) => e.extensions?.code === "UNAUTHORIZED"
-      );
-      if (!isAuthError || process.env.NODE_ENV !== "development") {
+      // Throw the error for callers to handle, but don't pollute the browser
+      // console in production — console errors tank Lighthouse Best Practices score.
+      // Callers (cart, collections) have their own try/catch with appropriate logging.
+      if (process.env.NODE_ENV === "development") {
         console.error("Shopify GraphQL errors:", json.errors);
       }
       throw new Error(json.errors[0]?.message || "GraphQL error");

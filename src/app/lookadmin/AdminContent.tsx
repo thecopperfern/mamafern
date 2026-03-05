@@ -673,7 +673,6 @@ export default function AdminContent() {
                       alt={activeLook.heroImageAlt || "Hero preview"}
                       fill
                       className="object-cover"
-                      unoptimized
                     />
                     {/* Render hotspots */}
                     {activeLook.hotspots?.map((hs) => {
@@ -950,7 +949,6 @@ export default function AdminContent() {
                               alt={sp.images[0].alt}
                               fill
                               className="object-cover"
-                              unoptimized
                             />
                           </div>
                         )}
@@ -1252,7 +1250,6 @@ function SortableProductCard({
               alt={product.selectedImageAlt || product.title}
               fill
               className="object-cover"
-              unoptimized
             />
           </div>
         )}
@@ -1405,7 +1402,6 @@ function SortableProductCard({
                   alt={img.alt}
                   fill
                   className="object-cover"
-                  unoptimized
                 />
               </button>
             ))}
@@ -1614,7 +1610,6 @@ function PreviewModal({
                 alt={look.heroImageAlt || look.title}
                 fill
                 className="object-cover"
-                unoptimized
               />
               <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-black/40 to-transparent h-24 flex items-end p-5">
                 <div>
@@ -1679,7 +1674,6 @@ function PreviewModal({
                       alt={product.selectedImageAlt || product.title}
                       fill
                       className="object-cover"
-                      unoptimized
                     />
                   )}
                   {product.badge && (

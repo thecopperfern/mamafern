@@ -73,7 +73,6 @@ export default function QuickViewModal({
                 fill
                 className="object-cover"
                 sizes="(max-width: 640px) 100vw, 320px"
-                unoptimized
               />
             )}
           </div>

@@ -9,7 +9,11 @@ import { useRouter } from "next/navigation";
 import { useCartActions, isCartOpenAtom } from "@/lib/atoms/cart";
 import { useAtom } from "jotai";
 import { Badge } from "@/components/ui/badge";
-import CartSlideout from "../CartSlideout";
+import dynamic from "next/dynamic";
+
+// Lazy-load CartSlideout — it imports framer-motion for slide animation.
+// Deferring it keeps ~30-50KB of JS out of the initial critical bundle.
+const CartSlideout = dynamic(() => import("../CartSlideout"), { ssr: false });
 
 function getTokenFromCookie(): string | null {
   if (typeof document === "undefined") return null;

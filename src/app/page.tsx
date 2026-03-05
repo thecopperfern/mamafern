@@ -100,19 +100,28 @@ export default async function Home() {
         secondaryButtonText={heroData?.secondaryButtonText || undefined}
         secondaryButtonHref={heroData?.secondaryButtonHref || undefined}
       />
-      <ShopTheLook initialLooks={publishedLooks} />
-      <CategoryCards
-        heading={sections.categoryCardsHeading}
-        categories={sections.categories}
-      />
+      {/* Below-fold sections use cv-auto (content-visibility: auto) to defer
+          layout/paint work until they scroll into view, reducing initial
+          main thread blocking and improving LCP. */}
+      <div className="cv-auto">
+        <ShopTheLook initialLooks={publishedLooks} />
+      </div>
+      <div className="cv-auto">
+        <CategoryCards
+          heading={sections.categoryCardsHeading}
+          categories={sections.categories}
+        />
+      </div>
       {sections.featuredSections.map((section) => (
-        <Suspense key={section.collectionHandle} fallback={<CollectionSkeleton />}>
-          <FeaturedCollection
-            handle={section.collectionHandle}
-            title={section.title}
-            subtitle={section.subtitle}
-          />
-        </Suspense>
+        <div key={section.collectionHandle} className="cv-auto">
+          <Suspense fallback={<CollectionSkeleton />}>
+            <FeaturedCollection
+              handle={section.collectionHandle}
+              title={section.title}
+              subtitle={section.subtitle}
+            />
+          </Suspense>
+        </div>
       ))}
     </div>
   );

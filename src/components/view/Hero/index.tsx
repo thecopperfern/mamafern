@@ -1,8 +1,5 @@
-"use client";
-
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
-import { motion, staggerContainer, fadeInUp } from "@/lib/motion";
 
 type HeroProps = {
   headlineLine1?: string;
@@ -14,6 +11,17 @@ type HeroProps = {
   secondaryButtonHref?: string;
 };
 
+/**
+ * Hero — primary above-the-fold section.
+ *
+ * Uses pure CSS fade-in-up animations instead of framer-motion to avoid
+ * blocking LCP. Now a Server Component — the h1 is visible in the server-
+ * rendered HTML immediately with zero JS hydration cost, then CSS @keyframes
+ * handle the entrance animation.
+ *
+ * Background uses the compressed linen.webp texture (~130KB vs 11MB original).
+ * The image is preloaded via <link rel="preload"> in layout.tsx <head>.
+ */
 export default function Hero({
   headlineLine1 = "For every stage of",
   headlineHighlight = "growing together",
@@ -27,7 +35,7 @@ export default function Hero({
     <section
       className="relative py-24 md:py-36 px-4"
       style={{
-        backgroundImage: "url('/linen.jpeg')",
+        backgroundImage: "url('/linen.webp')",
         backgroundRepeat: "repeat",
         backgroundSize: "800px auto",
       }}
@@ -35,29 +43,21 @@ export default function Hero({
       {/* Colour wash over the texture */}
       <div className="absolute inset-0 bg-gradient-to-br from-sage/30 via-cream/60 to-blush/30" />
 
-      <motion.div
-        className="relative z-10 mx-auto max-w-6xl text-center"
-        variants={staggerContainer}
-        initial="hidden"
-        animate="visible"
-      >
-        <motion.h1
-          className="text-4xl md:text-6xl font-display font-bold text-charcoal leading-tight"
-          variants={fadeInUp}
+      <div className="relative z-10 mx-auto max-w-6xl text-center">
+        <h1
+          className="text-4xl md:text-6xl font-display font-bold text-charcoal leading-tight animate-fade-in-up"
         >
           {headlineLine1}
           <br />
           <span className="text-fern">{headlineHighlight}</span>
-        </motion.h1>
-        <motion.p
-          className="mt-4 text-lg text-charcoal/80 max-w-xl mx-auto"
-          variants={fadeInUp}
+        </h1>
+        <p
+          className="mt-4 text-lg text-charcoal/80 max-w-xl mx-auto animate-fade-in-up-1"
         >
           {subtitle}
-        </motion.p>
-        <motion.div
-          className="mt-8 flex gap-4 justify-center"
-          variants={fadeInUp}
+        </p>
+        <div
+          className="mt-8 flex gap-4 justify-center animate-fade-in-up-2"
         >
           <Link href={primaryButtonHref}>
             <Button
@@ -76,8 +76,8 @@ export default function Hero({
               {secondaryButtonText}
             </Button>
           </Link>
-        </motion.div>
-      </motion.div>
+        </div>
+      </div>
     </section>
   );
 }

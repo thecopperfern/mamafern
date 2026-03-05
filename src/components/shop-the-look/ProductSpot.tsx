@@ -29,7 +29,7 @@ export default function ProductSpot({ product }: ProductSpotProps) {
       <button
         onClick={() => setModalOpen(true)}
         className="group text-left w-full focus-visible:outline-2 focus-visible:outline-fern focus-visible:outline-offset-2 rounded-xl"
-        aria-label={`View ${product.title}`}
+        aria-label={`${product.title} — View details`}
         data-testid={`product-spot-${product.id}`}
       >
         <div className="relative aspect-[3/4] w-full rounded-xl overflow-hidden border border-stone-100 shadow-sm bg-oat">
@@ -40,7 +40,6 @@ export default function ProductSpot({ product }: ProductSpotProps) {
               fill
               className="object-cover transition-transform duration-300 group-hover:scale-105"
               sizes="(max-width: 768px) 100vw, 320px"
-              unoptimized
             />
           )}
           {product.badge && (

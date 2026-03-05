@@ -50,7 +50,6 @@ export default function LookHero({
           fill
           className="object-cover"
           sizes="(max-width: 768px) 100vw, 960px"
-          unoptimized
           data-testid="look-hero-image"
         />
 
