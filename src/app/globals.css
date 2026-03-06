@@ -136,41 +136,4 @@
     contain-intrinsic-size: auto 600px;
   }
 }
-
-/* ===================================================================
-   Keystatic CMS — Full-viewport isolation layer
-   ===================================================================
-   The root layout always renders Navbar + Footer which squeezes
-   Keystatic and cuts off the top/bottom, especially on mobile.
-   We fix this by making the container a fixed overlay that covers
-   everything. We also reset brand CSS variables, fonts, and
-   background textures so Keystatic's built-in UI is readable.
-   =================================================================== */
-
-/*
- * Keystatic CMS container
- *
- * Resets brand styles (background textures, colors, fonts) so Keystatic's
- * built-in UI renders correctly. The layout hides Navbar/Footer via CSS;
- * this container just provides the visual reset.
- *
- * NOTE: We intentionally avoid aggressive wildcard resets (e.g. `.keystatic-container *`)
- * and position:fixed + overflow:auto, as those break Keystatic's internal
- * dropdown/popover positioning.
- */
-.keystatic-container {
-  min-height: 100vh;
-
-  /* Reset brand background to plain white */
-  background-color: #fff;
-  background-image: none;
-
-  /* Reset brand fonts to Keystatic defaults (system UI) */
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto,
-    Oxygen, Ubuntu, Cantarell, 'Helvetica Neue', sans-serif;
-
-  /* Reset brand color variables so Keystatic buttons/text are legible */
-  --background: #fff;
-  --foreground: #1a1a1a;
-  color: #1a1a1a;
-}
+/* Keystatic CMS styles moved to /keystatic/layout.tsx for route-specific loading */

@@ -20,6 +20,18 @@ export default function Layout({ children }: { children: React.ReactNode }) {
         #email-capture-modal { display: none !important; }
         #main-content { min-height: 0 !important; }
         body { background-color: #fff !important; background-image: none !important; }
+
+        /* Keystatic CMS container styles - moved from globals.css for route-specific loading */
+        .keystatic-container {
+          min-height: 100vh;
+          background-color: #fff;
+          background-image: none;
+          font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto,
+            Oxygen, Ubuntu, Cantarell, 'Helvetica Neue', sans-serif;
+          --background: #fff;
+          --foreground: #1a1a1a;
+          color: #1a1a1a;
+        }
       `}</style>
       <div className="keystatic-container">
         {children}

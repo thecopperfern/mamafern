@@ -29,7 +29,7 @@ export default function ProductSpot({ product }: ProductSpotProps) {
       <button
         onClick={() => setModalOpen(true)}
         className="group text-left w-full focus-visible:outline-2 focus-visible:outline-fern focus-visible:outline-offset-2 rounded-xl"
-        aria-label={`${product.title} — View details`}
+        aria-label={`View details for ${product.title}`}
         data-testid={`product-spot-${product.id}`}
       >
         <div className="relative aspect-[3/4] w-full rounded-xl overflow-hidden border border-stone-100 shadow-sm bg-oat">

@@ -51,7 +51,7 @@ export async function GET() {
     <lastBuildDate>${new Date().toUTCString()}</lastBuildDate>
     <atom:link href="${SITE_CONFIG.baseUrl}/blog/feed.xml" rel="self" type="application/rss+xml" />
     <image>
-      <url>${SITE_CONFIG.baseUrl}/mamafern_logo.png</url>
+      <url>${SITE_CONFIG.baseUrl}/logo.png</url>
       <title>Mama Fern Journal</title>
       <link>${SITE_CONFIG.baseUrl}/blog</link>
     </image>
