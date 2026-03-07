@@ -36,6 +36,91 @@ export const revalidate = 60
 #### Reference
 See `HOSTINGER_DEPLOYMENT_FIX.MD` for the full incident log and fix.
 
+## 🚨 CRITICAL: Performance & LCP Optimization
+
+### Font Preloading Rule
+**MANDATORY: All fonts used in above-the-fold content MUST have `preload: true`**
+
+#### The Problem
+Without font preloading, the browser discovers font requirements late in the page load process:
+1. Downloads HTML → Parses → Discovers CSS → Parses → Discovers font needed → Downloads font
+2. This sequential process adds 2-3 seconds to LCP
+3. Hero h1 can't render until Playfair Display font arrives
+
+#### The Solution
+```typescript
+// ✅ CORRECT (in src/app/layout.tsx)
+const playfair = Playfair_Display({
+  variable: "--font-playfair",
+  subsets: ["latin"],
+  display: "swap",
+  preload: true, // Browser downloads font immediately in parallel
+  adjustFontFallback: false, // Faster processing
+});
+```
+
+#### Impact
+**Before preloading:** Mobile LCP 4.9s, Performance 82
+**After preloading:** Mobile LCP 3.6s, Performance 90 ✅
+**Improvement:** +8 Lighthouse points, 27% faster LCP
+
+### Third-Party Script Strategy
+
+**Google Analytics, marketing pixels, and analytics MUST use `lazyOnload`:**
+
+```typescript
+// ✅ CORRECT - Defers 152KB GA script until page interactive
+<Script
+  src="https://www.googletagmanager.com/gtag/js?id={GA_ID}"
+  strategy="lazyOnload"
+/>
+
+// ❌ WRONG - Competes for bandwidth during critical render
+<Script
+  src="https://www.googletagmanager.com/gtag/js?id={GA_ID}"
+  strategy="afterInteractive"
+/>
+```
+
+**Strategy guide:**
+- `beforeInteractive` - Critical only (payments)
+- `afterInteractive` - Important widgets
+- `lazyOnload` - Analytics, marketing, social embeds ← **Use this for GA**
+
+### LCP Element Knowledge
+**The Hero `<h1>` is the Largest Contentful Paint element.**
+- Location: `src/components/view/Hero/index.tsx` line 47-53
+- Font: Playfair Display (38KB)
+- Text: "For every stage of growing together"
+
+**Rules for Hero optimization:**
+- Keep as Server Component (zero JS hydration cost)
+- Use CSS animations only (no framer-motion)
+- Background image must be preloaded in layout.tsx
+- Never lazy-load above-the-fold content
+
+### Performance Checklist
+When modifying layout, fonts, or scripts:
+- [ ] Fonts have `preload: true` for above-fold usage
+- [ ] Hero background has `<link rel="preload" as="image" fetchPriority="high">`
+- [ ] Logo has `priority` flag on `<Image>` component
+- [ ] Analytics use `strategy="lazyOnload"`
+- [ ] Run Lighthouse before committing major changes
+
+### Current Performance Status
+| Metric | Target | Current | Status |
+|--------|--------|---------|--------|
+| Mobile Performance | ≥90 | 90 | ✅ Target met |
+| Mobile LCP | <2.5s | 3.6s | ⚠️ Above target but improved |
+| Mobile TBT | <200ms | 30ms | ✅ Excellent |
+| Desktop Performance | ≥95 | 99 | ✅ Excellent |
+
+### Troubleshooting Resources
+- `LCP_FIX_IMPLEMENTATION.md` - Complete LCP optimization guide
+- `LIGHTHOUSE_POST_DEPLOYMENT_ANALYSIS.md` - Performance analysis and next steps
+- `src/app/layout.tsx` - Font configuration (lines 31-44)
+- `src/components/view/Analytics/index.tsx` - Script loading configuration
+
 ## Architecture Overview
 
 ### Tech Stack

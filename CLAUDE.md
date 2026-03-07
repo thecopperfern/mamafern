@@ -45,6 +45,142 @@ The SEO implementation (Phase 5) initially converted these pages to ISR for perf
 
 **If you ever see Shopify connection errors, check these pages first.**
 
+## ⚠️ CRITICAL: Performance & LCP Optimization Rules
+
+### The Golden Rule: ALWAYS Preload Critical Fonts
+**LCP (Largest Contentful Paint) is a Core Web Vital that directly impacts SEO and user experience.**
+
+#### DO:
+```typescript
+// ✅ CORRECT - Preload fonts used in above-the-fold content
+const playfair = Playfair_Display({
+  variable: "--font-playfair",
+  subsets: ["latin"],
+  display: "swap",
+  preload: true, // CRITICAL for fonts used in Hero h1, headers, etc.
+  adjustFontFallback: false, // Faster processing
+});
+```
+
+#### DO NOT:
+```typescript
+// ❌ WRONG - Missing preload causes 2-3s LCP delay
+const playfair = Playfair_Display({
+  variable: "--font-playfair",
+  subsets: ["latin"],
+  display: "swap",
+  // Missing preload: true ← LCP BLOCKER!
+});
+```
+
+#### Why This Matters
+**Historical Context (March 2026):**
+- Before font preloading: Mobile LCP 4.9s, Performance 82
+- After font preloading: Mobile LCP 3.6s, Performance 90 ✅
+- **Impact:** +8 Lighthouse points, 27% faster LCP
+
+**How fonts block LCP:**
+1. Browser downloads HTML
+2. Browser discovers CSS needs Playfair Display
+3. Browser starts font download (late!)
+4. Font arrives (2-3s delay)
+5. Hero h1 renders (LCP event)
+
+**With preload:**
+1. Browser sees `<link rel="preload" as="font">` in HTML `<head>`
+2. Browser downloads font immediately (parallel)
+3. Font ready when h1 needs to render
+4. LCP occurs ~2s earlier ✅
+
+#### Fonts in This Project
+- **Playfair Display** - Hero h1, all headings (LCP element)
+- **DM Sans** - Body text, Hero subtitle
+
+**BOTH must have `preload: true` in `src/app/layout.tsx`**
+
+### Performance Optimization Checklist
+
+#### Critical Resources (Always)
+- [ ] Fonts used in Hero have `preload: true`
+- [ ] Hero background images have `<link rel="preload" as="image" fetchPriority="high">`
+- [ ] Logo has `priority` flag on Next.js `<Image>` component
+- [ ] Third-party scripts use `strategy="lazyOnload"` (not `afterInteractive`)
+
+#### Third-Party Script Strategy
+```typescript
+// ✅ CORRECT - Defer non-critical scripts
+<Script
+  src="https://www.googletagmanager.com/gtag/js?id={GA_ID}"
+  strategy="lazyOnload" // Loads after page fully interactive
+/>
+
+// ❌ WRONG - Blocks LCP and increases TBT
+<Script
+  src="https://www.googletagmanager.com/gtag/js?id={GA_ID}"
+  strategy="afterInteractive" // Competes for bandwidth during critical render
+/>
+```
+
+**When to use each strategy:**
+- `beforeInteractive` - Critical scripts only (payments, authentication)
+- `afterInteractive` - Important but not critical (chat widgets)
+- `lazyOnload` - Analytics, marketing pixels, social embeds
+
+#### LCP Element Identification
+**The Hero `<h1>` is the LCP element on the homepage.**
+- Located in `src/components/view/Hero/index.tsx`
+- Uses Playfair Display font
+- Any delay in font loading delays LCP by the same amount
+
+**When modifying Hero:**
+1. Keep it a Server Component (no hydration cost)
+2. Use CSS animations, not JavaScript libraries
+3. Ensure background image is preloaded
+4. Never lazy-load content above the fold
+
+#### Performance Targets (Mobile)
+| Metric | Target | Current | Status |
+|--------|--------|---------|--------|
+| **Performance Score** | ≥90 | 90 | ✅ |
+| **LCP** | <2.5s | 3.6s | ⚠️ Room for improvement |
+| **TBT** | <200ms | 30ms | ✅ |
+| **CLS** | <0.1 | 0 | ✅ |
+| **FCP** | <1.8s | 1.1s | ✅ |
+
+**If Performance drops below 90 or LCP exceeds 4s:**
+1. Check if fonts have `preload: true` in `src/app/layout.tsx`
+2. Check if third-party scripts use `lazyOnload`
+3. Run Lighthouse and check LCP element
+4. Verify Hero background is preloaded
+5. See `LCP_FIX_IMPLEMENTATION.md` for detailed troubleshooting
+
+### Font Optimization Reference
+**File:** `src/app/layout.tsx` lines 31-44
+
+```typescript
+// Current optimized configuration (DO NOT REMOVE preload flags)
+const dmSans = DM_Sans({
+  variable: "--font-dm-sans",
+  subsets: ["latin"],
+  display: "swap",
+  preload: true, // For Hero subtitle and body text
+});
+
+const playfair = Playfair_Display({
+  variable: "--font-playfair",
+  subsets: ["latin"],
+  display: "swap",
+  preload: true, // CRITICAL: For Hero h1 (LCP element)
+  adjustFontFallback: false, // Faster font processing
+});
+```
+
+**Related Files:**
+- `LCP_FIX_IMPLEMENTATION.md` - Complete LCP optimization guide
+- `LIGHTHOUSE_POST_DEPLOYMENT_ANALYSIS.md` - Performance analysis
+- `src/components/view/Hero/index.tsx` - LCP element location
+- `src/components/view/Analytics/index.tsx` - Third-party script configuration
+
 ## Architecture Principles
 
 ### 1. Commerce Adapter Layer (Critical Pattern)

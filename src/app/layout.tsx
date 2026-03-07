@@ -32,12 +32,15 @@ const dmSans = DM_Sans({
   variable: "--font-dm-sans",
   subsets: ["latin"],
   display: "swap",
+  preload: true, // Preload for Hero subtitle (LCP-adjacent)
 });
 
 const playfair = Playfair_Display({
   variable: "--font-playfair",
   subsets: ["latin"],
   display: "swap",
+  preload: true, // CRITICAL: Preload for Hero h1 (LCP element)
+  adjustFontFallback: false, // Disable fallback metrics calculation for faster font load
 });
 
 export const metadata: Metadata = {
@@ -164,11 +167,19 @@ export default async function RootLayout({
   return (
     <html lang="en" suppressHydrationWarning>
       <head>
+        {/*
+          Preload critical resources for LCP optimization:
+          - linen.webp: Hero background texture (55KB WebP)
+          - Fonts are preloaded automatically by Next.js due to preload:true config
+        */}
         <link rel="preload" href="/linen.webp" as="image" type="image/webp" fetchPriority="high" />
+
+        {/* DNS prefetching for external resources */}
         <link rel="preconnect" href="https://cdn.shopify.com" />
         <link rel="dns-prefetch" href="https://cdn.shopify.com" />
         <link rel="preconnect" href="https://cdn11.bigcommerce.com" />
         <link rel="dns-prefetch" href="https://cdn11.bigcommerce.com" />
+
         {/*
           Plausible analytics is initialized in the <Analytics /> client component
           using the @plausible-analytics/tracker npm package. Events are sent to

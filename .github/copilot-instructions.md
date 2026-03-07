@@ -30,6 +30,58 @@ Mama Fern is a Next.js 15 (App Router) headless e-commerce storefront for a fami
 
 This abstraction allows swapping the backend (e.g., to WooCommerce, custom API) without changing components.
 
+## ⚠️ CRITICAL: Performance & LCP Optimization
+
+### Font Preloading (MANDATORY)
+**ALWAYS set `preload: true` on fonts used in above-the-fold content.**
+
+```typescript
+// ✅ CORRECT - Preload fonts for instant LCP
+const playfair = Playfair_Display({
+  variable: "--font-playfair",
+  subsets: ["latin"],
+  display: "swap",
+  preload: true, // CRITICAL: Hero h1 uses this font (LCP element)
+  adjustFontFallback: false,
+});
+
+// ❌ WRONG - Missing preload adds 2-3s to LCP
+const playfair = Playfair_Display({
+  variable: "--font-playfair",
+  subsets: ["latin"],
+  display: "swap",
+  // Missing preload: true ← Causes 4.9s LCP!
+});
+```
+
+**Impact:** Font preloading reduced mobile LCP from 4.9s → 3.6s (27% improvement), Performance score 82 → 90.
+
+**Location:** `src/app/layout.tsx` lines 31-44
+
+### Third-Party Scripts
+**ALWAYS use `strategy="lazyOnload"` for analytics and non-critical scripts:**
+
+```typescript
+// ✅ CORRECT - Defer analytics until page fully loaded
+<Script src="https://www.googletagmanager.com/gtag/js" strategy="lazyOnload" />
+
+// ❌ WRONG - Blocks LCP, increases TBT
+<Script src="https://www.googletagmanager.com/gtag/js" strategy="afterInteractive" />
+```
+
+**Location:** `src/components/view/Analytics/index.tsx`
+
+### Performance Targets
+- Mobile Performance: ≥90 (currently 90) ✅
+- Mobile LCP: <2.5s (currently 3.6s) ⚠️
+- Desktop Performance: ≥95 (currently 99) ✅
+
+**If performance drops, check:**
+1. Fonts have `preload: true`
+2. Scripts use `lazyOnload`
+3. Hero background is preloaded (`<link rel="preload">`)
+4. See `LCP_FIX_IMPLEMENTATION.md`
+
 ## Architecture
 
 ### Tech Stack
